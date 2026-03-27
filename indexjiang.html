@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 网站SEO基础信息 -->
+  <title data-lang="title">湘风茶叶 · 小江 | 视频与AI创作</title>
+  <meta name="description" content="湘风茶叶公司剪辑师小江，专注视频拍摄编辑与AI内容创作，以镜头记录茶香，用科技赋能文化" data-lang="meta_desc">
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- 引入Google Fonts - 国风字体（Noto Serif SC） -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <!-- 自定义Tailwind配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            // 国风环保配色：松绿、竹青、茶褐、米白
+            'tea-green': '#2d5a27', // 主色-松绿
+            'bamboo-green': '#4a7c59', // 辅助色-竹青
+            'tea-brown': '#8b6914', // 点缀色-茶褐
+            'rice-paper': '#f5f2e9', // 背景色-米白宣纸
+            'ink-black': '#1a1a1a', // 文字色-墨黑
+          },
+          fontFamily: {
+            // 国风字体：Noto Serif SC（思源宋体）+ ZCOOL XiaoWei（站酷小薇体）
+            serif: ['"Noto Serif SC"', '"ZCOOL XiaoWei"', 'serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      }
+      .ink-wash {
+        background: linear-gradient(135deg, rgba(45,90,39,0.05) 0%, rgba(74,124,89,0.08) 100%);
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .chinese-border {
+        border: 2px solid #2d5a27;
+        position: relative;
+      }
+      .chinese-border::before {
+        content: '';
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        right: 4px;
+        bottom: 4px;
+        border: 1px solid #4a7c59;
+        pointer-events: none;
+      }
+    }
+  </style>
+  <!-- 全局样式 -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      overflow-x: hidden;
+      background-color: #f5f2e9; /* 米白宣纸背景 */
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(45,90,39,0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(74,124,89,0.03) 0%, transparent 50%);
+      color: #1a1a1a;
+      font-family: "Noto Serif SC", serif;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* 国风装饰元素 */
+    .decorative-line {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #2d5a27, transparent);
+    }
+    /* 印章按钮效果 */
+    .stamp-btn {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .stamp-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(45,90,39,0.1);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+    .stamp-btn:hover::after {
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 py-4">
+    <div class="container mx-auto px-4 md:px-6">
+      <nav class="flex items-center justify-between bg-rice-paper/90 backdrop-blur-md rounded-full px-6 py-3 border border-tea-green/20 shadow-sm">
+        <!-- Logo区域：国风茶叶图标 -->
+        <a href="#home" class="text-2xl font-bold text-tea-green flex items-center gap-2">
+          <i class="fas fa-leaf"></i>
+          <span data-lang="logo">湘风 · 小江</span>
+        </a>
+
+        <!-- 桌面端导航菜单 -->
+        <ul class="hidden md:flex items-center gap-8">
+          <li><a href="#home" class="text-ink-black hover:text-tea-green transition-colors" data-lang="nav_home">首页</a></li>
+          <li><a href="#about" class="text-ink-black hover:text-tea-green transition-colors" data-lang="nav_about">关于我</a></li>
+          <li><a href="#works" class="text-ink-black hover:text-tea-green transition-colors" data-lang="nav_works">作品展示</a></li>
+          <li><a href="#skills" class="text-ink-black hover:text-tea-green transition-colors" data-lang="nav_skills">技能栈</a></li>
+          <li><a href="#contact" class="text-ink-black hover:text-tea-green transition-colors" data-lang="nav_contact">联系我</a></li>
+        </ul>
+
+        <!-- 右侧操作区：双语切换 + 移动端汉堡菜单 -->
+        <div class="flex items-center gap-4">
+          <!-- 双语切换按钮：国风设计 -->
+          <button id="langToggle" class="px-4 py-1.5 rounded-full border border-tea-green/50 text-tea-green hover:bg-tea-green/10 transition-all font-medium">
+            <span id="langText">EN</span>
+          </button>
+
+          <!-- 移动端汉堡菜单 -->
+          <button id="menuToggle" class="md:hidden text-2xl text-tea-green">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+
+      <!-- 移动端下拉菜单 -->
+      <div id="mobileMenu" class="md:hidden hidden bg-rice-paper/95 backdrop-blur-md mt-4 rounded-2xl border border-tea-green/20 p-6 absolute left-4 right-4 shadow-lg">
+        <ul class="flex flex-col gap-6">
+          <li><a href="#home" class="block py-2 text-lg text-ink-black hover:text-tea-green transition-colors" data-lang="nav_home">首页</a></li>
+          <li><a href="#about" class="block py-2 text-lg text-ink-black hover:text-tea-green transition-colors" data-lang="nav_about">关于我</a></li>
+          <li><a href="#works" class="block py-2 text-lg text-ink-black hover:text-tea-green transition-colors" data-lang="nav_works">作品展示</a></li>
+          <li><a href="#skills" class="block py-2 text-lg text-ink-black hover:text-tea-green transition-colors" data-lang="nav_skills">技能栈</a></li>
+          <li><a href="#contact" class="block py-2 text-lg text-ink-black hover:text-tea-green transition-colors" data-lang="nav_contact">联系我</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- 首页Hero区：国风山水+茶香 -->
+  <section id="home" class="min-h-screen flex items-center pt-24 pb-16 relative overflow-hidden">
+    <!-- 国风装饰背景：淡墨山水 -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <svg viewBox="0 0 1000 1000" class="w-full h-full">
+        <path d="M0,600 Q250,400 500,550 T1000,500 L1000,1000 L0,1000 Z" fill="#2d5a27" opacity="0.3"/>
+        <path d="M0,700 Q300,500 600,650 T1000,600 L1000,1000 L0,1000 Z" fill="#4a7c59" opacity="0.2"/>
+      </svg>
+    </div>
+
+    <div class="container mx-auto px-4 md:px-6 relative z-10">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="fade-in text-center md:text-left">
+          <!-- 国风问候语 -->
+          <p class="text-tea-brown text-lg mb-4 tracking-widest" data-lang="hero_greeting">茶者，南方之嘉木也</p>
+          
+          <h1 class="text-[clamp(2.5rem,8vw,4.5rem)] font-bold leading-tight mb-6 text-tea-green text-shadow">
+            <span data-lang="hero_hello">我是</span>
+            <span class="block text-ink-black" data-lang="hero_name">小江</span>
+          </h1>
+          
+          <h2 class="text-[clamp(1.2rem,3vw,1.8rem)] text-bamboo-green mb-8 h-10 font-medium">
+            <span id="typingText" data-lang="hero_title">湘风茶叶 · 视频剪辑师 & AI创作者</span>
+          </h2>
+          
+          <p class="text-ink-black/70 text-lg mb-10 max-w-xl mx-auto md:mx-0 leading-relaxed" data-lang="hero_desc">
+            以镜头记录茶园春色，用剪辑讲述茶香故事，借AI赋能文化传承。在湘风茶叶，让每一片茶叶都有自己的光影记忆。
+          </p>
+          
+          <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+            <a href="#works" class="stamp-btn px-8 py-3 bg-tea-green text-rice-paper rounded-full font-medium hover:shadow-lg hover:shadow-tea-green/20 transition-all relative z-10">
+              <span data-lang="hero_btn1">查看我的作品</span>
+            </a>
+            <a href="#contact" class="stamp-btn px-8 py-3 border-2 border-tea-green text-tea-green rounded-full font-medium hover:bg-tea-green/5 transition-all relative z-10">
+              <span data-lang="hero_btn2">与我联系</span>
+            </a>
+          </div>
+        </div>
+        
+        <div class="fade-in delay-200 relative">
+          <!-- 国风圆形相框 -->
+          <div class="absolute inset-0 bg-gradient-to-r from-tea-green/10 to-bamboo-green/10 rounded-full blur-3xl"></div>
+          <div class="relative rounded-full overflow-hidden border-4 border-tea-green/30 aspect-square max-w-md mx-auto chinese-border">
+            <!-- 个人头像：替换为你自己的照片（建议茶园/古风风格） -->
+            <img src="https://picsum.photos/800/800?random=10&blur=1" alt="小江在茶园" class="w-full h-full object-cover">
+          </div>
+          <!-- 装饰性茶叶图标 -->
+          <div class="absolute -top-4 -right-4 text-4xl text-tea-green opacity-60 animate-bounce">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <div class="absolute -bottom-2 -left-2 text-3xl text-bamboo-green opacity-50 animate-pulse">
+            <i class="fas fa-seedling"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于我区：国风宣纸质感 -->
+  <section id="about" class="py-24 ink-wash">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-tea-green">
+          <span data-lang="about_title">关于我</span>
+        </h2>
+        <div class="decorative-line w-32 mx-auto"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="fade-in relative order-2 md:order-1">
+          <!-- 工作照片：茶园拍摄场景 -->
+          <div class="relative rounded-2xl overflow-hidden border-2 border-tea-green/20 p-2 bg-rice-paper">
+            <img src="https://picsum.photos/800/600?random=11" alt="小江在茶园拍摄" class="w-full h-full object-cover rounded-lg">
+          </div>
+          <!-- 装饰性墨迹 -->
+          <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-tea-brown/10 rounded-full blur-2xl"></div>
+        </div>
+        
+        <div class="fade-in delay-200 order-1 md:order-2">
+          <h3 class="text-2xl font-bold mb-6 text-ink-black" data-lang="about_subtitle">
+            以镜头为笔，以茶叶为墨
+          </h3>
+          
+          <p class="text-ink-black/70 mb-6 leading-relaxed" data-lang="about_p1">
+            我是小江，湘风茶叶公司的一名视频剪辑师与AI创作者。每日与茶园相伴，用相机记录晨露中的茶芽，用剪辑器编织茶叶的旅程，用AI技术探索茶文化的现代表达。
+          </p>
+          
+          <p class="text-ink-black/70 mb-8 leading-relaxed" data-lang="about_p2">
+            从茶园到茶杯，我相信每一片茶叶都有自己的故事。我的工作，就是让这些故事被看见、被听见、被记住。在传统与科技的交汇处，寻找茶文化的新生。
+          </p>
+          
+          <!-- 国风数据展示 -->
+          <div class="grid grid-cols-2 gap-6 mb-10">
+            <div class="text-center p-6 bg-rice-paper rounded-xl border border-tea-green/10">
+              <h4 class="text-4xl font-bold text-tea-green mb-2">3+</h4>
+              <p class="text-ink-black/60" data-lang="about_years">年从业经验</p>
+            </div>
+            <div class="text-center p-6 bg-rice-paper rounded-xl border border-tea-green/10">
+              <h4 class="text-4xl font-bold text-bamboo-green mb-2">100+</h4>
+              <p class="text-ink-black/60" data-lang="about_videos">茶叶主题视频</p>
+            </div>
+          </div>
+          
+          <a href="#contact" class="inline-block stamp-btn px-6 py-3 bg-bamboo-green/10 border border-bamboo-green/30 text-bamboo-green rounded-full hover:bg-bamboo-green/20 transition-all relative z-10">
+            <span data-lang="about_btn">了解更多我的故事</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 作品展示区：茶叶视频与AI创作 -->
+  <section id="works" class="py-24">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-tea-green">
+          <span data-lang="works_title">作品展示</span>
+        </h2>
+        <p class="text-ink-black/60 max-w-2xl mx-auto mb-4" data-lang="works_desc">
+          精选茶叶主题视频作品与AI创作内容，记录茶园四季，传递茶香文化
+        </p>
+        <div class="decorative-line w-32 mx-auto"></div>
+      </div>
+
+      <!-- 作品卡片网格：国风设计 -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 作品1：茶园春景 -->
+        <div class="fade-in group">
+          <div class="bg-rice-paper rounded-2xl overflow-hidden border border-tea-green/10 h-full flex flex-col hover:border-tea-green/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-tea-green/5">
+            <div class="relative overflow-hidden">
+              <!-- 作品封面图 -->
+              <img src="https://picsum.photos/600/400?random=20" alt="茶园春景" class="w-full h-52 object-cover group-hover:scale-105 transition-all duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-black/60 to-transparent"></div>
+              <!-- 播放按钮图标 -->
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 rounded-full bg-rice-paper/90 flex items-center justify-center text-tea-green text-2xl group-hover:scale-110 transition-all">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-xl font-bold mb-3 text-tea-green" data-lang="work1_title">《茶园春早》</h3>
+              <p class="text-ink-black/60 mb-4 flex-1" data-lang="work1_desc">
+                记录湘风茶园春日清晨的采茶景象，晨露、茶芽、采茶人的双手，构成春天最美的画卷。
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 text-xs rounded-full bg-tea-green/10 text-tea-green border border-tea-green/20">实拍</span>
+                <span class="px-3 py-1 text-xs rounded-full bg-bamboo-green/10 text-bamboo-green border border-bamboo-green/20">茶园</span>
+                <span class="px-3 py-1 text-xs rounded-full bg-tea-brown/10 text-tea-brown border border-tea-brown/20">春茶</span>
+              </div>
+              <a href="#" class="text-tea-green font-medium flex items-center gap-2 hover:gap-3 transition-all">
+                <span data-lang="work_btn">观看完整视频</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 作品2：AI茶文化动画 -->
+        <div class="fade-in group delay-100">
+          <div class="bg-rice-paper rounded-2xl overflow-hidden border border-tea-green/10 h-full flex flex-col hover:border-tea-green/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-tea-green/5">
+            <div class="relative overflow-hidden">
+              <img src="https://picsum.photos/600/400?random=21" alt="AI茶文化动画" class="w-full h-52 object-cover group-hover:scale-105 transition-all duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-black/60 to-transparent"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 rounded-full bg-rice-paper/90 flex items-center justify-center text-tea-green text-2xl group-hover:scale-110 transition-all">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-xl font-bold mb-3 text-tea-green" data-lang="work2_title">《茶经·AI演绎》</h3>
+              <p class="text-ink-black/60 mb-4 flex-1" data-lang="work2_desc">
+                运用AI技术演绎《茶经》经典篇章，以国风动画形式再现陆羽笔下的茶文化世界，让古籍活起来。
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 text-xs rounded-full bg-tea-green/10 text-tea-green border border-tea-green/20">AI创作</span>
+                <span class="px-3 py-1 text-xs rounded-full bg-bamboo-green/10 text-bamboo-green border border-bamboo-green/20">国风动画</span>
+                <span class="px-3 py-1 text-xs rounded-full bg-tea-brown/10 text-tea-brown border border-tea-brown/20">茶经</span>
+              </div>
+              <a href="#" class="text-tea-green font-medium flex items-center gap-2 hover:gap-3 transition-all">
+                <span data-lang="work_btn">观看完整视频</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 作品3：茶艺教学 -->
+        <div class="fade-in group delay-200">
+          <div class="bg-rice-paper rounded-2xl overflow-hidden border border-tea-green/10 h-full flex flex-col hover:border-tea-green/30 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-tea-green/5">
+            <div class="relative overflow-hidden">
+              <img src="https://picsum.photos/600/400?random=22" alt="茶艺教学" class="w-full h-52 object-cover group-hover:scale-105 transition-all duration-700">
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-black/60 to-transparent"></div>
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 rounded-full bg-rice-paper/90 flex items-center justify-center text-tea-green text-2xl group-hover:scale-110 transition-all">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-xl font-bold mb-3 text-tea-green" data-lang="work3_title">《湘风茶艺课堂》</h3>
+              <p class="text-ink-black/60 mb-4 flex-1" data-lang="work3_desc">
+                系列茶艺教学视频，从识茶、选器到冲泡，一步步带你走进茶艺的世界，感受茶文化的魅力。
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="px-3 py-1 text-xs rounded-full bg-tea-green/10 text-tea-green border border-tea-green/20">教学</span>
+                <span class="px-3 py-1 text-xs rounded-full bg-bamboo-green/10 text-bamboo-green border border-bamboo-green/20">茶艺</span>
+                <span class="px-3 py-1 text-xs rounded-full bg-tea-brown/10 text-tea-brown border border-tea-brown/20">文化</span>
+              </div>
+              <a href="#" class="text-tea-green font-medium flex items-center gap-2 hover:gap-3 transition-all">
+                <span data-lang="work_btn">观看完整视频</span>
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 技能栈区：视频与AI -->
+  <section id="skills" class="py-24 ink-wash">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-tea-green">
+          <span data-lang="skills_title">技能栈</span>
+        </h2>
+        <p class="text-ink-black/60 max-w-2xl mx-auto mb-4" data-lang="skills_desc">
+          传统摄影技艺与现代AI技术的融合，只为更好地讲述茶叶的故事
+        </p>
+        <div class="decorative-line w-32 mx-auto"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- 左侧技能进度条：国风设计 -->
+        <div class="space-y-8 fade-in">
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-medium text-tea-green" data-lang="skill1">视频拍摄与策划</span>
+              <span class="text-ink-black/70">95%</span>
+            </div>
+            <div class="w-full h-3 bg-rice-paper rounded-full overflow-hidden border border-tea-green/20">
+              <div class="h-full bg-gradient-to-r from-tea-green to-bamboo-green w-[95%] rounded-full"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-medium text-tea-green" data-lang="skill2">视频剪辑（Pr/Final Cut）</span>
+              <span class="text-ink-black/70">92%</span>
+            </div>
+            <div class="w-full h-3 bg-rice-paper rounded-full overflow-hidden border border-tea-green/20">
+              <div class="h-full bg-gradient-to-r from-tea-green to-bamboo-green w-[92%] rounded-full"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-medium text-tea-green" data-lang="skill3">AI视频生成与编辑</span>
+              <span class="text-ink-black/70">88%</span>
+            </div>
+            <div class="w-full h-3 bg-rice-paper rounded-full overflow-hidden border border-tea-green/20">
+              <div class="h-full bg-gradient-to-r from-tea-green to-bamboo-green w-[88%] rounded-full"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-medium text-tea-green" data-lang="skill4">AI图像生成与处理</span>
+              <span class="text-ink-black/70">90%</span>
+            </div>
+            <div class="w-full h-3 bg-rice-paper rounded-full overflow-hidden border border-tea-green/20">
+              <div class="h-full bg-gradient-to-r from-tea-green to-bamboo-green w-[90%] rounded-full"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between mb-2">
+              <span class="font-medium text-tea-green" data-lang="skill5">茶文化知识与文案撰写</span>
+              <span class="text-ink-black/70">85%</span>
+            </div>
+            <div class="w-full h-3 bg-rice-paper rounded-full overflow-hidden border border-tea-green/20">
+              <div class="h-full bg-gradient-to-r from-tea-green to-bamboo-green w-[85%] rounded-full"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧技能标签云：国风设计 -->
+        <div class="fade-in delay-200">
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <div class="bg-rice-paper rounded-xl p-5 border border-tea-green/10 text-center hover:border-tea-green/30 hover:bg-tea-green/5 transition-all">
+              <i class="fas fa-video text-3xl text-tea-green mb-2"></i>
+              <p class="text-ink-black/80" data-lang="tag1">视频拍摄</p>
+            </div>
+            <div class="bg-rice-paper rounded-xl p-5 border border-tea-green/10 text-center hover:border-tea-green/30 hover:bg-tea-green/5 transition-all">
+              <i class="fas fa-cut text-3xl text-tea-green mb-2"></i>
+              <p class="text-ink-black/80" data-lang="tag2">视频剪辑</p>
+            </div>
+            <div class="bg-rice-paper rounded-xl p-5 border border-tea-green/10 text-center hover:border-tea-green/30 hover:bg-tea-green/5 transition-all">
+              <i class="fas fa-robot text-3xl text-tea-green mb-2"></i>
+              <p class="text-ink-black/80" data-lang="tag3">AI创作</p>
+            </div>
+            <div class="bg-rice-paper rounded-xl p-5 border border-tea-green/10 text-center hover:border-tea-green/30 hover:bg-tea-green/5 transition-all">
+              <i class="fas fa-image text-3xl text-tea-green mb-2"></i>
+              <p class="text-ink-black/80" data-lang="tag4">图像处理</p>
+            </div>
+            <div class="bg-rice-paper rounded-xl p-5 border border-tea-green/10 text-center hover:border-tea-green/30 hover:bg-tea-green/5 transition-all">
+              <i class="fas fa-music text-3xl text-tea-green mb-2"></i>
+              <p class="text-ink-black/80" data-lang="tag5">配乐音效</p>
+            </div>
+            <div class="bg-rice-paper rounded-xl p-5 border border-tea-green/10 text-center hover:border-tea-green/30 hover:bg-tea-green/5 transition-all">
+              <i class="fas fa-pen-fancy text-3xl text-tea-green mb-2"></i>
+              <p class="text-ink-black/80" data-lang="tag6">文案撰写</p>
+            </div>
+            <div class="bg-rice-paper rounded-xl p-5 border border-tea-green/10 text-center hover:border-tea-green/30 hover:bg-tea-green/5 transition-all">
+              <i class="fas fa-leaf text-3xl text-tea-green mb-2"></i>
+              <p class="text-ink-black/80" data-lang="tag7">茶文化</p>
+            </div>
+            <div class="bg-rice-paper rounded-xl p-5 border border-tea-green/10 text-center hover:border-tea-green/30 hover:bg-tea-green/5 transition-all">
+              <i class="fas fa-lightbulb text-3xl text-tea-green mb-2"></i>
+              <p class="text-ink-black/80" data-lang="tag8">创意策划</p>
+            </div>
+            <div class="bg-rice-paper rounded-xl p-5 border border-tea-green/10 text-center hover:border-tea-green/30 hover:bg-tea-green/5 transition-all">
+              <i class="fas fa-palette text-3xl text-tea-green mb-2"></i>
+              <p class="text-ink-black/80" data-lang="tag9">调色校色</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系我区：国风书信风格 -->
+  <section id="contact" class="py-24">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16 fade-in">
+        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-tea-green">
+          <span data-lang="contact_title">联系我</span>
+        </h2>
+        <p class="text-ink-black/60 max-w-2xl mx-auto mb-4" data-lang="contact_desc">
+          以茶会友，以影传情。期待与你一起，讲述更多茶叶的故事
+        </p>
+        <div class="decorative-line w-32 mx-auto"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- 左侧联系表单：国风书信设计 -->
+        <div class="fade-in">
+          <form class="bg-rice-paper rounded-2xl p-8 border border-tea-green/10 shadow-sm">
+            <div class="grid sm:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label for="name" class="block text-ink-black/70 mb-2" data-lang="form_name">姓名</label>
+                <input type="text" id="name" class="w-full bg-rice-paper border border-tea-green/20 rounded-lg px-4 py-3 outline-none focus:border-tea-green transition-all">
+              </div>
+              <div>
+                <label for="email" class="block text-ink-black/70 mb-2" data-lang="form_email">邮箱</label>
+                <input type="email" id="email" class="w-full bg-rice-paper border border-tea-green/20 rounded-lg px-4 py-3 outline-none focus:border-tea-green transition-all">
+              </div>
+            </div>
+            <div class="mb-6">
+              <label for="subject" class="block text-ink-black/70 mb-2" data-lang="form_subject">主题</label>
+              <input type="text" id="subject" class="w-full bg-rice-paper border border-tea-green/20 rounded-lg px-4 py-3 outline-none focus:border-tea-green transition-all">
+            </div>
+            <div class="mb-8">
+              <label for="message" class="block text-ink-black/70 mb-2" data-lang="form_message">留言</label>
+              <textarea id="message" rows="5" class="w-full bg-rice-paper border border-tea-green/20 rounded-lg px-4 py-3 outline-none focus:border-tea-green transition-all resize-none"></textarea>
+            </div>
+            <button type="submit" class="stamp-btn w-full py-3 bg-tea-green text-rice-paper rounded-lg font-medium hover:shadow-lg hover:shadow-tea-green/20 transition-all relative z-10">
+              <span data-lang="form_btn">发送消息</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- 右侧联系方式：国风设计 -->
+        <div class="fade-in delay-200 flex flex-col justify-center">
+          <h3 class="text-2xl font-bold mb-6 text-tea-green" data-lang="contact_subtitle">期待与你相识</h3>
+          <p class="text-ink-black/70 mb-8 leading-relaxed" data-lang="contact_p">
+            无论是茶叶视频合作、AI创作交流，还是茶文化探讨，都欢迎与我联系。一杯清茶，一段光影，我们的故事从这里开始。
+          </p>
+
+          <div class="space-y-6 mb-10">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-tea-green/10 flex items-center justify-center border border-tea-green/20 flex-shrink-0">
+                <i class="fas fa-envelope text-tea-green text-xl"></i>
+              </div>
+              <div>
+                <p class="text-ink-black/60 text-sm" data-lang="contact_email">邮箱</p>
+                <p class="font-medium text-ink-black">jiang@xiangfengtea.com</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-tea-green/10 flex items-center justify-center border border-tea-green/20 flex-shrink-0">
+                <i class="fas fa-map-marker-alt text-tea-green text-xl"></i>
+              </div>
+              <div>
+                <p class="text-ink-black/60 text-sm" data-lang="contact_address">工作地点</p>
+                <p class="font-medium text-ink-black" data-lang="address_detail">中国 · 湖南 · 长沙</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-tea-green/10 flex items-center justify-center border border-tea-green/20 flex-shrink-0">
+                <i class="fas fa-leaf text-tea-green text-xl"></i>
+              </div>
+              <div>
+                <p class="text-ink-black/60 text-sm" data-lang="contact_company">公司</p>
+                <p class="font-medium text-ink-black">湘风茶叶公司</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 社交媒体链接 -->
+          <div>
+            <p class="text-ink-black/60 mb-4" data-lang="contact_social">关注湘风茶叶</p>
+            <div class="flex gap-4">
+              <a href="#" class="w-10 h-10 rounded-full bg-tea-green/10 flex items-center justify-center text-tea-green hover:bg-tea-green hover:text-rice-paper transition-all">
+                <i class="fab fa-weixin"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-tea-green/10 flex items-center justify-center text-tea-green hover:bg-tea-green hover:text-rice-paper transition-all">
+                <i class="fab fa-weibo"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-tea-green/10 flex items-center justify-center text-tea-green hover:bg-tea-green hover:text-rice-paper transition-all">
+                <i class="fab fa-tiktok"></i>
+              </a>
+              <a href="#" class="w-10 h-10 rounded-full bg-tea-green/10 flex items-center justify-center text-tea-green hover:bg-tea-green hover:text-rice-paper transition-all">
+                <i class="fas fa-video"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚：国风设计 -->
+  <footer class="py-8 border-t border-tea-green/10 bg-rice-paper/50">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <p class="text-ink-black/60 mb-4 md:mb-0 flex items-center gap-2">
+          <i class="fas fa-leaf text-tea-green"></i>
+          © <span id="year"></span> <span data-lang="footer_name">湘风茶叶 · 小江</span>. <span data-lang="footer_rights">以茶会友，以影传情</span>
+        </p>
+        <div class="flex gap-6">
+          <a href="#" class="text-ink-black/60 hover:text-tea-green transition-colors" data-lang="footer_privacy">隐私政策</a>
+          <a href="#" class="text-ink-black/60 hover:text-tea-green transition-colors" data-lang="footer_terms">服务条款</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 回到顶部按钮：国风设计 -->
+  <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-tea-green text-rice-paper flex items-center justify-center opacity-0 invisible transition-all z-40 hover:bg-bamboo-green shadow-lg shadow-tea-green/20">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript 逻辑 -->
+  <script>
+    // 1. 双语语言包：国风文案
+    const langPack = {
+      zh: {
+        title: "湘风茶叶 · 小江 | 视频与AI创作",
+        meta_desc: "湘风茶叶公司剪辑师小江，专注视频拍摄编辑与AI内容创作，以镜头记录茶香，用科技赋能文化",
+        logo: "湘风 · 小江",
+        nav_home: "首页",
+        nav_about: "关于我",
+        nav_works: "作品展示",
+        nav_skills: "技能栈",
+        nav_contact: "联系我",
+        hero_greeting: "茶者，南方之嘉木也",
+        hero_hello: "我是",
+        hero_name: "小江",
+        hero_title: "湘风茶叶 · 视频剪辑师 & AI创作者",
+        hero_desc: "以镜头记录茶园春色，用剪辑讲述茶香故事，借AI赋能文化传承。在湘风茶叶，让每一片茶叶都有自己的光影记忆。",
+        hero_btn1: "查看我的作品",
+        hero_btn2: "与我联系",
+        about_title: "关于我",
+        about_subtitle: "以镜头为笔，以茶叶为墨",
+        about_p1: "我是小江，湘风茶叶公司的一名视频剪辑师与AI创作者。每日与茶园相伴，用相机记录晨露中的茶芽，用剪辑器编织茶叶的旅程，用AI技术探索茶文化的现代表达。",
+        about_p2: "从茶园到茶杯，我相信每一片茶叶都有自己的故事。我的工作，就是让这些故事被看见、被听见、被记住。在传统与科技的交汇处，寻找茶文化的新生。",
+        about_years: "年从业经验",
+        about_videos: "茶叶主题视频",
+        about_btn: "了解更多我的故事",
+        works_title: "作品展示",
+        works_desc: "精选茶叶主题视频作品与AI创作内容，记录茶园四季，传递茶香文化",
+        work1_title: "《茶园春早》",
+        work1_desc: "记录湘风茶园春日清晨的采茶景象，晨露、茶芽、采茶人的双手，构成春天最美的画卷。",
+        work2_title: "《茶经·AI演绎》",
+        work2_desc: "运用AI技术演绎《茶经》经典篇章，以国风动画形式再现陆羽笔下的茶文化世界，让古籍活起来。",
+        work3_title: "《湘风茶艺课堂》",
+        work3_desc: "系列茶艺教学视频，从识茶、选器到冲泡，一步步带你走进茶艺的世界，感受茶文化的魅力。",
+        work_btn: "观看完整视频",
+        skills_title: "技能栈",
+        skills_desc: "传统摄影技艺与现代AI技术的融合，只为更好地讲述茶叶的故事",
+        skill1: "视频拍摄与策划",
+        skill2: "视频剪辑（Pr/Final Cut）",
+        skill3: "AI视频生成与编辑",
+        skill4: "AI图像生成与处理",
+        skill5: "茶文化知识与文案撰写",
+        tag1: "视频拍摄",
+        tag2: "视频剪辑",
+        tag3: "AI创作",
+        tag4: "图像处理",
+        tag5: "配乐音效",
+        tag6: "文案撰写",
+        tag7: "茶文化",
+        tag8: "创意策划",
+        tag9: "调色校色",
+        contact_title: "联系我",
+        contact_desc: "以茶会友，以影传情。期待与你一起，讲述更多茶叶的故事",
+        contact_subtitle: "期待与你相识",
+        contact_p: "无论是茶叶视频合作、AI创作交流，还是茶文化探讨，都欢迎与我联系。一杯清茶，一段光影，我们的故事从这里开始。",
+        form_name: "姓名",
+        form_email: "邮箱",
+        form_subject: "主题",
+        form_message: "留言",
+        form_btn: "发送消息",
+        contact_email: "邮箱",
+        contact_address: "工作地点",
+        address_detail: "中国 · 湖南 · 长沙",
+        contact_company: "公司",
+        contact_social: "关注湘风茶叶",
+        footer_name: "湘风茶叶 · 小江",
+        footer_rights: "以茶会友，以影传情",
+        footer_privacy: "隐私政策",
+        footer_terms: "服务条款",
+      },
+      en: {
+        title: "Xiangfeng Tea · Jiang | Video & AI Creation",
+        meta_desc: "Jiang, video editor and AI creator at Xiangfeng Tea Company, focusing on video production and AI content creation, recording tea culture with lens, empowering culture with technology",
+        logo: "Xiangfeng · Jiang",
+        nav_home: "Home",
+        nav_about: "About",
+        nav_works: "Works",
+        nav_skills: "Skills",
+        nav_contact: "Contact",
+        hero_greeting: "Tea is the finest tree in the South",
+        hero_hello: "I'm",
+        hero_name: "Jiang",
+        hero_title: "Xiangfeng Tea · Video Editor & AI Creator",
+        hero_desc: "Recording the spring scenery of tea gardens with lens, telling tea stories with editing, empowering cultural inheritance with AI. At Xiangfeng Tea, let every tea leaf have its own light and shadow memory.",
+        hero_btn1: "View My Works",
+        hero_btn2: "Contact Me",
+        about_title: "About Me",
+        about_subtitle: "Lens as Pen, Tea as Ink",
+        about_p1: "I'm Jiang, a video editor and AI creator at Xiangfeng Tea Company. Accompanied by tea gardens every day, I record tea buds in morning dew with camera, weave the journey of tea leaves with editor, and explore the modern expression of tea culture with AI technology.",
+        about_p2: "From tea garden to teacup, I believe every tea leaf has its own story. My job is to make these stories seen, heard, and remembered. At the intersection of tradition and technology, seeking the new life of tea culture.",
+        about_years: "Years of Experience",
+        about_videos: "Tea-themed Videos",
+        about_btn: "Learn More About Me",
+        works_title: "My Works",
+        works_desc: "Selected tea-themed video works and AI creation content, recording the four seasons of tea gardens,传递 tea culture",
+        work1_title: "Early Spring in Tea Garden",
+        work1_desc: "Recording the tea picking scene in Xiangfeng tea garden on a spring morning, morning dew, tea buds, and the hands of tea pickers constitute the most beautiful picture of spring.",
+        work2_title: "Tea Classic · AI Interpretation",
+        work2_desc: "Using AI technology to interpret the classic chapters of \"Tea Classic\", reproducing the tea culture world described by Lu Yu in the form of Chinese style animation, making ancient books come alive.",
+        work3_title: "Xiangfeng Tea Art Classroom",
+        work3_desc: "Series of tea art teaching videos, from tea recognition, utensil selection to brewing, step by step带你 into the world of tea art, feeling the charm of tea culture.",
+        work_btn: "Watch Full Video",
+        skills_title: "My Skills",
+        skills_desc: "The fusion of traditional photography skills and modern AI technology, just to better tell the story of tea",
+        skill1: "Video Shooting & Planning",
+        skill2: "Video Editing (Pr/Final Cut)",
+        skill3: "AI Video Generation & Editing",
+        skill4: "AI Image Generation & Processing",
+        skill5: "Tea Culture Knowledge & Copywriting",
+        tag1: "Video Shooting",
+        tag2: "Video Editing",
+        tag3: "AI Creation",
+        tag4: "Image Processing",
+        tag5: "Music & Sound",
+        tag6: "Copywriting",
+        tag7: "Tea Culture",
+        tag8: "Creative Planning",
+        tag9: "Color Grading",
+        contact_title: "Contact Me",
+        contact_desc: "Meeting friends through tea, conveying emotions through videos. Looking forward to telling more tea stories with you",
+        contact_subtitle: "Looking Forward to Meeting You",
+        contact_p: "Whether it's tea video cooperation, AI creation exchange, or tea culture discussion, welcome to contact me. A cup of tea, a section of light and shadow, our story starts here.",
+        form_name: "Name",
+        form_email: "Email",
+        form_subject: "Subject",
+        form_message: "Message",
+        form_btn: "Send Message",
+        contact_email: "Email",
+        contact_address: "Location",
+        address_detail: "Changsha, Hunan, China",
+        contact_company: "Company",
+        contact_social: "Follow Xiangfeng Tea",
+        footer_name: "Xiangfeng Tea · Jiang",
+        footer_rights: "Meeting Friends Through Tea",
+        footer_privacy: "Privacy Policy",
+        footer_terms: "Terms of Service",
+      }
+    };
+
+    // 2. 双语切换逻辑
+    let currentLang = "zh"; // 默认中文
+    const langToggle = document.getElementById("langToggle");
+    const langText = document.getElementById("langText");
+
+    function switchLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll("[data-lang]").forEach(el => {
+        const key = el.getAttribute("data-lang");
+        if (langPack[lang][key]) {
+          el.textContent = langPack[lang][key];
+        }
+      });
+      langText.textContent = lang === "zh" ? "EN" : "中文";
+      document.title = langPack[lang].title;
+      document.querySelector("meta[name='description']").setAttribute("content", langPack[lang].meta_desc);
+    }
+
+    langToggle.addEventListener("click", () => {
+      switchLang(currentLang === "zh" ? "en" : "zh");
+    });
+
+    // 3. 导航栏滚动效果
+    const navbar = document.getElementById("navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add("py-2", "shadow-md");
+        navbar.classList.remove("py-4");
+      } else {
+        navbar.classList.add("py-4");
+        navbar.classList.remove("py-2", "shadow-md");
+      }
+    });
+
+    // 4. 移动端汉堡菜单
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+      const icon = menuToggle.querySelector("i");
+      icon.classList.toggle("fa-bars");
+      icon.classList.toggle("fa-times");
+    });
+
+    document.querySelectorAll("#mobileMenu a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        const icon = menuToggle.querySelector("i");
+        icon.classList.add("fa-bars");
+        icon.classList.remove("fa-times");
+      });
+    });
+
+    // 5. 滚动渐入动画
+    const fadeElements = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeElements.forEach(el => observer.observe(el));
+
+    // 6. 回到顶部按钮
+    const backToTop = document.getElementById("backToTop");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.remove("opacity-0", "invisible");
+        backToTop.classList.add("opacity-100", "visible");
+      } else {
+        backToTop.classList.add("opacity-0", "invisible");
+        backToTop.classList.remove("opacity-100", "visible");
+      }
+    });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // 7. 打字动画效果
+    const typingText = document.getElementById("typingText");
+    let typingIndex = 0;
+    let isDeleting = false;
+    let typingTimer;
+
+    function typeEffect() {
+      const currentText = langPack[currentLang].hero_title;
+      if (isDeleting) {
+        typingText.textContent = currentText.substring(0, typingIndex - 1);
+        typingIndex--;
+      } else {
+        typingText.textContent = currentText.substring(0, typingIndex + 1);
+        typingIndex++;
+      }
+
+      let typeSpeed = isDeleting ? 50 : 150;
+
+      if (!isDeleting && typingIndex === currentText.length) {
+        typeSpeed = 2500; // 停留2.5秒
+        isDeleting = true;
+      } else if (isDeleting && typingIndex === 0) {
+        isDeleting = false;
+        typeSpeed = 500;
+      }
+
+      typingTimer = setTimeout(typeEffect, typeSpeed);
+    }
+
+    window.addEventListener("load", typeEffect);
+
+    langToggle.addEventListener("click", () => {
+      clearTimeout(typingTimer);
+      typingIndex = 0;
+      isDeleting = false;
+      typeEffect();
+    });
+
+    // 8. 版权年份自动更新
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // 9. 表单提交
+    document.querySelector("form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      alert(currentLang === "zh" ? "消息已发送！期待与你以茶会友。" : "Message sent! Looking forward to meeting you through tea.");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
