@@ -3,28 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-lang="title">小江的个人空间 | 赛博朋克</title>
-  <meta name="description" content="小江的个人网站，赛博朋克风格，支持风格切换与多语言" data-lang="meta_desc">
-  <!-- 引入Tailwind CSS -->
+  <title data-lang="title">小江的个人空间</title>
+  <meta name="description" content="小江的个人网站，自媒体创作者，视频剪辑师" data-lang="meta_desc">
+  <!-- 核心资源引入 -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 引入Font Awesome图标 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- 自定义Tailwind配置 -->
+  <!-- 中文字体引入 -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- Tailwind 自定义配置（核心配色 #bef5ff） -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          colors: {
+            primary: '#bef5ff', // 你指定的主色
+            secondary: '#2596be', // 辅助深蓝（用于强调/按钮）
+            dark: '#1e293b', // 主文字色
+            light: '#f8fafc', // 背景浅白
+            muted: '#64748b', // 次要文字色
+          },
           fontFamily: {
-            mono: ['"Courier New"', 'monospace'],
-            sans: ['Inter', 'system-ui', 'sans-serif'],
+            sans: ['"Noto Sans SC"', 'system-ui', 'sans-serif'],
           },
         },
       }
     }
   </script>
-  <!-- 核心：三套风格CSS变量系统 -->
+  <!-- 简约风格全局CSS -->
   <style>
-    /* 全局重置 */
     * {
       margin: 0;
       padding: 0;
@@ -35,133 +41,28 @@
       scroll-behavior: smooth;
     }
 
-    /* ========== 风格1：赛博朋克 (默认) ========== */
-    body.cyberpunk {
-      --bg-primary: #0a0e17;
-      --bg-secondary: #111928;
-      --bg-card: rgba(17, 25, 40, 0.8);
-      --text-primary: #e0e0e0;
-      --text-secondary: #a0a0a0;
-      --accent-primary: #00f0ff; /* 霓虹青 */
-      --accent-secondary: #ff00ff; /* 霓虹粉 */
-      --accent-tertiary: #ffff00; /* 霓虹黄 */
-      --border-color: rgba(0, 240, 255, 0.3);
-      --glow-color: 0 0 20px rgba(0, 240, 255, 0.5);
-      --font-family: 'Courier New', monospace;
-      background-color: var(--bg-primary);
-      background-image: 
-        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
+    :root {
+      --primary: #bef5ff;
+      --secondary: #2596be;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --muted: #64748b;
+      --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --card-hover: 0 8px 30px rgba(0, 0, 0, 0.08);
     }
 
-    /* ========== 风格2：末日废土 ========== */
-    body.wasteland {
-      --bg-primary: #1a1510;
-      --bg-secondary: #2a2318;
-      --bg-card: rgba(42, 35, 24, 0.9);
-      --text-primary: #d4c4a8;
-      --text-secondary: #8b7355;
-      --accent-primary: #b7410e; /* 铁锈红 */
-      --accent-secondary: #5c4033; /* 枯木棕 */
-      --accent-tertiary: #c2a366; /* 沙金 */
-      --border-color: rgba(183, 65, 14, 0.4);
-      --glow-color: 0 0 15px rgba(183, 65, 14, 0.3);
-      --font-family: 'Georgia', serif;
-      background-color: var(--bg-primary);
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-    }
-
-    /* ========== 风格3：商务都市 ========== */
-    body.corporate {
-      --bg-primary: #0f1419;
-      --bg-secondary: #1a1f2e;
-      --bg-card: rgba(26, 31, 46, 0.95);
-      --text-primary: #f0f4f8;
-      --text-secondary: #94a3b8;
-      --accent-primary: #3b82f6; /* 商务蓝 */
-      --accent-secondary: #64748b; /* 银灰 */
-      --accent-tertiary: #10b981; /* 科技绿 */
-      --border-color: rgba(59, 130, 246, 0.3);
-      --glow-color: 0 0 15px rgba(59, 130, 246, 0.2);
-      --font-family: 'Inter', 'system-ui', sans-serif;
-      background-color: var(--bg-primary);
-      background-image: linear-gradient(135deg, rgba(59, 130, 246, 0.02) 0%, transparent 100%);
-    }
-
-    /* 全局应用变量 */
     body {
-      font-family: var(--font-family);
-      color: var(--text-primary);
-      transition: all 0.5s ease;
+      font-family: 'Noto Sans SC', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    /* 通用组件样式 */
-    .glow-text {
-      text-shadow: var(--glow-color);
-    }
-    .glow-border {
-      box-shadow: var(--glow-color);
-      border: 1px solid var(--border-color);
-    }
-    .card-bg {
-      background-color: var(--bg-card);
-      backdrop-filter: blur(10px);
-    }
-    .accent-gradient {
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    }
-    .accent-text {
-      color: var(--accent-primary);
-    }
-    .accent-border {
-      border-color: var(--accent-primary);
-    }
-
-    /* 赛博朋克专属：故障文字效果 */
-    .glitch {
-      position: relative;
-    }
-    .glitch::before,
-    .glitch::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .glitch::before {
-      animation: glitch-1 2s infinite linear alternate-reverse;
-      color: var(--accent-secondary);
-      z-index: -1;
-    }
-    .glitch::after {
-      animation: glitch-2 3s infinite linear alternate-reverse;
-      color: var(--accent-primary);
-      z-index: -2;
-    }
-    @keyframes glitch-1 {
-      0% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
-      20% { clip-path: inset(60% 0 20% 0); transform: translate(2px, -2px); }
-      40% { clip-path: inset(40% 0 40% 0); transform: translate(-1px, 1px); }
-      60% { clip-path: inset(80% 0 10% 0); transform: translate(1px, -1px); }
-      80% { clip-path: inset(10% 0 80% 0); transform: translate(-2px, 2px); }
-      100% { clip-path: inset(30% 0 50% 0); transform: translate(2px, -2px); }
-    }
-    @keyframes glitch-2 {
-      0% { clip-path: inset(60% 0 20% 0); transform: translate(2px, -2px); }
-      20% { clip-path: inset(20% 0 60% 0); transform: translate(-2px, 2px); }
-      40% { clip-path: inset(80% 0 10% 0); transform: translate(1px, -1px); }
-      60% { clip-path: inset(40% 0 40% 0); transform: translate(-1px, 1px); }
-      80% { clip-path: inset(30% 0 50% 0); transform: translate(2px, -2px); }
-      100% { clip-path: inset(10% 0 80% 0); transform: translate(-2px, 2px); }
-    }
-
-    /* 滚动动画 */
+    /* 滚动渐入动画（简约版） */
     .fade-in {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(20px);
       transition: all 0.6s ease-out;
     }
     .fade-in.visible {
@@ -169,16 +70,93 @@
       transform: translateY(0);
     }
 
+    /* 简约卡片样式 */
+    .base-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    .base-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-hover);
+    }
+
+    /* 主按钮样式 */
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--dark);
+      font-weight: 500;
+      border-radius: 999px;
+      padding: 12px 32px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background-color: var(--secondary);
+      color: white;
+      transform: scale(1.02);
+    }
+
+    /* 次要按钮样式 */
+    .btn-outline {
+      border: 2px solid var(--secondary);
+      color: var(--secondary);
+      background: transparent;
+      font-weight: 500;
+      border-radius: 999px;
+      padding: 12px 32px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-outline:hover {
+      background-color: var(--secondary);
+      color: white;
+      transform: scale(1.02);
+    }
+
+    /* 标签按钮样式 */
+    .tab-btn {
+      padding: 8px 24px;
+      border-radius: 999px;
+      border: none;
+      background: white;
+      color: var(--muted);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: var(--card-shadow);
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background-color: var(--primary);
+      color: var(--dark);
+    }
+    .tab-btn:hover:not(.active) {
+      color: var(--secondary);
+    }
+
+    /* 装饰线条 */
+    .divider {
+      height: 3px;
+      width: 60px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 999px;
+      margin: 0 auto;
+    }
+
     /* 作品模态框 */
     .modal {
       display: none;
       position: fixed;
-      z-index: 100;
+      z-index: 9999;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.9);
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
     }
     .modal-content {
       margin: auto;
@@ -189,125 +167,114 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      border-radius: 8px;
     }
     .close-modal {
       position: absolute;
       top: 20px;
       right: 35px;
-      color: var(--text-primary);
+      color: white;
       font-size: 40px;
       font-weight: bold;
       cursor: pointer;
-      z-index: 101;
+      z-index: 10000;
     }
   </style>
 </head>
-<!-- 默认赛博朋克风格 -->
-<body class="cyberpunk">
-  <!-- 导航栏 -->
-  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-4">
+<body>
+  <!-- 导航栏（简约固定顶部） -->
+  <header id="navbar" class="fixed w-full top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm py-3 transition-all duration-300">
     <div class="container mx-auto px-4 md:px-6">
-      <nav class="flex items-center justify-between card-bg rounded-full px-6 py-3 glow-border">
+      <nav class="flex items-center justify-between">
         <!-- Logo -->
-        <a href="#home" class="text-2xl font-bold accent-text glow-text">
+        <a href="#home" class="text-xl font-bold text-[var(--secondary)]">
           <span data-lang="logo">XIAOJIANG</span>
         </a>
 
         <!-- 桌面端菜单 -->
         <ul class="hidden md:flex items-center gap-8">
-          <li><a href="#home" class="hover:text-[var(--accent-primary)] transition-colors" data-lang="nav_home">首页</a></li>
-          <li><a href="#about" class="hover:text-[var(--accent-primary)] transition-colors" data-lang="nav_about">关于小江</a></li>
-          <li><a href="#skills" class="hover:text-[var(--accent-primary)] transition-colors" data-lang="nav_skills">小江技能</a></li>
-          <li><a href="#works" class="hover:text-[var(--accent-primary)] transition-colors" data-lang="nav_works">小江作品</a></li>
-          <li><a href="#contact" class="hover:text-[var(--accent-primary)] transition-colors" data-lang="nav_contact">联系小江</a></li>
+          <li><a href="#home" class="text-[var(--dark)] hover:text-[var(--secondary)] transition-colors" data-lang="nav_home">首页</a></li>
+          <li><a href="#about" class="text-[var(--dark)] hover:text-[var(--secondary)] transition-colors" data-lang="nav_about">关于小江</a></li>
+          <li><a href="#skills" class="text-[var(--dark)] hover:text-[var(--secondary)] transition-colors" data-lang="nav_skills">小江技能</a></li>
+          <li><a href="#works" class="text-[var(--dark)] hover:text-[var(--secondary)] transition-colors" data-lang="nav_works">小江作品</a></li>
+          <li><a href="#contact" class="text-[var(--dark)] hover:text-[var(--secondary)] transition-colors" data-lang="nav_contact">联系小江</a></li>
         </ul>
 
-        <!-- 右侧切换区：风格切换 + 语言切换 + 移动端菜单 -->
-        <div class="flex items-center gap-3">
-          <!-- 风格切换按钮 -->
+        <!-- 右侧：语言切换 + 移动端菜单 -->
+        <div class="flex items-center gap-4">
+          <!-- 语言切换（中英双语） -->
           <div class="relative group">
-            <button id="styleToggle" class="px-3 py-1.5 rounded-full border border-[var(--accent-primary)] text-[var(--accent-primary)] hover:bg-[var(--accent-primary)] hover:text-[var(--bg-primary)] transition-all font-medium">
-              <span id="styleText" data-lang="style_cyber">赛博</span>
-            </button>
-            <!-- 风格下拉菜单 -->
-            <div id="styleMenu" class="absolute right-0 mt-2 w-40 card-bg rounded-xl glow-border p-2 hidden group-hover:block z-50">
-              <button class="style-option w-full text-left px-4 py-2 rounded-lg hover:bg-[var(--accent-primary)]/20 transition-all" data-style="cyberpunk" data-lang="style_cyber">赛博朋克</button>
-              <button class="style-option w-full text-left px-4 py-2 rounded-lg hover:bg-[var(--accent-primary)]/20 transition-all" data-style="wasteland" data-lang="style_waste">末日废土</button>
-              <button class="style-option w-full text-left px-4 py-2 rounded-lg hover:bg-[var(--accent-primary)]/20 transition-all" data-style="corporate" data-lang="style_corp">商务都市</button>
-            </div>
-          </div>
-
-          <!-- 语言切换按钮 -->
-          <div class="relative group">
-            <button id="langToggle" class="px-3 py-1.5 rounded-full border border-[var(--accent-secondary)] text-[var(--accent-secondary)] hover:bg-[var(--accent-secondary)] hover:text-[var(--bg-primary)] transition-all font-medium">
+            <button id="langToggle" class="px-3 py-1.5 rounded-full border border-[var(--secondary)] text-[var(--secondary)] hover:bg-[var(--primary)] transition-all">
               <span id="langText">中</span>
             </button>
-            <!-- 语言下拉菜单 -->
-            <div id="langMenu" class="absolute right-0 mt-2 w-32 card-bg rounded-xl glow-border p-2 hidden group-hover:block z-50">
-              <button class="lang-option w-full text-left px-4 py-2 rounded-lg hover:bg-[var(--accent-secondary)]/20 transition-all" data-lang="zh">中文</button>
-              <button class="lang-option w-full text-left px-4 py-2 rounded-lg hover:bg-[var(--accent-secondary)]/20 transition-all" data-lang="en">English</button>
-              <button class="lang-option w-full text-left px-4 py-2 rounded-lg hover:bg-[var(--accent-secondary)]/20 transition-all" data-lang="ru">Русский</button>
+            <div id="langMenu" class="absolute right-0 mt-2 w-24 bg-white rounded-xl shadow-lg p-2 hidden group-hover:block z-50">
+              <button class="lang-option w-full text-left px-3 py-2 rounded-lg hover:bg-[var(--primary)] transition-all" data-lang="zh">中文</button>
+              <button class="lang-option w-full text-left px-3 py-2 rounded-lg hover:bg-[var(--primary)] transition-all" data-lang="en">English</button>
             </div>
           </div>
 
           <!-- 移动端汉堡菜单 -->
-          <button id="menuToggle" class="md:hidden text-2xl accent-text">
+          <button id="menuToggle" class="md:hidden text-xl text-[var(--dark)]">
             <i class="fas fa-bars"></i>
           </button>
         </div>
       </nav>
 
       <!-- 移动端下拉菜单 -->
-      <div id="mobileMenu" class="md:hidden hidden card-bg mt-4 rounded-2xl glow-border p-6 absolute left-4 right-4">
-        <ul class="flex flex-col gap-6">
-          <li><a href="#home" class="block py-2 text-lg hover:text-[var(--accent-primary)] transition-colors" data-lang="nav_home">首页</a></li>
-          <li><a href="#about" class="block py-2 text-lg hover:text-[var(--accent-primary)] transition-colors" data-lang="nav_about">关于小江</a></li>
-          <li><a href="#skills" class="block py-2 text-lg hover:text-[var(--accent-primary)] transition-colors" data-lang="nav_skills">小江技能</a></li>
-          <li><a href="#works" class="block py-2 text-lg hover:text-[var(--accent-primary)] transition-colors" data-lang="nav_works">小江作品</a></li>
-          <li><a href="#contact" class="block py-2 text-lg hover:text-[var(--accent-primary)] transition-colors" data-lang="nav_contact">联系小江</a></li>
+      <div id="mobileMenu" class="md:hidden hidden bg-white rounded-xl shadow-lg mt-4 p-6 absolute left-4 right-4 z-50">
+        <ul class="flex flex-col gap-5">
+          <li><a href="#home" class="block py-1 hover:text-[var(--secondary)] transition-colors" data-lang="nav_home">首页</a></li>
+          <li><a href="#about" class="block py-1 hover:text-[var(--secondary)] transition-colors" data-lang="nav_about">关于小江</a></li>
+          <li><a href="#skills" class="block py-1 hover:text-[var(--secondary)] transition-colors" data-lang="nav_skills">小江技能</a></li>
+          <li><a href="#works" class="block py-1 hover:text-[var(--secondary)] transition-colors" data-lang="nav_works">小江作品</a></li>
+          <li><a href="#contact" class="block py-1 hover:text-[var(--secondary)] transition-colors" data-lang="nav_contact">联系小江</a></li>
         </ul>
       </div>
     </div>
   </header>
 
-  <!-- 首页Hero区 -->
-  <section id="home" class="min-h-screen flex items-center pt-24 pb-16">
+  <!-- 首页Hero区（简约大气版） -->
+  <section id="home" class="min-h-screen flex items-center pt-20 pb-16">
     <div class="container mx-auto px-4 md:px-6">
       <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="fade-in text-center md:text-left">
-          <p class="text-[var(--accent-tertiary)] text-lg mb-4 tracking-widest" data-lang="hero_greeting">
-            [ SYSTEM ONLINE ]
+        <!-- 左侧文字 -->
+        <div class="fade-in text-center md:text-left order-2 md:order-1">
+          <p class="text-[var(--secondary)] font-medium mb-4" data-lang="hero_greeting">
+            你好，我是小江
           </p>
           
-          <h1 class="text-[clamp(2.5rem,8vw,4.5rem)] font-bold leading-tight mb-6">
-            <span class="glitch" data-text="XIAOJIANG" data-lang="hero_name">小江</span>
+          <h1 class="text-[clamp(2.5rem,8vw,4rem)] font-bold leading-tight mb-6 text-[var(--dark)]">
+            <span data-lang="hero_name">用内容记录生活</span>
           </h1>
           
-          <h2 class="text-[clamp(1.2rem,3vw,1.8rem)] text-[var(--text-secondary)] mb-8 h-10 font-mono">
-            <span id="typingText" data-lang="hero_title">自媒体人 · 内容创作者 · 焦虑ing</span>
+          <h2 class="text-[clamp(1.2rem,3vw,1.5rem)] text-[var(--muted)] mb-8 h-8">
+            <span id="typingText" data-lang="hero_title">自媒体人 · 内容创作者 · 学AI懵逼中</span>
           </h2>
           
-          <p class="text-[var(--text-secondary)] text-lg mb-10 max-w-xl mx-auto md:mx-0 leading-relaxed" data-lang="hero_desc">
-            在现实与虚拟之间游走，用镜头记录世界，用代码构建未来，同时担心被AI取代的普通人类。
+          <p class="text-[var(--muted)] text-lg mb-10 max-w-xl mx-auto md:mx-0" data-lang="hero_desc">
+            从峡谷到工地，从镜头到AI世界，在现实与虚拟之间不断探索，用内容记录生活，同时在AI浪潮中努力前行。
           </p>
           
           <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-            <a href="#works" class="px-8 py-3 accent-gradient text-[var(--bg-primary)] rounded-full font-bold hover:shadow-lg hover:shadow-[var(--accent-primary)]/30 transition-all">
+            <a href="#works" class="btn-primary">
               <span data-lang="hero_btn1">查看作品</span>
             </a>
-            <a href="#contact" class="px-8 py-3 border-2 accent-border text-[var(--accent-primary)] rounded-full font-bold hover:bg-[var(--accent-primary)]/10 transition-all">
+            <a href="#contact" class="btn-outline">
               <span data-lang="hero_btn2">联系我</span>
             </a>
           </div>
         </div>
         
-        <div class="fade-in delay-200 relative">
-          <div class="absolute inset-0 bg-gradient-to-r from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 rounded-full blur-3xl"></div>
-          <div class="relative rounded-2xl overflow-hidden glow-border aspect-square max-w-md mx-auto">
-            <!-- 头像占位图，替换成你自己的照片 -->
-            <img src="https://picsum.photos/800/800?random=1&grayscale" alt="小江" class="w-full h-full object-cover">
-            <!-- 扫描线效果 -->
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--accent-primary)]/10 to-transparent bg-[length:100%_4px] pointer-events-none"></div>
+        <!-- 右侧头像 -->
+        <div class="fade-in delay-200 order-1 md:order-2">
+          <div class="relative max-w-sm mx-auto">
+            <!-- 头像主图（这里替换成你的头像） -->
+            <div class="rounded-2xl overflow-hidden shadow-xl">
+              <img id="avatarImg" src="https://picsum.photos/id/1012/800/800" alt="小江的头像" class="w-full aspect-square object-cover">
+            </div>
+            <!-- 简约装饰 -->
+            <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-[var(--primary)] rounded-2xl -z-10"></div>
+            <div class="absolute -top-4 -left-4 w-24 h-24 border-2 border-[var(--secondary)] rounded-2xl -z-10"></div>
           </div>
         </div>
       </div>
@@ -315,62 +282,56 @@
   </section>
 
   <!-- 关于小江区 -->
-  <section id="about" class="py-24">
+  <section id="about" class="py-24 bg-white">
     <div class="container mx-auto px-4 md:px-6">
       <div class="text-center mb-16 fade-in">
-        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 accent-text glow-text">
-          <span data-lang="about_title">关于小江</span>
-        </h2>
-        <div class="w-32 h-1 accent-gradient mx-auto rounded-full"></div>
+        <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold mb-4 text-[var(--dark)]" data-lang="about_title">关于小江</h2>
+        <div class="divider"></div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="fade-in relative">
-          <div class="card-bg rounded-2xl p-2 glow-border">
-            <img src="https://picsum.photos/800/600?random=2&blur=2" alt="小江的经历" class="w-full h-full object-cover rounded-lg">
-          </div>
+      <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+        <div class="fade-in">
+          <img src="https://picsum.photos/id/1016/800/600" alt="小江的经历" class="w-full rounded-2xl shadow-lg">
         </div>
         
         <div class="fade-in delay-200">
-          <h3 class="text-2xl font-bold mb-6" data-lang="about_subtitle">
-            我的「人生副本」
-          </h3>
+          <h3 class="text-xl font-bold mb-6 text-[var(--secondary)]" data-lang="about_subtitle">我的人生经历</h3>
           
-          <!-- 经历时间线 -->
+          <!-- 简约时间线 -->
           <div class="space-y-6">
-            <div class="card-bg p-6 rounded-xl glow-border">
-              <div class="flex items-center gap-4 mb-3">
-                <div class="w-10 h-10 rounded-full accent-gradient flex items-center justify-center text-[var(--bg-primary)]">
+            <div class="base-card p-6">
+              <div class="flex items-center gap-4 mb-2">
+                <div class="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-[var(--dark)] flex-shrink-0">
                   <i class="fas fa-gamepad"></i>
                 </div>
-                <h4 class="text-xl font-bold accent-text" data-lang="exp1_title">王者陪玩</h4>
+                <h4 class="text-lg font-bold text-[var(--dark)]" data-lang="exp1_title">王者陪玩</h4>
               </div>
-              <p class="text-[var(--text-secondary)]" data-lang="exp1_desc">
-                曾经在峡谷里叱咤风云，靠一手「躺赢」绝技带飞老板，深谙「如何让老板觉得是他自己Carry」的核心技术。
+              <p class="text-[var(--muted)]" data-lang="exp1_desc">
+                曾经在王者峡谷叱咤风云，靠一手「躺赢」绝技带飞老板，深谙「如何让老板觉得是他自己Carry全场」的核心技巧。
               </p>
             </div>
 
-            <div class="card-bg p-6 rounded-xl glow-border">
-              <div class="flex items-center gap-4 mb-3">
-                <div class="w-10 h-10 rounded-full accent-gradient flex items-center justify-center text-[var(--bg-primary)]">
+            <div class="base-card p-6">
+              <div class="flex items-center gap-4 mb-2">
+                <div class="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-[var(--dark)] flex-shrink-0">
                   <i class="fas fa-hard-hat"></i>
                 </div>
-                <h4 class="text-xl font-bold accent-text" data-lang="exp2_title">工地传奇</h4>
+                <h4 class="text-lg font-bold text-[var(--dark)]" data-lang="exp2_title">工地传奇</h4>
               </div>
-              <p class="text-[var(--text-secondary)]" data-lang="exp2_desc">
-                在工地挥洒过汗水，获得过「工地干饭王」荣誉称号，深知「吃饱了才有力气干活」的朴素真理。
+              <p class="text-[var(--muted)]" data-lang="exp2_desc">
+                在工地挥洒过汗水，解锁「工地干饭王」成就，深知「吃饱了才有力气干活」的朴素真理。
               </p>
             </div>
 
-            <div class="card-bg p-6 rounded-xl glow-border">
-              <div class="flex items-center gap-4 mb-3">
-                <div class="w-10 h-10 rounded-full accent-gradient flex items-center justify-center text-[var(--bg-primary)]">
+            <div class="base-card p-6">
+              <div class="flex items-center gap-4 mb-2">
+                <div class="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-[var(--dark)] flex-shrink-0">
                   <i class="fas fa-video"></i>
                 </div>
-                <h4 class="text-xl font-bold accent-text" data-lang="exp3_title">自媒体人</h4>
+                <h4 class="text-lg font-bold text-[var(--dark)]" data-lang="exp3_title">自媒体人</h4>
               </div>
-              <p class="text-[var(--text-secondary)]" data-lang="exp3_desc">
-                现在是一名自媒体内容创作者，像「核动力驴」一样不停产出内容，同时在AI的浪潮中瑟瑟发抖，担心明天就被取代。
+              <p class="text-[var(--muted)]" data-lang="exp3_desc">
+                现在是一名自媒体内容创作者，像「核动力驴」一样不停产出内容，同时在AI的浪潮中疯狂学习，每天都在学AI和被AI搞懵逼之间反复横跳。
               </p>
             </div>
           </div>
@@ -380,63 +341,50 @@
   </section>
 
   <!-- 小江技能区 -->
-  <section id="skills" class="py-24">
+  <section id="skills" class="py-24 bg-[#fafbfc]">
     <div class="container mx-auto px-4 md:px-6">
       <div class="text-center mb-16 fade-in">
-        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 accent-text glow-text">
-          <span data-lang="skills_title">小江技能</span>
-        </h2>
-        <div class="w-32 h-1 accent-gradient mx-auto rounded-full"></div>
+        <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold mb-4 text-[var(--dark)]" data-lang="skills_title">小江技能</h2>
+        <div class="divider"></div>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- 技能1 -->
-        <div class="fade-in group">
-          <div class="card-bg rounded-2xl p-8 glow-border text-center h-full hover:-translate-y-2 transition-all duration-300">
-            <div class="text-5xl mb-4 accent-text group-hover:scale-110 transition-all">
-              🐶
-            </div>
-            <h3 class="text-xl font-bold mb-3" data-lang="skill1_title">王者一级躺赢</h3>
-            <p class="text-[var(--text-secondary)]" data-lang="skill1_desc">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <!-- 技能卡片 -->
+        <div class="fade-in">
+          <div class="base-card p-8 text-center h-full">
+            <div class="text-4xl mb-4 text-[var(--secondary)]">🐶</div>
+            <h3 class="text-lg font-bold mb-3 text-[var(--dark)]" data-lang="skill1_title">王者一级躺赢</h3>
+            <p class="text-[var(--muted)]" data-lang="skill1_desc">
               专业辅助三十年，擅长让老板在不知不觉中Carry全场，游戏体验拉满。
             </p>
           </div>
         </div>
 
-        <!-- 技能2 -->
-        <div class="fade-in group delay-100">
-          <div class="card-bg rounded-2xl p-8 glow-border text-center h-full hover:-translate-y-2 transition-all duration-300">
-            <div class="text-5xl mb-4 accent-text group-hover:scale-110 transition-all">
-              🍚
-            </div>
-            <h3 class="text-xl font-bold mb-3" data-lang="skill2_title">工地干饭王</h3>
-            <p class="text-[var(--text-secondary)]" data-lang="skill2_desc">
+        <div class="fade-in delay-100">
+          <div class="base-card p-8 text-center h-full">
+            <div class="text-4xl mb-4 text-[var(--secondary)]">🍚</div>
+            <h3 class="text-lg font-bold mb-3 text-[var(--dark)]" data-lang="skill2_title">工地干饭王</h3>
+            <p class="text-[var(--muted)]" data-lang="skill2_desc">
               工地食堂的王者，能在5分钟内完成打饭、干饭、洗碗全套流程，效率拉满。
             </p>
           </div>
         </div>
 
-        <!-- 技能3 -->
-        <div class="fade-in group delay-200">
-          <div class="card-bg rounded-2xl p-8 glow-border text-center h-full hover:-translate-y-2 transition-all duration-300">
-            <div class="text-5xl mb-4 accent-text group-hover:scale-110 transition-all">
-              🐴
-            </div>
-            <h3 class="text-xl font-bold mb-3" data-lang="skill3_title">自媒体核动力驴</h3>
-            <p class="text-[var(--text-secondary)]" data-lang="skill3_desc">
+        <div class="fade-in delay-200">
+          <div class="base-card p-8 text-center h-full">
+            <div class="text-4xl mb-4 text-[var(--secondary)]">🐴</div>
+            <h3 class="text-lg font-bold mb-3 text-[var(--dark)]" data-lang="skill3_title">自媒体核动力驴</h3>
+            <p class="text-[var(--muted)]" data-lang="skill3_desc">
               像驴一样不知疲倦地产出内容，日更不是梦，全靠一口仙气吊着。
             </p>
           </div>
         </div>
 
-        <!-- 技能4 -->
-        <div class="fade-in group delay-300">
-          <div class="card-bg rounded-2xl p-8 glow-border text-center h-full hover:-translate-y-2 transition-all duration-300">
-            <div class="text-5xl mb-4 accent-text group-hover:scale-110 transition-all">
-              🎬
-            </div>
-            <h3 class="text-xl font-bold mb-3" data-lang="skill4_title">一点点拍摄剪辑</h3>
-            <p class="text-[var(--text-secondary)]" data-lang="skill4_desc">
+        <div class="fade-in delay-300">
+          <div class="base-card p-8 text-center h-full">
+            <div class="text-4xl mb-4 text-[var(--secondary)]">🎬</div>
+            <h3 class="text-lg font-bold mb-3 text-[var(--dark)]" data-lang="skill4_title">一点点拍摄剪辑</h3>
+            <p class="text-[var(--muted)]" data-lang="skill4_desc">
               会用一点点相机，会剪一点点视频，能看，能交差，偶尔还能出个小爆款。
             </p>
           </div>
@@ -446,52 +394,50 @@
   </section>
 
   <!-- 小江作品区 -->
-  <section id="works" class="py-24">
+  <section id="works" class="py-24 bg-white">
     <div class="container mx-auto px-4 md:px-6">
       <div class="text-center mb-16 fade-in">
-        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 accent-text glow-text">
-          <span data-lang="works_title">小江作品</span>
-        </h2>
-        <div class="w-32 h-1 accent-gradient mx-auto rounded-full"></div>
+        <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold mb-4 text-[var(--dark)]" data-lang="works_title">小江作品</h2>
+        <div class="divider"></div>
       </div>
 
       <!-- 作品分类标签 -->
       <div class="flex flex-wrap justify-center gap-4 mb-12 fade-in">
-        <button class="work-tab active px-6 py-2 rounded-full accent-gradient text-[var(--bg-primary)] font-bold" data-tab="photo">
+        <button class="tab-btn active" data-tab="photo">
           <span data-lang="tab_photo">人像摄影</span>
         </button>
-        <button class="work-tab px-6 py-2 rounded-full border-2 accent-border text-[var(--accent-primary)] font-bold hover:bg-[var(--accent-primary)]/10" data-tab="video">
+        <button class="tab-btn" data-tab="video">
           <span data-lang="tab_video">专业视频/MV</span>
         </button>
-        <button class="work-tab px-6 py-2 rounded-full border-2 accent-border text-[var(--accent-primary)] font-bold hover:bg-[var(--accent-primary)]/10" data-tab="film">
+        <button class="tab-btn" data-tab="film">
           <span data-lang="tab_film">校园微电影</span>
         </button>
-        <button class="work-tab px-6 py-2 rounded-full border-2 accent-border text-[var(--accent-primary)] font-bold hover:bg-[var(--accent-primary)]/10" data-tab="ai">
+        <button class="tab-btn" data-tab="ai">
           <span data-lang="tab_ai">AI产品视频</span>
         </button>
       </div>
 
       <!-- 人像摄影作品 -->
       <div class="work-content active" id="photo-tab">
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="fade-in group cursor-pointer" onclick="openModal('https://picsum.photos/800/1000?random=10')">
-            <div class="rounded-2xl overflow-hidden glow-border hover:-translate-y-2 transition-all duration-300">
-              <img src="https://picsum.photos/400/500?random=10" alt="人像作品" class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-all duration-500">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div class="fade-in group cursor-pointer" onclick="openModal('https://picsum.photos/id/331/800/1000')">
+            <div class="base-card overflow-hidden">
+              <img src="https://picsum.photos/id/331/400/500" alt="人像作品" class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-all duration-500">
             </div>
           </div>
-          <div class="fade-in group cursor-pointer delay-100" onclick="openModal('https://picsum.photos/800/1000?random=11')">
-            <div class="rounded-2xl overflow-hidden glow-border hover:-translate-y-2 transition-all duration-300">
-              <img src="https://picsum.photos/400/500?random=11" alt="人像作品" class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-all duration-500">
+          <div class="fade-in group cursor-pointer delay-100" onclick="openModal('https://picsum.photos/id/334/800/1000')">
+            <div class="base-card overflow-hidden">
+              <img src="https://picsum.photos/id/334/400/500" alt="人像作品" class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-all duration-500">
             </div>
           </div>
-          <div class="fade-in group cursor-pointer delay-200" onclick="openModal('https://picsum.photos/800/1000?random=12')">
-            <div class="rounded-2xl overflow-hidden glow-border hover:-translate-y-2 transition-all duration-300">
-              <img src="https://picsum.photos/400/500?random=12" alt="人像作品" class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-all duration-500">
+          <div class="fade-in group cursor-pointer delay-200" onclick="openModal('https://picsum.photos/id/338/800/1000')">
+            <div class="base-card overflow-hidden">
+              <img src="https://picsum.photos/id/338/400/500" alt="人像作品" class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-all duration-500">
             </div>
           </div>
-          <div class="fade-in group cursor-pointer delay-300" onclick="openModal('https://picsum.photos/800/1000?random=13')">
-            <div class="rounded-2xl overflow-hidden glow-border hover:-translate-y-2 transition-all duration-300">
-              <img src="https://picsum.photos/400/500?random=13" alt="人像作品" class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-all duration-500">
+          <div class="fade-in group cursor-pointer delay-300" onclick="openModal('https://picsum.photos/id/342/800/1000')">
+            <div class="base-card overflow-hidden">
+              <img src="https://picsum.photos/id/342/400/500" alt="人像作品" class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-all duration-500">
             </div>
           </div>
         </div>
@@ -499,56 +445,56 @@
 
       <!-- 专业视频/MV作品 -->
       <div class="work-content hidden" id="video-tab">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
           <div class="fade-in group">
-            <div class="card-bg rounded-2xl overflow-hidden glow-border h-full flex flex-col hover:-translate-y-2 transition-all duration-300">
-              <div class="relative overflow-hidden bg-[var(--bg-secondary)]" style="aspect-ratio: 16/9;">
-                <img src="https://picsum.photos/600/340?random=20" alt="视频封面" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+            <div class="base-card overflow-hidden h-full flex flex-col">
+              <div class="relative overflow-hidden" style="aspect-ratio: 16/9;">
+                <img src="https://picsum.photos/id/36/600/340" alt="视频封面" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
                 <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="w-16 h-16 rounded-full accent-gradient flex items-center justify-center text-[var(--bg-primary)] text-2xl group-hover:scale-110 transition-all">
+                  <div class="w-14 h-14 rounded-full bg-white/80 flex items-center justify-center text-[var(--secondary)] text-xl group-hover:scale-110 transition-all">
                     <i class="fas fa-play"></i>
                   </div>
                 </div>
               </div>
               <div class="p-6 flex flex-col flex-1">
-                <h3 class="text-xl font-bold mb-3 accent-text" data-lang="video1_title">专业MV作品</h3>
-                <p class="text-[var(--text-secondary)] flex-1" data-lang="video1_desc">
+                <h3 class="text-lg font-bold mb-2 text-[var(--dark)]" data-lang="video1_title">专业MV作品</h3>
+                <p class="text-[var(--muted)] flex-1" data-lang="video1_desc">
                   多支专业音乐视频拍摄与剪辑，从策划到拍摄到后期全流程制作。
                 </p>
               </div>
             </div>
           </div>
           <div class="fade-in group delay-100">
-            <div class="card-bg rounded-2xl overflow-hidden glow-border h-full flex flex-col hover:-translate-y-2 transition-all duration-300">
-              <div class="relative overflow-hidden bg-[var(--bg-secondary)]" style="aspect-ratio: 16/9;">
-                <img src="https://picsum.photos/600/340?random=21" alt="视频封面" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+            <div class="base-card overflow-hidden h-full flex flex-col">
+              <div class="relative overflow-hidden" style="aspect-ratio: 16/9;">
+                <img src="https://picsum.photos/id/42/600/340" alt="视频封面" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
                 <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="w-16 h-16 rounded-full accent-gradient flex items-center justify-center text-[var(--bg-primary)] text-2xl group-hover:scale-110 transition-all">
+                  <div class="w-14 h-14 rounded-full bg-white/80 flex items-center justify-center text-[var(--secondary)] text-xl group-hover:scale-110 transition-all">
                     <i class="fas fa-play"></i>
                   </div>
                 </div>
               </div>
               <div class="p-6 flex flex-col flex-1">
-                <h3 class="text-xl font-bold mb-3 accent-text" data-lang="video2_title">商业宣传片</h3>
-                <p class="text-[var(--text-secondary)] flex-1" data-lang="video2_desc">
+                <h3 class="text-lg font-bold mb-2 text-[var(--dark)]" data-lang="video2_title">商业宣传片</h3>
+                <p class="text-[var(--muted)] flex-1" data-lang="video2_desc">
                   多支企业商业宣传片制作，专业团队，专业设备，专业效果。
                 </p>
               </div>
             </div>
           </div>
           <div class="fade-in group delay-200">
-            <div class="card-bg rounded-2xl overflow-hidden glow-border h-full flex flex-col hover:-translate-y-2 transition-all duration-300">
-              <div class="relative overflow-hidden bg-[var(--bg-secondary)]" style="aspect-ratio: 16/9;">
-                <img src="https://picsum.photos/600/340?random=22" alt="视频封面" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+            <div class="base-card overflow-hidden h-full flex flex-col">
+              <div class="relative overflow-hidden" style="aspect-ratio: 16/9;">
+                <img src="https://picsum.photos/id/49/600/340" alt="视频封面" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
                 <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="w-16 h-16 rounded-full accent-gradient flex items-center justify-center text-[var(--bg-primary)] text-2xl group-hover:scale-110 transition-all">
+                  <div class="w-14 h-14 rounded-full bg-white/80 flex items-center justify-center text-[var(--secondary)] text-xl group-hover:scale-110 transition-all">
                     <i class="fas fa-play"></i>
                   </div>
                 </div>
               </div>
               <div class="p-6 flex flex-col flex-1">
-                <h3 class="text-xl font-bold mb-3 accent-text" data-lang="video3_title">短视频内容</h3>
-                <p class="text-[var(--text-secondary)] flex-1" data-lang="video3_desc">
+                <h3 class="text-lg font-bold mb-2 text-[var(--dark)]" data-lang="video3_title">短视频内容</h3>
+                <p class="text-[var(--muted)] flex-1" data-lang="video3_desc">
                   海量短视频内容创作，从15秒到5分钟，覆盖多个平台。
                 </p>
               </div>
@@ -559,26 +505,26 @@
 
       <!-- 校园微电影作品 -->
       <div class="work-content hidden" id="film-tab">
-        <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div class="max-w-2xl mx-auto">
           <div class="fade-in group">
-            <div class="card-bg rounded-2xl overflow-hidden glow-border hover:-translate-y-2 transition-all duration-300">
-              <div class="relative overflow-hidden bg-[var(--bg-secondary)]" style="aspect-ratio: 16/9;">
-                <img src="https://picsum.photos/800/450?random=30" alt="微电影封面" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
+            <div class="base-card overflow-hidden">
+              <div class="relative overflow-hidden" style="aspect-ratio: 16/9;">
+                <img src="https://picsum.photos/id/103/800/450" alt="微电影封面" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500">
                 <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="w-20 h-20 rounded-full accent-gradient flex items-center justify-center text-[var(--bg-primary)] text-3xl group-hover:scale-110 transition-all">
+                  <div class="w-16 h-16 rounded-full bg-white/80 flex items-center justify-center text-[var(--secondary)] text-2xl group-hover:scale-110 transition-all">
                     <i class="fas fa-play"></i>
                   </div>
                 </div>
               </div>
               <div class="p-8">
-                <h3 class="text-2xl font-bold mb-4 accent-text" data-lang="film_title">《青春的答案》校园微电影</h3>
-                <p class="text-[var(--text-secondary)] mb-6" data-lang="film_desc">
+                <h3 class="text-xl font-bold mb-3 text-[var(--dark)]" data-lang="film_title">《青春的答案》校园微电影</h3>
+                <p class="text-[var(--muted)] mb-6" data-lang="film_desc">
                   自编自导自摄自剪的校园微电影作品，讲述青春里的迷茫与成长，获得多个校园电影节奖项。
                 </p>
                 <div class="flex flex-wrap gap-3">
-                  <span class="px-4 py-1 rounded-full bg-[var(--accent-primary)]/20 text-[var(--accent-primary)] border border-[var(--accent-primary)]/30">剧情</span>
-                  <span class="px-4 py-1 rounded-full bg-[var(--accent-secondary)]/20 text-[var(--accent-secondary)] border border-[var(--accent-secondary)]/30">校园</span>
-                  <span class="px-4 py-1 rounded-full bg-[var(--accent-tertiary)]/20 text-[var(--accent-tertiary)] border border-[var(--accent-tertiary)]/30">原创</span>
+                  <span class="px-3 py-1 text-xs rounded-full bg-[var(--primary)] text-[var(--dark)]">剧情</span>
+                  <span class="px-3 py-1 text-xs rounded-full bg-[#f1f5f9] text-[var(--muted)]">校园</span>
+                  <span class="px-3 py-1 text-xs rounded-full bg-[#f1f5f9] text-[var(--muted)]">原创</span>
                 </div>
               </div>
             </div>
@@ -588,36 +534,36 @@
 
       <!-- AI产品视频作品 -->
       <div class="work-content hidden" id="ai-tab">
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="fade-in group cursor-pointer" onclick="openModal('https://picsum.photos/800/600?random=40')">
-            <div class="rounded-2xl overflow-hidden glow-border hover:-translate-y-2 transition-all duration-300">
-              <img src="https://picsum.photos/400/300?random=40" alt="AI作品" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-all duration-500">
-              <div class="p-4 card-bg">
-                <h4 class="font-bold accent-text" data-lang="ai1_title">AI产品展示1</h4>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <div class="fade-in group cursor-pointer" onclick="openModal('https://picsum.photos/id/180/800/600')">
+            <div class="base-card overflow-hidden">
+              <img src="https://picsum.photos/id/180/400/300" alt="AI作品" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-all duration-500">
+              <div class="p-4">
+                <h4 class="font-bold text-[var(--dark)]" data-lang="ai1_title">AI产品展示1</h4>
               </div>
             </div>
           </div>
-          <div class="fade-in group cursor-pointer delay-100" onclick="openModal('https://picsum.photos/800/600?random=41')">
-            <div class="rounded-2xl overflow-hidden glow-border hover:-translate-y-2 transition-all duration-300">
-              <img src="https://picsum.photos/400/300?random=41" alt="AI作品" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-all duration-500">
-              <div class="p-4 card-bg">
-                <h4 class="font-bold accent-text" data-lang="ai2_title">AI产品展示2</h4>
+          <div class="fade-in group cursor-pointer delay-100" onclick="openModal('https://picsum.photos/id/182/800/600')">
+            <div class="base-card overflow-hidden">
+              <img src="https://picsum.photos/id/182/400/300" alt="AI作品" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-all duration-500">
+              <div class="p-4">
+                <h4 class="font-bold text-[var(--dark)]" data-lang="ai2_title">AI产品展示2</h4>
               </div>
             </div>
           </div>
-          <div class="fade-in group cursor-pointer delay-200" onclick="openModal('https://picsum.photos/800/600?random=42')">
-            <div class="rounded-2xl overflow-hidden glow-border hover:-translate-y-2 transition-all duration-300">
-              <img src="https://picsum.photos/400/300?random=42" alt="AI作品" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-all duration-500">
-              <div class="p-4 card-bg">
-                <h4 class="font-bold accent-text" data-lang="ai3_title">AI产品展示3</h4>
+          <div class="fade-in group cursor-pointer delay-200" onclick="openModal('https://picsum.photos/id/184/800/600')">
+            <div class="base-card overflow-hidden">
+              <img src="https://picsum.photos/id/184/400/300" alt="AI作品" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-all duration-500">
+              <div class="p-4">
+                <h4 class="font-bold text-[var(--dark)]" data-lang="ai3_title">AI产品展示3</h4>
               </div>
             </div>
           </div>
-          <div class="fade-in group cursor-pointer delay-300" onclick="openModal('https://picsum.photos/800/600?random=43')">
-            <div class="rounded-2xl overflow-hidden glow-border hover:-translate-y-2 transition-all duration-300">
-              <img src="https://picsum.photos/400/300?random=43" alt="AI作品" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-all duration-500">
-              <div class="p-4 card-bg">
-                <h4 class="font-bold accent-text" data-lang="ai4_title">AI产品展示4</h4>
+          <div class="fade-in group cursor-pointer delay-300" onclick="openModal('https://picsum.photos/id/185/800/600')">
+            <div class="base-card overflow-hidden">
+              <img src="https://picsum.photos/id/185/400/300" alt="AI作品" class="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-all duration-500">
+              <div class="p-4">
+                <h4 class="font-bold text-[var(--dark)]" data-lang="ai4_title">AI产品展示4</h4>
               </div>
             </div>
           </div>
@@ -627,69 +573,62 @@
   </section>
 
   <!-- 联系小江区 -->
-  <section id="contact" class="py-24">
+  <section id="contact" class="py-24 bg-[#fafbfc]">
     <div class="container mx-auto px-4 md:px-6">
       <div class="text-center mb-16 fade-in">
-        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 accent-text glow-text">
-          <span data-lang="contact_title">联系小江</span>
-        </h2>
-        <div class="w-32 h-1 accent-gradient mx-auto rounded-full"></div>
+        <h2 class="text-[clamp(1.8rem,5vw,2.5rem)] font-bold mb-4 text-[var(--dark)]" data-lang="contact_title">联系小江</h2>
+        <div class="divider"></div>
       </div>
 
       <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
         <!-- 左侧联系方式 -->
         <div class="fade-in">
-          <h3 class="text-2xl font-bold mb-8" data-lang="contact_subtitle">
-            找到我
-          </h3>
+          <h3 class="text-xl font-bold mb-6 text-[var(--secondary)]" data-lang="contact_subtitle">找到我</h3>
           
-          <div class="space-y-6 mb-10">
-            <div class="card-bg p-6 rounded-xl glow-border flex items-center gap-4">
-              <div class="w-12 h-12 rounded-full accent-gradient flex items-center justify-center text-[var(--bg-primary)] flex-shrink-0">
-                <i class="fab fa-weixin text-xl"></i>
+          <div class="space-y-4 mb-8">
+            <div class="base-card p-5 flex items-center gap-4">
+              <div class="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-[var(--dark)] flex-shrink-0">
+                <i class="fab fa-weixin"></i>
               </div>
               <div>
-                <p class="text-[var(--text-secondary)] text-sm" data-lang="contact_wechat">微信</p>
-                <p class="font-mono text-xl accent-text">chuan1584282</p>
+                <p class="text-[var(--muted)] text-sm" data-lang="contact_wechat">微信</p>
+                <p class="font-bold text-[var(--dark)]">chuan1584282</p>
               </div>
             </div>
 
-            <div class="card-bg p-6 rounded-xl glow-border flex items-center gap-4">
-              <div class="w-12 h-12 rounded-full accent-gradient flex items-center justify-center text-[var(--bg-primary)] flex-shrink-0">
-                <i class="fas fa-envelope text-xl"></i>
+            <div class="base-card p-5 flex items-center gap-4">
+              <div class="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-[var(--dark)] flex-shrink-0">
+                <i class="fas fa-at"></i>
               </div>
               <div>
-                <p class="text-[var(--text-secondary)] text-sm" data-lang="contact_email">邮箱</p>
-                <p class="font-mono text-xl accent-text">xiaojiang@example.com</p>
+                <p class="text-[var(--muted)] text-sm" data-lang="contact_social">全平台同名</p>
+                <p class="font-bold text-[var(--dark)]" data-lang="contact_id">抖、B、书同名：学ai懵逼的小江</p>
               </div>
             </div>
 
-            <div class="card-bg p-6 rounded-xl glow-border flex items-center gap-4">
-              <div class="w-12 h-12 rounded-full accent-gradient flex items-center justify-center text-[var(--bg-primary)] flex-shrink-0">
-                <i class="fas fa-video text-xl"></i>
+            <div class="base-card p-5 flex items-center gap-4">
+              <div class="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center text-[var(--dark)] flex-shrink-0">
+                <i class="fas fa-envelope"></i>
               </div>
               <div>
-                <p class="text-[var(--text-secondary)] text-sm" data-lang="contact_social">社交媒体</p>
-                <p class="font-mono text-xl accent-text">全平台同名</p>
+                <p class="text-[var(--muted)] text-sm" data-lang="contact_email">邮箱</p>
+                <p class="font-bold text-[var(--dark)]">xiaojiang@example.com</p>
               </div>
             </div>
           </div>
 
           <!-- 社交链接 -->
           <div>
-            <p class="text-[var(--text-secondary)] mb-4" data-lang="contact_follow">关注我</p>
-            <div class="flex gap-4">
-              <a href="#" class="w-12 h-12 rounded-full card-bg glow-border flex items-center justify-center text-[var(--accent-primary)] hover:accent-gradient hover:text-[var(--bg-primary)] transition-all">
-                <i class="fab fa-douyin text-xl"></i>
+            <p class="text-[var(--muted)] mb-4" data-lang="contact_follow">关注我</p>
+            <div class="flex gap-3">
+              <a href="#" class="w-10 h-10 rounded-full base-card flex items-center justify-center text-[var(--secondary)] hover:bg-[var(--primary)] transition-all">
+                <i class="fab fa-tiktok"></i>
               </a>
-              <a href="#" class="w-12 h-12 rounded-full card-bg glow-border flex items-center justify-center text-[var(--accent-primary)] hover:accent-gradient hover:text-[var(--bg-primary)] transition-all">
-                <i class="fab fa-weibo text-xl"></i>
+              <a href="#" class="w-10 h-10 rounded-full base-card flex items-center justify-center text-[var(--secondary)] hover:bg-[var(--primary)] transition-all">
+                <i class="fab fa-bilibili"></i>
               </a>
-              <a href="#" class="w-12 h-12 rounded-full card-bg glow-border flex items-center justify-center text-[var(--accent-primary)] hover:accent-gradient hover:text-[var(--bg-primary)] transition-all">
-                <i class="fab fa-bilibili text-xl"></i>
-              </a>
-              <a href="#" class="w-12 h-12 rounded-full card-bg glow-border flex items-center justify-center text-[var(--accent-primary)] hover:accent-gradient hover:text-[var(--bg-primary)] transition-all">
-                <i class="fab fa-youtube text-xl"></i>
+              <a href="#" class="w-10 h-10 rounded-full base-card flex items-center justify-center text-[var(--secondary)] hover:bg-[var(--primary)] transition-all">
+                <i class="fab fa-xiaohongshu"></i>
               </a>
             </div>
           </div>
@@ -697,16 +636,16 @@
 
         <!-- 右侧留言表单 -->
         <div class="fade-in delay-200">
-          <form class="card-bg rounded-2xl p-8 glow-border">
-            <div class="mb-6">
-              <label for="name" class="block text-[var(--text-secondary)] mb-2" data-lang="form_name">你的名字</label>
-              <input type="text" id="name" class="w-full bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-3 outline-none focus:border-[var(--accent-primary)] transition-all text-[var(--text-primary)]">
+          <form class="base-card p-8">
+            <div class="mb-5">
+              <label for="name" class="block text-[var(--muted)] mb-2" data-lang="form_name">你的名字</label>
+              <input type="text" id="name" class="w-full border border-gray-200 rounded-lg px-4 py-3 outline-none focus:border-[var(--secondary)] transition-all">
             </div>
-            <div class="mb-6">
-              <label for="message" class="block text-[var(--text-secondary)] mb-2" data-lang="form_message">想说什么</label>
-              <textarea id="message" rows="5" class="w-full bg-[var(--bg-secondary)] border border-[var(--border-color)] rounded-lg px-4 py-3 outline-none focus:border-[var(--accent-primary)] transition-all text-[var(--text-primary)] resize-none"></textarea>
+            <div class="mb-5">
+              <label for="message" class="block text-[var(--muted)] mb-2" data-lang="form_message">想对我说的话</label>
+              <textarea id="message" rows="5" class="w-full border border-gray-200 rounded-lg px-4 py-3 outline-none focus:border-[var(--secondary)] transition-all resize-none"></textarea>
             </div>
-            <button type="submit" class="w-full py-3 accent-gradient text-[var(--bg-primary)] rounded-lg font-bold hover:shadow-lg hover:shadow-[var(--accent-primary)]/30 transition-all">
+            <button type="submit" class="w-full py-3 btn-primary">
               <span data-lang="form_btn">发送消息</span>
             </button>
           </form>
@@ -715,24 +654,31 @@
     </div>
   </section>
 
-  <!-- 页脚 -->
-  <footer class="py-8 border-t border-[var(--border-color)]">
+  <!-- 免责声明区 -->
+  <section class="py-6 bg-white">
     <div class="container mx-auto px-4 md:px-6">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <p class="text-[var(--text-secondary)] mb-4 md:mb-0">
-          © <span id="year"></span> <span data-lang="footer_name">XIAOJIANG</span>. 
-          <span class="text-[var(--accent-tertiary)]" data-lang="footer_anxiety">担心被AI取代中...</span>
+      <div class="base-card p-4 text-center">
+        <p class="text-[var(--muted)] text-sm" data-lang="disclaimer">
+          本网站仅供个人娱乐学习使用，不作任何商业用途
         </p>
-        <div class="flex gap-6">
-          <a href="#" class="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors" data-lang="footer_privacy">隐私政策</a>
-          <a href="#" class="text-[var(--text-secondary)] hover:text-[var(--accent-primary)] transition-colors" data-lang="footer_terms">服务条款</a>
-        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="py-6 border-t border-gray-100 bg-white">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center">
+        <p class="text-[var(--muted)]">
+          © <span id="year"></span> <span data-lang="footer_name">XIAOJIANG</span>. 
+          <span class="text-[var(--secondary)]" data-lang="footer_anxiety">学AI懵逼中...</span>
+        </p>
       </div>
     </div>
   </footer>
 
   <!-- 回到顶部按钮 -->
-  <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full accent-gradient text-[var(--bg-primary)] flex items-center justify-center opacity-0 invisible transition-all z-40 hover:shadow-lg hover:shadow-[var(--accent-primary)]/30">
+  <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full btn-primary flex items-center justify-center opacity-0 invisible transition-all z-40">
     <i class="fas fa-arrow-up"></i>
   </button>
 
@@ -742,36 +688,33 @@
     <img class="modal-content" id="modalImg">
   </div>
 
-  <!-- JavaScript 逻辑 -->
+  <!-- 完整JavaScript逻辑 -->
   <script>
-    // ========== 1. 多语言系统 ==========
+    // ========== 1. 中英双语系统 ==========
     const langPack = {
       zh: {
-        title: "小江的个人空间 | 赛博朋克",
-        meta_desc: "小江的个人网站，赛博朋克风格，支持风格切换与多语言",
+        title: "小江的个人空间",
+        meta_desc: "小江的个人网站，自媒体创作者，视频剪辑师",
         logo: "XIAOJIANG",
         nav_home: "首页",
         nav_about: "关于小江",
         nav_skills: "小江技能",
         nav_works: "小江作品",
         nav_contact: "联系小江",
-        style_cyber: "赛博",
-        style_waste: "末日废土",
-        style_corp: "商务都市",
-        hero_greeting: "[ SYSTEM ONLINE ]",
-        hero_name: "小江",
-        hero_title: "自媒体人 · 内容创作者 · 焦虑ing",
-        hero_desc: "在现实与虚拟之间游走，用镜头记录世界，用代码构建未来，同时担心被AI取代的普通人类。",
+        hero_greeting: "你好，我是小江",
+        hero_name: "用内容记录生活",
+        hero_title: "自媒体人 · 内容创作者 · 学AI懵逼中",
+        hero_desc: "从峡谷到工地，从镜头到AI世界，在现实与虚拟之间不断探索，用内容记录生活，同时在AI浪潮中努力前行。",
         hero_btn1: "查看作品",
         hero_btn2: "联系我",
         about_title: "关于小江",
-        about_subtitle: "我的「人生副本」",
+        about_subtitle: "我的人生经历",
         exp1_title: "王者陪玩",
-        exp1_desc: "曾经在峡谷里叱咤风云，靠一手「躺赢」绝技带飞老板，深谙「如何让老板觉得是他自己Carry」的核心技术。",
+        exp1_desc: "曾经在王者峡谷叱咤风云，靠一手「躺赢」绝技带飞老板，深谙「如何让老板觉得是他自己Carry全场」的核心技巧。",
         exp2_title: "工地传奇",
-        exp2_desc: "在工地挥洒过汗水，获得过「工地干饭王」荣誉称号，深知「吃饱了才有力气干活」的朴素真理。",
+        exp2_desc: "在工地挥洒过汗水，解锁「工地干饭王」成就，深知「吃饱了才有力气干活」的朴素真理。",
         exp3_title: "自媒体人",
-        exp3_desc: "现在是一名自媒体内容创作者，像「核动力驴」一样不停产出内容，同时在AI的浪潮中瑟瑟发抖，担心明天就被取代。",
+        exp3_desc: "现在是一名自媒体内容创作者，像「核动力驴」一样不停产出内容，同时在AI的浪潮中疯狂学习，每天都在学AI和被AI搞懵逼之间反复横跳。",
         skills_title: "小江技能",
         skill1_title: "王者一级躺赢",
         skill1_desc: "专业辅助三十年，擅长让老板在不知不觉中Carry全场，游戏体验拉满。",
@@ -801,61 +744,58 @@
         contact_title: "联系小江",
         contact_subtitle: "找到我",
         contact_wechat: "微信",
+        contact_social: "全平台同名",
+        contact_id: "抖、B、书同名：学ai懵逼的小江",
         contact_email: "邮箱",
-        contact_social: "社交媒体",
         contact_follow: "关注我",
         form_name: "你的名字",
-        form_message: "想说什么",
+        form_message: "想对我说的话",
         form_btn: "发送消息",
+        disclaimer: "本网站仅供个人娱乐学习使用，不作任何商业用途",
         footer_name: "XIAOJIANG",
-        footer_anxiety: "担心被AI取代中...",
-        footer_privacy: "隐私政策",
-        footer_terms: "服务条款",
+        footer_anxiety: "学AI懵逼中...",
       },
       en: {
-        title: "Xiaojiang's Space | Cyberpunk",
-        meta_desc: "Xiaojiang's personal website, cyberpunk style, with theme switch and multi-language support",
+        title: "Xiaojiang's Personal Space",
+        meta_desc: "Xiaojiang's personal website, content creator, video editor",
         logo: "XIAOJIANG",
         nav_home: "Home",
         nav_about: "About",
         nav_skills: "Skills",
         nav_works: "Works",
         nav_contact: "Contact",
-        style_cyber: "Cyber",
-        style_waste: "Wasteland",
-        style_corp: "Corporate",
-        hero_greeting: "[ SYSTEM ONLINE ]",
-        hero_name: "Xiaojiang",
-        hero_title: "Content Creator ·自媒体人 · Anxious about AI",
-        hero_desc: "Wandering between reality and virtual, recording the world with lens, building the future with code, while worrying about being replaced by AI.",
+        hero_greeting: "Hello, I'm Xiaojiang",
+        hero_name: "Record Life with Content",
+        hero_title: "Content Creator · Learning AI",
+        hero_desc: "From game canyon to construction site, from camera to AI world, exploring between reality and virtual, recording life with content, and moving forward in the wave of AI.",
         hero_btn1: "View Works",
         hero_btn2: "Contact Me",
         about_title: "About Me",
-        about_subtitle: "My Life Versions",
+        about_subtitle: "My Experience",
         exp1_title: "Game Booster",
-        exp1_desc: "Once a professional game booster, mastering the art of making clients feel like they carried the game.",
+        exp1_desc: "Once a professional game booster, mastering the art of making clients feel like they carried the whole game.",
         exp2_title: "Construction Legend",
         exp2_desc: "Worked on construction sites, earned the title of 'Eating Champion', knowing the truth that you need to eat well to work well.",
         exp3_title: "Content Creator",
-        exp3_desc: "Now a self-media content creator, producing content like a nuclear-powered donkey, while trembling in the wave of AI, worrying about being replaced tomorrow.",
+        exp3_desc: "Now a self-media content creator, producing content tirelessly, while learning AI crazily every day.",
         skills_title: "My Skills",
-        skill1_title: "Pro Carry Assistant",
+        skill1_title: "Pro Game Assistant",
         skill1_desc: "Professional support for 30 years, good at making clients carry the game without knowing it.",
         skill2_title: "Eating Champion",
         skill2_desc: "King of the construction site canteen, can finish eating and washing dishes in 5 minutes.",
-        skill3_title: "Nuclear-Powered Donkey",
-        skill3_desc: "Producing content tirelessly like a donkey, daily updates are not a dream.",
-        skill4_title: "Some Shooting & Editing",
+        skill3_title: "Content Creator",
+        skill3_desc: "Producing content tirelessly, daily updates are not a dream.",
+        skill4_title: "Shooting & Editing",
         skill4_desc: "Know a little bit of camera, a little bit of editing, enough to get the job done.",
         works_title: "My Works",
         tab_photo: "Portrait Photography",
-        tab_video: "Professional Videos/MV",
+        tab_video: "Videos & MV",
         tab_film: "Campus Microfilm",
         tab_ai: "AI Product Videos",
         video1_title: "Professional MV",
         video1_desc: "Multiple professional music videos, full process from planning to shooting to post-production.",
         video2_title: "Commercial Videos",
-        video2_desc: "Multiple corporate commercial videos, professional team, professional equipment.",
+        video2_desc: "Multiple corporate commercial videos, professional team and equipment.",
         video3_title: "Short Videos",
         video3_desc: "Massive short video content, from 15 seconds to 5 minutes, covering multiple platforms.",
         film_title: "The Answer of Youth Microfilm",
@@ -867,89 +807,24 @@
         contact_title: "Contact Me",
         contact_subtitle: "Find Me",
         contact_wechat: "WeChat",
+        contact_social: "Same ID on All Platforms",
+        contact_id: "Douyin/Bilibili/Red: xiaojiang_ai",
         contact_email: "Email",
-        contact_social: "Social Media",
         contact_follow: "Follow Me",
         form_name: "Your Name",
         form_message: "Your Message",
         form_btn: "Send Message",
+        disclaimer: "This website is for personal entertainment and learning purposes only, not for any commercial use.",
         footer_name: "XIAOJIANG",
-        footer_anxiety: "Worrying about being replaced by AI...",
-        footer_privacy: "Privacy Policy",
-        footer_terms: "Terms of Service",
-      },
-      ru: {
-        title: "Пространство Сяоцзяна | Киберпанк",
-        meta_desc: "Личный сайт Сяоцзяна в стиле киберпанк с переключением тем и многоязычной поддержкой",
-        logo: "XIAOJIANG",
-        nav_home: "Главная",
-        nav_about: "Обо мне",
-        nav_skills: "Навыки",
-        nav_works: "Работы",
-        nav_contact: "Контакты",
-        style_cyber: "Кибер",
-        style_waste: "Пустошь",
-        style_corp: "Корпоратив",
-        hero_greeting: "[ СИСТЕМА ОНЛАЙН ]",
-        hero_name: "Сяоцзян",
-        hero_title: "Создатель контента · Блогер · Тревога об ИИ",
-        hero_desc: "Скитаюсь между реальностью и виртуальностью, записываю мир объективом, строю будущее кодом, одновременно беспокоюсь о замене ИИ.",
-        hero_btn1: "Посмотреть работы",
-        hero_btn2: "Связаться",
-        about_title: "Обо мне",
-        about_subtitle: "Мои жизненные версии",
-        exp1_title: "Игровой бустер",
-        exp1_desc: "Когда-то был профессиональным игровым бустером, владея искусством заставлять клиентов чувствовать, что они выиграли игру.",
-        exp2_title: "Легенда стройки",
-        exp2_desc: "Работал на стройках, получил титул 'Чемпион по еде', зная истину, что нужно хорошо есть, чтобы хорошо работать.",
-        exp3_title: "Создатель контента",
-        exp3_desc: "Теперь блогер и создатель контента, производящий контент, как осел с ядерным двигателем, одновременно дрожа в волне ИИ, беспокоюсь о замене завтра.",
-        skills_title: "Мои навыки",
-        skill1_title: "Профессиональный ассистент",
-        skill1_desc: "Профессиональная поддержка 30 лет, умею заставлять клиентов выиграть игру, не осознавая этого.",
-        skill2_title: "Чемпион по еде",
-        skill2_desc: "Король столовой стройки, могу закончить есть и мыть посуду за 5 минут.",
-        skill3_title: "Осел с ядерным двигателем",
-        skill3_desc: "Производю контент неустанно, как осел, ежедневные обновления - не мечта.",
-        skill4_title: "Немного съемки и монтажа",
-        skill4_desc: "Знаю немного камеру, немного монтажа, достаточно, чтобы выполнить работу.",
-        works_title: "Мои работы",
-        tab_photo: "Портретная фотография",
-        tab_video: "Профессиональные видео/MV",
-        tab_film: "Студенческий микрофильм",
-        tab_ai: "AI видео о продуктах",
-        video1_title: "Профессиональный MV",
-        video1_desc: "Несколько профессиональных музыкальных видео, полный процесс от планирования до съемки и постпроизводства.",
-        video2_title: "Коммерческие видео",
-        video2_desc: "Несколько корпоративных коммерческих видео, профессиональная команда, профессиональное оборудование.",
-        video3_title: "Короткие видео",
-        video3_desc: "Массовый контент коротких видео, от 15 секунд до 5 минут, охватывающий несколько платформ.",
-        film_title: "Микрофильм 'Ответ молодости'",
-        film_desc: "Самостоятельно написанный, снятый и смонтированный студенческий микрофильм, рассказывающий о путанице и росте в молодости.",
-        ai1_title: "AI показ продукта 1",
-        ai2_title: "AI показ продукта 2",
-        ai3_title: "AI показ продукта 3",
-        ai4_title: "AI показ продукта 4",
-        contact_title: "Связаться со мной",
-        contact_subtitle: "Найди меня",
-        contact_wechat: "WeChat",
-        contact_email: "Email",
-        contact_social: "Социальные сети",
-        contact_follow: "Подпишись на меня",
-        form_name: "Твое имя",
-        form_message: "Твое сообщение",
-        form_btn: "Отправить",
-        footer_name: "XIAOJIANG",
-        footer_anxiety: "Беспокоюсь о замене ИИ...",
-        footer_privacy: "Политика конфиденциальности",
-        footer_terms: "Условия обслуживания",
+        footer_anxiety: "Learning AI...",
       }
     };
 
     let currentLang = "zh";
     const langText = document.getElementById("langText");
-    const langNames = { zh: "中", en: "EN", ru: "RU" };
+    const langNames = { zh: "中", en: "EN" };
 
+    // 语言切换函数
     function switchLang(lang) {
       currentLang = lang;
       document.querySelectorAll("[data-lang]").forEach(el => {
@@ -963,51 +838,25 @@
       document.querySelector("meta[name='description']").setAttribute("content", langPack[lang].meta_desc);
     }
 
+    // 绑定语言切换事件
     document.querySelectorAll(".lang-option").forEach(btn => {
       btn.addEventListener("click", () => {
         switchLang(btn.getAttribute("data-lang"));
       });
     });
 
-    // ========== 2. 风格切换系统 ==========
-    let currentStyle = "cyberpunk";
-    const styleText = document.getElementById("styleText");
-    const styleNames = { 
-      cyberpunk: langPack[currentLang].style_cyber, 
-      wasteland: langPack[currentLang].style_waste, 
-      corporate: langPack[currentLang].style_corp 
-    };
-
-    function switchStyle(style) {
-      currentStyle = style;
-      document.body.className = style;
-      // 更新按钮文本（保持当前语言）
-      const styleKey = style === "cyberpunk" ? "style_cyber" : style === "wasteland" ? "style_waste" : "style_corp";
-      styleText.textContent = langPack[currentLang][styleKey];
-    }
-
-    document.querySelectorAll(".style-option").forEach(btn => {
-      btn.addEventListener("click", () => {
-        switchStyle(btn.getAttribute("data-style"));
-      });
-    });
-
-    // ========== 3. 作品分类切换 ==========
-    const workTabs = document.querySelectorAll(".work-tab");
+    // ========== 2. 作品分类切换 ==========
+    const workTabs = document.querySelectorAll(".tab-btn");
     const workContents = document.querySelectorAll(".work-content");
 
     workTabs.forEach(tab => {
       tab.addEventListener("click", () => {
         // 移除所有激活状态
-        workTabs.forEach(t => {
-          t.classList.remove("active", "accent-gradient", "text-[var(--bg-primary)]");
-          t.classList.add("border-2", "accent-border", "text-[var(--accent-primary)]", "hover:bg-[var(--accent-primary)]/10");
-        });
+        workTabs.forEach(t => t.classList.remove("active"));
         workContents.forEach(c => c.classList.add("hidden"));
 
         // 激活当前标签
-        tab.classList.add("active", "accent-gradient", "text-[var(--bg-primary)]");
-        tab.classList.remove("border-2", "accent-border", "text-[var(--accent-primary)]", "hover:bg-[var(--accent-primary)]/10");
+        tab.classList.add("active");
 
         // 显示对应内容
         const targetTab = tab.getAttribute("data-tab");
@@ -1015,7 +864,7 @@
       });
     });
 
-    // ========== 4. 作品模态框 ==========
+    // ========== 3. 作品模态框功能 ==========
     function openModal(imgSrc) {
       const modal = document.getElementById("workModal");
       const modalImg = document.getElementById("modalImg");
@@ -1036,15 +885,15 @@
       }
     }
 
-    // ========== 5. 其他通用功能 ==========
+    // ========== 4. 通用交互功能 ==========
     // 导航栏滚动效果
     const navbar = document.getElementById("navbar");
     window.addEventListener("scroll", () => {
       if (window.scrollY > 50) {
         navbar.classList.add("py-2");
-        navbar.classList.remove("py-4");
+        navbar.classList.remove("py-3");
       } else {
-        navbar.classList.add("py-4");
+        navbar.classList.add("py-3");
         navbar.classList.remove("py-2");
       }
     });
@@ -1059,6 +908,7 @@
       icon.classList.toggle("fa-times");
     });
 
+    // 点击移动端菜单链接关闭菜单
     document.querySelectorAll("#mobileMenu a").forEach(link => {
       link.addEventListener("click", () => {
         mobileMenu.classList.add("hidden");
@@ -1096,7 +946,7 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // 打字动画
+    // 打字机效果
     const typingText = document.getElementById("typingText");
     let typingIndex = 0;
     let isDeleting = false;
@@ -1127,7 +977,7 @@
 
     window.addEventListener("load", typeEffect);
 
-    // 切换语言时重置打字动画
+    // 切换语言时重置打字机
     document.querySelectorAll(".lang-option").forEach(btn => {
       btn.addEventListener("click", () => {
         clearTimeout(typingTimer);
@@ -1137,13 +987,13 @@
       });
     });
 
-    // 版权年份
+    // 版权年份自动更新
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // 表单提交
+    // 表单提交提示
     document.querySelector("form").addEventListener("submit", (e) => {
       e.preventDefault();
-      alert(langPack[currentLang].form_btn + " (演示)");
+      alert(langPack[currentLang].form_btn + " 成功！");
       e.target.reset();
     });
   </script>
