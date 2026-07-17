@@ -933,8 +933,8 @@
               "has_liquor": true,
               "images": {
                 "conventional": {
-                  "dry": "",
-                  "liquor": ""
+                  "dry": "https://video.aultras-tea.com/lvcha.png",
+                  "liquor": "https://video.aultras-tea.com/baicha.png"
                 },
                 "eu": {
                   "dry": "",
@@ -956,8 +956,8 @@
               "has_liquor": true,
               "images": {
                 "conventional": {
-                  "dry": "",
-                  "liquor": ""
+                  "dry": "https://video.aultras-tea.com/lvcha.png",
+                  "liquor": "https://video.aultras-tea.com/baicha.png"
                 },
                 "eu": {
                   "dry": "",
@@ -979,8 +979,8 @@
               "has_liquor": true,
               "images": {
                 "conventional": {
-                  "dry": "",
-                  "liquor": ""
+                  "dry": "https://video.aultras-tea.com/lvcha.png",
+                  "liquor": "https://video.aultras-tea.com/baicha.png"
                 },
                 "eu": {
                   "dry": "",
@@ -1002,8 +1002,8 @@
               "has_liquor": true,
               "images": {
                 "conventional": {
-                  "dry": "",
-                  "liquor": ""
+                  "dry": "https://video.aultras-tea.com/lvcha.png",
+                  "liquor": "https://video.aultras-tea.com/baicha.png"
                 },
                 "eu": {
                   "dry": "",
@@ -1025,8 +1025,8 @@
               "has_liquor": true,
               "images": {
                 "conventional": {
-                  "dry": "",
-                  "liquor": ""
+                  "dry": "https://video.aultras-tea.com/lvcha.png",
+                  "liquor": "https://video.aultras-tea.com/baicha.png"
                 },
                 "eu": {
                   "dry": "",
