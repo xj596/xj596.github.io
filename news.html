@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-lang="meta_title">News | AultrasTea - Latest Updates & Events</title>
+  <meta name="description" data-lang="meta_desc" content="Stay updated with the latest news and events from AultrasTea.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0F4C3A',
+            secondary: '#D4AF37',
+            light: '#F8F5F0',
+            dark: '#1A1A1A',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['"Noto Serif SC"', 'serif'],
+          },
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto { content-visibility: auto; }
+      .text-shadow { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    }
+  </style>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { overflow-x: hidden; background-color: #F8F5F0; color: #1A1A1A; font-family: "Inter", sans-serif; }
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #D4AF37; transition: width 0.3s ease; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* 左侧导航样式 */
+    .sidebar-nav { height: calc(100vh - 80px); overflow-y: auto; }
+    .sidebar-nav::-webkit-scrollbar { width: 4px; }
+    .sidebar-nav::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+    .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+
+    .year-item { cursor: pointer; user-select: none; }
+    .year-item.active { color: #0F4C3A; font-weight: 700; }
+    .month-list { display: none; }
+    .month-list.open { display: block; }
+    .month-item { cursor: pointer; transition: all 0.2s; }
+    .month-item:hover { color: #0F4C3A; padding-left: 0.5rem; }
+    .month-item.active { color: #D4AF37; font-weight: 600; }
+    .day-list { display: none; padding-left: 1rem; }
+    .day-list.open { display: block; }
+    .day-item { cursor: pointer; transition: all 0.2s; padding: 4px 8px; border-radius: 4px; }
+    .day-item:hover { background: rgba(15,76,58,0.08); color: #0F4C3A; }
+    .day-item.active { background: #0F4C3A; color: white; font-weight: 500; }
+
+    /* 新闻详情样式 */
+    .news-detail-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(15,76,58,0.08); }
+    .news-detail-card .detail-img { width: 100%; max-height: 400px; object-fit: cover; }
+    .news-detail-card .content-img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 8px; margin: 1.5rem 0; }
+    .news-detail-content { line-height: 1.8; font-size: 1.05rem; color: #374151; }
+    .news-list-item { cursor: pointer; transition: all 0.3s; border-left: 3px solid transparent; padding-left: 1rem; margin-left: -1rem; }
+    .news-list-item:hover { border-left-color: #0F4C3A; background: rgba(15,76,58,0.04); }
+    .news-list-item.active { border-left-color: #D4AF37; background: rgba(212,175,55,0.08); }
+
+    /* 返回顶部 */
+    #backToTop { position: fixed; bottom: 24px; right: 24px; width: 44px; height: 44px; border-radius: 50%; background: #0F4C3A; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 40; box-shadow: 0 4px 12px rgba(15,76,58,0.3); }
+    #backToTop:hover { background: #D4AF37; transform: translateY(-2px); }
+    #backToTop.visible { opacity: 1; visibility: visible; }
+
+    /* 加载状态 */
+    .loading-spinner { width: 40px; height: 40px; border: 3px solid #f3f3f3; border-top: 3px solid #0F4C3A; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* 面包屑 */
+    .breadcrumb-item::after { content: '/'; margin: 0 0.5rem; color: #9ca3af; }
+    .breadcrumb-item:last-child::after { content: ''; }
+
+    /* 展开动画 */
+    .news-detail-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out, opacity 0.3s ease; opacity: 0; }
+    .news-detail-content.expanded { max-height: 5000px; opacity: 1; }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 py-3 bg-light/95 backdrop-blur-md shadow-sm">
+    <div class="container mx-auto px-4 md:px-6">
+      <nav class="flex items-center justify-between">
+        <a href="index.html" class="text-2xl font-bold text-primary flex items-center gap-2">
+          <i class="fas fa-leaf"></i>
+          <span id="navbar-brand" data-lang="navbar_brand">AultrasTea</span>
+        </a>
+        <ul class="hidden md:flex items-center gap-8">
+          <li><a href="index.html#home" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_home">Home</a></li>
+          <li><a href="index.html#about" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_about">About Us</a></li>
+          <li><a href="index.html#products" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_products">Products</a></li>
+          <li><a href="index.html#certificates" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_certificates">Certificates</a></li>
+          <li><a href="index.html#exhibitions" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_exhibitions">Exhibitions</a></li>
+          <li><a href="news.html" class="nav-link text-primary hover:text-primary transition-colors font-medium" data-lang="nav_news">News</a></li>
+          <li><a href="index.html#contact" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_contact">Contact Us</a></li>
+        </ul>
+        <div class="flex items-center gap-4">
+          <select id="langSelect" class="px-3 py-1.5 rounded-lg border border-primary/30 text-primary bg-white font-medium outline-none">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ru">Русский</option>
+            <option value="de">Deutsch</option>
+          </select>
+          <button id="menuToggle" class="md:hidden text-2xl text-primary">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+      <div id="mobileMenu" class="md:hidden hidden bg-white mt-4 rounded-xl border border-primary/10 p-6 absolute left-4 right-4 shadow-lg">
+        <ul class="flex flex-col gap-5">
+          <li><a href="index.html#home" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_home">Home</a></li>
+          <li><a href="index.html#about" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_about">About Us</a></li>
+          <li><a href="index.html#products" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_products">Products</a></li>
+          <li><a href="index.html#certificates" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_certificates">Certificates</a></li>
+          <li><a href="index.html#exhibitions" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_exhibitions">Exhibitions</a></li>
+          <li><a href="news.html" class="block py-2 text-primary font-medium" data-lang="nav_news">News</a></li>
+          <li><a href="index.html#contact" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_contact">Contact Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="pt-24 pb-16 min-h-screen">
+    <!-- 面包屑 + 返回按钮 -->
+    <div class="container mx-auto px-4 md:px-6 mb-8">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <a href="index.html" class="breadcrumb-item hover:text-primary transition-colors" data-lang="nav_home">Home</a>
+          <span class="breadcrumb-item" data-lang="nav_news">News</span>
+          <span id="breadcrumb-detail" class="text-primary font-medium hidden"></span>
+        </div>
+        <a href="index.html#news" class="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary text-sm font-medium rounded-full hover:bg-primary hover:text-white transition-all">
+          <i class="fas fa-arrow-left"></i>
+          <span data-lang="back_to_home">Back to Home</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 页面标题 -->
+    <div class="container mx-auto px-4 md:px-6 mb-12">
+      <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold text-primary" data-lang="page_title">News & Updates</h1>
+      <p class="text-dark/70 mt-3 text-lg" data-lang="page_desc">Stay updated with the latest news and events from AultrasTea.</p>
+    </div>
+
+    <!-- 主内容：左侧导航 + 右侧新闻列表 -->
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid lg:grid-cols-12 gap-8">
+        
+        <!-- 左侧导航栏 -->
+        <aside class="lg:col-span-3">
+          <div class="sidebar-nav sticky top-24 bg-white rounded-xl shadow-sm p-5">
+            <h3 class="font-bold text-primary mb-4 flex items-center gap-2">
+              <i class="fas fa-folder-open text-secondary"></i>
+              <span data-lang="nav_archive">Archive</span>
+            </h3>
+            <div id="sidebar-nav" class="space-y-2">
+              <!-- 由JS渲染 -->
+            </div>
+          </div>
+        </aside>
+
+        <!-- 右侧新闻内容 -->
+        <div class="lg:col-span-9">
+          <!-- 加载状态 -->
+          <div id="loading" class="flex items-center justify-center py-20">
+            <div class="loading-spinner"></div>
+          </div>
+
+          <!-- 空状态 -->
+          <div id="empty-state" class="hidden text-center py-20 text-gray-400">
+            <i class="fas fa-newspaper text-6xl mb-4 text-gray-300"></i>
+            <p class="text-lg" data-lang="empty_msg">No news available.</p>
+          </div>
+
+          <!-- 新闻列表 -->
+          <div id="news-list" class="space-y-6">
+            <!-- 由JS渲染 -->
+          </div>
+
+          <!-- 展开的详细视图 -->
+          <div id="news-detail" class="hidden">
+            <!-- 由JS渲染 -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="py-10 bg-primary text-white">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-leaf"></i> <span data-lang="navbar_brand">AultrasTea</span></h3>
+          <p class="text-white/70 mb-4" data-lang="footer_desc">Professional Chinese tea manufacturer and exporter, supply premium organic tea to the world.</p>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold mb-4" data-lang="footer_quick">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="index.html" class="text-white/70 hover:text-white transition-colors" data-lang="nav_home">Home</a></li>
+            <li><a href="index.html#about" class="text-white/70 hover:text-white transition-colors" data-lang="nav_about">About Us</a></li>
+            <li><a href="index.html#products" class="text-white/70 hover:text-white transition-colors" data-lang="nav_products">Products</a></li>
+            <li><a href="index.html#exhibitions" class="text-white/70 hover:text-white transition-colors" data-lang="nav_exhibitions">Exhibitions</a></li>
+            <li><a href="news.html" class="text-white/70 hover:text-white transition-colors" data-lang="nav_news">News</a></li>
+            <li><a href="index.html#contact" class="text-white/70 hover:text-white transition-colors" data-lang="nav_contact">Contact Us</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold mb-4" data-lang="footer_product">Product Categories</h4>
+          <ul class="space-y-2">
+            <li><a href="product-green.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_green">Green Tea</a></li>
+            <li><a href="product-black.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_black">Black Tea</a></li>
+            <li><a href="product-oolong.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_oolong">Oolong Tea</a></li>
+            <li><a href="product-white.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_white">White Tea</a></li>
+            <li><a href="product-yellow.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_yellow">Yellow Tea</a></li>
+            <li><a href="product-dark.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_dark">Dark Tea</a></li>
+            <li><a href="product-flower.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_flower">Flower Tea</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-lg font-bold mb-4" data-lang="footer_contact">Contact</h4>
+          <ul class="space-y-2">
+            <li class="flex items-center gap-2 text-white/70"><i class="fas fa-envelope"></i> <span id="footer_email">admin@aultrastea.com</span></li>
+            <li class="flex items-center gap-2 text-white/70"><i class="fas fa-phone"></i> <span id="footer_phone">400-059-8108</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-white/20 pt-6 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-white/60 mb-4 md:mb-0">© <span id="year"></span> <span data-lang="footer_company">GUIZHOU AULTRAS TEA CO.,LTD.</span> <span data-lang="footer_copy">All Rights Reserved.</span></p>
+        <p class="text-white/60 text-sm" data-lang="footer_disclaimer">Disclaimer: This website is for product display and international trade communication only.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 返回顶部 -->
+  <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center opacity-0 invisible transition-all z-40 hover:bg-secondary shadow-lg">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    // ===== 语言包 =====
+    const langPack = {
+      en: {
+        navbar_brand: "AultrasTea",
+        meta_title: "News | AultrasTea - Latest Updates & Events",
+        meta_desc: "Stay updated with the latest news and events from AultrasTea.",
+        nav_home: "Home", nav_about: "About Us", nav_products: "Products", nav_certificates: "Certificates",
+        nav_exhibitions: "Exhibitions", nav_news: "News", nav_contact: "Contact Us",
+        page_title: "News & Updates", page_desc: "Stay updated with the latest news and events from AultrasTea.",
+        back_to_home: "Back to Home", nav_archive: "Archive", empty_msg: "No news available.",
+        footer_desc: "Professional Chinese tea manufacturer and exporter, supply premium organic tea to the world.",
+        footer_quick: "Quick Links", footer_product: "Product Categories", footer_contact: "Contact",
+        footer_disclaimer: "Disclaimer: This website is for product display and international trade communication only.",
+        footer_company: "GUIZHOU AULTRAS TEA CO.,LTD.", footer_copy: "All Rights Reserved.",
+        product_green: "Green Tea", product_black: "Black Tea", product_oolong: "Oolong Tea",
+        product_white: "White Tea", product_yellow: "Yellow Tea", product_dark: "Dark Tea", product_flower: "Flower Tea",
+        read_more: "Read More", close_detail: "Close", external_link: "External Link"
+      },
+      zh: {
+        navbar_brand: "湘丰瀑布AULTRAS",
+        meta_title: "新闻动态 | 贵州湘丰瀑布茶业有限公司 - 最新资讯与活动",
+        meta_desc: "了解贵州湘丰瀑布茶业的最新动态与行业资讯。",
+        nav_home: "首页", nav_about: "关于我们", nav_products: "产品中心", nav_certificates: "公司资质",
+        nav_exhibitions: "展会动态", nav_news: "新闻动态", nav_contact: "联系我们",
+        page_title: "新闻动态", page_desc: "了解贵州湘丰瀑布茶业的最新动态与行业资讯。",
+        back_to_home: "返回首页", nav_archive: "归档", empty_msg: "暂无新闻。",
+        footer_desc: "专业的中国茶叶生产出口商，为全球供应优质有机茶叶。",
+        footer_quick: "快速导航", footer_product: "产品分类", footer_contact: "联系我们",
+        footer_disclaimer: "免责声明：本网站仅用于产品展示与国际贸易沟通使用。",
+        footer_company: "贵州湘丰瀑布茶业有限公司", footer_copy: "版权所有",
+        product_green: "绿茶", product_black: "红茶", product_oolong: "乌龙茶",
+        product_white: "白茶", product_yellow: "黄茶", product_dark: "黑茶", product_flower: "工艺茶",
+        read_more: "阅读更多", close_detail: "关闭详情", external_link: "外部链接"
+      },
+      ru: {
+        navbar_brand: "AultrasTea",
+        meta_title: "Новости | AultrasTea - Последние обновления и события",
+        meta_desc: "Будьте в курсе последних новостей и событий AultrasTea.",
+        nav_home: "Главная", nav_about: "О нас", nav_products: "Продукция", nav_certificates: "Сертификаты",
+        nav_exhibitions: "Выставки", nav_news: "Новости", nav_contact: "Контакты",
+        page_title: "Новости и обновления", page_desc: "Будьте в курсе последних новостей и событий AultrasTea.",
+        back_to_home: "На главную", nav_archive: "Архив", empty_msg: "Новостей пока нет.",
+        footer_desc: "Профессиональный производитель и экспортер чая из Китая.",
+        footer_quick: "Быстрые ссылки", footer_product: "Категории продукции", footer_contact: "Контакты",
+        footer_disclaimer: "Этот сайт предназначен только для демонстрации продукции.",
+        footer_company: "GUIZHOU AULTRAS TEA CO.,LTD.", footer_copy: "Все права защищены.",
+        product_green: "Зелёный чай", product_black: "Чёрный чай", product_oolong: "Улун",
+        product_white: "Белый чай", product_yellow: "Жёлтый чай", product_dark: "Тёмный чай", product_flower: "Цветочный чай",
+        read_more: "Подробнее", close_detail: "Закрыть", external_link: "Внешняя ссылка"
+      },
+      de: {
+        navbar_brand: "AultrasTea",
+        meta_title: "Neuigkeiten | AultrasTea - Neueste Updates & Veranstaltungen",
+        meta_desc: "Bleiben Sie über die neuesten Nachrichten und Ereignisse von AultrasTea informiert.",
+        nav_home: "Startseite", nav_about: "Über Uns", nav_products: "Produkte", nav_certificates: "Zertifikate",
+        nav_exhibitions: "Messen", nav_news: "Neuigkeiten", nav_contact: "Kontakt",
+        page_title: "Neuigkeiten & Updates", page_desc: "Bleiben Sie über die neuesten Nachrichten und Ereignisse von AultrasTea informiert.",
+        back_to_home: "Zurück zur Startseite", nav_archive: "Archiv", empty_msg: "Noch keine Nachrichten.",
+        footer_desc: "Professioneller Tee Hersteller und Exporteur aus China.",
+        footer_quick: "Schnellzugriff", footer_product: "Produktkategorien", footer_contact: "Kontakt",
+        footer_disclaimer: "Diese Website dient nur der Produktpräsentation.",
+        footer_company: "GUIZHOU AULTRAS TEA CO.,LTD.", footer_copy: "Alle Rechte vorbehalten.",
+        product_green: "Grüntee", product_black: "Schwarztee", product_oolong: "Oolong Tee",
+        product_white: "Weißtee", product_yellow: "Gelbtee", product_dark: "Dunkeltee", product_flower: "Blumentee",
+        read_more: "Mehr lesen", close_detail: "Schließen", external_link: "Externer Link"
+      }
+    };
+
+    // ===== 全局状态 =====
+    let allNews = [];  // 所有新闻详情（从 news_detail 读取）
+    let currentLang = 'en';
+    let expandedId = null; // 当前展开的新闻ID
+    let activeYear = null;
+    let activeMonth = null;
+
+    // ===== 语言切换 =====
+    const langSelect = document.getElementById('langSelect');
+    function switchLang(lang) {
+      currentLang = lang;
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        const key = el.getAttribute('data-lang');
+        if (langPack[lang] && langPack[lang][key]) el.textContent = langPack[lang][key];
+      });
+      document.title = langPack[lang].meta_title;
+      document.querySelector("meta[name='description']").setAttribute('content', langPack[lang].meta_desc);
+      document.documentElement.lang = lang;
+
+      // 重新渲染新闻列表
+      renderSidebarNav();
+      renderNewsList();
+
+      // 如果有展开的新闻，重新渲染详情
+      if (expandedId !== null) {
+        renderNewsDetail(expandedId);
+      }
+    }
+    langSelect.addEventListener('change', () => switchLang(langSelect.value));
+
+    // ===== 解析URL参数，获取初始新闻ID =====
+    function getNewsIdFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      return parseInt(params.get('id')) || null;
+    }
+
+    // ===== 渲染左侧导航栏（年份-月份-日期树形结构）=====
+    function renderSidebarNav() {
+      const nav = document.getElementById('sidebar-nav');
+      if (!allNews.length) {
+        nav.innerHTML = '<p class="text-gray-400 text-sm">' + (langPack[currentLang].empty_msg || 'No news') + '</p>';
+        return;
+      }
+
+      // 按日期分组
+      const grouped = {};
+      allNews.forEach(item => {
+        const date = new Date(item.date || '2000-01-01');
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        if (!grouped[year]) grouped[year] = {};
+        if (!grouped[year][month]) grouped[year][month] = [];
+        grouped[year][month].push(item);
+      });
+
+      // 按年份降序排序
+      const years = Object.keys(grouped).sort((a, b) => b - a);
+      const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const monthNamesZh = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+      const monthNamesRu = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+      const monthNamesDe = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+
+      let html = '';
+      years.forEach(year => {
+        const months = Object.keys(grouped[year]).sort((a, b) => b - a);
+        const isYearOpen = activeYear === year || (activeYear === null && years[0] === year);
+        const isYearActive = activeYear === year;
+
+        html += `
+          <div class="year-item ${isYearActive ? 'active' : ''}" onclick="toggleYear('${year}')">
+            <div class="flex items-center justify-between py-1">
+              <span class="font-bold text-lg">${year}</span>
+              <i class="fas fa-chevron-${isYearOpen ? 'down' : 'right'} text-xs transition-transform"></i>
+            </div>
+            <div class="month-list ${isYearOpen ? 'open' : ''}" id="year-${year}">
+        `;
+
+        months.forEach(month => {
+          const monthNamesArr = currentLang === 'zh' ? monthNamesZh : currentLang === 'ru' ? monthNamesRu : currentLang === 'de' ? monthNamesDe : monthNames;
+          const monthName = monthNamesArr[month - 1];
+          const isMonthOpen = activeYear === year && (activeMonth === month || (activeMonth === null && months[0] === month));
+          const isMonthActive = activeYear === year && activeMonth === month;
+
+          html += `
+            <div class="month-item ${isMonthActive ? 'active' : ''}" onclick="event.stopPropagation(); toggleMonth('${year}', '${month}')">
+              <div class="flex items-center justify-between py-1 pl-2">
+                <span>${monthName}</span>
+                <i class="fas fa-chevron-${isMonthOpen ? 'down' : 'right'} text-xs transition-transform"></i>
+              </div>
+              <div class="day-list ${isMonthOpen ? 'open' : ''}" id="year-${year}-month-${month}">
+          `;
+
+          grouped[year][month].forEach(item => {
+            const day = new Date(item.date).getDate();
+            const title = item['title_' + currentLang] || item.title_en || '';
+            const isActive = expandedId === item.id;
+            html += `
+              <div class="day-item ${isActive ? 'active' : ''}" onclick="event.stopPropagation(); selectNews(${item.id})">
+                <div class="text-xs truncate">${day} - ${title.substring(0, 30)}${title.length > 30 ? '...' : ''}</div>
+              </div>
+            `;
+          });
+
+          html += `</div></div>`;
+        });
+
+        html += `</div></div>`;
+      });
+
+      nav.innerHTML = html;
+    }
+
+    function toggleYear(year) {
+      activeYear = activeYear === year ? null : year;
+      activeMonth = null;
+      renderSidebarNav();
+    }
+
+    function toggleMonth(year, month) {
+      if (activeYear !== year) activeYear = year;
+      activeMonth = activeMonth === month ? null : month;
+      renderSidebarNav();
+    }
+
+    // ===== 渲染新闻列表 =====
+    function renderNewsList() {
+      const list = document.getElementById('news-list');
+      const detail = document.getElementById('news-detail');
+
+      if (!allNews.length) {
+        list.innerHTML = '';
+        detail.innerHTML = '';
+        document.getElementById('empty-state').classList.remove('hidden');
+        return;
+      }
+
+      document.getElementById('empty-state').classList.add('hidden');
+
+      // 如果有日期筛选，只显示匹配的
+      let filteredNews = allNews;
+      if (activeYear) {
+        filteredNews = filteredNews.filter(item => {
+          const d = new Date(item.date);
+          return d.getFullYear().toString() === activeYear;
+        });
+        if (activeMonth) {
+          filteredNews = filteredNews.filter(item => {
+            const d = new Date(item.date);
+            return (d.getMonth() + 1).toString() === activeMonth;
+          });
+        }
+      }
+
+      // 按日期降序
+      filteredNews.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      const readMoreLabel = langPack[currentLang].read_more || 'Read More';
+      const contactLabel = langPack[currentLang].nav_contact || 'Contact Us';
+
+      list.innerHTML = filteredNews.map(item => {
+        const title = item['title_' + currentLang] || item.title_en || '';
+        const dateStr = item.date || '';
+        const imgUrl = (item.image || '').trim();
+        const isActive = expandedId === item.id;
+
+        return `
+          <div class="news-list-item ${isActive ? 'active' : ''}" onclick="selectNews(${item.id})">
+            <div class="bg-white rounded-xl shadow-sm p-5 hover:shadow-md transition-shadow">
+              <div class="flex gap-4">
+                ${imgUrl ? `<img src="${imgUrl}" alt="${title}" class="w-24 h-24 object-cover rounded-lg flex-shrink-0">` : ''}
+                <div class="flex-grow">
+                  <span class="text-xs text-gray-400 mb-1 block">${dateStr}</span>
+                  <h3 class="font-bold text-primary text-lg mb-2 leading-snug">${title}</h3>
+                  <div class="flex items-center gap-3">
+                    <a href="index.html#contact" onclick="event.stopPropagation()" class="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-primary transition-colors">
+                      <i class="fas fa-envelope"></i> ${contactLabel}
+                    </a>
+                    ${item.link ? `
+                      <a href="${item.link}" target="_blank" onclick="event.stopPropagation()" class="inline-flex items-center gap-1 text-xs text-secondary hover:text-secondary/80 transition-colors">
+                        <i class="fas fa-external-link-alt"></i> ${langPack[currentLang].external_link || 'External Link'}
+                      </a>
+                    ` : ''}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ===== 选择新闻，显示详情 =====
+    function selectNews(id) {
+      if (expandedId === id) {
+        expandedId = null;
+        document.getElementById('news-detail').classList.add('hidden');
+        renderNewsList();
+        renderSidebarNav();
+        return;
+      }
+
+      expandedId = id;
+      renderNewsDetail(id);
+      renderNewsList();
+      renderSidebarNav();
+
+      // 滚动到详情
+      document.getElementById('news-detail').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // ===== 渲染新闻详情 =====
+    function renderNewsDetail(id) {
+      const detail = document.getElementById('news-detail');
+      const item = allNews.find(n => n.id === id);
+      if (!item) return;
+
+      const title = item['title_' + currentLang] || item.title_en || '';
+      const content = item['content_' + currentLang] || item.content_en || '';
+      const imgUrl = (item.image || '').trim();
+      const img2Url = (item.image2 || '').trim();
+      const img3Url = (item.image3 || '').trim();
+      const dateStr = item.date || '';
+      const linkUrl = (item.link || '').trim();
+      const readMoreLabel = langPack[currentLang].read_more || 'Read More';
+      const closeLabel = langPack[currentLang].close_detail || 'Close';
+
+      // 更新面包屑
+      const breadcrumb = document.getElementById('breadcrumb-detail');
+      breadcrumb.textContent = title.substring(0, 40) + (title.length > 40 ? '...' : '');
+      breadcrumb.classList.remove('hidden');
+
+      detail.classList.remove('hidden');
+      detail.innerHTML = `
+        <div class="news-detail-card">
+          <!-- 大图 -->
+          ${imgUrl ? `<img src="${imgUrl}" alt="${title}" class="detail-img">` : ''}
+
+          <div class="p-6 md:p-8">
+            <!-- 日期 -->
+            <div class="flex items-center gap-4 mb-4">
+              <span class="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full">${dateStr}</span>
+            </div>
+
+            <!-- 标题 -->
+            <h2 class="text-2xl md:text-3xl font-bold text-primary mb-6 leading-tight">${title}</h2>
+
+            <!-- 主体内容（带插图） -->
+            <div class="news-detail-content expanded">
+              <div class="news-detail-body">
+                ${content.split('\n').map(para => {
+                  // 检测是否应该在中间插入图片
+                  const parts = para.split('{{img2}}');
+                  if (parts.length > 1) {
+                    return parts.map((p, i) => `
+                      <p class="mb-4">${p}</p>
+                      ${i < parts.length - 1 && img2Url ? `<img src="${img2Url}" alt="Image 2" class="content-img">` : ''}
+                    `).join('');
+                  }
+                  const parts2 = para.split('{{img3}}');
+                  if (parts2.length > 1) {
+                    return parts2.map((p, i) => `
+                      <p class="mb-4">${p}</p>
+                      ${i < parts2.length - 1 && img3Url ? `<img src="${img3Url}" alt="Image 3" class="content-img">` : ''}
+                    `).join('');
+                  }
+                  return para ? `<p class="mb-4">${para}</p>` : '';
+                }).join('')}
+              </div>
+
+              <!-- 两张插图（如果内容中没有手动插入） -->
+              ${img2Url && !content.includes('{{img2}}') ? `<img src="${img2Url}" alt="Image 2" class="content-img">` : ''}
+              ${img3Url && !content.includes('{{img3}}') ? `<img src="${img3Url}" alt="Image 3" class="content-img">` : ''}
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="flex flex-wrap items-center gap-4 mt-8 pt-6 border-t border-gray-200">
+              <a href="index.html#contact" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-medium rounded-full hover:bg-primary/90 transition-all">
+                <i class="fas fa-envelope"></i>
+                <span>${langPack[currentLang].nav_contact || 'Contact Us'}</span>
+              </a>
+              ${linkUrl ? `
+                <a href="${linkUrl}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 bg-secondary text-white font-medium rounded-full hover:bg-secondary/90 transition-all">
+                  <i class="fas fa-external-link-alt"></i>
+                  <span>${langPack[currentLang].external_link || 'External Link'}</span>
+                </a>
+              ` : ''}
+              <button onclick="closeDetail()" class="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-300 text-gray-600 font-medium rounded-full hover:bg-gray-100 transition-all ml-auto">
+                <i class="fas fa-times"></i>
+                <span>${closeLabel}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function closeDetail() {
+      expandedId = null;
+      document.getElementById('news-detail').classList.add('hidden');
+      document.getElementById('breadcrumb-detail').classList.add('hidden');
+      renderNewsList();
+      renderSidebarNav();
+    }
+
+    // ===== 从 data.json 加载数据 =====
+    async function loadNewsData() {
+      const loading = document.getElementById('loading');
+      // 防御性UTF-8多重编码自动修复（循环解码）
+      function fixDoubleEncoded(obj){if(typeof obj==='string'){let c=obj;for(let i=0;i<10;i++){try{const f=decodeURIComponent(escape(c));if(f===c)break;c=f}catch(e){break}}return c}if(Array.isArray(obj))return obj.map(i=>fixDoubleEncoded(i));if(obj&&typeof obj==='object'){const r={};for(const k in obj)r[k]=fixDoubleEncoded(obj[k]);return r}return obj}
+      try {
+        const res = await fetch('./data.json?t=' + Date.now());
+        let data = await res.json();
+        data = fixDoubleEncoded(data);
+
+        // 优先读取 news_detail（详细版），如果不存在则读取旧版 news
+        allNews = data.news_detail || data.news || [];
+
+        // 按日期降序
+        allNews.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // 更新联系方式
+        if (data.contact_info) {
+          document.getElementById('footer_email').textContent = data.contact_info.email_1 || '';
+          document.getElementById('footer_phone').textContent = data.contact_info.phone_1 || '';
+        }
+
+        loading.classList.add('hidden');
+
+        // 渲染
+        renderSidebarNav();
+        renderNewsList();
+
+        // 检查URL是否有id参数
+        const urlId = getNewsIdFromUrl();
+        if (urlId) {
+          // 延迟一下确保渲染完成
+          setTimeout(() => selectNews(urlId), 100);
+        }
+
+      } catch (e) {
+        console.warn('data.json 加载失败', e);
+        loading.innerHTML = `
+          <div class="text-center text-gray-400">
+            <i class="fas fa-exclamation-triangle text-3xl mb-3"></i>
+            <p>Failed to load news data. Please refresh the page.</p>
+          </div>
+        `;
+      }
+    }
+
+    // ===== 导航滚动 =====
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('py-2', window.scrollY > 50);
+      navbar.classList.toggle('shadow-md', window.scrollY > 50);
+    });
+
+    // ===== 移动端菜单 =====
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const icon = menuToggle.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    });
+    document.querySelectorAll('#mobileMenu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuToggle.querySelector('i').className = 'fas fa-bars';
+      });
+    });
+
+    // ===== 回到顶部 =====
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ===== 年份 =====
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== 初始化 =====
+    loadNewsData();
+  </script>
+</body>
+</html>

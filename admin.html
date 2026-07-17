@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AultrasTea 后台管理系统</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; }
+    .tab-btn.active { background: #0F4C3A; color: white; }
+    .img-preview { max-height: 80px; object-fit: cover; border-radius: 6px; margin-top: 6px; }
+    .section-card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 8px rgba(0,0,0,0.07); }
+    input[type=text], input[type=url], textarea, select.form-select {
+      width: 100%; border: 1px solid #d1d5db; border-radius: 8px; padding: 8px 12px;
+      font-size: 14px; transition: border 0.2s; outline: none; background: white;
+    }
+    input[type=text]:focus, input[type=url]:focus, textarea:focus, select.form-select:focus { border-color: #0F4C3A; box-shadow: 0 0 0 3px rgba(15,76,58,0.1); }
+    .btn-primary { background: #0F4C3A; color: white; padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; }
+    .btn-primary:hover { background: #0a3428; }
+    .btn-danger { background: #ef4444; color: white; padding: 6px 14px; border-radius: 6px; font-size: 13px; cursor: pointer; border: none; }
+    .btn-add { background: #D4AF37; color: white; padding: 8px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; }
+    .toast { position: fixed; top: 24px; right: 24px; z-index: 9999; padding: 14px 24px; border-radius: 10px; font-weight: 600; color: white; transition: all 0.3s; transform: translateX(120%); }
+    .toast.show { transform: translateX(0); }
+    .toast.success { background: #16a34a; }
+    .toast.error { background: #ef4444; }
+    .toast.loading { background: #0F4C3A; }
+    .badge-confirm { background: #dcfce7; color: #15803d; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .badge-upcoming { background: #fef9c3; color: #a16207; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .field-label { font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 4px; }
+    .social-card { border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px; margin-bottom: 12px; background: #fafafa; }
+    .product-detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .sub-tab-btn { transition: all 0.2s; }
+    .news-summary-item { border-left: 4px solid #3b82f6; }
+    .news-detail-item { border-left: 4px solid #16a34a; }
+    .news-editor-section { background: #f9fafb; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- Toast提示 -->
+<div id="toast" class="toast">Loading...</div>
+
+<!-- 登录界面 -->
+<div id="loginPage" class="min-h-screen flex items-center justify-center">
+  <div class="bg-white rounded-2xl shadow-xl p-10 w-full max-w-md">
+    <div class="text-center mb-8">
+      <div class="w-16 h-16 bg-green-900 rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <i class="fas fa-leaf text-white text-2xl"></i>
+      </div>
+      <h1 class="text-2xl font-bold text-gray-800">AultrasTea 后台管理</h1>
+      <p class="text-gray-500 text-sm mt-1">填写 GitHub 信息以开始管理网站内容</p>
+    </div>
+
+    <div class="space-y-4">
+      <div>
+        <div class="field-label">GitHub 用户名</div>
+        <input type="text" id="githubOwner" placeholder="例如: aultrastea" />
+      </div>
+      <div>
+        <div class="field-label">仓库名称</div>
+        <input type="text" id="githubRepo" placeholder="例如: aultrastea.github.io" />
+      </div>
+      <div>
+        <div class="field-label">GitHub Token（Fine-grained，需要 Contents 读写权限）</div>
+        <input type="text" id="githubToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" />
+        <p class="text-xs text-gray-400 mt-1">Token 仅保存在您的浏览器本地，不会上传任何服务器</p>
+      </div>
+      <div>
+        <div class="field-label">data.json 路径（通常为 data.json）</div>
+        <input type="text" id="dataPath" value="data.json" />
+      </div>
+      <button onclick="doLogin()" class="btn-primary w-full mt-2 text-center">
+        <i class="fas fa-sign-in-alt mr-2"></i> 连接并进入管理后台
+      </button>
+    </div>
+
+    <div class="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
+      <strong>⚠️ 如何获取 Token？</strong><br>
+      GitHub → Settings → Developer settings → Fine-grained tokens → Generate new token<br>
+      权限选择：选择你的仓库 → Contents → Read and write
+    </div>
+  </div>
+</div>
+
+<!-- 主管理界面 -->
+<div id="adminPage" class="hidden min-h-screen">
+  <!-- 顶部导航 -->
+  <header class="bg-white shadow-sm sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-green-900 rounded-lg flex items-center justify-center">
+          <i class="fas fa-leaf text-white text-sm"></i>
+        </div>
+        <span class="font-bold text-gray-800 text-lg">AultrasTea 后台</span>
+        <span id="repoTag" class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full ml-1"></span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#" id="previewLink" target="_blank" class="text-sm text-blue-600 hover:underline flex items-center gap-1">
+          <i class="fas fa-external-link-alt text-xs"></i> 预览网站
+        </a>
+        <button onclick="doLogout()" class="text-sm text-gray-500 hover:text-red-500 transition-colors">
+          <i class="fas fa-sign-out-alt mr-1"></i>退出
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tab导航 -->
+  <div class="max-w-6xl mx-auto px-6 pt-6">
+    <div class="flex flex-wrap gap-2 bg-white rounded-xl p-1.5 shadow-sm mb-6 w-fit">
+      <button class="tab-btn active px-4 py-2.5 rounded-lg font-medium text-sm transition-all" onclick="switchTab('images')">
+        <i class="fas fa-images mr-1.5"></i> 图片管理
+      </button>
+      <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('about-video')">
+        <i class="fas fa-play-circle mr-1.5"></i> 关于视频
+      </button>
+      <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('product-detail')">
+        <i class="fas fa-box-open mr-1.5"></i> 产品中心
+      </button>
+      <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('certificates')">
+        <i class="fas fa-certificate mr-1.5"></i> 公司资质图
+      </button>
+      <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('contact-info')">
+        <i class="fas fa-address-card mr-1.5"></i> 联系方式
+      </button>
+      <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('exhibitions')">
+        <i class="fas fa-calendar-alt mr-1.5"></i> 展会信息
+      </button>
+      <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('cert-icons')">
+        <i class="fas fa-award mr-1.5"></i> 认证徽标
+      </button>
+      <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('brochure')">
+        <i class="fas fa-file-pdf mr-1.5"></i> 产品手册PDF
+      </button>
+      <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('social')">
+        <i class="fas fa-share-alt mr-1.5"></i> 社媒链接
+      </button>
+      <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('news')">
+        <i class="fas fa-newspaper mr-1.5"></i> 新闻管理
+      </button>
+    </div>
+
+    <!-- ===== 图片管理 Tab ===== -->
+    <div id="tab-images" class="tab-content">
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- Hero区 -->
+        <div class="section-card">
+          <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2"><span class="w-2 h-2 bg-green-700 rounded-full inline-block"></span> 首页 Hero 区</h3>
+          <div class="space-y-4">
+            <div>
+              <div class="field-label">背景图片链接</div>
+              <input type="url" id="img_hero_bg" placeholder="https://..." />
+              <img id="prev_hero_bg" class="img-preview hidden" />
+            </div>
+            <div>
+              <div class="field-label">右侧主图链接</div>
+              <input type="url" id="img_hero_main" placeholder="https://..." />
+              <img id="prev_hero_main" class="img-preview hidden" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 产品封面图（7大类） -->
+        <div class="section-card">
+          <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2"><span class="w-2 h-2 bg-yellow-500 rounded-full inline-block"></span> 产品封面图（7大类）</h3>
+          <div class="space-y-3">
+            <div>
+              <div class="field-label">绿茶 Green Tea</div>
+              <input type="url" id="img_product_green" placeholder="https://..." />
+              <img id="prev_product_green" class="img-preview hidden" />
+            </div>
+            <div>
+              <div class="field-label">红茶 Black Tea</div>
+              <input type="url" id="img_product_black" placeholder="https://..." />
+              <img id="prev_product_black" class="img-preview hidden" />
+            </div>
+            <div>
+              <div class="field-label">乌龙茶 Oolong Tea</div>
+              <input type="url" id="img_product_oolong" placeholder="https://..." />
+              <img id="prev_product_oolong" class="img-preview hidden" />
+            </div>
+            <div>
+              <div class="field-label">白茶 White Tea</div>
+              <input type="url" id="img_product_white" placeholder="https://..." />
+              <img id="prev_product_white" class="img-preview hidden" />
+            </div>
+            <div>
+              <div class="field-label">黄茶 Yellow Tea</div>
+              <input type="url" id="img_product_yellow" placeholder="https://..." />
+              <img id="prev_product_yellow" class="img-preview hidden" />
+            </div>
+            <div>
+              <div class="field-label">黑茶 Dark Tea</div>
+              <input type="url" id="img_product_dark" placeholder="https://..." />
+              <img id="prev_product_dark" class="img-preview hidden" />
+            </div>
+            <div>
+              <div class="field-label">工艺茶 Flower Tea</div>
+              <input type="url" id="img_product_flower" placeholder="https://..." />
+              <img id="prev_product_flower" class="img-preview hidden" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 证书图片提示 -->
+        <div class="section-card md:col-span-2">
+          <h3 class="font-bold text-gray-800 mb-2 flex items-center gap-2"><span class="w-2 h-2 bg-purple-600 rounded-full inline-block"></span> 资质证书图片（最多20张）</h3>
+          <div class="p-4 bg-purple-50 rounded-lg border border-purple-200 text-sm text-purple-800 flex items-center gap-3">
+            <i class="fas fa-certificate text-2xl text-purple-400"></i>
+            <div>
+              <strong>证书图片现已升级为轮播展示（最多20张）</strong><br>
+              请前往 <button onclick="switchTabByName('certificates')" class="underline text-purple-700 font-medium">📋 公司资质图</button> 标签进行管理。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 mt-2 mb-10">
+        <button onclick="saveImages()" class="btn-primary flex items-center gap-2">
+          <i class="fas fa-save"></i> 保存图片设置到网站
+        </button>
+        <span class="text-xs text-gray-400">保存后约 1-2 分钟网站生效</span>
+      </div>
+    </div>
+
+    <!-- ===== 关于我们视频 Tab ===== -->
+    <div id="tab-about-video" class="tab-content hidden">
+      <div class="section-card max-w-2xl">
+        <h3 class="font-bold text-gray-800 mb-2 text-lg">关于我们 — 品牌视频</h3>
+        <p class="text-gray-500 text-sm mb-6">此视频将展示在前端网站"关于我们"板块的左侧。支持 YouTube、Bunny Stream、Streamable 等所有 iframe 平台。</p>
+
+        <div class="space-y-5">
+          <div class="p-4 bg-green-50 border border-green-200 rounded-lg text-sm text-green-800 mb-2">
+            <strong>🎬 支持两种视频方式（二选一）：</strong><br>
+            ① ImageKit 直链 MP4（推荐，填写下方链接即可）<br>
+            ② 其他平台 iframe 代码（YouTube、Bunny Stream 等）
+          </div>
+          <div>
+            <div class="field-label">方式① ImageKit MP4 直链（推荐）</div>
+            <input type="url" id="about_video_direct_url" placeholder="https://ik.imagekit.io/xxx/video.mp4" />
+            <p class="text-xs text-gray-400 mt-1">填写 ImageKit 视频直链，格式：https://ik.imagekit.io/xxx/filename.mp4</p>
+          </div>
+          <div>
+            <div class="field-label">方式② iframe 嵌入代码（留空则使用上方直链）</div>
+            <textarea id="about_video_embed_code" rows="4" placeholder='<div style="position:relative; width:100%; height:0px; padding-bottom:56.250%"><iframe src="https://..." ...></iframe></div>'></textarea>
+            <p class="text-xs text-gray-400 mt-1">从视频平台复制完整 iframe 代码粘贴至此（支持 Bunny Stream、YouTube 等）</p>
+          </div>
+          
+          <div>
+            <div class="field-label mb-2">实时预览</div>
+            <div id="about_video_preview" class="w-full aspect-video bg-gray-100 rounded-lg overflow-hidden border border-gray-200 flex items-center justify-center text-gray-400 text-sm">
+              粘贴 iframe 代码后在此预览
+            </div>
+          </div>
+        </div>
+
+        <button onclick="saveAboutVideo()" class="btn-primary flex items-center gap-2 mt-6">
+          <i class="fas fa-save"></i> 保存关于视频到网站
+        </button>
+      </div>
+    </div>
+
+        <!-- ===== 产品中心管理 Tab ===== -->
+    <div id="tab-product-detail" class="tab-content hidden">
+      <div class="section-card">
+        <h3 class="font-bold text-gray-800 mb-2 text-lg">产品中心管理（分类 → 子品类 → 产品）</h3>
+        <p class="text-gray-500 text-sm mb-4">为每个品类下的每款产品设置图片。每款产品可切换 <b>国标 / 欧盟(EU) / 有机(Organic)</b> 标准，分别上传 <b>干茶图</b> 与 <b>茶汤图</b>（无茶汤产品如抹茶、普洱饼请取消"有茶汤"）。</p>
+        <div class="mb-4 grid sm:grid-cols-2 gap-4">
+          <div>
+            <div class="field-label">选择品类</div>
+            <select id="pm_cat" onchange="pmRender()" class="form-select max-w-xs">
+              <option value="green">绿茶 Green Tea</option>
+              <option value="black">红茶 Black Tea</option>
+              <option value="dark">黑茶 Dark Tea</option>
+              <option value="white">白茶 White Tea</option>
+              <option value="flower">花茶 Flower Tea</option>
+              <option value="oolong">乌龙茶 Oolong Tea</option>
+            </select>
+          </div>
+          <div>
+            <div class="field-label">当前编辑标准（上传该标准下的图片）</div>
+            <select id="pm_std" onchange="pmRender()" class="form-select max-w-xs">
+              <option value="conventional">国标 Conventional</option>
+              <option value="eu">欧盟 EU</option>
+              <option value="organic">有机 Organic</option>
+            </select>
+          </div>
+        </div>
+        <div id="pm-editor" class="space-y-6"></div>
+        <div class="flex items-center gap-4 mt-6">
+          <button onclick="saveProductManager()" class="btn-primary flex items-center gap-2"><i class="fas fa-save"></i> 保存产品中心到网站</button>
+          <span class="text-xs text-gray-400">图片链接填好后点保存即可，空白项自动忽略</span>
+        </div>
+      </div>
+    </div>
+
+<!-- ===== 公司资质图 Tab ===== -->
+    <div id="tab-certificates" class="tab-content hidden">
+      <div class="section-card">
+        <h3 class="font-bold text-gray-800 mb-2 text-lg">公司资质图片管理</h3>
+        <p class="text-gray-500 text-sm mb-6">最多支持 <strong>20 张</strong>资质证书图片展示。前端以 6 框轮播形式展示，超出自动分页。图片留空则不显示。</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5" id="cert-imgs-editor">
+          <!-- 由JS渲染 -->
+        </div>
+        <div class="flex items-center gap-4 mt-6 mb-4">
+          <button onclick="saveCertImages()" class="btn-primary flex items-center gap-2">
+            <i class="fas fa-save"></i> 保存资质图片到网站
+          </button>
+          <span class="text-xs text-gray-400">图片链接填好后点保存即可，空白项自动忽略</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 联系方式 Tab ===== -->
+    <div id="tab-contact-info" class="tab-content hidden">
+      <div class="section-card max-w-2xl">
+        <h3 class="font-bold text-gray-800 mb-2 text-lg">联系方式管理</h3>
+        <p class="text-gray-500 text-sm mb-6">此处修改的内容将同步更新网站首页和页脚的邮箱、电话、地址信息。</p>
+
+        <div class="space-y-5">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <div class="field-label">主邮箱</div>
+              <input type="text" id="ci_email_1" placeholder="admin@aultrastea.com" />
+            </div>
+            <div>
+              <div class="field-label">备用邮箱（可留空）</div>
+              <input type="text" id="ci_email_2" placeholder="tea@xf-tea.com" />
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <div class="field-label">主电话 / WhatsApp</div>
+              <input type="text" id="ci_phone_1" placeholder="400-059-8108" />
+            </div>
+            <div>
+              <div class="field-label">备用电话（可留空）</div>
+              <input type="text" id="ci_phone_2" placeholder="+86 731 8465 2208" />
+            </div>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <div class="field-label">主地址</div>
+              <input type="text" id="ci_address_1" placeholder="贵州省安顺市西秀区鸡场乡鑫堡村茶果场" />
+            </div>
+            <div>
+              <div class="field-label">备用地址（可留空）</div>
+              <input type="text" id="ci_address_2" placeholder="贵州省安顺市西秀区鸡场乡鑫堡村茶果场" />
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200 text-xs text-blue-800">
+          💡 <strong>生效范围：</strong>修改后，首页"联系我们"区域及网页底部页脚的邮箱和电话将自动更新。
+        </div>
+
+        <button onclick="saveContactInfo()" class="btn-primary flex items-center gap-2 mt-6">
+          <i class="fas fa-save"></i> 保存联系方式到网站
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== 展会信息 Tab ===== -->
+    <div id="tab-exhibitions" class="tab-content hidden">
+      <div class="flex justify-between items-center mb-4">
+        <div>
+          <h3 class="font-bold text-gray-800 text-lg">展会信息管理</h3>
+          <p class="text-sm text-gray-500 mt-1">前端始终显示 3 个展示框，添加第 4 条起将以轮播形式隐藏，左右滑动可查看。</p>
+        </div>
+        <button onclick="addExhibition()" class="btn-add flex items-center gap-2">
+          <i class="fas fa-plus"></i> 新增展会
+        </button>
+      </div>
+
+      <div id="exhibitions-editor" class="space-y-4"></div>
+
+      <div class="flex items-center gap-4 mt-6 mb-10">
+        <button onclick="saveExhibitions()" class="btn-primary flex items-center gap-2">
+          <i class="fas fa-save"></i> 保存展会信息到网站
+        </button>
+        <span class="text-xs text-gray-400">支持添加/删除/编辑任意展会，超出3个自动轮播</span>
+      </div>
+    </div>
+
+
+    <!-- ===== 认证徽标图片 Tab ===== -->
+    <div id="tab-cert-icons" class="tab-content hidden">
+      <div class="section-card max-w-3xl">
+        <h3 class="font-bold text-gray-800 mb-2 text-lg">认证徽标图片管理</h3>
+        <p class="text-gray-500 text-sm mb-5">为每个认证项目上传图标图片链接（PNG/JPG，建议正方形图片）。留空则显示默认图标样式。</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="cert-icons-editor">
+          <!-- 由 JS 渲染 -->
+        </div>
+        <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200 text-xs text-blue-800">
+          💡 上传到 ImageKit 或 Postimages 后，将图片链接粘贴到对应输入框，保存后前端自动替换为图片展示。
+        </div>
+        <div class="flex items-center gap-4 mt-6 mb-4">
+          <button onclick="saveCertIcons()" class="btn-primary flex items-center gap-2">
+            <i class="fas fa-save"></i> 保存认证徽标到网站
+          </button>
+          <span class="text-xs text-gray-400">图片链接填好后点保存即可</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 产品手册 PDF Tab ===== -->
+    <div id="tab-brochure" class="tab-content hidden">
+      <div class="section-card max-w-2xl">
+        <h3 class="font-bold text-gray-800 mb-2 text-lg">产品手册 PDF 管理</h3>
+        <p class="text-gray-500 text-sm mb-5">设置前端"产品手册"卡片的 PDF 下载链接（支持 ImageKit 直链）。</p>
+        <div>
+          <div class="field-label">PDF 下载链接</div>
+          <input type="url" id="brochure_url_input" placeholder="https://ik.imagekit.io/xxx/brochure.pdf" />
+          <p class="text-xs text-gray-400 mt-1">将 ImageKit 上传后的 PDF 直链粘贴至此，前端点击"Download PDF"即触发浏览器下载。</p>
+        </div>
+        <div class="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
+          <strong>💡 ImageKit 上传步骤：</strong><br>
+          1. 登录 imagekit.io → 左侧"Media Library" → 点击上传<br>
+          2. 选择 PDF 文件上传<br>
+          3. 上传完成后，复制文件 URL（格式：https://ik.imagekit.io/xxx/filename.pdf）<br>
+          4. 粘贴到上方输入框 → 点保存 → 生效
+        </div>
+        <div class="flex items-center gap-4 mt-6 mb-4">
+          <button onclick="saveBrochureUrl()" class="btn-primary flex items-center gap-2">
+            <i class="fas fa-save"></i> 保存 PDF 链接到网站
+          </button>
+          <span class="text-xs text-gray-400">当前 PDF：<span id="current-brochure-url" class="text-blue-600 underline truncate max-w-xs inline-block align-bottom"></span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 社媒链接 Tab ===== -->
+    <div id="tab-social" class="tab-content hidden">
+      <div class="section-card max-w-2xl">
+        <div class="flex justify-between items-center mb-4">
+          <div>
+            <h3 class="font-bold text-gray-800 text-lg">联系我们 — 社媒链接管理</h3>
+            <p class="text-sm text-gray-500 mt-1">管理"联系我们"板块底部的社交媒体图标与链接</p>
+          </div>
+          <button onclick="addSocialLink()" class="btn-add flex items-center gap-2">
+            <i class="fas fa-plus"></i> 添加社媒
+          </button>
+        </div>
+
+        <div id="social-editor" class="space-y-3"></div>
+
+        <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200 text-xs text-blue-800">
+          <strong>💡 平台说明：</strong><br>
+          <span class="font-mono">youtube</span> → YouTube 频道<br>
+          <span class="font-mono">linkedin</span> → LinkedIn 企业页面<br>
+          <span class="font-mono">whatsapp</span> → WhatsApp（填写格式: https://wa.me/86手机号）<br>
+          <span class="font-mono">wechat</span> → 微信（可填写 #contact 让用户扫码联系）<br>
+          <span class="font-mono">facebook / instagram / twitter</span> → 其他平台
+        </div>
+
+        <div class="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
+          <strong>🔗 湘丰茶叶参考链接（待确认）：</strong><br>
+          YouTube: https://www.youtube.com/@XiangfengTea（请到 YouTube 搜索确认）<br>
+          LinkedIn: https://cn.linkedin.com/company/湘丰茶业集团有限公司（已找到）<br>
+          WhatsApp: https://wa.me/8673184652476<br>
+          微信: 请提供公众号链接或二维码
+        </div>
+
+        <button onclick="saveSocialLinks()" class="btn-primary flex items-center gap-2 mt-6">
+          <i class="fas fa-save"></i> 保存社媒链接到网站
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== 新闻管理 Tab（分为首页版和详情版）===== -->
+    <div id="tab-news" class="tab-content hidden">
+      <div class="mb-4">
+        <h3 class="font-bold text-gray-800 text-lg mb-2">新闻动态管理</h3>
+        <p class="text-sm text-gray-500">新闻分为两部分管理：<strong>首页展示</strong>（精简卡片）和<strong>详情页面</strong>（完整内容）。</p>
+      </div>
+
+      <!-- 新闻子Tab切换 -->
+      <div class="flex gap-2 mb-6">
+        <button id="subtab-summary" class="sub-tab-btn active px-4 py-2.5 rounded-lg font-medium text-sm transition-all bg-primary text-white" onclick="switchNewsSubTab('summary')">
+          <i class="fas fa-th-large mr-1.5"></i> 首页新闻（news_summary）
+        </button>
+        <button id="subtab-detail" class="sub-tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all bg-gray-100 text-gray-600 hover:bg-gray-200" onclick="switchNewsSubTab('detail')">
+          <i class="fas fa-file-alt mr-1.5"></i> 新闻详情（news_detail）
+        </button>
+      </div>
+
+      <!-- 首页新闻编辑器（news_summary） -->
+      <div id="news-summary-editor">
+        <div class="flex justify-between items-center mb-4">
+          <div>
+            <h4 class="font-bold text-gray-700 flex items-center gap-2"><span class="w-2 h-2 bg-blue-500 rounded-full inline-block"></span> 首页新闻展示</h4>
+            <p class="text-xs text-gray-500 mt-1">用于前端首页的精简卡片：图片 + 标题 + 摘要 + 查看详情链接</p>
+          </div>
+          <button onclick="addNewsSummary()" class="btn-add flex items-center gap-2">
+            <i class="fas fa-plus"></i> 新增新闻
+          </button>
+        </div>
+
+        <div id="news-summary-list" class="space-y-4"></div>
+
+        <div class="flex items-center gap-4 mt-6 mb-10">
+          <button onclick="saveNewsSummary()" class="btn-primary flex items-center gap-2">
+            <i class="fas fa-save"></i> 保存首页新闻
+          </button>
+          <span class="text-xs text-gray-400">首页最多展示6个新闻卡片，超出部分在"新闻详情"页面查看</span>
+        </div>
+      </div>
+
+      <!-- 新闻详情编辑器（news_detail） -->
+      <div id="news-detail-editor" class="hidden">
+        <div class="flex justify-between items-center mb-4">
+          <div>
+            <h4 class="font-bold text-gray-700 flex items-center gap-2"><span class="w-2 h-2 bg-green-500 rounded-full inline-block"></span> 新闻详情页面</h4>
+            <p class="text-xs text-gray-500 mt-1">用于"新闻"子级页面的完整内容：大图 + 正文 + 插图 + 外链</p>
+          </div>
+          <button onclick="addNewsDetail()" class="btn-add flex items-center gap-2">
+            <i class="fas fa-plus"></i> 新增新闻
+          </button>
+        </div>
+
+        <div id="news-detail-list" class="space-y-4"></div>
+
+        <div class="flex items-center gap-4 mt-6 mb-10">
+          <button onclick="saveNewsDetail()" class="btn-primary flex items-center gap-2">
+            <i class="fas fa-save"></i> 保存新闻详情
+          </button>
+          <span class="text-xs text-gray-400">新闻详情页面支持左侧按日期导航，含大图、正文、两张插图</span>
+        </div>
+      </div>
+    </div>
+</div><!-- end adminPage -->
+
+<script>
+// ===== 全局状态 =====
+let CONFIG = { owner: '', repo: '', token: '', dataPath: 'data.json' };
+let currentData = null;
+let currentSHA = '';
+
+// ===== 防御性UTF-8多重编码自动修复（循环解码） =====
+// GitHub上的data.json可能因旧版Bug被多重双重编码污染，
+// 此函数在后台读取数据后自动循环解码，确保表单显示和保存的都是正确中文
+function fixDoubleEncoded(obj) {
+  if (typeof obj === 'string') {
+    let current = obj;
+    for (let i = 0; i < 10; i++) {
+      try {
+        const fixed = decodeURIComponent(escape(current));
+        if (fixed === current) break;
+        current = fixed;
+      } catch(e) { break; }
+    }
+    return current;
+  }
+  if (Array.isArray(obj)) return obj.map(item => fixDoubleEncoded(item));
+  if (obj && typeof obj === 'object') {
+    const fixed = {};
+    for (const key in obj) fixed[key] = fixDoubleEncoded(obj[key]);
+    return fixed;
+  }
+  return obj;
+}
+
+// 产品4图的key映射
+const PRODUCT_CATS = {
+  green: ['Chunmee','Gunpowder','Dragon Well','Sencha','Mao Feng','Green Tea Fannings','Mao Jian','Green Brick Tea'],
+  black: ['CTC Black Tea','Golden Snail','Black Fannings','Black BOP','Mao Feng Black','Dianhong Golden Bud','Lapsang Souchong','Custom Blends'],
+  oolong: ['Da Hong Pao','Tie Guan Yin','Milk Oolong','Ginseng Oolong','Oolong Fannings','Four Seasons Oolong','Dong Ding Oolong','Oriental Beauty'],
+  white: ['Silver Needle','White Peony','Yunnan White Peony','White Tea Fannings','Shou Mei','Gong Mei','Aged White Tea','White Tea Cake'],
+  yellow: ['Jun Shan Yin Zhen','Meng Ding Huang Ya','Huo Shan Huang Ya','Beigang Maojian','Weishan Maojian','Hai Ma Gong Ya','Yellow Small Tea','Yellow Tea Gift Box'],
+  dark: ['Sheng Pu-erh','Shou Pu-erh','Fu Brick Tea','Liu Bao Tea','Qian Liang Tea','Tian Jian','Dark Tea Cake','Dark Tea Brick'],
+  flower: ['Jasmine Pearls','Blooming Tea','Jasmine Silver Needle','Rose Green Tea','Jasmine Mao Feng','Chrysanthemum Tea','Osmanthus Tea','Mixed Flower Gift Set']
+};
+const IMG_SUFFIXES = ['gift','dry','liquor','leaf'];
+const IMG_LABELS = ['礼盒 Gift Box','干茶 Dry Leaf','茶汤 Tea Liquor','叶底 Leaf Base'];
+const PLATFORM_ICONS = { youtube:'fab fa-youtube', linkedin:'fab fa-linkedin', whatsapp:'fab fa-whatsapp', wechat:'fab fa-weixin', facebook:'fab fa-facebook', instagram:'fab fa-instagram', twitter:'fab fa-twitter' };
+
+// ===== Toast =====
+function showToast(msg, type = 'loading', duration = 3000) {
+  const t = document.getElementById('toast');
+  t.className = `toast ${type} show`;
+  t.innerHTML = type === 'loading'
+    ? `<i class="fas fa-spinner fa-spin mr-2"></i>${msg}`
+    : type === 'success'
+    ? `<i class="fas fa-check-circle mr-2"></i>${msg}`
+    : `<i class="fas fa-times-circle mr-2"></i>${msg}`;
+  if (duration > 0) setTimeout(() => t.classList.remove('show'), duration);
+}
+
+// ===== Tab切换 =====
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(el => {
+    el.classList.remove('active');
+    el.classList.add('text-gray-600');
+  });
+  document.getElementById('tab-' + name).classList.remove('hidden');
+  event.target.classList.add('active');
+  event.target.classList.remove('text-gray-600');
+}
+
+// ===== 登录 =====
+function doLogin() {
+  const owner = document.getElementById('githubOwner').value.trim();
+  const repo = document.getElementById('githubRepo').value.trim();
+  const token = document.getElementById('githubToken').value.trim();
+  const dataPath = document.getElementById('dataPath').value.trim() || 'data.json';
+  if (!owner || !repo || !token) { showToast('请填写所有必填项', 'error'); return; }
+  CONFIG = { owner, repo, token, dataPath };
+  localStorage.setItem('aultrastea_cfg', JSON.stringify(CONFIG));
+  showToast('正在连接 GitHub...', 'loading', 0);
+  fetchDataJson();
+}
+
+function doLogout() {
+  localStorage.removeItem('aultrastea_cfg');
+  document.getElementById('loginPage').classList.remove('hidden');
+  document.getElementById('adminPage').classList.add('hidden');
+  currentData = null;
+}
+
+// ===== 从 GitHub 读取 data.json =====
+async function fetchDataJson() {
+  try {
+    const url = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.dataPath}`;
+    const res = await fetch(url, {
+      headers: { 'Authorization': `token ${CONFIG.token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    if (!res.ok) { const err = await res.json(); throw new Error(err.message || `HTTP ${res.status}`); }
+    const json = await res.json();
+    currentSHA = json.sha;
+    currentData = JSON.parse(decodeURIComponent(escape(atob(json.content.replace(/\n/g, '')))));
+    // 自动修复多重编码的中文字段，确保表单显示正确中文
+    currentData = fixDoubleEncoded(currentData);
+    showToast('连接成功！', 'success');
+    document.getElementById('loginPage').classList.add('hidden');
+    document.getElementById('adminPage').classList.remove('hidden');
+    document.getElementById('repoTag').textContent = `${CONFIG.owner}/${CONFIG.repo}`;
+    const isUserPages = CONFIG.repo === CONFIG.owner + '.github.io';
+    document.getElementById('previewLink').href = isUserPages
+      ? `https://${CONFIG.owner}.github.io/`
+      : `https://${CONFIG.owner}.github.io/${CONFIG.repo}/`;
+    populateForm();
+  } catch(e) {
+    showToast('连接失败：' + e.message, 'error');
+  }
+}
+
+// ===== 填充表单 =====
+function populateForm() {
+  if (!currentData) return;
+  const imgs = currentData.images || {};
+
+  // 图片（Hero + 产品封面）
+  const imgKeys = ['hero_bg','hero_main','product_green','product_black','product_oolong','product_white','product_yellow','product_dark','product_flower'];
+  imgKeys.forEach(k => {
+    const input = document.getElementById('img_' + k);
+    if (input) { input.value = imgs[k] || ''; setupPreview(input, 'prev_' + k); }
+  });
+
+  // 关于视频
+  const aboutVid = currentData.about_video || {};
+  const avInput = document.getElementById('about_video_embed_code');
+  if (avInput) { avInput.value = aboutVid.embed_code || ''; updateAboutVideoPreview(); }
+  const avDirectInput = document.getElementById('about_video_direct_url');
+  if (avDirectInput) avDirectInput.value = aboutVid.direct_url || '';
+
+  // 证书图片
+  renderCertImgsEditor(imgs);
+
+  // 联系方式
+  populateContactInfo(currentData.contact_info || {});
+
+  // 展会
+  renderExhibitionsEditor(currentData.exhibitions || []);
+
+  // 社媒
+  renderSocialEditor(currentData.social_links || []);
+
+  // 认证徽标
+  renderCertIconsEditor(currentData.cert_icons || {});
+
+  // 产品手册 PDF
+  populateBrochureUrl(currentData.brochure_url || '');
+
+  // 新闻（分别渲染首页版和详情版）
+  renderNewsSummaryEditor(currentData.news_summary || currentData.news || []);
+  renderNewsDetailEditor(currentData.news_detail || currentData.news || []);
+
+  // 产品4图
+  pmRender();
+}
+
+// ===== 图片预览 =====
+function setupPreview(input, prevId) {
+  const prev = document.getElementById(prevId);
+  if (!prev) return;
+  const update = () => {
+    if (input.value.trim()) {
+      prev.src = input.value.trim();
+      prev.classList.remove('hidden');
+      prev.onerror = () => prev.classList.add('hidden');
+    } else { prev.classList.add('hidden'); }
+  };
+  input.addEventListener('input', update);
+  update();
+}
+
+// ===== HTML转义函数（用于安全插入用户内容到innerHTML）=====
+function escapeHtml(str) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ===== 收集图片数据 =====
+function collectImages() {
+  const keys = ['hero_bg','hero_main','product_green','product_black','product_oolong','product_white','product_yellow','product_dark','product_flower'];
+  const images = currentData.images || {};
+  keys.forEach(k => {
+    const el = document.getElementById('img_' + k);
+    if (el) images[k] = el.value.trim();
+  });
+  return images;
+}
+
+// ===== 保存图片 =====
+async function saveImages() {
+  currentData.images = collectImages();
+  await pushDataJson('图片设置已保存并推送到 GitHub ✅');
+}
+
+// ===== 证书图片管理（20张）=====
+function renderCertImgsEditor(imgs) {
+  const container = document.getElementById('cert-imgs-editor');
+  if (!container) return;
+  let html = '';
+  for (let i = 1; i <= 20; i++) {
+    const key = 'cert_' + i;
+    const val = imgs[key] || '';
+    html += `<div>
+      <div class="field-label text-xs">证书图 ${i}</div>
+      <input type="url" id="ci_cert_${i}" value="${val}" placeholder="https://..." />
+      <img src="${val}" id="prev_cert_${i}" class="img-preview ${val ? '' : 'hidden'}" onerror="this.classList.add('hidden')" />
+    </div>`;
+  }
+  container.innerHTML = html;
+  // 绑定预览
+  for (let i = 1; i <= 20; i++) {
+    const input = document.getElementById('ci_cert_' + i);
+    if (input) setupPreview(input, 'prev_cert_' + i);
+  }
+}
+
+function collectCertImages() {
+  if (!currentData.images) currentData.images = {};
+  for (let i = 1; i <= 20; i++) {
+    const el = document.getElementById('ci_cert_' + i);
+    if (el) currentData.images['cert_' + i] = el.value.trim();
+  }
+}
+
+async function saveCertImages() {
+  collectCertImages();
+  await pushDataJson('资质证书图片已保存并推送到 GitHub ✅');
+}
+
+// ===== 联系方式管理 =====
+function populateContactInfo(ci) {
+  const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
+  setVal('ci_email_1', ci.email_1);
+  setVal('ci_email_2', ci.email_2);
+  setVal('ci_phone_1', ci.phone_1);
+  setVal('ci_phone_2', ci.phone_2);
+  setVal('ci_address_1', ci.address_1);
+  setVal('ci_address_2', ci.address_2);
+}
+
+function collectContactInfo() {
+  return {
+    email_1: document.getElementById('ci_email_1')?.value.trim() || '',
+    email_2: document.getElementById('ci_email_2')?.value.trim() || '',
+    phone_1: document.getElementById('ci_phone_1')?.value.trim() || '',
+    phone_2: document.getElementById('ci_phone_2')?.value.trim() || '',
+    address_1: document.getElementById('ci_address_1')?.value.trim() || '',
+    address_2: document.getElementById('ci_address_2')?.value.trim() || ''
+  };
+}
+
+async function saveContactInfo() {
+  currentData.contact_info = collectContactInfo();
+  await pushDataJson('联系方式已保存并推送到 GitHub ✅');
+}
+
+// ===== switchTabByName（用于跨Tab跳转按钮）=====
+function switchTabByName(name) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('.tab-btn').forEach(el => {
+    el.classList.remove('active');
+    el.classList.add('text-gray-600');
+  });
+  document.getElementById('tab-' + name).classList.remove('hidden');
+  // 找对应按钮激活
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + name + "'")) {
+      btn.classList.add('active');
+      btn.classList.remove('text-gray-600');
+    }
+  });
+}
+
+// ===== 关于视频预览 =====
+function updateAboutVideoPreview() {
+  const code = document.getElementById('about_video_embed_code').value.trim();
+  const preview = document.getElementById('about_video_preview');
+  if (code) {
+    preview.innerHTML = code;
+    preview.classList.remove('flex','items-center','justify-center','text-gray-400','text-sm');
+  } else {
+    preview.innerHTML = '粘贴 iframe 代码后在此预览';
+    preview.classList.add('flex','items-center','justify-center','text-gray-400','text-sm');
+  }
+}
+
+// ===== 保存关于视频 =====
+async function saveAboutVideo() {
+  if (!currentData.about_video) currentData.about_video = {};
+  currentData.about_video.embed_code = document.getElementById('about_video_embed_code').value.trim();
+  const directInput = document.getElementById('about_video_direct_url');
+  if (directInput) currentData.about_video.direct_url = directInput.value.trim();
+  await pushDataJson('关于我们视频已保存并推送到 GitHub ✅');
+}
+
+// ===== 产品4图编辑器 =====
+// ===== 产品中心管理（新版：分类→子品类→产品，含国标/EU/有机标准） =====
+function t(obj, lang) {
+  if (!obj) return '';
+  return obj[lang] || obj.en || obj.zh || '';
+}
+
+function pmRender() {
+  const cat = document.getElementById('pm_cat').value;
+  const std = document.getElementById('pm_std').value;
+  const catData = currentData && currentData.products && currentData.products[cat];
+  const editor = document.getElementById('pm-editor');
+  if (!editor) return;
+  if (!catData) { editor.innerHTML = '<div class="text-gray-400 py-6 text-center">该品类暂无数据，请确认 data.json 已包含 products 结构。</div>'; return; }
+  let html = '';
+  catData.subcategories.forEach((sub, si) => {
+    html += '<div class="section-card border-l-4 border-green-700">';
+    html += '<h4 class="font-bold text-gray-800 mb-1">' + escapeHtml(t(sub.name, 'zh')) + ' <span class="text-gray-400 font-normal text-sm">' + escapeHtml(t(sub.name, 'en')) + '</span></h4>';
+    html += '<div class="space-y-3 mt-3">';
+    sub.products.forEach((p, pj) => {
+      const hasLiq = p.has_liquor !== false;
+      const imgObj = (p.images && p.images[std]) || { dry: '', liquor: '' };
+      html += '<div class="border border-gray-200 rounded-lg p-3">';
+      html += '<div class="flex items-center justify-between mb-2">';
+      html += '<div class="font-medium text-gray-700 text-sm">' + escapeHtml(t(p.name, 'zh')) + ' <span class="text-gray-400 text-xs">' + escapeHtml(t(p.name, 'en')) + '</span></div>';
+      html += '<label class="flex items-center gap-1 text-xs text-gray-500 cursor-pointer"><input type="checkbox" data-pm="hasliq" data-si="' + si + '" data-pj="' + pj + '" ' + (hasLiq ? 'checked' : '') + '/> 有茶汤</label>';
+      html += '</div>';
+      html += '<div class="grid sm:grid-cols-2 gap-3">';
+      html += '<div><div class="field-label text-xs">干茶图 Dry Leaf</div><input type="url" data-pm="dry" data-si="' + si + '" data-pj="' + pj + '" data-std="' + std + '" value="' + escapeHtml(imgObj.dry || '') + '" placeholder="https://..." /></div>';
+      html += '<div data-pm-liqwrap="' + si + '-' + pj + '" style="' + (hasLiq ? '' : 'display:none') + '"><div class="field-label text-xs">茶汤图 Tea Liquor</div><input type="url" data-pm="liquor" data-si="' + si + '" data-pj="' + pj + '" data-std="' + std + '" value="' + escapeHtml(imgObj.liquor || '') + '" placeholder="https://..." /></div>';
+      html += '</div></div>';
+    });
+    html += '</div></div>';
+  });
+  editor.innerHTML = html;
+  editor.querySelectorAll('[data-pm="hasliq"]').forEach(cb => cb.addEventListener('change', () => pmToggleLiquor(cb)));
+  editor.querySelectorAll('input[data-pm="dry"], input[data-pm="liquor"]').forEach(inp => inp.addEventListener('input', () => pmLiveBind(inp)));
+}
+
+function pmToggleLiquor(cb) {
+  const si = +cb.dataset.si, pj = +cb.dataset.pj;
+  const p = currentData.products[document.getElementById('pm_cat').value].subcategories[si].products[pj];
+  p.has_liquor = cb.checked;
+  const wrap = document.querySelector('[data-pm-liqwrap="' + si + '-' + pj + '"]');
+  if (wrap) wrap.style.display = cb.checked ? '' : 'none';
+}
+
+function pmLiveBind(inp) {
+  const si = +inp.dataset.si, pj = +inp.dataset.pj, std = inp.dataset.std, field = inp.dataset.pm;
+  const cat = document.getElementById('pm_cat').value;
+  const p = currentData.products[cat].subcategories[si].products[pj];
+  if (!p.images) p.images = {};
+  if (!p.images[std]) p.images[std] = { dry: '', liquor: '' };
+  p.images[std][field] = inp.value.trim();
+}
+
+async function saveProductManager() {
+  if (!currentData.products) { showToast('产品数据结构缺失', 'error'); return; }
+  await pushDataJson('产品中心已保存并推送到 GitHub ✅');
+}
+
+// ===== 展会编辑器 =====
+function renderExhibitionsEditor(exhs) {
+  const container = document.getElementById('exhibitions-editor');
+  container.innerHTML = '';
+  exhs.forEach((exh, i) => {
+    const div = document.createElement('div');
+    div.className = 'section-card border-l-4 border-green-700';
+    div.innerHTML = `
+      <div class="flex items-center justify-between mb-4">
+        <h4 class="font-bold text-gray-700 flex items-center gap-2">
+          <i class="fas fa-calendar-check text-green-700"></i>
+          展会 ${i + 1}
+          <span class="${exh.status === 'confirmed' ? 'badge-confirm' : 'badge-upcoming'}">${exh.status === 'confirmed' ? '已确认' : '待定'}</span>
+          ${i >= 3 ? '<span class="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full">轮播隐藏</span>' : '<span class="text-xs bg-green-100 text-green-600 px-2 py-0.5 rounded-full">前3展示</span>'}
+        </h4>
+        <button class="btn-danger" onclick="removeExhibition(${i})"><i class="fas fa-trash mr-1"></i>删除</button>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div>
+          <div class="field-label">展会名称</div>
+          <input type="text" data-exh="${i}" data-field="name" value="${escapeHtml(exh.name || '')}" />
+        </div>
+        <div>
+          <div class="field-label">日期</div>
+          <input type="text" data-exh="${i}" data-field="date" value="${escapeHtml(exh.date || '')}" placeholder="例如: 1 - 3 April 2026" />
+        </div>
+        <div>
+          <div class="field-label">展会地点</div>
+          <input type="text" data-exh="${i}" data-field="location" value="${escapeHtml(exh.location || '')}" />
+        </div>
+        <div>
+          <div class="field-label">展位号</div>
+          <input type="text" data-exh="${i}" data-field="booth" value="${escapeHtml(exh.booth || '')}" placeholder="例如: F92 或 TBA" />
+        </div>
+        <div>
+          <div class="field-label">状态</div>
+          <select data-exh="${i}" data-field="status" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-green-700">
+            <option value="confirmed" ${exh.status === 'confirmed' ? 'selected' : ''}>已确认</option>
+            <option value="upcoming" ${exh.status === 'upcoming' ? 'selected' : ''}>待定</option>
+          </select>
+        </div>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function addExhibition() {
+  if (!currentData.exhibitions) currentData.exhibitions = [];
+  currentData.exhibitions.push({ id: Date.now(), date: 'Coming Soon', name: '新展会', location: '城市, 国家', booth: 'TBA', status: 'upcoming' });
+  renderExhibitionsEditor(currentData.exhibitions);
+}
+
+function removeExhibition(idx) {
+  if (!confirm('确认删除这个展会信息？')) return;
+  currentData.exhibitions.splice(idx, 1);
+  renderExhibitionsEditor(currentData.exhibitions);
+}
+
+function collectExhibitions() {
+  const inputs = document.querySelectorAll('#exhibitions-editor [data-exh]');
+  const exhs = [];
+  inputs.forEach(el => {
+    const i = parseInt(el.dataset.exh);
+    if (!exhs[i]) exhs[i] = {};
+    exhs[i][el.dataset.field] = el.value;
+  });
+  return exhs.filter(Boolean);
+}
+
+async function saveExhibitions() {
+  currentData.exhibitions = collectExhibitions();
+  await pushDataJson('展会信息已保存并推送到 GitHub ✅');
+}
+
+// ===== 社媒链接编辑器 =====
+function renderSocialEditor(links) {
+  const container = document.getElementById('social-editor');
+  container.innerHTML = '';
+  links.forEach((link, i) => {
+    const iconClass = PLATFORM_ICONS[link.platform] || 'fas fa-link';
+    const div = document.createElement('div');
+    div.className = 'social-card flex items-center gap-3';
+    div.innerHTML = `
+      <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+        <i class="${iconClass}"></i>
+      </div>
+      <div class="flex-1 grid sm:grid-cols-2 gap-3">
+        <div>
+          <div class="field-label text-xs">平台</div>
+          <select data-social="${i}" data-field="platform" onchange="updateSocialIcon(this)" class="form-select text-sm">
+            <option value="youtube" ${link.platform==='youtube'?'selected':''}>YouTube</option>
+            <option value="linkedin" ${link.platform==='linkedin'?'selected':''}>LinkedIn</option>
+            <option value="whatsapp" ${link.platform==='whatsapp'?'selected':''}>WhatsApp</option>
+            <option value="wechat" ${link.platform==='wechat'?'selected':''}>WeChat 微信</option>
+            <option value="facebook" ${link.platform==='facebook'?'selected':''}>Facebook</option>
+            <option value="instagram" ${link.platform==='instagram'?'selected':''}>Instagram</option>
+            <option value="twitter" ${link.platform==='twitter'?'selected':''}>Twitter / X</option>
+          </select>
+        </div>
+        <div>
+          <div class="field-label text-xs">链接 URL</div>
+          <input type="url" data-social="${i}" data-field="url" value="${escapeHtml(link.url || '')}" placeholder="https://..." class="text-sm" />
+        </div>
+      </div>
+      <button class="btn-danger ml-2 flex-shrink-0" onclick="removeSocialLink(${i})"><i class="fas fa-trash"></i></button>`;
+    container.appendChild(div);
+  });
+}
+
+function updateSocialIcon(select) {
+  const platform = select.value;
+  const iconClass = PLATFORM_ICONS[platform] || 'fas fa-link';
+  const icon = select.closest('.social-card').querySelector('.fa-youtube, .fa-linkedin, .fa-whatsapp, .fa-weixin, .fa-facebook, .fa-instagram, .fa-twitter, .fa-link');
+  if (icon) { icon.className = iconClass; }
+}
+
+function addSocialLink() {
+  if (!currentData.social_links) currentData.social_links = [];
+  currentData.social_links.push({ platform: 'youtube', url: '' });
+  renderSocialEditor(currentData.social_links);
+}
+
+function removeSocialLink(idx) {
+  currentData.social_links.splice(idx, 1);
+  renderSocialEditor(currentData.social_links);
+}
+
+function collectSocialLinks() {
+  const inputs = document.querySelectorAll('#social-editor [data-social]');
+  const links = [];
+  inputs.forEach(el => {
+    const i = parseInt(el.dataset.social);
+    if (!links[i]) links[i] = {};
+    links[i][el.dataset.field] = el.value;
+  });
+  return links.filter(Boolean);
+}
+
+async function saveSocialLinks() {
+  currentData.social_links = collectSocialLinks();
+  await pushDataJson('社媒链接已保存并推送到 GitHub ✅');
+}
+
+
+// ===== 认证徽标图片管理 =====
+const CERT_ICON_LABELS = {
+  cert_eu: 'EU Organic 欧盟有机',
+  cert_us: 'US Organic 美国有机',
+  cert_haccp: 'HACCP'
+};
+
+function renderCertIconsEditor(certIcons) {
+  const container = document.getElementById('cert-icons-editor');
+  if (!container) return;
+  const icons = certIcons || {};
+  container.innerHTML = Object.entries(CERT_ICON_LABELS).map(([key, label]) => {
+    const val = icons[key] || '';
+    return `<div>
+      <div class="field-label text-xs">${label}</div>
+      <input type="url" id="ci_${key}" value="${val}" placeholder="https://..." />
+      <img src="${val}" id="prev_${key}" class="img-preview ${val ? '' : 'hidden'}" onerror="this.classList.add('hidden')" />
+    </div>`;
+  }).join('');
+  Object.keys(CERT_ICON_LABELS).forEach(key => {
+    const input = document.getElementById('ci_' + key);
+    if (input) setupPreview(input, 'prev_' + key);
+  });
+}
+
+async function saveCertIcons() {
+  if (!currentData.cert_icons) currentData.cert_icons = {};
+  Object.keys(CERT_ICON_LABELS).forEach(key => {
+    const el = document.getElementById('ci_' + key);
+    if (el) currentData.cert_icons[key] = el.value.trim();
+  });
+  await pushDataJson('认证徽标图片已保存并推送到 GitHub ✅');
+}
+
+// ===== 产品手册 PDF 管理 =====
+function populateBrochureUrl(url) {
+  const input = document.getElementById('brochure_url_input');
+  if (input) input.value = url || '';
+  const display = document.getElementById('current-brochure-url');
+  if (display) display.textContent = url || '（未设置）';
+}
+
+async function saveBrochureUrl() {
+  const input = document.getElementById('brochure_url_input');
+  if (input) currentData.brochure_url = input.value.trim();
+  await pushDataJson('产品手册 PDF 链接已保存并推送到 GitHub ✅');
+}
+
+// ===== 新闻管理（两个编辑器） =====
+
+// 子Tab切换
+function switchNewsSubTab(tab) {
+  const summaryBtn = document.getElementById('subtab-summary');
+  const detailBtn = document.getElementById('subtab-detail');
+  const summaryEditor = document.getElementById('news-summary-editor');
+  const detailEditor = document.getElementById('news-detail-editor');
+
+  if (tab === 'summary') {
+    summaryBtn.classList.remove('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+    summaryBtn.classList.add('bg-primary', 'text-white');
+    detailBtn.classList.remove('bg-primary', 'text-white');
+    detailBtn.classList.add('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+    summaryEditor.classList.remove('hidden');
+    detailEditor.classList.add('hidden');
+  } else {
+    detailBtn.classList.remove('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+    detailBtn.classList.add('bg-primary', 'text-white');
+    summaryBtn.classList.remove('bg-primary', 'text-white');
+    summaryBtn.classList.add('bg-gray-100', 'text-gray-600', 'hover:bg-gray-200');
+    detailEditor.classList.remove('hidden');
+    summaryEditor.classList.add('hidden');
+  }
+}
+
+// ===== 首页新闻编辑器（news_summary） =====
+function renderNewsSummaryEditor(news) {
+  const container = document.getElementById('news-summary-list');
+  if (!container) return;
+  container.innerHTML = '';
+  if (!news || news.length === 0) {
+    container.innerHTML = '<div class="section-card text-center text-gray-400 py-8"><i class="fas fa-newspaper text-3xl mb-3"></i><p>暂无新闻，点击右上角"新增新闻"开始添加</p></div>';
+    return;
+  }
+  news.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'news-summary-item section-card';
+    div.innerHTML = `
+      <div class="flex items-center justify-between mb-4">
+        <h4 class="font-bold text-gray-700 flex items-center gap-2">
+          <i class="fas fa-newspaper text-blue-500"></i>
+          首页新闻 ${i + 1}
+          <span class="text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">${escapeHtml(item.date || '未设置日期')}</span>
+        </h4>
+        <button class="btn-danger" onclick="removeNewsSummary(${i})"><i class="fas fa-trash mr-1"></i>删除</button>
+      </div>
+
+      <!-- 日期 + 图片 -->
+      <div class="grid sm:grid-cols-2 gap-4 mb-4">
+        <div>
+          <div class="field-label">日期 <span class="text-gray-400 font-normal text-xs">（格式: 2026-04-01，用于排序）</span></div>
+          <input type="text" data-summary="${i}" data-field="date" value="${escapeHtml(item.date || '')}" placeholder="2026-04-01" />
+        </div>
+        <div>
+          <div class="field-label">封面图片链接 <span class="text-gray-400 font-normal text-xs">（首页卡片展示图）</span></div>
+          <input type="url" data-summary="${i}" data-field="image" value="${escapeHtml(item.image || '')}" placeholder="https://..." />
+        </div>
+      </div>
+
+      <!-- 标题（4语言） -->
+      <div class="mb-3">
+        <div class="font-semibold text-gray-600 text-sm mb-2 flex items-center gap-2"><i class="fas fa-heading text-gray-400"></i> 新闻标题（4语言）</div>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <div class="field-label text-xs">🇬🇧 英文标题</div>
+            <input type="text" data-summary="${i}" data-field="title_en" value="${escapeHtml(item.title_en || '')}" placeholder="News title in English" />
+          </div>
+          <div>
+            <div class="field-label text-xs">🇨🇳 中文标题</div>
+            <input type="text" data-summary="${i}" data-field="title_zh" value="${escapeHtml(item.title_zh || '')}" placeholder="中文新闻标题" />
+          </div>
+          <div>
+            <div class="field-label text-xs">🇷🇺 俄文标题</div>
+            <input type="text" data-summary="${i}" data-field="title_ru" value="${escapeHtml(item.title_ru || '')}" placeholder="Заголовок новости" />
+          </div>
+          <div>
+            <div class="field-label text-xs">🇩🇪 德文标题</div>
+            <input type="text" data-summary="${i}" data-field="title_de" value="${escapeHtml(item.title_de || '')}" placeholder="Nachrichtentitel" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 摘要（4语言） -->
+      <div>
+        <div class="font-semibold text-gray-600 text-sm mb-2 flex items-center gap-2"><i class="fas fa-align-left text-gray-400"></i> 新闻摘要（4语言，用于首页卡片）</div>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <div class="field-label text-xs">🇬🇧 英文摘要</div>
+            <textarea data-summary="${i}" data-field="summary_en" rows="2" placeholder="Brief summary for homepage card...">${escapeHtml(item.summary_en || '')}</textarea>
+          </div>
+          <div>
+            <div class="field-label text-xs">🇨🇳 中文摘要</div>
+            <textarea data-summary="${i}" data-field="summary_zh" rows="2" placeholder="首页卡片显示的中文摘要...">${escapeHtml(item.summary_zh || '')}</textarea>
+          </div>
+          <div>
+            <div class="field-label text-xs">🇷🇺 俄文摘要</div>
+            <textarea data-summary="${i}" data-field="summary_ru" rows="2" placeholder="Краткое описание...">${escapeHtml(item.summary_ru || '')}</textarea>
+          </div>
+          <div>
+            <div class="field-label text-xs">🇩🇪 德文摘要</div>
+            <textarea data-summary="${i}" data-field="summary_de" rows="2" placeholder="Kurze Zusammenfassung...">${escapeHtml(item.summary_de || '')}</textarea>
+          </div>
+        </div>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function addNewsSummary() {
+  if (!currentData.news_summary) currentData.news_summary = [];
+  const today = new Date().toISOString().slice(0, 10);
+  currentData.news_summary.push({
+    id: Date.now(),
+    date: today,
+    title_en: '',
+    title_zh: '',
+    title_ru: '',
+    title_de: '',
+    summary_en: '',
+    summary_zh: '',
+    summary_ru: '',
+    summary_de: '',
+    image: ''
+  });
+  renderNewsSummaryEditor(currentData.news_summary);
+  const container = document.getElementById('news-summary-list');
+  if (container && container.lastElementChild) {
+    container.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function removeNewsSummary(idx) {
+  if (!confirm('确认删除这条新闻？此操作保存前可撤销。')) return;
+  currentData.news_summary.splice(idx, 1);
+  renderNewsSummaryEditor(currentData.news_summary);
+}
+
+function collectNewsSummary() {
+  const inputs = document.querySelectorAll('#news-summary-list [data-summary]');
+  const news = [];
+  inputs.forEach(el => {
+    const i = parseInt(el.dataset.summary);
+    if (!news[i]) news[i] = {};
+    news[i][el.dataset.field] = el.value.trim();
+  });
+  return news.filter(Boolean).map((item, i) => ({
+    id: (currentData.news_summary && currentData.news_summary[i] && currentData.news_summary[i].id) || Date.now() + i,
+    ...item
+  }));
+}
+
+async function saveNewsSummary() {
+  currentData.news_summary = collectNewsSummary();
+  await pushDataJson('首页新闻已保存并推送到 GitHub ✅');
+}
+
+// ===== 新闻详情编辑器（news_detail） =====
+function renderNewsDetailEditor(news) {
+  const container = document.getElementById('news-detail-list');
+  if (!container) return;
+  container.innerHTML = '';
+  if (!news || news.length === 0) {
+    container.innerHTML = '<div class="section-card text-center text-gray-400 py-8"><i class="fas fa-file-alt text-3xl mb-3"></i><p>暂无新闻详情，点击右上角"新增新闻"开始添加</p></div>';
+    return;
+  }
+  news.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'news-detail-item section-card';
+    div.innerHTML = `
+      <div class="flex items-center justify-between mb-4">
+        <h4 class="font-bold text-gray-700 flex items-center gap-2">
+          <i class="fas fa-file-alt text-green-500"></i>
+          新闻详情 ${i + 1}
+          <span class="text-xs bg-green-50 text-green-600 px-2 py-0.5 rounded-full">${escapeHtml(item.date || '未设置日期')}</span>
+        </h4>
+        <button class="btn-danger" onclick="removeNewsDetail(${i})"><i class="fas fa-trash mr-1"></i>删除</button>
+      </div>
+
+      <!-- 日期 + 图片 -->
+      <div class="grid sm:grid-cols-3 gap-4 mb-4">
+        <div>
+          <div class="field-label">日期 <span class="text-gray-400 font-normal text-xs">（格式: 2026-04-01，用于排序和导航）</span></div>
+          <input type="text" data-detail="${i}" data-field="date" value="${escapeHtml(item.date || '')}" placeholder="2026-04-01" />
+        </div>
+        <div>
+          <div class="field-label">主图链接 <span class="text-gray-400 font-normal text-xs">（顶部大图）</span></div>
+          <input type="url" data-detail="${i}" data-field="image" value="${escapeHtml(item.image || '')}" placeholder="https://..." />
+        </div>
+        <div>
+          <div class="field-label">外链 <span class="text-gray-400 font-normal text-xs">（可留空）</span></div>
+          <input type="url" data-detail="${i}" data-field="link" value="${escapeHtml(item.link || '')}" placeholder="https://..." />
+        </div>
+      </div>
+
+      <!-- 两张插图 -->
+      <div class="grid sm:grid-cols-2 gap-4 mb-4">
+        <div>
+          <div class="field-label">插图1链接 <span class="text-gray-400 font-normal text-xs">（插入正文中间）</span></div>
+          <input type="url" data-detail="${i}" data-field="image2" value="${escapeHtml(item.image2 || '')}" placeholder="https://..." />
+        </div>
+        <div>
+          <div class="field-label">插图2链接 <span class="text-gray-400 font-normal text-xs">（插入正文中间）</span></div>
+          <input type="url" data-detail="${i}" data-field="image3" value="${escapeHtml(item.image3 || '')}" placeholder="https://..." />
+        </div>
+      </div>
+
+      <!-- 标题（4语言） -->
+      <div class="mb-3">
+        <div class="font-semibold text-gray-600 text-sm mb-2 flex items-center gap-2"><i class="fas fa-heading text-gray-400"></i> 新闻标题（4语言）</div>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <div class="field-label text-xs">🇬🇧 英文标题</div>
+            <input type="text" data-detail="${i}" data-field="title_en" value="${escapeHtml(item.title_en || '')}" placeholder="News title in English" />
+          </div>
+          <div>
+            <div class="field-label text-xs">🇨🇳 中文标题</div>
+            <input type="text" data-detail="${i}" data-field="title_zh" value="${escapeHtml(item.title_zh || '')}" placeholder="中文新闻标题" />
+          </div>
+          <div>
+            <div class="field-label text-xs">🇷🇺 俄文标题</div>
+            <input type="text" data-detail="${i}" data-field="title_ru" value="${escapeHtml(item.title_ru || '')}" placeholder="Заголовок новости" />
+          </div>
+          <div>
+            <div class="field-label text-xs">🇩🇪 德文标题</div>
+            <input type="text" data-detail="${i}" data-field="title_de" value="${escapeHtml(item.title_de || '')}" placeholder="Nachrichtentitel" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 正文内容（4语言） -->
+      <div>
+        <div class="font-semibold text-gray-600 text-sm mb-2 flex items-center gap-2">
+          <i class="fas fa-file-lines text-gray-400"></i> 新闻正文内容（4语言）
+          <span class="text-xs text-gray-400 ml-2">（可在正文中插入 {{img2}} 和 {{img3}} 标记来控制图片位置）</span>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <div class="field-label text-xs">🇬🇧 英文正文</div>
+            <textarea data-detail="${i}" data-field="content_en" rows="5" placeholder="Full news content in English...">${escapeHtml(item.content_en || '')}</textarea>
+          </div>
+          <div>
+            <div class="field-label text-xs">🇨🇳 中文正文</div>
+            <textarea data-detail="${i}" data-field="content_zh" rows="5" placeholder="完整的中文新闻正文内容...">${escapeHtml(item.content_zh || '')}</textarea>
+          </div>
+          <div>
+            <div class="field-label text-xs">🇷🇺 俄文正文</div>
+            <textarea data-detail="${i}" data-field="content_ru" rows="5" placeholder="Полный текст новости...">${escapeHtml(item.content_ru || '')}</textarea>
+          </div>
+          <div>
+            <div class="field-label text-xs">🇩🇪 德文正文</div>
+            <textarea data-detail="${i}" data-field="content_de" rows="5" placeholder="Vollständiger Nachrichtentext...">${escapeHtml(item.content_de || '')}</textarea>
+          </div>
+        </div>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function addNewsDetail() {
+  if (!currentData.news_detail) currentData.news_detail = [];
+  const today = new Date().toISOString().slice(0, 10);
+  currentData.news_detail.push({
+    id: Date.now(),
+    date: today,
+    title_en: '',
+    title_zh: '',
+    title_ru: '',
+    title_de: '',
+    content_en: '',
+    content_zh: '',
+    content_ru: '',
+    content_de: '',
+    image: '',
+    image2: '',
+    image3: '',
+    link: ''
+  });
+  renderNewsDetailEditor(currentData.news_detail);
+  const container = document.getElementById('news-detail-list');
+  if (container && container.lastElementChild) {
+    container.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function removeNewsDetail(idx) {
+  if (!confirm('确认删除这条新闻详情？此操作保存前可撤销。')) return;
+  currentData.news_detail.splice(idx, 1);
+  renderNewsDetailEditor(currentData.news_detail);
+}
+
+function collectNewsDetail() {
+  const inputs = document.querySelectorAll('#news-detail-list [data-detail]');
+  const news = [];
+  inputs.forEach(el => {
+    const i = parseInt(el.dataset.detail);
+    if (!news[i]) news[i] = {};
+    news[i][el.dataset.field] = el.value.trim();
+  });
+  return news.filter(Boolean).map((item, i) => ({
+    id: (currentData.news_detail && currentData.news_detail[i] && currentData.news_detail[i].id) || Date.now() + i,
+    ...item
+  }));
+}
+
+async function saveNewsDetail() {
+  currentData.news_detail = collectNewsDetail();
+  await pushDataJson('新闻详情已保存并推送到 GitHub ✅');
+}
+
+// ===== 推送 data.json 到 GitHub =====
+async function pushDataJson(successMsg) {
+  showToast('正在推送到 GitHub...', 'loading', 0);
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(currentData, null, 2))));
+    const url = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.dataPath}`;
+    const body = {
+      message: `chore: update site content via admin panel [${new Date().toISOString()}]`,
+      content: content,
+      sha: currentSHA
+    };
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: { 'Authorization': `token ${CONFIG.token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) { const err = await res.json(); throw new Error(err.message || `HTTP ${res.status}`); }
+    const result = await res.json();
+    currentSHA = result.content.sha;
+    showToast(successMsg, 'success');
+  } catch(e) {
+    showToast('推送失败：' + e.message, 'error');
+  }
+}
+
+// ===== 初始化 =====
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('aultrastea_cfg');
+  if (saved) {
+    try {
+      const cfg = JSON.parse(saved);
+      document.getElementById('githubOwner').value = cfg.owner || '';
+      document.getElementById('githubRepo').value = cfg.repo || '';
+      document.getElementById('githubToken').value = cfg.token || '';
+      document.getElementById('dataPath').value = cfg.dataPath || 'data.json';
+    } catch(e) {}
+  }
+
+  // 图片预览绑定（Hero + 产品封面）
+  ['hero_bg','hero_main','product_green','product_black','product_oolong','product_white','product_yellow','product_dark','product_flower'].forEach(k => {
+    const input = document.getElementById('img_' + k);
+    if (input) setupPreview(input, 'prev_' + k);
+  });
+
+  // 关于视频预览
+  const avInput = document.getElementById('about_video_embed_code');
+  if (avInput) avInput.addEventListener('input', updateAboutVideoPreview);
+});
+</script>
+</body>
+</html>
