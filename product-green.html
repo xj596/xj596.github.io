@@ -24,6 +24,10 @@
     .fade-in.visible { opacity: 1; transform: translateY(0); }
     .product-detail-img { background: #e5e7eb; min-height: 7rem; }
     #lightbox { backdrop-filter: blur(4px); }
+    .zoom-wrap { cursor: zoom-in; }
+    .product-img { transition: transform .12s ease-out; }
+    .zoom-lens { position:fixed; border:1px solid rgba(15,76,58,.55); background:rgba(212,175,55,.22); pointer-events:none; display:none; z-index:96; }
+    .zoom-result { position:fixed; width:360px; height:360px; border-radius:14px; background-color:#fff; background-repeat:no-repeat; box-shadow:0 14px 44px rgba(0,0,0,.28); border:1px solid rgba(0,0,0,.06); display:none; z-index:95; pointer-events:none; }
   </style>
 </head>
 <body>
@@ -201,7 +205,11 @@
           }
           const drySrc = imgs.dry || "";
           html += '<div class="bg-white rounded-2xl overflow-hidden shadow-md fade-in flex flex-col">';
-          html += '<div class="p-2"><img data-pkey="'+key+'" src="'+drySrc+'" alt="'+escapeHtml(t(p.name,lang))+'" class="product-img w-full h-40 object-cover rounded-lg bg-gray-100 product-detail-img cursor-pointer"></div>';
+          const _hasImg = !!(drySrc && drySrc.trim()!=="");
+          const _imgInner = _hasImg
+            ? '<img data-pkey="'+key+'" src="'+drySrc+'" alt="'+escapeHtml(t(p.name,lang))+'" class="product-img w-full h-full object-cover cursor-zoom-in">'
+            : '<div class="w-full h-full flex flex-col items-center justify-center text-center text-dark/40 text-xs p-2 leading-relaxed"><span>'+escapeHtml(t(p.name,lang))+'</span><span class="opacity-60 mt-1">图片待上传</span></div>';
+          html += '<div class="p-2"><div class="zoom-wrap relative overflow-hidden rounded-lg bg-gray-100 product-detail-img" style="height:10rem">'+_imgInner+'</div></div>';
           html += '<div class="p-4 pt-2 flex-1 flex flex-col">';
           html += '<h4 class="text-base font-bold text-primary mb-1">'+escapeHtml(t(p.name,lang))+'</h4>';
           if(!hasLiq) html += '<span class="text-xs text-dark/40 mb-1">'+pack.no_liquor+'</span>';
@@ -215,6 +223,8 @@
       cont.querySelectorAll(".product-img").forEach(img=>{
         img.addEventListener("click", ()=> openLightbox(img.getAttribute("data-pkey")));
         img.addEventListener("error", ()=>{ img.style.background="#e5e7eb"; });
+        const _src = img.getAttribute("src");
+        if(_src && _src.trim()!=="") attachZoom(img);
       });
       cont.querySelectorAll("[data-stdbtn]").forEach(btn=>{
         btn.addEventListener("click", ()=>{ const parts=btn.getAttribute("data-stdbtn").split("|"); productStd[parts[0]]=parts[1]; renderProducts(currentLang); });
@@ -245,6 +255,48 @@
       lb.querySelectorAll("img").forEach(img=>{ img.addEventListener("error", ()=>{ img.style.display="none"; }); });
     }
     function closeLightbox(){ const lb=document.getElementById("lightbox"); lb.classList.add("hidden"); lb.innerHTML=""; document.body.style.overflow=""; }
+
+    /* ===== 悬停放大镜（仿 loopteas 产品图放大展示细节） ===== */
+    const ZOOM = 2.4;
+    let _zoomLens = null, _zoomResult = null;
+    function ensureZoomEls(){
+      if(_zoomResult) return;
+      _zoomLens = document.createElement('div'); _zoomLens.className='zoom-lens';
+      _zoomResult = document.createElement('div'); _zoomResult.className='zoom-result';
+      document.body.appendChild(_zoomLens); document.body.appendChild(_zoomResult);
+    }
+    function attachZoom(img){
+      img.addEventListener('mouseenter', function(){
+        if(!img.getAttribute('src')) return;
+        ensureZoomEls();
+        _zoomLens.style.display='block';
+        _zoomResult.style.display='block';
+        _zoomResult.style.backgroundImage='url(' + JSON.stringify(img.getAttribute('src')) + ')';
+      });
+      img.addEventListener('mousemove', function(e){
+        if(_zoomResult.style.display!=='block') return;
+        const r = img.getBoundingClientRect();
+        const lensW = r.width/ZOOM, lensH = r.height/ZOOM;
+        _zoomLens.style.width=lensW+'px'; _zoomLens.style.height=lensH+'px';
+        let x=e.clientX-r.left, y=e.clientY-r.top;
+        let lx=Math.max(0,Math.min(x-lensW/2, r.width-lensW));
+        let ly=Math.max(0,Math.min(y-lensH/2, r.height-lensH));
+        _zoomLens.style.left=(r.left+lx)+'px';
+        _zoomLens.style.top=(r.top+ly)+'px';
+        _zoomResult.style.backgroundSize=(r.width*ZOOM)+'px '+(r.height*ZOOM)+'px';
+        _zoomResult.style.backgroundPosition='-'+(lx*ZOOM)+'px -'+(ly*ZOOM)+'px';
+        const pw=360, ph=360, gap=16;
+        let px = (r.right+gap+pw < window.innerWidth) ? r.right+gap : (r.left-gap-pw>0 ? r.left-gap-pw : Math.max(8,(window.innerWidth-pw)/2));
+        let py = Math.max(8, Math.min(e.clientY-ph/2, window.innerHeight-ph-8));
+        _zoomResult.style.left=px+'px';
+        _zoomResult.style.top=py+'px';
+      });
+      img.addEventListener('mouseleave', function(){
+        if(_zoomLens){_zoomLens.style.display='none';}
+        if(_zoomResult){_zoomResult.style.display='none';}
+      });
+    }
+
 
     function switchLang(lang){
       currentLang = lang;
