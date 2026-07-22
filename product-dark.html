@@ -26,8 +26,8 @@
     #lightbox { backdrop-filter: blur(4px); }
     .zoom-wrap { cursor: zoom-in; }
     .product-img { transition: transform .12s ease-out; }
-    .zoom-lens { position:fixed; border:1px solid rgba(15,76,58,.55); background:rgba(212,175,55,.22); pointer-events:none; display:none; z-index:96; }
-    .zoom-result { position:fixed; width:360px; height:360px; border-radius:14px; background-color:#fff; background-repeat:no-repeat; box-shadow:0 14px 44px rgba(0,0,0,.28); border:1px solid rgba(0,0,0,.06); display:none; z-index:95; pointer-events:none; }
+    .zoom-lens { position:fixed; border:2px solid rgba(15,76,58,.65); background:rgba(212,175,55,.20); pointer-events:none; display:none; z-index:110; }
+    .zoom-result { position:fixed; width:360px; height:360px; border-radius:14px; background-color:#fff; background-repeat:no-repeat; box-shadow:0 18px 50px rgba(0,0,0,.30); border:1px solid rgba(0,0,0,.08); display:none; z-index:110; pointer-events:none; }
   </style>
 </head>
 <body>
@@ -223,8 +223,6 @@
       cont.querySelectorAll(".product-img").forEach(img=>{
         img.addEventListener("click", ()=> openLightbox(img.getAttribute("data-pkey")));
         img.addEventListener("error", ()=>{ img.style.background="#e5e7eb"; });
-        const _src = img.getAttribute("src");
-        if(_src && _src.trim()!=="") attachZoom(img);
       });
       cont.querySelectorAll("[data-stdbtn]").forEach(btn=>{
         btn.addEventListener("click", ()=>{ const parts=btn.getAttribute("data-stdbtn").split("|"); productStd[parts[0]]=parts[1]; renderProducts(currentLang); });
@@ -240,21 +238,36 @@
       const imgs = (p.images && p.images[std]) || {dry:"",liquor:""};
       const hasLiq = p.has_liquor !== false;
       const lang = currentLang; const pack = UI[lang] || UI.en;
-      let html = '<div class="absolute top-4 right-4"><button onclick="closeLightbox()" class="w-10 h-10 rounded-full bg-white/90 text-gray-700 flex items-center justify-center text-lg shadow"><i class="fas fa-times"></i></button></div>';
+      const views = [{label: pack.dry_leaf, src: imgs.dry}];
+      if(hasLiq && imgs.liquor) views.push({label: pack.liquor, src: imgs.liquor});
+      let html = '<div class="absolute top-4 right-4 z-[120]"><button onclick="closeLightbox()" class="w-10 h-10 rounded-full bg-white/90 text-gray-700 flex items-center justify-center text-lg shadow"><i class="fas fa-times"></i></button></div>';
       html += '<div class="text-center mb-4"><h3 class="text-xl font-bold text-primary">'+escapeHtml(t(p.name,lang))+'</h3><p class="text-dark/50 text-sm">'+escapeHtml(t(sub.name,lang))+'</p></div>';
-      html += '<div class="flex flex-col md:flex-row gap-4 justify-center items-start max-w-4xl w-full">';
-      html += '<div class="flex-1"><div class="text-xs text-dark/60 mb-1 font-medium">'+pack.dry_leaf+'</div><img src="'+imgs.dry+'" class="w-full max-h-[60vh] object-contain rounded-lg bg-gray-100"></div>';
-      if(hasLiq){
-        html += '<div class="flex-1"><div class="text-xs text-dark/60 mb-1 font-medium">'+pack.liquor+'</div><img src="'+imgs.liquor+'" class="w-full max-h-[60vh] object-contain rounded-lg bg-gray-100"></div>';
-      } else {
-        html += '<div class="flex-1 flex items-center justify-center text-dark/40 text-sm border border-dashed border-gray-200 rounded-lg p-8">'+pack.no_liquor+'</div>';
+      html += '<div class="flex flex-col items-center gap-3 w-full max-w-4xl">';
+      html += '<div class="w-full flex justify-center"><img id="lb-main" src="'+views[0].src+'" alt="'+escapeHtml(t(p.name,lang))+'" class="max-h-[64vh] w-auto object-contain rounded-lg bg-gray-100 cursor-zoom-in shadow-lg"></div>';
+      if(views.length>1){
+        html += '<div class="flex gap-3">';
+        views.forEach((v,i)=>{
+          html += '<button type="button" class="lb-thumb rounded-lg overflow-hidden border-2 '+(i===0?'border-primary':'border-transparent')+'" data-lbsrc="'+v.src+'"><img src="'+v.src+'" class="h-16 w-16 object-cover"></button>';
+        });
+        html += '</div>';
       }
       html += '</div>';
       const lb = document.getElementById("lightbox");
       lb.innerHTML = html; lb.classList.remove("hidden"); document.body.style.overflow="hidden";
-      lb.querySelectorAll("img").forEach(img=>{ img.addEventListener("error", ()=>{ img.style.display="none"; }); });
+      const main = document.getElementById("lb-main");
+      if(main){ main.addEventListener("error", ()=>{ main.style.background="#e5e7eb"; }); attachLightboxZoom(main); }
+      lb.querySelectorAll(".lb-thumb").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          if(!main) return;
+          main.src = btn.getAttribute("data-lbsrc");
+          lb.querySelectorAll(".lb-thumb").forEach(b=>{ b.classList.remove("border-primary"); b.classList.add("border-transparent"); });
+          btn.classList.add("border-primary"); btn.classList.remove("border-transparent");
+          if(_zoomResult) _zoomResult.style.display="none";
+          if(_zoomLens) _zoomLens.style.display="none";
+        });
+      });
     }
-    function closeLightbox(){ const lb=document.getElementById("lightbox"); lb.classList.add("hidden"); lb.innerHTML=""; document.body.style.overflow=""; }
+    function closeLightbox(){ const lb=document.getElementById("lightbox"); lb.classList.add("hidden"); lb.innerHTML=""; document.body.style.overflow=""; if(_zoomLens)_zoomLens.style.display='none'; if(_zoomResult)_zoomResult.style.display='none'; }
 
     /* ===== 悬停放大镜（仿 loopteas 产品图放大展示细节） ===== */
     const ZOOM = 2.4;
@@ -265,29 +278,41 @@
       _zoomResult = document.createElement('div'); _zoomResult.className='zoom-result';
       document.body.appendChild(_zoomLens); document.body.appendChild(_zoomResult);
     }
-    function attachZoom(img){
+    function getContentRect(img){
+      const r = img.getBoundingClientRect();
+      const nw = img.naturalWidth, nh = img.naturalHeight;
+      if(!nw || !nh) return r;
+      const scale = Math.min(r.width/nw, r.height/nh);
+      const dw = nw*scale, dh = nh*scale;
+      return { left: r.left + (r.width-dw)/2, top: r.top + (r.height-dh)/2, width: dw, height: dh };
+    }
+    function attachLightboxZoom(img){
       img.addEventListener('mouseenter', function(){
         if(!img.getAttribute('src')) return;
         ensureZoomEls();
         _zoomLens.style.display='block';
         _zoomResult.style.display='block';
-        _zoomResult.style.backgroundImage='url(' + JSON.stringify(img.getAttribute('src')) + ')';
+        _zoomResult.style.backgroundImage='url("' + img.getAttribute('src') + '")';
       });
       img.addEventListener('mousemove', function(e){
         if(_zoomResult.style.display!=='block') return;
-        const r = img.getBoundingClientRect();
-        const lensW = r.width/ZOOM, lensH = r.height/ZOOM;
-        _zoomLens.style.width=lensW+'px'; _zoomLens.style.height=lensH+'px';
-        let x=e.clientX-r.left, y=e.clientY-r.top;
-        let lx=Math.max(0,Math.min(x-lensW/2, r.width-lensW));
-        let ly=Math.max(0,Math.min(y-lensH/2, r.height-lensH));
-        _zoomLens.style.left=(r.left+lx)+'px';
-        _zoomLens.style.top=(r.top+ly)+'px';
-        _zoomResult.style.backgroundSize=(r.width*ZOOM)+'px '+(r.height*ZOOM)+'px';
+        const cr = getContentRect(img);
+        const lensW = cr.width/ZOOM, lensH = cr.height/ZOOM;
+        _zoomLens.style.width=lensW+'px';
+        _zoomLens.style.height=lensH+'px';
+        let x=e.clientX-cr.left, y=e.clientY-cr.top;
+        let lx=Math.max(0,Math.min(x-lensW/2, cr.width-lensW));
+        let ly=Math.max(0,Math.min(y-lensH/2, cr.height-lensH));
+        _zoomLens.style.left=(cr.left+lx)+'px';
+        _zoomLens.style.top=(cr.top+ly)+'px';
+        const resW=_zoomResult.offsetWidth, resH=_zoomResult.offsetHeight;
+        _zoomResult.style.backgroundSize=(cr.width*ZOOM)+'px '+(cr.height*ZOOM)+'px';
         _zoomResult.style.backgroundPosition='-'+(lx*ZOOM)+'px -'+(ly*ZOOM)+'px';
-        const pw=360, ph=360, gap=16;
-        let px = (r.right+gap+pw < window.innerWidth) ? r.right+gap : (r.left-gap-pw>0 ? r.left-gap-pw : Math.max(8,(window.innerWidth-pw)/2));
-        let py = Math.max(8, Math.min(e.clientY-ph/2, window.innerHeight-ph-8));
+        const gap=16;
+        let px = cr.right+gap;
+        if(px+resW > window.innerWidth-8) px = cr.left-gap-resW;
+        if(px < 8) px = 8;
+        let py = Math.max(8, Math.min(e.clientY-resH/2, window.innerHeight-resH-8));
         _zoomResult.style.left=px+'px';
         _zoomResult.style.top=py+'px';
       });
