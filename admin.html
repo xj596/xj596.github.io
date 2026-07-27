@@ -116,7 +116,7 @@
         <i class="fas fa-play-circle mr-1.5"></i> 关于视频
       </button>
       <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('product-detail')">
-        <i class="fas fa-box-open mr-1.5"></i> 产品中心
+        <i class="fas fa-box-open mr-1.5"></i> 产品图（4图）
       </button>
       <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('certificates')">
         <i class="fas fa-certificate mr-1.5"></i> 公司资质图
@@ -262,41 +262,38 @@
       </div>
     </div>
 
-        <!-- ===== 产品中心管理 Tab ===== -->
+    <!-- ===== 产品4图管理 Tab ===== -->
     <div id="tab-product-detail" class="tab-content hidden">
       <div class="section-card">
-        <h3 class="font-bold text-gray-800 mb-2 text-lg">产品中心管理（分类 → 子品类 → 产品）</h3>
-        <p class="text-gray-500 text-sm mb-4">为每个品类下的每款产品设置图片。每款产品可切换 <b>国标 / 欧盟(EU) / 有机(Organic)</b> 标准，分别上传 <b>干茶图</b> 与 <b>茶汤图</b>（无茶汤产品如抹茶、普洱饼请取消"有茶汤"）。</p>
-        <div class="mb-4 grid sm:grid-cols-2 gap-4">
-          <div>
-            <div class="field-label">选择品类</div>
-            <select id="pm_cat" onchange="pmRender()" class="form-select max-w-xs">
-              <option value="green">绿茶 Green Tea</option>
-              <option value="black">红茶 Black Tea</option>
-              <option value="dark">黑茶 Dark Tea</option>
-              <option value="white">白茶 White Tea</option>
-              <option value="flower">花茶 Flower Tea</option>
-              <option value="oolong">乌龙茶 Oolong Tea</option>
-            </select>
-          </div>
-          <div>
-            <div class="field-label">当前编辑标准（上传该标准下的图片）</div>
-            <select id="pm_std" onchange="pmRender()" class="form-select max-w-xs">
-              <option value="conventional">国标 Conventional</option>
-              <option value="eu">欧盟 EU</option>
-              <option value="organic">有机 Organic</option>
-            </select>
-          </div>
+        <h3 class="font-bold text-gray-800 mb-2 text-lg">产品详情页 — 4图管理</h3>
+        <p class="text-gray-500 text-sm mb-4">为每个品类的每款产品（共 7 类 × 8 款 = 56 款）分别设置4张展示图：礼盒 / 干茶 / 茶汤 / 叶底</p>
+        
+        <!-- 品类选择 -->
+        <div class="mb-4">
+          <div class="field-label">选择品类</div>
+          <select id="product_detail_cat" onchange="renderProductDetailEditor()" class="form-select max-w-xs">
+            <option value="green">绿茶 Green Tea</option>
+            <option value="black">红茶 Black Tea</option>
+            <option value="oolong">乌龙茶 Oolong Tea</option>
+            <option value="white">白茶 White Tea</option>
+            <option value="yellow">黄茶 Yellow Tea</option>
+            <option value="dark">黑茶 Dark Tea</option>
+            <option value="flower">工艺茶 Flower Tea</option>
+          </select>
         </div>
-        <div id="pm-editor" class="space-y-6"></div>
+
+        <div id="product-detail-editor" class="space-y-4"></div>
+
         <div class="flex items-center gap-4 mt-6">
-          <button onclick="saveProductManager()" class="btn-primary flex items-center gap-2"><i class="fas fa-save"></i> 保存产品中心到网站</button>
-          <span class="text-xs text-gray-400">图片链接填好后点保存即可，空白项自动忽略</span>
+          <button onclick="saveProductDetails()" class="btn-primary flex items-center gap-2">
+            <i class="fas fa-save"></i> 保存产品详情图到网站
+          </button>
+          <span class="text-xs text-gray-400">图片链接填好后点保存即可</span>
         </div>
       </div>
     </div>
 
-<!-- ===== 公司资质图 Tab ===== -->
+    <!-- ===== 公司资质图 Tab ===== -->
     <div id="tab-certificates" class="tab-content hidden">
       <div class="section-card">
         <h3 class="font-bold text-gray-800 mb-2 text-lg">公司资质图片管理</h3>
@@ -689,7 +686,7 @@ function populateForm() {
   renderNewsDetailEditor(currentData.news_detail || currentData.news || []);
 
   // 产品4图
-  pmRender();
+  renderProductDetailEditor();
 }
 
 // ===== 图片预览 =====
@@ -834,64 +831,54 @@ async function saveAboutVideo() {
 }
 
 // ===== 产品4图编辑器 =====
-// ===== 产品中心管理（新版：分类→子品类→产品，含国标/EU/有机标准） =====
-function t(obj, lang) {
-  if (!obj) return '';
-  return obj[lang] || obj.en || obj.zh || '';
-}
+function renderProductDetailEditor() {
+  const cat = document.getElementById('product_detail_cat').value;
+  const products = PRODUCT_CATS[cat] || [];
+  const imgs = (currentData && currentData.images) || {};
+  const container = document.getElementById('product-detail-editor');
+  container.innerHTML = '';
 
-function pmRender() {
-  const cat = document.getElementById('pm_cat').value;
-  const std = document.getElementById('pm_std').value;
-  const catData = currentData && currentData.products && currentData.products[cat];
-  const editor = document.getElementById('pm-editor');
-  if (!editor) return;
-  if (!catData) { editor.innerHTML = '<div class="text-gray-400 py-6 text-center">该品类暂无数据，请确认 data.json 已包含 products 结构。</div>'; return; }
-  let html = '';
-  catData.subcategories.forEach((sub, si) => {
-    html += '<div class="section-card border-l-4 border-green-700">';
-    html += '<h4 class="font-bold text-gray-800 mb-1">' + escapeHtml(t(sub.name, 'zh')) + ' <span class="text-gray-400 font-normal text-sm">' + escapeHtml(t(sub.name, 'en')) + '</span></h4>';
-    html += '<div class="space-y-3 mt-3">';
-    sub.products.forEach((p, pj) => {
-      const hasLiq = p.has_liquor !== false;
-      const imgObj = (p.images && p.images[std]) || { dry: '', liquor: '' };
-      html += '<div class="border border-gray-200 rounded-lg p-3">';
-      html += '<div class="flex items-center justify-between mb-2">';
-      html += '<div class="font-medium text-gray-700 text-sm">' + escapeHtml(t(p.name, 'zh')) + ' <span class="text-gray-400 text-xs">' + escapeHtml(t(p.name, 'en')) + '</span></div>';
-      html += '<label class="flex items-center gap-1 text-xs text-gray-500 cursor-pointer"><input type="checkbox" data-pm="hasliq" data-si="' + si + '" data-pj="' + pj + '" ' + (hasLiq ? 'checked' : '') + '/> 有茶汤</label>';
-      html += '</div>';
-      html += '<div class="grid sm:grid-cols-2 gap-3">';
-      html += '<div><div class="field-label text-xs">干茶图 Dry Leaf</div><input type="url" data-pm="dry" data-si="' + si + '" data-pj="' + pj + '" data-std="' + std + '" value="' + escapeHtml(imgObj.dry || '') + '" placeholder="https://..." /></div>';
-      html += '<div data-pm-liqwrap="' + si + '-' + pj + '" style="' + (hasLiq ? '' : 'display:none') + '"><div class="field-label text-xs">茶汤图 Tea Liquor</div><input type="url" data-pm="liquor" data-si="' + si + '" data-pj="' + pj + '" data-std="' + std + '" value="' + escapeHtml(imgObj.liquor || '') + '" placeholder="https://..." /></div>';
-      html += '</div></div>';
+  products.forEach((pname, i) => {
+    const div = document.createElement('div');
+    div.className = 'section-card border-l-4 border-yellow-500';
+    let imgInputs = '';
+    IMG_SUFFIXES.forEach((suf, si) => {
+      const key = `product_${cat}_${i}_${suf}`;
+      const val = imgs[key] || '';
+      imgInputs += `
+        <div>
+          <div class="field-label text-xs">${IMG_LABELS[si]}</div>
+          <input type="url" data-imgkey="${key}" value="${val}" placeholder="https://..." class="product-detail-input" />
+          <img src="${val}" class="img-preview ${val ? '' : 'hidden'}" onerror="this.classList.add('hidden')" />
+        </div>`;
     });
-    html += '</div></div>';
+    div.innerHTML = `
+      <div class="font-bold text-gray-700 mb-3"><i class="fas fa-box text-yellow-500 mr-2"></i>${i+1}. ${pname}</div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">${imgInputs}</div>`;
+    container.appendChild(div);
   });
-  editor.innerHTML = html;
-  editor.querySelectorAll('[data-pm="hasliq"]').forEach(cb => cb.addEventListener('change', () => pmToggleLiquor(cb)));
-  editor.querySelectorAll('input[data-pm="dry"], input[data-pm="liquor"]').forEach(inp => inp.addEventListener('input', () => pmLiveBind(inp)));
+
+  // 绑定预览
+  container.querySelectorAll('.product-detail-input').forEach(input => {
+    input.addEventListener('input', () => {
+      const preview = input.nextElementSibling;
+      if (input.value.trim()) {
+        preview.src = input.value.trim();
+        preview.classList.remove('hidden');
+        preview.onerror = () => preview.classList.add('hidden');
+      } else { preview.classList.add('hidden'); }
+    });
+  });
 }
 
-function pmToggleLiquor(cb) {
-  const si = +cb.dataset.si, pj = +cb.dataset.pj;
-  const p = currentData.products[document.getElementById('pm_cat').value].subcategories[si].products[pj];
-  p.has_liquor = cb.checked;
-  const wrap = document.querySelector('[data-pm-liqwrap="' + si + '-' + pj + '"]');
-  if (wrap) wrap.style.display = cb.checked ? '' : 'none';
-}
-
-function pmLiveBind(inp) {
-  const si = +inp.dataset.si, pj = +inp.dataset.pj, std = inp.dataset.std, field = inp.dataset.pm;
-  const cat = document.getElementById('pm_cat').value;
-  const p = currentData.products[cat].subcategories[si].products[pj];
-  if (!p.images) p.images = {};
-  if (!p.images[std]) p.images[std] = { dry: '', liquor: '' };
-  p.images[std][field] = inp.value.trim();
-}
-
-async function saveProductManager() {
-  if (!currentData.products) { showToast('产品数据结构缺失', 'error'); return; }
-  await pushDataJson('产品中心已保存并推送到 GitHub ✅');
+// ===== 保存产品4图 =====
+async function saveProductDetails() {
+  if (!currentData.images) currentData.images = {};
+  document.querySelectorAll('.product-detail-input').forEach(input => {
+    const key = input.getAttribute('data-imgkey');
+    currentData.images[key] = input.value.trim();
+  });
+  await pushDataJson('产品详情图已保存并推送到 GitHub ✅');
 }
 
 // ===== 展会编辑器 =====
