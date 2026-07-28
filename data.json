@@ -196,7 +196,8 @@
     "phone_1": "收集中",
     "phone_2": "收集中",
     "address_1": "贵州省安顺市西秀区",
-    "address_2": "鸡场乡鑫堡村茶果场"
+    "address_2": "鸡场乡鑫堡村茶果场",
+    "email": "admin@aultrastea.com"
   },
   "about_video": {
     "embed_code": "",
@@ -234,12 +235,12 @@
     {
       "id": "exh_prodexpo_2026",
       "date": "Feb 2026",
-      "name": "Prodexpo 2026: 33rd International Exhibition for Food, Beverages and Food Raw Materials\n\nProdexpo is Russia's largest food trade show for industry professionals. It is distinguished by an abundance of trending new products, extensive business networking, and contracts worth hundreds of billions of rubles. Every year there are about 2,000 exhibitors from more than 35 countries. About 70,000 buyers from more than 100 countries find suppliers and sign deals at Prodexpo. The show's products range from everyday food and beverages to gourmet, halal, organic food, sports and functional nutrition, healthy food, and exotic products.",
+      "name": "Prodexpo 2026: 33rd International Exhibition for Food, Beverages and Food Raw Materials\n\nProdexpo is Russia's largest food trade show for industry professionals. It is distinguished by an abundance of trending new products, extensive business networking, and contracts worth of hundred billions of rubles. Every year there are about 2,000 exhibitors from more than 35 countries. About 70,000 buyers from more than 100 countries find suppliers and sign deals at Prodexpo. The show's products are ranging from everyday food and beverages to gourmet, halal, organic food, sports and functional nutrition, healthy food, and exotic products.",
       "location": "Moscow, Russia",
       "booth": "TBA",
       "status": "confirmed",
       "name_zh": "2026年俄罗斯国际食品及饮料展览会（Prodexpo 2026）：第33届国际食品、饮料及食品原料展览会\n\nProdexpo是俄罗斯最大的面向行业专业人士的食品贸易展览会。其特点是新品潮流云集、商务洽谈广泛、合同金额达数千亿卢布。每年有来自超过35个国家的约2000家参展商。来自100多个国家的约70000名买家在Prodexpo寻找供应商并签订协议。展品范围涵盖日常食品饮料，以及美食、清真、有机食品、运动和功能性营养品、健康食品及异域特色产品。",
-      "name_en": "Prodexpo 2026: 33rd International Exhibition for Food, Beverages and Food Raw Materials\n\nProdexpo is Russia's largest food trade show for industry professionals. It is distinguished by an abundance of trending new products, extensive business networking, and contracts worth hundreds of billions of rubles. Every year there are about 2,000 exhibitors from more than 35 countries. About 70,000 buyers from more than 100 countries find suppliers and sign deals at Prodexpo. The show's products range from everyday food and beverages to gourmet, halal, organic food, sports and functional nutrition, healthy food, and exotic products."
+      "name_en": "Prodexpo 2026: 33rd International Exhibition for Food, Beverages and Food Raw Materials\n\nProdexpo is Russia's largest food trade show for industry professionals. It is distinguished by an abundance of trending new products, extensive business networking, and contracts worth of hundred billions of rubles. Every year there are about 2,000 exhibitors from more than 35 countries. About 70,000 buyers from more than 100 countries find suppliers and sign deals at Prodexpo. The show's products are ranging from everyday food and beverages to gourmet, halal, organic food, sports and functional nutrition, healthy food, and exotic products."
     },
     {
       "id": "exh_biofach_2026",
