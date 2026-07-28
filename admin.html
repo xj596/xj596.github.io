@@ -913,8 +913,16 @@ function renderExhibitionsEditor(exhs) {
       </div>
       <div class="grid sm:grid-cols-2 gap-4">
         <div>
-          <div class="field-label">展会名称</div>
+          <div class="field-label">展会名称（默认 / 英文 name）</div>
           <input type="text" data-exh="${i}" data-field="name" value="${escapeHtml(exh.name || '')}" />
+        </div>
+        <div>
+          <div class="field-label">展会名称（中文 name_zh）</div>
+          <input type="text" data-exh="${i}" data-field="name_zh" value="${escapeHtml(exh.name_zh || '')}" />
+        </div>
+        <div>
+          <div class="field-label">展会名称（英文 name_en）</div>
+          <input type="text" data-exh="${i}" data-field="name_en" value="${escapeHtml(exh.name_en || '')}" />
         </div>
         <div>
           <div class="field-label">日期</div>
@@ -1040,8 +1048,6 @@ async function saveSocialLinks() {
 
 // ===== 认证徽标图片管理 =====
 const CERT_ICON_LABELS = {
-  cert_eu: 'EU Organic 欧盟有机',
-  cert_us: 'US Organic 美国有机',
   cert_haccp: 'HACCP'
 };
 
