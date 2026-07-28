@@ -5,9 +5,7 @@
     "product_green": "https://video.aultras-tea.com/lvcha.png",
     "product_black": "https://video.aultras-tea.com/hongcha.png",
     "product_oolong": "https://video.aultras-tea.com/wulongcha.png",
-    "product_white": "https://video.aultras-tea.com/baicha.png",
-    "product_yellow": "https://video.aultras-tea.com/huangcha.jpg",
-    "product_dark": "https://video.aultras-tea.com/heicha.png",
+    "product_white": "https://video.aultras-tea.com/baicha.png",    "product_dark": "https://video.aultras-tea.com/heicha.png",
     "product_flower": "https://video.aultras-tea.com/gongyicha.JPG",
     "product_green_0_gift": "",
     "product_green_0_dry": "https://ik.imagekit.io/Lemon/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-41022-1_1.jpg",
@@ -195,6 +193,8 @@
     "email_2": "tea@xf-tea.com",
     "phone_1": "收集中",
     "phone_1_en": "To be collected",
+    "phone_1_ru": "Уточняется",
+    "phone_1_de": "Wird noch bekannt gegeben",
     "phone_2": "收集中",
     "phone_2_en": "To be collected",
     "address_1": "贵州省安顺市西秀区",
@@ -1008,18 +1008,18 @@
         },
         {
           "name": {
-            "en": "Green Tea Fanning",
+            "en": "Green Tea Fannings",
             "zh": "绿碎",
-            "ru": "Green Tea Fanning",
-            "de": "Green Tea Fanning"
+            "ru": "Green Tea Fannings",
+            "de": "Green Tea Fannings"
           },
           "products": [
             {
               "name": {
-                "en": "Green Tea Fanning 3A",
+                "en": "Green Tea Fannings 3A",
                 "zh": "绿碎3A",
-                "ru": "Green Tea Fanning 3A",
-                "de": "Green Tea Fanning 3A"
+                "ru": "Green Tea Fannings 3A",
+                "de": "Green Tea Fannings 3A"
               },
               "has_liquor": true,
               "images": {
@@ -1039,10 +1039,10 @@
             },
             {
               "name": {
-                "en": "Green Tea Fanning 2A",
+                "en": "Green Tea Fannings 2A",
                 "zh": "绿碎2A",
-                "ru": "Green Tea Fanning 2A",
-                "de": "Green Tea Fanning 2A"
+                "ru": "Green Tea Fannings 2A",
+                "de": "Green Tea Fannings 2A"
               },
               "has_liquor": true,
               "images": {
@@ -1062,10 +1062,10 @@
             },
             {
               "name": {
-                "en": "Green Tea Fanning 2A",
+                "en": "Green Tea Fannings 2A",
                 "zh": "绿碎2A",
-                "ru": "Green Tea Fanning 2A",
-                "de": "Green Tea Fanning 2A"
+                "ru": "Green Tea Fannings 2A",
+                "de": "Green Tea Fannings 2A"
               },
               "has_liquor": true,
               "images": {
@@ -1085,10 +1085,10 @@
             },
             {
               "name": {
-                "en": "Green Tea Fanning",
+                "en": "Green Tea Fannings",
                 "zh": "绿碎",
-                "ru": "Green Tea Fanning",
-                "de": "Green Tea Fanning"
+                "ru": "Green Tea Fannings",
+                "de": "Green Tea Fannings"
               },
               "has_liquor": true,
               "images": {
@@ -1108,10 +1108,10 @@
             },
             {
               "name": {
-                "en": "Green Tea Fanning",
+                "en": "Green Tea Fannings",
                 "zh": "绿碎",
-                "ru": "Green Tea Fanning",
-                "de": "Green Tea Fanning"
+                "ru": "Green Tea Fannings",
+                "de": "Green Tea Fannings"
               },
               "has_liquor": true,
               "images": {
@@ -1900,18 +1900,18 @@
       "subcategories": [
         {
           "name": {
-            "en": "Black Tea Fanning",
+            "en": "Black Tea Fannings",
             "zh": "红碎",
-            "ru": "Black Tea Fanning",
-            "de": "Black Tea Fanning"
+            "ru": "Black Tea Fannings",
+            "de": "Black Tea Fannings"
           },
           "products": [
             {
               "name": {
-                "en": "Black Tea Fanning 2A",
+                "en": "Black Tea Fannings 2A",
                 "zh": "红碎2A",
-                "ru": "Black Tea Fanning 2A",
-                "de": "Black Tea Fanning 2A"
+                "ru": "Black Tea Fannings 2A",
+                "de": "Black Tea Fannings 2A"
               },
               "has_liquor": true,
               "images": {
@@ -1931,10 +1931,10 @@
             },
             {
               "name": {
-                "en": "Black Tea Fanning A",
+                "en": "Black Tea Fannings A",
                 "zh": "红碎A",
-                "ru": "Black Tea Fanning A",
-                "de": "Black Tea Fanning A"
+                "ru": "Black Tea Fannings A",
+                "de": "Black Tea Fannings A"
               },
               "has_liquor": true,
               "images": {
@@ -1954,10 +1954,10 @@
             },
             {
               "name": {
-                "en": "Black Tea Fanning A",
+                "en": "Black Tea Fannings A",
                 "zh": "红碎A",
-                "ru": "Black Tea Fanning A",
-                "de": "Black Tea Fanning A"
+                "ru": "Black Tea Fannings A",
+                "de": "Black Tea Fannings A"
               },
               "has_liquor": true,
               "images": {
@@ -1977,10 +1977,10 @@
             },
             {
               "name": {
-                "en": "Black Tea Fanning",
+                "en": "Black Tea Fannings",
                 "zh": "红碎",
-                "ru": "Black Tea Fanning",
-                "de": "Black Tea Fanning"
+                "ru": "Black Tea Fannings",
+                "de": "Black Tea Fannings"
               },
               "has_liquor": true,
               "images": {
@@ -2000,10 +2000,10 @@
             },
             {
               "name": {
-                "en": "Black Tea Fanning",
+                "en": "Black Tea Fannings",
                 "zh": "红碎",
-                "ru": "Black Tea Fanning",
-                "de": "Black Tea Fanning"
+                "ru": "Black Tea Fannings",
+                "de": "Black Tea Fannings"
               },
               "has_liquor": true,
               "images": {
@@ -2371,18 +2371,18 @@
       "subcategories": [
         {
           "name": {
-            "en": "Pu'er Tea Fanning",
+            "en": "Pu'er Tea Fannings",
             "zh": "普洱碎",
-            "ru": "Pu'er Tea Fanning",
-            "de": "Pu'er Tea Fanning"
+            "ru": "Pu'er Tea Fannings",
+            "de": "Pu'er Tea Fannings"
           },
           "products": [
             {
               "name": {
-                "en": "Pu'er Tea Fanning",
+                "en": "Pu'er Tea Fannings",
                 "zh": "普洱碎",
-                "ru": "Pu'er Tea Fanning",
-                "de": "Pu'er Tea Fanning"
+                "ru": "Pu'er Tea Fannings",
+                "de": "Pu'er Tea Fannings"
               },
               "has_liquor": true,
               "images": {
@@ -2744,18 +2744,18 @@
         },
         {
           "name": {
-            "en": "White tea fanning",
+            "en": "White tea Fannings",
             "zh": "白茶碎",
-            "ru": "White tea fanning",
-            "de": "White tea fanning"
+            "ru": "White tea Fannings",
+            "de": "White tea Fannings"
           },
           "products": [
             {
               "name": {
-                "en": "White tea fanning A",
+                "en": "White tea Fannings A",
                 "zh": "白茶碎A",
-                "ru": "White tea fanning A",
-                "de": "White tea fanning A"
+                "ru": "White tea Fannings A",
+                "de": "White tea Fannings A"
               },
               "has_liquor": true,
               "images": {
@@ -2775,10 +2775,10 @@
             },
             {
               "name": {
-                "en": "White tea fanning",
+                "en": "White tea Fannings",
                 "zh": "白茶碎",
-                "ru": "White tea fanning",
-                "de": "White tea fanning"
+                "ru": "White tea Fannings",
+                "de": "White tea Fannings"
               },
               "has_liquor": true,
               "images": {
@@ -3348,18 +3348,18 @@
         },
         {
           "name": {
-            "en": "Oolong tea fanning",
+            "en": "Oolong tea Fannings",
             "zh": "乌龙碎",
-            "ru": "Oolong tea fanning",
-            "de": "Oolong tea fanning"
+            "ru": "Oolong tea Fannings",
+            "de": "Oolong tea Fannings"
           },
           "products": [
             {
               "name": {
-                "en": "Oolong tea fanning A",
+                "en": "Oolong tea Fannings A",
                 "zh": "乌龙碎A",
-                "ru": "Oolong tea fanning A",
-                "de": "Oolong tea fanning A"
+                "ru": "Oolong tea Fannings A",
+                "de": "Oolong tea Fannings A"
               },
               "has_liquor": true,
               "images": {
@@ -3379,10 +3379,10 @@
             },
             {
               "name": {
-                "en": "Oolong tea fanning",
+                "en": "Oolong tea Fannings",
                 "zh": "乌龙碎",
-                "ru": "Oolong tea fanning",
-                "de": "Oolong tea fanning"
+                "ru": "Oolong tea Fannings",
+                "de": "Oolong tea Fannings"
               },
               "has_liquor": true,
               "images": {
