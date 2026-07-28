@@ -193,8 +193,8 @@
   "contact_info": {
     "email_1": "admin@aultrastea.com",
     "email_2": "tea@xf-tea.com",
-    "phone_1": "400-059-8108",
-    "phone_2": "+86 731 8465 2208",
+    "phone_1": "收集中",
+    "phone_2": "收集中",
     "address_1": "贵州省安顺市西秀区",
     "address_2": "鸡场乡鑫堡村茶果场"
   },
@@ -222,42 +222,38 @@
   ],
   "exhibitions": [
     {
-      "id": 1,
-      "date": "1 - 3 April 2026",
-      "name": "UzFood 2026",
-      "location": "Uzexpocentre NEC, Tashkent, Uzbekistan",
-      "booth": "F92",
-      "status": "confirmed"
-    },
-    {
-      "id": 2,
-      "date": "26 - 30 January 2026",
-      "name": "Gulfood 2026",
-      "location": "Dubai World Trade Centre (DWTC) & Dubai Exhibition Centre (DEC), Dubai, UAE",
+      "id": "exh_gulfood_2026",
+      "date": "Jan 26-30, 2026",
+      "name": "Gulfood 2026: World's Biggest Food Show Even Bigger in 2026\n\nGulfood 2026 is one of the largest and most influential comprehensive exhibitions in the global food and beverage industry. It will be grandly held at the Dubai World Trade Centre (DWTC) and the Dubai Exhibition Centre (DEC) from January 26th to 30th, 2026. As the first annual procurement event, it serves not only as a core platform for industry trend releases and innovation showcases but also as a key hub for global food trade.",
+      "location": "Dubai, UAE (DWTC & DEC)",
       "booth": "TBA",
-      "status": "upcoming"
+      "status": "confirmed",
+      "name_zh": "2026年海湾食品展（Gulfood 2026）：全球最大食品展将于2026年进一步扩大规模\n\nGulfood 2026是全球食品饮料行业规模最大、最具影响力的综合性展览之一。该展会将于2026年1月26日至30日在迪拜世界贸易中心和迪拜展览中心隆重举行。作为年度首个采购盛会，它不仅是行业趋势发布和创新展示的核心平台，也是全球食品贸易的关键枢纽。",
+      "name_en": "Gulfood 2026: World's Biggest Food Show Even Bigger in 2026\n\nGulfood 2026 is one of the largest and most influential comprehensive exhibitions in the global food and beverage industry. It will be grandly held at the Dubai World Trade Centre (DWTC) and the Dubai Exhibition Centre (DEC) from January 26th to 30th, 2026. As the first annual procurement event, it serves not only as a core platform for industry trend releases and innovation showcases but also as a key hub for global food trade."
     },
     {
-      "id": 3,
-      "date": "Coming Soon",
-      "name": "Prodexpo 2026",
+      "id": "exh_prodexpo_2026",
+      "date": "Feb 2026",
+      "name": "Prodexpo 2026: 33rd International Exhibition for Food, Beverages and Food Raw Materials\n\nProdexpo is Russia's largest food trade show for industry professionals. It is distinguished by an abundance of trending new products, extensive business networking, and contracts worth hundreds of billions of rubles. Every year there are about 2,000 exhibitors from more than 35 countries. About 70,000 buyers from more than 100 countries find suppliers and sign deals at Prodexpo. The show's products range from everyday food and beverages to gourmet, halal, organic food, sports and functional nutrition, healthy food, and exotic products.",
       "location": "Moscow, Russia",
       "booth": "TBA",
-      "status": "upcoming"
+      "status": "confirmed",
+      "name_zh": "2026年俄罗斯国际食品及饮料展览会（Prodexpo 2026）：第33届国际食品、饮料及食品原料展览会\n\nProdexpo是俄罗斯最大的面向行业专业人士的食品贸易展览会。其特点是新品潮流云集、商务洽谈广泛、合同金额达数千亿卢布。每年有来自超过35个国家的约2000家参展商。来自100多个国家的约70000名买家在Prodexpo寻找供应商并签订协议。展品范围涵盖日常食品饮料，以及美食、清真、有机食品、运动和功能性营养品、健康食品及异域特色产品。",
+      "name_en": "Prodexpo 2026: 33rd International Exhibition for Food, Beverages and Food Raw Materials\n\nProdexpo is Russia's largest food trade show for industry professionals. It is distinguished by an abundance of trending new products, extensive business networking, and contracts worth hundreds of billions of rubles. Every year there are about 2,000 exhibitors from more than 35 countries. About 70,000 buyers from more than 100 countries find suppliers and sign deals at Prodexpo. The show's products range from everyday food and beverages to gourmet, halal, organic food, sports and functional nutrition, healthy food, and exotic products."
     },
     {
-      "id": 4,
-      "date": "Coming Soon",
-      "name": "BIOFACH 2026",
+      "id": "exh_biofach_2026",
+      "date": "Feb 2026",
+      "name": "BIOFACH 2026: World's Leading Trade Fair for Organic Food\n\nThe World's Leading Trade Fair for Organic Food is an important business event, an emotional event for the sector, and both a get-together and an opportunity for positioning. The leading exhibitions in the BIOFACH World connect organic marketplaces with international demand in 8 key economic regions of the world, and promote the development of regional markets at the same time. They are the meeting places for supply and demand, raw materials and convenience products, manufacturers and buyers, as well as politics and media.",
       "location": "Nuremberg, Germany",
       "booth": "TBA",
-      "status": "upcoming"
+      "status": "confirmed",
+      "name_zh": "2026年德国国际有机食品展（BIOFACH 2026）：世界领先的有机食品贸易展览会\n\n这个世界领先的有机食品贸易展览会，既是一个重要的商业盛会，也是行业的一次情感聚会，同时还是业内交流与定位的机会。BIOFACH世界系列中的领先展会，将全球8大关键经济区域的有机市场与国际需求连接起来，同时促进区域市场的发展。它们是供需双方、原料与便捷产品、制造商与买家，以及政界与媒体的交汇平台。",
+      "name_en": "BIOFACH 2026: World's Leading Trade Fair for Organic Food\n\nThe World's Leading Trade Fair for Organic Food is an important business event, an emotional event for the sector, and both a get-together and an opportunity for positioning. The leading exhibitions in the BIOFACH World connect organic marketplaces with international demand in 8 key economic regions of the world, and promote the development of regional markets at the same time. They are the meeting places for supply and demand, raw materials and convenience products, manufacturers and buyers, as well as politics and media."
     }
   ],
   "brochure_url": "https://ik.imagekit.io/taclov2ip/aultrastea-product-brochure.pdf",
   "cert_icons": {
-    "cert_eu": "https://video.aultras-tea.com/EU%20Organic.jpg",
-    "cert_us": "https://video.aultras-tea.com/US%20Organic%20.jpg",
     "cert_haccp": "https://video.aultras-tea.com/HACCP.jpg",
     "cert_iso": "https://ik.imagekit.io/taclov2ip/%E5%9B%BE%E7%89%87/%E7%AC%AC%E4%B8%89%E9%95%9C%E9%A6%96%E5%B8%A7.jpg?updatedAt=1777256039941",
     "cert_fairtrade": "https://ik.imagekit.io/taclov2ip/%E5%9B%BE%E7%89%87/%E7%AC%AC%E4%B8%89%E9%95%9C%E9%A6%96%E5%B8%A7.jpg?updatedAt=1777256039941"
@@ -898,16 +894,16 @@
   ],
   "news": [
     {
-      "id": 1777274400195,
-      "date": "2026-04-27",
+      "id": "news_spv_2024",
+      "date": "2024-11-09",
       "image": "",
-      "link": "",
-      "title_en": "good",
-      "title_zh": "好",
+      "link": "#",
+      "title_en": "Xiangfeng Tea Industry Group and Anshun City Bureau of Agriculture and Rural Affairs signed a large-scale tea SPV investment cooperation agreement",
+      "title_zh": "湘丰茶业集团与安顺市农业农村局签署大型茶叶SPV投资合作协议",
       "title_ru": "",
       "title_de": "",
-      "summary_en": "",
-      "summary_zh": "",
+      "summary_en": "On November 9, Xiangfeng Tea Industry Group and Anshun Agriculture and Rural Bureau signed a large-scale tea investment cooperation agreement based on the SPV model (special purpose structure model for innovative financial investment in agriculture-related funds) at Anshun Comprehensive Economic Service Center.\nAt the signing ceremony, Qin Jiantao, general manager of the Falls Tea Company, Wang Qiguan, chairman of the board, Li Zhongqin, CEO of Xiangfeng Tea Group, Tang Yu, founder, and Song Zhengjun, Secretary of the Party Committee and Director of the Anshun Agricultural and Rural Bureau, delivered speeches, expressing warm congratulations on the signing of the cooperation, and eagerly looking forward to a series of economic and social benefits that the cooperation will produce. According to the agreement, Xiangfeng Tea Industry Group will soon sign an SPV cooperation agreement with Waterfall Tea Industry Company, a wholly state-owned enterprise specializing in the construction and operation of tea platform in Anshun City, and the two sides will jointly invest in the construction and operation of bulk tea refining processing system in the form of a joint venture, and carry out tea international trade business. The joint venture will undertake the 7,000 tons of bulk tea refining production and processing system invested and built by Waterfall Tea Industry, and supply cost-effective products to Xiangfeng Tea Industry Group, foreign trade export enterprises and the international market.",
+      "summary_zh": "11月9日，湘丰茶业集团与安顺市农业农村局在安顺市综合经济服务中心，基于SPV模式（涉农资金创新金融投资专用结构模式），签署了一项大型茶叶投资合作协议。\n签约仪式上，瀑布茶业公司总经理秦建涛、董事长王启权、湘丰茶业集团首席执行官李中钦、创始人汤宇，以及安顺市农业农村局党委书记、局长宋正钧分别致辞，对此次合作签约表示热烈祝贺，并对合作将带来的一系列经济和社会效益表达了热切期待。根据协议，湘丰茶业集团近期将与安顺市专门负责茶业平台建设与运营的全资国有企业——瀑布茶业公司签署一份SPV合作协议。双方将以合资公司的形式，共同投资建设并运营大宗茶叶精制加工体系，并开展茶叶国际贸易业务。合资公司将承接瀑布茶业公司投资建设的7000吨大宗茶叶精制生产线，为湘丰茶业集团、外贸出口企业及国际市场供应高性价比产品。",
       "summary_ru": "",
       "summary_de": ""
     }
