@@ -4,25 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="page-title">Dark Tea | AultrasTea</title>
-  <meta name="description" id="page-desc" content="Premium Dark Tea (Post-Fermented) From Yunnan & Hunan, China - AultrasTea premium organic tea from China.">
+  <meta name="description" id="page-desc" content="Premium Organic Tea From Guizhou & Hunan, China - AultrasTea.">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#0F4C3A',
-            secondary: '#D4AF37',
-            light: '#F8F5F0',
-            dark: '#1A1A1A',
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-        },
-      }
+      theme: { extend: { colors: { primary: '#0F4C3A', secondary: '#D4AF37', light: '#F8F5F0', dark: '#1A1A1A' },
+        fontFamily: { sans: ['Inter', 'sans-serif'] } } }
     }
   </script>
   <style>
@@ -34,10 +23,14 @@
     .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
     .product-detail-img { background: #e5e7eb; min-height: 7rem; }
+    #lightbox { backdrop-filter: blur(4px); }
+    .zoom-wrap { cursor: zoom-in; }
+    .product-img { transition: transform .12s ease-out; }
+    .zoom-lens { position:fixed; border:2px solid rgba(15,76,58,.65); background:rgba(212,175,55,.20); pointer-events:none; display:none; z-index:110; }
+    .zoom-result { position:fixed; width:360px; height:360px; border-radius:14px; background-color:#fff; background-repeat:no-repeat; box-shadow:0 18px 50px rgba(0,0,0,.30); border:1px solid rgba(0,0,0,.08); display:none; z-index:110; pointer-events:none; }
   </style>
 </head>
 <body>
-  <!-- 导航栏 -->
   <header class="fixed w-full top-0 z-50 transition-all duration-500 py-3 bg-light/95 backdrop-blur-md shadow-sm">
     <div class="container mx-auto px-4 md:px-6">
       <nav class="flex items-center justify-between">
@@ -65,7 +58,6 @@
     </div>
   </header>
 
-  <!-- Hero Banner -->
   <div class="pt-20">
     <div class="bg-primary text-white py-16">
       <div class="container mx-auto px-4 md:px-6">
@@ -81,7 +73,7 @@
             <div class="inline-block px-3 py-1 bg-white/20 text-white rounded-full text-sm font-medium mb-4" data-lang="badge">Organic Certified</div>
             <h1 class="text-4xl md:text-5xl font-bold mb-3" id="cat-name-en">Dark Tea</h1>
             <p class="text-white/60 text-xl mb-6" id="cat-name-zh">黑茶</p>
-            <p class="text-white/80 text-lg leading-relaxed mb-6" id="cat-subtitle" data-lang="subtitle">Premium Dark Tea (Post-Fermented) From Yunnan & Hunan, China</p>
+            <p class="text-white/80 text-lg leading-relaxed mb-6" id="cat-subtitle" data-lang="subtitle">Premium Dark Tea & Pu-erh From Guizhou, China</p>
             <div class="space-y-3 mb-8" id="features-list"></div>
             <div class="flex gap-4 flex-wrap">
               <a href="index.html#contact" class="px-8 py-3 bg-secondary text-white rounded-full font-medium hover:bg-secondary/90 transition-all shadow-lg">
@@ -102,19 +94,17 @@
     </div>
   </div>
 
-  <!-- 产品展示区 -->
   <section class="py-16">
     <div class="container mx-auto px-4 md:px-6">
       <div class="text-center mb-12 fade-in">
         <h2 class="text-3xl font-bold mb-4 text-primary" data-lang="product_range_title">Product Range</h2>
-        <p class="text-dark/60 max-w-2xl mx-auto" id="range-desc" data-lang="product_range_desc">Each product is shown with Gift Box / Dry Leaf / Tea Liquor / Leaf Base — 4 images per item.</p>
+        <p class="text-dark/60 max-w-2xl mx-auto" id="range-desc" data-lang="product_range_desc">Each product shows the dry leaf; click to enlarge and view the tea soup (liquor).</p>
         <div class="w-24 h-1 bg-secondary mx-auto mt-4"></div>
       </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="products-grid"></div>
+      <div id="products-container" class="space-y-12"></div>
     </div>
   </section>
 
-  <!-- CTA -->
   <section class="py-16 bg-primary text-white">
     <div class="container mx-auto px-4 md:px-6 text-center">
       <h2 class="text-3xl font-bold mb-4" data-lang="cta_title">Ready to Order?</h2>
@@ -130,131 +120,244 @@
     </div>
   </section>
 
-  <!-- 页脚 -->
   <footer class="py-8 bg-dark text-white/60">
     <div class="container mx-auto px-4 md:px-6 text-center">
       <p>© <span id="year"></span> <span data-lang="footer_company">GUIZHOU AULTRAS TEA CO.,LTD.</span> <span data-lang="footer_copy">All Rights Reserved.</span></p>
     </div>
   </footer>
 
+  <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4" onclick="if(event.target===this)closeLightbox()"></div>
+
   <script>
-    // ===== 语言包 =====
-    const langPack = {'en': {'title': 'Dark Tea | AultrasTea', 'navbar_brand': 'AultrasTea', 'subtitle': 'Premium Dark Tea (Post-Fermented) From Yunnan & Hunan, China. Pu\'er Tea: Post-fermented; deep red liquor; aged and mellow.', 'badge': 'Organic Certified', 'nav_home': 'Home', 'nav_products': 'Products', 'nav_cert': 'Certificates', 'nav_contact': 'Contact Us', 'view_all': 'All Products', 'inquiry': 'Send Inquiry Now', 'product_range_title': 'Product Range', 'product_range_desc': 'Each product is shown with Gift Box / Dry Leaf / Tea Liquor / Leaf Base — 4 images per item.', 'gift_box': 'Gift Box', 'dry_leaf': 'Dry Leaf', 'liquor': 'Liquor', 'leaf_base': 'Leaf Base', 'inquiry_btn': 'Inquiry Now', 'cta_title': 'Ready to Order?', 'cta_desc': 'Contact us for samples, pricing, and custom packaging solutions. We reply within 24 hours.', 'send_inquiry': 'Send Inquiry', 'email_us': 'Email Us', 'cat_en': 'Dark Tea', 'cat_zh': '黑茶', 'footer_copy': 'All Rights Reserved.', 'footer_company': 'GUIZHOU AULTRAS TEA CO.,LTD.', 'products': [{'name': 'Sheng Pu-erh (Raw)', 'desc': 'Uncooked pu-erh aged naturally, evolving complexity over years.'}, {'name': 'Shou Pu-erh (Ripe)', 'desc': 'Artificially fermented pu-erh with smooth, earthy profile.'}, {'name': 'Fu Brick Tea', 'desc': 'Compressed dark tea with golden flower fungus inside.'}, {'name': 'Liu Bao Tea', 'desc': 'Guangxi aged dark tea with pine smoke and areca nut aroma.'}, {'name': 'Qian Liang Tea', 'desc': 'Iconic Hunan dark tea compressed in bamboo poles.'}, {'name': 'Tian Jian', 'desc': 'Top-grade loose-leaf Hunan dark tea with sweet pine-smoke notes.'}, {'name': 'Dark Tea Cake', 'desc': 'Compressed dark tea discs, convenient for aging and gifting.'}, {'name': 'Dark Tea Brick', 'desc': 'Classic rectangular dark tea brick, strong and mellow.'}]}, 'zh': {'title': '黑茶 | 贵州湘丰瀑布有限公司', 'navbar_brand': '湘丰瀑布AULTRAS', 'subtitle': '来自中国云南与湖南的优质后发酵黑茶. 普洱茶：后发酵（生茶自然陈化，熟茶人工渥堆），汤色红浓，陈香醇厚。', 'badge': '有机认证', 'nav_home': '首页', 'nav_products': '产品中心', 'nav_cert': '公司资质', 'nav_contact': '联系我们', 'view_all': '全部产品', 'inquiry': '立即询价', 'product_range_title': '产品系列', 'product_range_desc': '每款产品展示礼盒/干茶/茶汤/叶底四张图，图片均可通过后台管理更新。', 'gift_box': '礼盒', 'dry_leaf': '干茶', 'liquor': '茶汤', 'leaf_base': '叶底', 'inquiry_btn': '立即咨询', 'cta_title': '准备下单？', 'cta_desc': '联系我们获取样品、报价和定制包装方案，我们24小时内回复。', 'send_inquiry': '发送询盘', 'email_us': '发邮件', 'cat_en': 'Dark Tea', 'cat_zh': '黑茶', 'footer_copy': '版权所有', 'footer_company': '贵州湘丰瀑布有限公司', 'products': [{'name': '生普洱', 'desc': '生茶自然陈化，滋味随年份不断演变。'}, {'name': '熟普洱', 'desc': '人工渥堆发酵，汤色深红，醇厚甘滑。'}, {'name': '茯砖茶', 'desc': '安化传统茯砖，内含金花菌，益生功效显著。'}, {'name': '六堡茶', 'desc': '广西名茶，松烟与槟榔香独特，历史悠久。'}, {'name': '千两茶', 'desc': '安化千两茶，竹篓压制，工艺独特，湖南特色。'}, {'name': '天尖茶', 'desc': '安化黑茶顶级散茶，松烟香甜，品质上乘。'}, {'name': '黑茶饼', 'desc': '圆形压制黑茶，便于存放与陈化，适合收藏。'}, {'name': '黑砖茶', 'desc': '传统黑砖，口感浓醇，性价比高，日常饮用。'}]}, 'ru': {'title': 'Тёмный чай | AultrasTea', 'navbar_brand': 'AultrasTea', 'subtitle': 'Постферментированный тёмный чай высшего качества из Юньнани и Хунани, Китай. Пуэр: Постферментированный; тёмно-красный настой; выдержанный и мягкий.', 'badge': 'Органический', 'nav_home': 'Главная', 'nav_products': 'Продукция', 'nav_cert': 'Сертификаты', 'nav_contact': 'Контакты', 'view_all': 'Все продукты', 'inquiry': 'Запросить цену', 'product_range_title': 'Ассортимент', 'product_range_desc': 'Каждый продукт представлен 4 фото: подарочная коробка, сухой чай, настой, лист.', 'gift_box': 'Подарок', 'dry_leaf': 'Сухой лист', 'liquor': 'Настой', 'leaf_base': 'Лист', 'inquiry_btn': 'Запрос цены', 'cta_title': 'Готовы заказать?', 'cta_desc': 'Свяжитесь с нами для образцов и цен. Ответим в течение 24 часов.', 'send_inquiry': 'Отправить запрос', 'email_us': 'Написать письмо', 'cat_en': 'Dark Tea', 'cat_zh': '黑茶', 'footer_copy': 'Все права защищены.', 'footer_company': 'GUIZHOU AULTRAS TEA CO.,LTD.', 'products': [{'name': 'Шэн Пуэр (сырой)', 'desc': 'Натуральный пуэр, естественно выдержанный.'}, {'name': 'Шоу Пуэр (зрелый)', 'desc': 'Искусственно ферментированный пуэр с землистым вкусом.'}, {'name': 'Фу кирпичный чай', 'desc': 'Прессованный тёмный чай с золотым грибком внутри.'}, {'name': 'Лю Бао', 'desc': 'Гуансийский выдержанный тёмный чай с ароматом сосны.'}, {'name': 'Цяньлян чай', 'desc': 'Культовый хунаньский тёмный чай в бамбуковых стеблях.'}, {'name': 'Тянь Цзянь', 'desc': 'Рассыпной тёмный чай высшего сорта из Хунани.'}, {'name': 'Кирпичный тёмный чай', 'desc': 'Прессованные диски тёмного чая для хранения и подарков.'}, {'name': 'Тёмный кирпичный чай', 'desc': 'Классический прямоугольный кирпич тёмного чая.'}]}, 'de': {'title': 'Dunkeltee | AultrasTea', 'navbar_brand': 'AultrasTea', 'subtitle': 'Premium Dunkeltee (Nachfermentiert) aus Yunnan und Hunan, China', 'badge': 'Bio-zertifiziert', 'nav_home': 'Startseite', 'nav_products': 'Produkte', 'nav_cert': 'Zertifikate', 'nav_contact': 'Kontakt', 'view_all': 'Alle Produkte', 'inquiry': 'Jetzt Anfragen', 'product_range_title': 'Produktsortiment', 'product_range_desc': 'Jedes Produkt wird mit 4 Bildern gezeigt: Geschenkbox / Trockenes Blatt / Aufguss / Blattboden.', 'gift_box': 'Geschenkbox', 'dry_leaf': 'Trockenes Blatt', 'liquor': 'Aufguss', 'leaf_base': 'Blattboden', 'inquiry_btn': 'Jetzt Anfragen', 'cta_title': 'Bereit zu bestellen?', 'cta_desc': 'Kontaktieren Sie uns für Muster, Preise und individuelle Verpackung. Wir antworten innerhalb von 24 Stunden.', 'send_inquiry': 'Anfrage senden', 'email_us': 'E-Mail senden', 'cat_en': 'Dark Tea', 'cat_zh': '黑茶', 'footer_copy': 'Alle Rechte vorbehalten.', 'footer_company': 'GUIZHOU AULTRAS TEA CO.,LTD.', 'products': [{'name': 'Sheng Pu-erh (Roh)', 'desc': 'Natürlich gereifter Roh-Pu-erh, wächst in Komplexität.'}, {'name': 'Shou Pu-erh (Reif)', 'desc': 'Künstlich fermentierter Pu-erh mit sanftem, erdigen Profil.'}, {'name': 'Fu-Ziegeltee', 'desc': 'Gepresster Dunkeltee mit goldenem Blumenpilz darin.'}, {'name': 'Liu Bao Tee', 'desc': 'Guangxi-Dunkeltee mit Kieferrauch und Betelnussaroma.'}, {'name': 'Qian Liang Tee', 'desc': 'Kultiger Hunan-Dunkeltee in Bambusstöcken gepresst.'}, {'name': 'Tian Jian', 'desc': 'Erstklassiger loser Hunan-Dunkeltee mit Kieferrauch.'}, {'name': 'Dunkeltee-Kuchen', 'desc': 'Gepresste Scheiben, bequem für Lagerung und Geschenke.'}, {'name': 'Dunkeltee-Ziegel', 'desc': 'Klassischer rechteckiger Dunkeltee-Ziegel.'}]}};
-    const catFeatures = {'en': ['Pu-erh, Liu Bao, Fu Brick, An Hua Dark Tea', 'Post-Fermented, Earthy Aged Character', 'Improves with Age, Collectible', 'Custom Packaging & Private Label Available'], 'zh': ['普洱茶、六堡茶、茯砖茶、安化黑茶', '后发酵工艺，陈香浓郁', '越陈越香，具有收藏价值', '支持定制包装和自有品牌'], 'ru': ['Пуэр, Лю Бао, Фу Кирпич, Аньхуа тёмный чай', 'Постферментация, землистый выдержанный характер', 'Улучшается с возрастом, коллекционный', 'Индивидуальная упаковка и частная марка'], 'de': ['Pu-erh, Liu Bao, Fu-Ziegel, An Hua Dunkeltee', 'Nachfermentiert, erdiger gereifter Charakter', 'Verbessert sich mit dem Alter, sammelwürdig', 'Individuelle Verpackung & Eigenmarke']};
+    const CAT = "dark";
+    const CAT_TITLE = { en: "Dark Tea | AultrasTea", zh: "黑茶 | 贵州湘丰瀑布茶业有限公司", ru: "Dark Tea | AultrasTea", de: "Dark Tea | AultrasTea" };
+    const CAT_SUB   = { en: "Premium Dark Tea & Pu-erh From Guizhou, China",   zh: "来自中国贵州的优质黑茶与普洱",   ru: "Premium Dark Tea & Pu-erh From Guizhou, China", de: "Premium Dark Tea & Pu-erh From Guizhou, China" };
+    const CAT_NAME  = { en: "Dark Tea",    zh: "黑茶",    ru: "Dark Tea",  de: "Dark Tea" };
 
-    let currentLang = 'en';
+    const UI = {
+      en: { navbar_brand:"AultrasTea", nav_home:"Home", nav_products:"Products", nav_cert:"Certificates", nav_contact:"Contact Us", view_all:"All Products", inquiry:"Send Inquiry Now", badge:"Organic Certified", product_range_title:"Product Range", product_range_desc:"Each product shows the dry leaf; click to enlarge and view the tea soup (liquor).", dry_leaf:"Dry Leaf", liquor:"Tea Liquor", no_liquor:"No liquor soup", inquiry_btn:"Inquiry Now", cta_title:"Ready to Order?", cta_desc:"Contact us for samples, pricing, and custom packaging solutions.", send_inquiry:"Send Inquiry", email_us:"Email Us", footer_copy:"All Rights Reserved.", footer_company:"GUIZHOU AULTRAS TEA CO.,LTD.", std_conventional:"Conventional", std_eu:"EU", std_organic:"Organic", close:"Close", sub_label:"Subcategory", features:["Full range of grades & specifications","EU & US Organic Certified options","Custom Packaging & Private Label","Direct from origin tea gardens"] },
+      zh: { navbar_brand:"湘丰瀑布AULTRAS", nav_home:"首页", nav_products:"产品中心", nav_cert:"公司资质", nav_contact:"联系我们", view_all:"全部产品", inquiry:"立即咨询", badge:"有机认证", product_range_title:"产品系列", product_range_desc:"每款产品展示干茶；点击可放大查看茶汤。", dry_leaf:"干茶", liquor:"茶汤", no_liquor:"无茶汤", inquiry_btn:"立即咨询", cta_title:"准备下单？", cta_desc:"联系我们获取样品、报价及定制包装方案。", send_inquiry:"发送询盘", email_us:"邮件联系", footer_copy:"版权所有", footer_company:"贵州湘丰瀑布茶业有限公司", std_conventional:"国标", std_eu:"欧盟", std_organic:"有机", close:"关闭", sub_label:"子品类", features:["齐全的等级与规格","可提供欧盟及美国有机认证","支持定制包装与自有品牌","原产地茶园直供"] }
+    };
+    UI.ru = Object.assign({}, UI.en);
+    UI.de = Object.assign({}, UI.en);
 
-    function switchLang(lang) {
-      currentLang = lang;
-      const pack = langPack[lang];
-      if (!pack) return;
+    let siteData = null, catData = null, currentLang = "en";
+    const productStd = {};
 
-      document.getElementById('html-root').lang = lang;
-      document.getElementById('page-title').textContent = pack.title;
-      document.title = pack.title;
+    function t(obj, lang){ if(!obj) return ""; return obj[lang] || obj.en || obj.zh || ""; }
+    function escapeHtml(str){ if(!str) return ""; const d=document.createElement("div"); d.textContent=str; return d.innerHTML; }
 
-      // data-lang 元素
-      document.querySelectorAll('[data-lang]').forEach(el => {
-        const key = el.getAttribute('data-lang');
-        if (pack[key] !== undefined) el.textContent = pack[key];
-      });
-
-      // 品类名
-      document.getElementById('cat-name-en').textContent = pack.cat_en;
-      document.getElementById('cat-name-zh').textContent = pack.cat_zh;
-      document.getElementById('breadcrumb-cat').textContent = pack.cat_en;
-
-      // 特性列表
+    function applyUI(lang){
+      const pack = UI[lang] || UI.en;
+      document.getElementById("page-title").textContent = CAT_TITLE[lang] || CAT_TITLE.en;
+      document.title = CAT_TITLE[lang] || CAT_TITLE.en;
+      document.querySelectorAll("[data-lang]").forEach(el=>{ const k=el.getAttribute("data-lang"); if(pack[k]!==undefined) el.textContent=pack[k]; });
+      document.getElementById("cat-name-en").textContent = t(CAT_NAME, lang);
+      document.getElementById("cat-name-zh").textContent = CAT_NAME.zh;
+      document.getElementById("breadcrumb-cat").textContent = t(CAT_NAME, lang);
+      document.getElementById("cat-subtitle").textContent = CAT_SUB[lang] || CAT_SUB.en;
       renderFeatures(lang);
+    }
 
-      // 产品网格
+    function renderFeatures(lang){
+      const pack = UI[lang] || UI.en;
+      const list = document.getElementById("features-list");
+      list.innerHTML = (pack.features||[]).map(f=>'<div class="flex items-center gap-3"><i class="fas fa-check-circle text-secondary"></i><span>'+f+'</span></div>').join("");
+    }
+
+    function availableStandards(prod){
+      const stds=["conventional","eu","organic"];
+      return stds.filter(s=> prod.images && prod.images[s] && prod.images[s].dry);
+    }
+    function getStd(prod, key){
+      if(productStd[key]) return productStd[key];
+      const av = availableStandards(prod);
+      return av.length ? av[0] : "conventional";
+    }
+
+    function renderProducts(lang){
+      const cont = document.getElementById("products-container");
+      if(!cont) return;
+      if(!catData){ cont.innerHTML='<div class="text-center text-dark/50 py-10">No product data.</div>'; return; }
+      const pack = UI[lang] || UI.en;
+      let html="";
+      catData.subcategories.forEach((sub, si)=>{
+        const subOther = (lang==="zh") ? t(sub.name,"en") : t(sub.name,"zh");
+        html += '<div class="subcat-block fade-in">';
+        html += '<div class="flex items-center gap-3 mb-6"><div class="w-1.5 h-8 bg-secondary rounded-full"></div>';
+        html += '<h3 class="text-2xl font-bold text-primary">'+escapeHtml(t(sub.name,lang))+'</h3>';
+        html += '<span class="text-dark/40 text-sm">'+escapeHtml(subOther)+'</span></div>';
+        html += '<div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">';
+        sub.products.forEach((p, pj)=>{
+          const key = CAT+"-"+si+"-"+pj;
+          const std = getStd(p, key);
+          const imgs = (p.images && p.images[std]) || {dry:"",liquor:""};
+          const hasLiq = p.has_liquor !== false;
+          const av = availableStandards(p);
+          let stdBtns="";
+          if(av.length>1){
+            stdBtns = '<div class="flex gap-1 mt-2 flex-wrap">'+["conventional","eu","organic"].map(s=>{
+              const lbl = pack["std_"+s];
+              const dis = (av.indexOf(s)<0) ? "opacity-40 cursor-not-allowed" : "";
+              const act = (s===std) ? "bg-primary text-white" : "bg-gray-100 text-gray-600";
+              return '<button type="button" data-stdbtn="'+key+"|"+s+'" class="text-xs px-2 py-1 rounded '+act+" "+dis+'">'+lbl+'</button>';
+            }).join("")+'</div>';
+          }
+          const drySrc = imgs.dry || "";
+          html += '<div class="bg-white rounded-2xl overflow-hidden shadow-md fade-in flex flex-col">';
+          const _hasImg = !!(drySrc && drySrc.trim()!=="");
+          const _imgInner = _hasImg
+            ? '<img data-pkey="'+key+'" src="'+drySrc+'" alt="'+escapeHtml(t(p.name,lang))+'" class="product-img w-full h-full object-cover cursor-zoom-in">'
+            : '<div class="w-full h-full flex flex-col items-center justify-center text-center text-dark/40 text-xs p-2 leading-relaxed"><span>'+escapeHtml(t(p.name,lang))+'</span><span class="opacity-60 mt-1">图片待上传</span></div>';
+          html += '<div class="p-2"><div class="zoom-wrap relative overflow-hidden rounded-lg bg-gray-100 product-detail-img" style="height:10rem">'+_imgInner+'</div></div>';
+          html += '<div class="p-4 pt-2 flex-1 flex flex-col">';
+          html += '<h4 class="text-base font-bold text-primary mb-1">'+escapeHtml(t(p.name,lang))+'</h4>';
+          if(!hasLiq) html += '<span class="text-xs text-dark/40 mb-1">'+pack.no_liquor+'</span>';
+          html += stdBtns;
+          html += '<div class="mt-auto pt-3 border-t border-gray-100"><a href="index.html#contact" class="text-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all text-sm"><span>'+pack.inquiry_btn+'</span><i class="fas fa-arrow-right text-xs"></i></a></div>';
+          html += '</div></div>';
+        });
+        html += '</div></div>';
+      });
+      cont.innerHTML = html;
+      cont.querySelectorAll(".product-img").forEach(img=>{
+        img.addEventListener("click", ()=> openLightbox(img.getAttribute("data-pkey")));
+        img.addEventListener("error", ()=>{ img.style.background="#e5e7eb"; });
+      });
+      cont.querySelectorAll("[data-stdbtn]").forEach(btn=>{
+        btn.addEventListener("click", ()=>{ const parts=btn.getAttribute("data-stdbtn").split("|"); productStd[parts[0]]=parts[1]; renderProducts(currentLang); });
+      });
+      cont.querySelectorAll(".fade-in").forEach(el=>observer.observe(el));
+    }
+
+    function openLightbox(key){
+      const parts = key.split("-"); const si=+parts[1], pj=+parts[2];
+      const sub = catData.subcategories[si];
+      const p = sub.products[pj];
+      const std = getStd(p, key);
+      const imgs = (p.images && p.images[std]) || {dry:"",liquor:""};
+      const hasLiq = p.has_liquor !== false;
+      const lang = currentLang; const pack = UI[lang] || UI.en;
+      const views = [{label: pack.dry_leaf, src: imgs.dry}];
+      if(hasLiq && imgs.liquor) views.push({label: pack.liquor, src: imgs.liquor});
+      let html = '<div class="absolute top-4 right-4 z-[120]"><button onclick="closeLightbox()" class="w-10 h-10 rounded-full bg-white/90 text-gray-700 flex items-center justify-center text-lg shadow"><i class="fas fa-times"></i></button></div>';
+      html += '<div class="text-center mb-4"><h3 class="text-xl font-bold text-primary">'+escapeHtml(t(p.name,lang))+'</h3><p class="text-dark/50 text-sm">'+escapeHtml(t(sub.name,lang))+'</p></div>';
+      html += '<div class="flex flex-col items-center gap-3 w-full max-w-4xl">';
+      html += '<div class="w-full flex justify-center"><img id="lb-main" src="'+views[0].src+'" alt="'+escapeHtml(t(p.name,lang))+'" class="max-h-[64vh] w-auto object-contain rounded-lg bg-gray-100 cursor-zoom-in shadow-lg"></div>';
+      if(views.length>1){
+        html += '<div class="flex gap-3">';
+        views.forEach((v,i)=>{
+          html += '<button type="button" class="lb-thumb rounded-lg overflow-hidden border-2 '+(i===0?'border-primary':'border-transparent')+'" data-lbsrc="'+v.src+'"><img src="'+v.src+'" class="h-16 w-16 object-cover"></button>';
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+      const lb = document.getElementById("lightbox");
+      lb.innerHTML = html; lb.classList.remove("hidden"); document.body.style.overflow="hidden";
+      const main = document.getElementById("lb-main");
+      if(main){ main.addEventListener("error", ()=>{ main.style.background="#e5e7eb"; }); attachLightboxZoom(main); }
+      lb.querySelectorAll(".lb-thumb").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          if(!main) return;
+          main.src = btn.getAttribute("data-lbsrc");
+          lb.querySelectorAll(".lb-thumb").forEach(b=>{ b.classList.remove("border-primary"); b.classList.add("border-transparent"); });
+          btn.classList.add("border-primary"); btn.classList.remove("border-transparent");
+          if(_zoomResult) _zoomResult.style.display="none";
+          if(_zoomLens) _zoomLens.style.display="none";
+        });
+      });
+    }
+    function closeLightbox(){ const lb=document.getElementById("lightbox"); lb.classList.add("hidden"); lb.innerHTML=""; document.body.style.overflow=""; if(_zoomLens)_zoomLens.style.display='none'; if(_zoomResult)_zoomResult.style.display='none'; }
+
+    /* ===== 悬停放大镜（仿 loopteas 产品图放大展示细节） ===== */
+    const ZOOM = 2.4;
+    let _zoomLens = null, _zoomResult = null;
+    function ensureZoomEls(){
+      if(_zoomResult) return;
+      _zoomLens = document.createElement('div'); _zoomLens.className='zoom-lens';
+      _zoomResult = document.createElement('div'); _zoomResult.className='zoom-result';
+      document.body.appendChild(_zoomLens); document.body.appendChild(_zoomResult);
+    }
+    function getContentRect(img){
+      const r = img.getBoundingClientRect();
+      const nw = img.naturalWidth, nh = img.naturalHeight;
+      if(!nw || !nh) return r;
+      const scale = Math.min(r.width/nw, r.height/nh);
+      const dw = nw*scale, dh = nh*scale;
+      return { left: r.left + (r.width-dw)/2, top: r.top + (r.height-dh)/2, width: dw, height: dh };
+    }
+    function attachLightboxZoom(img){
+      img.addEventListener('mouseenter', function(){
+        if(!img.getAttribute('src')) return;
+        ensureZoomEls();
+        _zoomLens.style.display='block';
+        _zoomResult.style.display='block';
+        _zoomResult.style.backgroundImage='url("' + img.getAttribute('src') + '")';
+      });
+      img.addEventListener('mousemove', function(e){
+        if(_zoomResult.style.display!=='block') return;
+        const cr = getContentRect(img);
+        const lensW = cr.width/ZOOM, lensH = cr.height/ZOOM;
+        _zoomLens.style.width=lensW+'px';
+        _zoomLens.style.height=lensH+'px';
+        let x=e.clientX-cr.left, y=e.clientY-cr.top;
+        let lx=Math.max(0,Math.min(x-lensW/2, cr.width-lensW));
+        let ly=Math.max(0,Math.min(y-lensH/2, cr.height-lensH));
+        _zoomLens.style.left=(cr.left+lx)+'px';
+        _zoomLens.style.top=(cr.top+ly)+'px';
+        const resW=_zoomResult.offsetWidth, resH=_zoomResult.offsetHeight;
+        _zoomResult.style.backgroundSize=(cr.width*ZOOM)+'px '+(cr.height*ZOOM)+'px';
+        _zoomResult.style.backgroundPosition='-'+(lx*ZOOM)+'px -'+(ly*ZOOM)+'px';
+        const gap=16;
+        let px = cr.right+gap;
+        if(px+resW > window.innerWidth-8) px = cr.left-gap-resW;
+        if(px < 8) px = 8;
+        let py = Math.max(8, Math.min(e.clientY-resH/2, window.innerHeight-resH-8));
+        _zoomResult.style.left=px+'px';
+        _zoomResult.style.top=py+'px';
+      });
+      img.addEventListener('mouseleave', function(){
+        if(_zoomLens){_zoomLens.style.display='none';}
+        if(_zoomResult){_zoomResult.style.display='none';}
+      });
+    }
+
+
+    function switchLang(lang){
+      currentLang = lang;
+      applyUI(lang);
       renderProducts(lang);
     }
 
-    function renderFeatures(lang) {
-      const features = catFeatures[lang] || catFeatures['en'];
-      const list = document.getElementById('features-list');
-      list.innerHTML = features.map(f =>
-        `<div class="flex items-center gap-3"><i class="fas fa-check-circle text-secondary"></i><span>${f}</span></div>`
-      ).join('');
+    function fixDoubleEncoded(obj){
+      if(typeof obj==="string"){ let c=obj; for(let i=0;i<10;i++){ try{ const f=decodeURIComponent(escape(c)); if(f===c) break; c=f; }catch(e){ break; } } return c; }
+      if(Array.isArray(obj)) return obj.map(i=>fixDoubleEncoded(i));
+      if(obj && typeof obj==="object"){ const r={}; for(const k in obj) r[k]=fixDoubleEncoded(obj[k]); return r; }
+      return obj;
     }
 
-    function renderProducts(lang) {
-      const pack = langPack[lang];
-      const imgs = window._siteImages || {};
-      const grid = document.getElementById('products-grid');
-      const catKey = 'dark';
-      const labels = [pack.gift_box, pack.dry_leaf, pack.liquor, pack.leaf_base];
-      const suffixes = ['gift','dry','liquor','leaf'];
-
-      grid.innerHTML = pack.products.map((p, i) => {
-        const imgCards = suffixes.map((suf, si) => {
-          const key = `product_${catKey}_${i}_${suf}`;
-          const src = imgs[key] || '';
-          return `<div class="relative">
-            <img src="${src}" data-key="${key}" alt="${labels[si]}" class="w-full h-28 object-cover rounded-lg bg-gray-100 product-detail-img">
-            <span class="absolute bottom-1 left-1 bg-black/50 text-white text-xs px-1.5 py-0.5 rounded">${labels[si]}</span>
-          </div>`;
-        }).join('');
-
-        return `<div class="bg-white rounded-2xl overflow-hidden shadow-md fade-in">
-          <div class="p-4">
-            <h3 class="text-lg font-bold text-primary mb-3">${p.name}</h3>
-            <div class="grid grid-cols-2 gap-2 mb-3">${imgCards}</div>
-            <p class="text-dark/70 text-sm leading-relaxed">${p.desc}</p>
-          </div>
-          <div class="px-4 py-3 border-t border-gray-100">
-            <a href="index.html#contact" class="text-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all text-sm">
-              <span>${pack.inquiry_btn}</span><i class="fas fa-arrow-right text-xs"></i>
-            </a>
-          </div>
-        </div>`;
-      }).join('');
-
-      // 重新绑定渐入
-      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    }
-
-    // 防御性UTF-8多重编码自动修复（循环解码）
-    function fixDoubleEncoded(obj){if(typeof obj==='string'){let c=obj;for(let i=0;i<10;i++){try{const f=decodeURIComponent(escape(c));if(f===c)break;c=f}catch(e){break}}return c}if(Array.isArray(obj))return obj.map(i=>fixDoubleEncoded(i));if(obj&&typeof obj==='object'){const r={};for(const k in obj)r[k]=fixDoubleEncoded(obj[k]);return r}return obj}
-
-    // ===== 从 data.json 加载图片 =====
-    async function loadProductImages() {
-      try {
-        const res = await fetch('./data.json?t=' + Date.now());
+    async function loadData(){
+      try{
+        const res = await fetch("./data.json?t=" + Date.now());
         let data = await res.json();
         data = fixDoubleEncoded(data);
-        window._siteImages = data.images || {};
-        const heroImg = document.getElementById('cat_hero_img');
-        if (heroImg && window._siteImages['product_dark']) {
-          heroImg.src = window._siteImages['product_dark'];
-        }
-      } catch(e) {
-        window._siteImages = {};
-        console.warn('data.json 加载失败', e);
-      }
-      renderFeatures(currentLang);
-      renderProducts(currentLang);
+        siteData = data;
+        catData = (data.products && data.products[CAT]) || null;
+        const heroImg = document.getElementById("cat_hero_img");
+        if(heroImg && siteData.images && siteData.images["product_"+CAT]) heroImg.src = siteData.images["product_"+CAT];
+      }catch(e){ siteData=null; catData=null; console.warn("data.json load failed", e); }
     }
 
-    // ===== 渐入动画 =====
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    const observer = new IntersectionObserver(entries=>{ entries.forEach(e=> e.isIntersecting && e.target.classList.add("visible")); }, { threshold: 0.1 });
+    document.querySelectorAll(".fade-in").forEach(el=>observer.observe(el));
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const savedLang = localStorage.getItem("aultrastea_lang") || "en";
+    document.getElementById("html-root").lang = savedLang;
+    document.getElementById("langSelect").value = savedLang;
+    document.getElementById("langSelect").addEventListener("change", e=>{ localStorage.setItem("aultrastea_lang", e.target.value); switchLang(e.target.value); });
 
-    // ===== 初始化 =====
-    loadProductImages();
-
-    // 语言选择器自动还原
-    const savedLang = localStorage.getItem('aultrastea_lang') || 'en';
-    document.getElementById('langSelect').value = savedLang;
-    document.getElementById('langSelect').addEventListener('change', e => {
-      localStorage.setItem('aultrastea_lang', e.target.value);
-    });
-    switchLang(savedLang);
+    loadData().then(()=> switchLang(savedLang));
   </script>
 </body>
 </html>
