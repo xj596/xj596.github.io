@@ -9,26 +9,6 @@
     "product_yellow": "https://video.aultras-tea.com/huangcha.jpg",
     "product_dark": "https://video.aultras-tea.com/heicha.png",
     "product_flower": "https://video.aultras-tea.com/gongyicha.JPG",
-    "cert_1": "https://video.aultras-tea.com/renzheng.png",
-    "cert_2": "https://video.aultras-tea.com/renzheng.png",
-    "cert_3": "https://video.aultras-tea.com/renzheng.png",
-    "cert_4": "https://video.aultras-tea.com/renzheng.png",
-    "cert_5": "https://video.aultras-tea.com/renzheng.png",
-    "cert_6": "https://video.aultras-tea.com/renzheng.png",
-    "cert_7": "https://video.aultras-tea.com/renzheng.png",
-    "cert_8": "https://video.aultras-tea.com/renzheng.png",
-    "cert_9": "https://video.aultras-tea.com/renzheng.png",
-    "cert_10": "https://video.aultras-tea.com/renzheng.png",
-    "cert_11": "https://video.aultras-tea.com/renzheng.png",
-    "cert_12": "https://video.aultras-tea.com/renzheng.png",
-    "cert_13": "https://video.aultras-tea.com/renzheng.png",
-    "cert_14": "https://video.aultras-tea.com/renzheng.png",
-    "cert_15": "https://video.aultras-tea.com/renzheng.png",
-    "cert_16": "https://video.aultras-tea.com/renzheng.png",
-    "cert_17": "https://video.aultras-tea.com/renzheng.png",
-    "cert_18": "https://video.aultras-tea.com/renzheng.png",
-    "cert_19": "https://video.aultras-tea.com/renzheng.png",
-    "cert_20": "https://video.aultras-tea.com/renzheng.png",
     "product_green_0_gift": "",
     "product_green_0_dry": "https://ik.imagekit.io/Lemon/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-41022-1_1.jpg",
     "product_green_0_liquor": "https://ik.imagekit.io/Lemon/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-41022-1_2.jpg",
@@ -255,9 +235,7 @@
   ],
   "brochure_url": "https://ik.imagekit.io/taclov2ip/aultrastea-product-brochure.pdf",
   "cert_icons": {
-    "cert_haccp": "https://video.aultras-tea.com/HACCP.jpg",
-    "cert_iso": "https://ik.imagekit.io/taclov2ip/%E5%9B%BE%E7%89%87/%E7%AC%AC%E4%B8%89%E9%95%9C%E9%A6%96%E5%B8%A7.jpg?updatedAt=1777256039941",
-    "cert_fairtrade": "https://ik.imagekit.io/taclov2ip/%E5%9B%BE%E7%89%87/%E7%AC%AC%E4%B8%89%E9%95%9C%E9%A6%96%E5%B8%A7.jpg?updatedAt=1777256039941"
+    "cert_haccp": "https://video.aultras-tea.com/HACCP.jpg"
   },
   "news_summary": [
     {
