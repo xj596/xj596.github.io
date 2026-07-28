@@ -332,22 +332,30 @@
           </div>
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
-              <div class="field-label">主电话 / WhatsApp</div>
-              <input type="text" id="ci_phone_1" placeholder="400-059-8108" />
+              <div class="field-label">主电话 / WhatsApp（中文）</div>
+              <input type="text" id="ci_phone_1" placeholder="收集中" />
+              <div class="field-label mt-2">主电话 / WhatsApp（English）</div>
+              <input type="text" id="ci_phone_1_en" placeholder="To be collected" />
             </div>
             <div>
-              <div class="field-label">备用电话（可留空）</div>
-              <input type="text" id="ci_phone_2" placeholder="+86 731 8465 2208" />
+              <div class="field-label">备用电话（中文）</div>
+              <input type="text" id="ci_phone_2" placeholder="收集中" />
+              <div class="field-label mt-2">备用电话（English）</div>
+              <input type="text" id="ci_phone_2_en" placeholder="To be collected" />
             </div>
           </div>
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
-              <div class="field-label">主地址</div>
+              <div class="field-label">主地址（中文）</div>
               <input type="text" id="ci_address_1" placeholder="贵州省安顺市西秀区鸡场乡鑫堡村茶果场" />
+              <div class="field-label mt-2">主地址（English）</div>
+              <input type="text" id="ci_address_1_en" placeholder="Chaguochang, Xinbao Village, Jichang Town, Xixiu District," />
             </div>
             <div>
-              <div class="field-label">备用地址（可留空）</div>
+              <div class="field-label">备用地址（中文）</div>
               <input type="text" id="ci_address_2" placeholder="贵州省安顺市西秀区鸡场乡鑫堡村茶果场" />
+              <div class="field-label mt-2">备用地址（English）</div>
+              <input type="text" id="ci_address_2_en" placeholder="Anshun City, Guizhou Province" />
             </div>
           </div>
         </div>
@@ -776,6 +784,10 @@ function populateContactInfo(ci) {
   setVal('ci_phone_2', ci.phone_2);
   setVal('ci_address_1', ci.address_1);
   setVal('ci_address_2', ci.address_2);
+  setVal('ci_phone_1_en', ci.phone_1_en);
+  setVal('ci_phone_2_en', ci.phone_2_en);
+  setVal('ci_address_1_en', ci.address_1_en);
+  setVal('ci_address_2_en', ci.address_2_en);
 }
 
 function collectContactInfo() {
@@ -785,7 +797,11 @@ function collectContactInfo() {
     phone_1: document.getElementById('ci_phone_1')?.value.trim() || '',
     phone_2: document.getElementById('ci_phone_2')?.value.trim() || '',
     address_1: document.getElementById('ci_address_1')?.value.trim() || '',
-    address_2: document.getElementById('ci_address_2')?.value.trim() || ''
+    address_2: document.getElementById('ci_address_2')?.value.trim() || '',
+    phone_1_en: document.getElementById('ci_phone_1_en')?.value.trim() || '',
+    phone_2_en: document.getElementById('ci_phone_2_en')?.value.trim() || '',
+    address_1_en: document.getElementById('ci_address_1_en')?.value.trim() || '',
+    address_2_en: document.getElementById('ci_address_2_en')?.value.trim() || ''
   };
 }
 

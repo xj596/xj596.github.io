@@ -391,7 +391,7 @@
 
       <!-- 认证徽标行：data-cert-icon 属性供 JS 替换图片使用 -->
       <div class="flex justify-center fade-in mb-12">
-        <div class="text-center py-6 px-4 border border-primary/10 rounded-lg hover:border-primary/30 transition-all w-64" data-cert-icon="cert_haccp"><div class="cert-icon-wrap"><i class="fas fa-certificate text-4xl text-primary mb-3"></i></div><p class="font-medium" data-lang="cert_haccp">HACCP</p></div>
+        <div class="text-center py-6 px-4 border border-primary/10 rounded-lg hover:border-primary/30 transition-all w-64" data-cert-icon="cert_haccp"><div class="cert-icon-wrap"><img src="https://video.aultras-tea.com/HACCP.jpg" alt="HACCP" style="width:100%;max-width:120px;height:auto;object-fit:contain;margin:0 auto 8px;"></div><p class="font-medium" data-lang="cert_haccp">HACCP</p></div>
       </div>
 
       <!-- 证书图片轮播（6列网格，支持20+张，与上方 HACCP 徽标并存） -->
@@ -653,6 +653,26 @@
     // ===== 展会轮播 =====
     let exhIndex = 0;
     let exhTotal = 0;
+    let currentLang = 'en';
+    let _exhibitionsAll = [];
+    let _contactInfo = null;
+    function setContactText(id, val){ const el = document.getElementById(id); if (el && val != null && val !== '') el.textContent = val; }
+    function applyContactLang(lang){
+      if (!_contactInfo) return;
+      const ci = _contactInfo;
+      const v = (k) => (ci[k + '_' + lang] != null && ci[k + '_' + lang] !== '') ? ci[k + '_' + lang]
+                     : (ci[k + '_en'] != null && ci[k + '_en'] !== '') ? ci[k + '_en']
+                     : (ci[k] != null && ci[k] !== '') ? ci[k]
+                     : (ci[k + '_zh'] != null ? ci[k + '_zh'] : '');
+      setContactText('contact_email_1', ci.email_1);
+      setContactText('contact_email_2', ci.email_2);
+      setContactText('contact_phone_1', v('phone_1'));
+      setContactText('contact_phone_2', v('phone_2'));
+      setContactText('contact_address_1', v('address_1'));
+      setContactText('contact_address_2', v('address_2'));
+      setContactText('footer_email', ci.email_1);
+      setContactText('footer_phone', v('phone_1'));
+    }
     const VISIBLE_COUNT = () => window.innerWidth >= 1024 ? 3 : window.innerWidth >= 769 ? 2 : 1;
 
     function renderExhibitions(exhs) {
@@ -1036,23 +1056,12 @@
         }
         if (certUrls.length > 0) renderCertificates(certUrls);
 
-        // 联系方式动态替换
+        // 联系方式（多语言，随语言切换）
         if (data.contact_info) {
-          const ci = data.contact_info;
-          const setTxt = (id, val) => { const el = document.getElementById(id); if(el && val) el.textContent = val; };
-          const setHref = (id, val) => { const el = document.getElementById(id); if(el && val) el.href = val; };
-          setTxt('contact_email_1', ci.email_1);
-          setTxt('contact_email_2', ci.email_2);
-          setTxt('contact_phone_1', ci.phone_1);
-          setTxt('contact_phone_2', ci.phone_2);
-          setTxt('contact_address_1', ci.address_1);
-          setTxt('contact_address_2', ci.address_2);
-          setTxt('footer_email', ci.email_1);
-          setTxt('footer_phone', ci.phone_1);
-          if (ci.email_1) {
-            const el = document.getElementById('contact_email_link');
-            if (el) el.href = 'mailto:' + ci.email_1;
-          }
+          _contactInfo = data.contact_info;
+          applyContactLang(langSelect.value || 'en');
+          const el = document.getElementById('contact_email_link');
+          if (el && _contactInfo.email_1) el.href = 'mailto:' + _contactInfo.email_1;
         }
 
         // 关于我们视频（支持 direct_url MP4 直链 和 embed_code iframe 两种）
@@ -1137,8 +1146,11 @@
 
     // ===== 语言切换 =====
     const langSelect = document.getElementById('langSelect');
+    function _renderNewsPage(){ if (_newsAll && _newsAll.length) renderNews(_newsAll); }
+
     function switchLang(lang) {
       currentLang = lang;
+      applyContactLang(lang);
       document.querySelectorAll('[data-lang]').forEach(el => {
         const key = el.getAttribute('data-lang');
         if(langPack[lang] && langPack[lang][key]) el.textContent = langPack[lang][key];

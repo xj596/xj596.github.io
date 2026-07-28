@@ -132,7 +132,8 @@
     const CAT = "white";
     const CAT_TITLE = { en: "White Tea | AultrasTea", zh: "白茶 | 贵州湘丰瀑布茶业有限公司", ru: "White Tea | AultrasTea", de: "White Tea | AultrasTea" };
         const CAT_SUB   = { en: "Premium Organic White Tea From Guizhou & Hunan, China",    zh: "来自中国贵州与湖南的优质有机白茶",    ru: "Премиальный органический белый чай из Гуйчжоу и Хунани, Китай",  de: "Premium Bio-Weißer Tee aus Guizhou & Hunan, China" };
-        const CAT_NAME  = { en: "White Tea: Slightly fermented; pale apricot liquor; light and sweet.",    zh: "白茶：微发酵，满披白毫，汤色浅杏黄，清甜淡雅。",    ru: "Белый чай: Слабоферментированный; бледно-абрикосовый настой; лёгкий и нежный.",  de: "Weißer Tee: Leicht vergärt; blass-aprikosenfarbene Brühe; leicht und süß." };
+                const CAT_NAME  = { en: "White Tea", zh: "白茶", ru: "Белый чай", de: "Weißer Tee" };
+        const CAT_FERMENT = { en: "White Tea: Slightly fermented; pale apricot liquor; light and sweet.", zh: "白茶：微发酵，满披白毫，汤色浅杏黄，清甜淡雅。", ru: "Белый чай: Слабоферментированный; бледно-абрикосовый настой; лёгкий и нежный.", de: "Weißer Tee: Leicht vergärt; blass-aprikosenfarbene Brühe; leicht und süß." };
 
     const UI = {
       en: { navbar_brand:"AultrasTea", nav_home:"Home", nav_products:"Products", nav_cert:"Certificates", nav_contact:"Contact Us", view_all:"All Products", inquiry:"Send Inquiry Now", badge:"Organic Certified", product_range_title:"Product Range", product_range_desc:"Each product shows the dry leaf; click to enlarge and view the tea soup (liquor).", dry_leaf:"Dry Leaf", liquor:"Tea Liquor", no_liquor:"No liquor soup", inquiry_btn:"Inquiry Now", cta_title:"Ready to Order?", cta_desc:"Contact us for samples, pricing, and custom packaging solutions.", send_inquiry:"Send Inquiry", email_us:"Email Us", footer_copy:"All Rights Reserved.", footer_company:"GUIZHOU AULTRAS TEA CO.,LTD.", std_conventional:"Conventional", std_eu:"EU", std_organic:"Organic", close:"Close", sub_label:"Subcategory", features:["Full range of grades & specifications","EU & US Organic Certified options","Custom Packaging & Private Label","Direct from origin tea gardens"] },
@@ -153,7 +154,7 @@
       document.title = CAT_TITLE[lang] || CAT_TITLE.en;
       document.querySelectorAll("[data-lang]").forEach(el=>{ const k=el.getAttribute("data-lang"); if(pack[k]!==undefined) el.textContent=pack[k]; });
       document.getElementById("cat-name-en").textContent = t(CAT_NAME, lang);
-      document.getElementById("cat-name-zh").textContent = CAT_NAME.zh;
+      document.getElementById("cat-name-zh").textContent = t(CAT_FERMENT, lang);
       document.getElementById("breadcrumb-cat").textContent = t(CAT_NAME, lang);
       document.getElementById("cat-subtitle").textContent = CAT_SUB[lang] || CAT_SUB.en;
       renderFeatures(lang);

@@ -194,9 +194,13 @@
     "email_1": "admin@aultrastea.com",
     "email_2": "tea@xf-tea.com",
     "phone_1": "收集中",
+    "phone_1_en": "To be collected",
     "phone_2": "收集中",
+    "phone_2_en": "To be collected",
     "address_1": "贵州省安顺市西秀区",
+    "address_1_en": "Chaguochang, Xinbao Village, Jichang Town, Xixiu District,",
     "address_2": "鸡场乡鑫堡村茶果场",
+    "address_2_en": "Anshun City, Guizhou Province",
     "email": "admin@aultrastea.com"
   },
   "about_video": {
