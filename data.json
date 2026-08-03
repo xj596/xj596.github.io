@@ -5,7 +5,8 @@
     "product_green": "https://video.aultras-tea.com/lvcha.png",
     "product_black": "https://video.aultras-tea.com/hongcha.png",
     "product_oolong": "https://video.aultras-tea.com/wulongcha.png",
-    "product_white": "https://video.aultras-tea.com/baicha.png",    "product_dark": "https://video.aultras-tea.com/heicha.png",
+    "product_white": "https://video.aultras-tea.com/baicha.png",
+    "product_dark": "https://video.aultras-tea.com/heicha.png",
     "product_flower": "https://video.aultras-tea.com/gongyicha.JPG",
     "product_green_0_gift": "",
     "product_green_0_dry": "https://ik.imagekit.io/Lemon/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-41022-1_1.jpg",
@@ -191,17 +192,14 @@
   "contact_info": {
     "email_1": "admin@aultrastea.com",
     "email_2": "tea@xf-tea.com",
-    "phone_1": "收集中",
-    "phone_1_en": "To be collected",
-    "phone_1_ru": "Уточняется",
-    "phone_1_de": "Wird noch bekannt gegeben",
-    "phone_2": "收集中",
-    "phone_2_en": "To be collected",
+    "phone_1": "86-731-84652476",
+    "phone_2": "86-731-84652476",
     "address_1": "贵州省安顺市西秀区",
-    "address_1_en": "Chaguochang, Xinbao Village, Jichang Town, Xixiu District,",
     "address_2": "鸡场乡鑫堡村茶果场",
-    "address_2_en": "Anshun City, Guizhou Province",
-    "email": "admin@aultrastea.com"
+    "phone_1_en": "86-731-84652476",
+    "phone_2_en": "To be collected86-731-84652476",
+    "address_1_en": "Chaguochang, Xinbao Village, Jichang Town, Xixiu District,",
+    "address_2_en": "Anshun City, Guizhou Province"
   },
   "about_video": {
     "embed_code": "",
