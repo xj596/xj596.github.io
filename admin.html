@@ -331,12 +331,20 @@
               <input type="text" id="ci_phone_1" placeholder="收集中" />
               <div class="field-label mt-2">主电话 / WhatsApp（English）</div>
               <input type="text" id="ci_phone_1_en" placeholder="To be collected" />
+              <div class="field-label mt-2">主电话 / WhatsApp（Русский）</div>
+              <input type="text" id="ci_phone_1_ru" placeholder="Уточняется" />
+              <div class="field-label mt-2">主电话 / WhatsApp（Deutsch）</div>
+              <input type="text" id="ci_phone_1_de" placeholder="Wird noch bekannt gegeben" />
             </div>
             <div>
               <div class="field-label">备用电话（中文）</div>
               <input type="text" id="ci_phone_2" placeholder="收集中" />
               <div class="field-label mt-2">备用电话（English）</div>
               <input type="text" id="ci_phone_2_en" placeholder="To be collected" />
+              <div class="field-label mt-2">备用电话（Русский）</div>
+              <input type="text" id="ci_phone_2_ru" placeholder="Уточняется" />
+              <div class="field-label mt-2">备用电话（Deutsch）</div>
+              <input type="text" id="ci_phone_2_de" placeholder="Wird noch bekannt gegeben" />
             </div>
           </div>
           <div class="grid sm:grid-cols-2 gap-4">
@@ -780,6 +788,10 @@ function populateContactInfo(ci) {
   setVal('ci_address_2', ci.address_2);
   setVal('ci_phone_1_en', ci.phone_1_en);
   setVal('ci_phone_2_en', ci.phone_2_en);
+  setVal('ci_phone_1_ru', ci.phone_1_ru);
+  setVal('ci_phone_1_de', ci.phone_1_de);
+  setVal('ci_phone_2_ru', ci.phone_2_ru);
+  setVal('ci_phone_2_de', ci.phone_2_de);
   setVal('ci_address_1_en', ci.address_1_en);
   setVal('ci_address_2_en', ci.address_2_en);
 }
@@ -794,6 +806,10 @@ function collectContactInfo() {
     address_2: document.getElementById('ci_address_2')?.value.trim() || '',
     phone_1_en: document.getElementById('ci_phone_1_en')?.value.trim() || '',
     phone_2_en: document.getElementById('ci_phone_2_en')?.value.trim() || '',
+    phone_1_ru: document.getElementById('ci_phone_1_ru')?.value.trim() || '',
+    phone_1_de: document.getElementById('ci_phone_1_de')?.value.trim() || '',
+    phone_2_ru: document.getElementById('ci_phone_2_ru')?.value.trim() || '',
+    phone_2_de: document.getElementById('ci_phone_2_de')?.value.trim() || '',
     address_1_en: document.getElementById('ci_address_1_en')?.value.trim() || '',
     address_2_en: document.getElementById('ci_address_2_en')?.value.trim() || ''
   };

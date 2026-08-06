@@ -217,7 +217,7 @@
             </div>
             <div class="flex items-center gap-3">
               <i class="fas fa-phone text-primary text-xl"></i>
-              <span id="hero_phone" class="text-dark/80" data-lang="contact_phone_placeholder">收集中</span>
+              <span id="hero_phone" class="text-dark/80">收集中</span>
             </div>
           </div>
         </div>
@@ -517,8 +517,8 @@
         <!-- 电话 -->
         <div>
           <p class="text-dark/50 text-sm mb-1" data-lang="contact_phone">Phone / WhatsApp</p>
-          <p class="font-medium text-dark text-sm leading-relaxed" id="contact_phone_1" data-lang="contact_phone_placeholder">收集中</p>
-          <p class="font-medium text-dark text-sm leading-relaxed" id="contact_phone_2" data-lang="contact_phone_placeholder">收集中</p>
+          <p class="font-medium text-dark text-sm leading-relaxed" id="contact_phone_1">收集中</p>
+          <p class="font-medium text-dark text-sm leading-relaxed" id="contact_phone_2">收集中</p>
         </div>
         <!-- 地址 -->
         <div>
@@ -570,7 +570,7 @@
           <h4 class="text-lg font-bold mb-4" data-lang="footer_contact">Contact</h4>
           <ul class="space-y-2">
             <li class="flex items-center gap-2 text-white/70"><i class="fas fa-envelope"></i> <span id="footer_email">admin@aultrastea.com</span></li>
-            <li class="flex items-center gap-2 text-white/70"><i class="fas fa-phone"></i> <span id="footer_phone" data-lang="contact_phone_placeholder">收集中</span></li>
+            <li class="flex items-center gap-2 text-white/70"><i class="fas fa-phone"></i> <span id="footer_phone">收集中</span></li>
           </ul>
         </div>
       </div>
@@ -637,19 +637,20 @@
     function applyContactLang(lang){
       if (!_contactInfo) return;
       const ci = _contactInfo;
+      const ph = (langPack[lang] && langPack[lang].contact_phone_placeholder) ? langPack[lang].contact_phone_placeholder : 'To be collected';
       const v = (k) => (ci[k + '_' + lang] != null && ci[k + '_' + lang] !== '') ? ci[k + '_' + lang]
-                     : (ci[k + '_en'] != null && ci[k + '_en'] !== '') ? ci[k + '_en']
                      : (ci[k] != null && ci[k] !== '') ? ci[k]
+                     : (ci[k + '_en'] != null && ci[k + '_en'] !== '') ? ci[k + '_en']
                      : (ci[k + '_zh'] != null ? ci[k + '_zh'] : '');
-      setContactText('contact_email_1', ci.email_1);
-      setContactText('contact_email_2', ci.email_2);
-      setContactText('contact_phone_1', v('phone_1'));
-      setContactText('contact_phone_2', v('phone_2'));
-      setContactText('contact_address_1', v('address_1'));
-      setContactText('contact_address_2', v('address_2'));
-      setContactText('footer_email', ci.email_1);
-      setContactText('footer_phone', v('phone_1'));
-      setContactText('hero_phone', v('phone_1'));
+      setContactText('contact_email_1', ci.email_1 || '');
+      setContactText('contact_email_2', ci.email_2 || '');
+      setContactText('contact_phone_1', v('phone_1') || ph);
+      setContactText('contact_phone_2', v('phone_2') || ph);
+      setContactText('contact_address_1', v('address_1') || '');
+      setContactText('contact_address_2', v('address_2') || '');
+      setContactText('footer_email', ci.email_1 || '');
+      setContactText('footer_phone', v('phone_1') || ph);
+      setContactText('hero_phone', v('phone_1') || ph);
     }
     const VISIBLE_COUNT = () => window.innerWidth >= 1024 ? 3 : window.innerWidth >= 769 ? 2 : 1;
 
@@ -1127,11 +1128,11 @@
 
     function switchLang(lang) {
       currentLang = lang;
-      applyContactLang(lang);
       document.querySelectorAll('[data-lang]').forEach(el => {
         const key = el.getAttribute('data-lang');
         if(langPack[lang] && langPack[lang][key]) el.textContent = langPack[lang][key];
       });
+      applyContactLang(lang);
       document.title = langPack[lang].meta_title;
       document.querySelector("meta[name='description']").setAttribute('content', langPack[lang].meta_desc);
       document.documentElement.lang = lang;
