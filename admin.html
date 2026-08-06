@@ -70,15 +70,23 @@
         <div class="field-label">data.json 路径（通常为 data.json）</div>
         <input type="text" id="dataPath" value="data.json" />
       </div>
+      <div>
+        <div class="field-label">分支（GitHub Pages 所在分支，如 main / master / gh-pages，留空则用仓库默认分支）</div>
+        <input type="text" id="githubBranch" placeholder="例如: main" />
+      </div>
       <button onclick="doLogin()" class="btn-primary w-full mt-2 text-center">
         <i class="fas fa-sign-in-alt mr-2"></i> 连接并进入管理后台
+      </button>
+      <button onclick="downloadDataJson()" class="btn-secondary w-full mt-2 text-center">
+        <i class="fas fa-download mr-2"></i> 下载 data.json（用于推送到 git 仓库）
       </button>
     </div>
 
     <div class="mt-6 p-4 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800">
       <strong>⚠️ 如何获取 Token？</strong><br>
       GitHub → Settings → Developer settings → Fine-grained tokens → Generate new token<br>
-      权限选择：选择你的仓库 → Contents → Read and write
+      权限选择：选择你的仓库 → Contents → Read and write<br>
+      <span class="mt-1 block">保存后 GitHub Pages 通常需 1–3 分钟重新构建才会生效，请耐心等待或强制刷新（Ctrl/Cmd+Shift+R）。</span>
     </div>
   </div>
 </div>
@@ -138,6 +146,9 @@
       </button>
       <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('news')">
         <i class="fas fa-newspaper mr-1.5"></i> 新闻管理
+      </button>
+      <button class="tab-btn px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-gray-600 hover:bg-gray-100" onclick="switchTab('sitetext')">
+        <i class="fas fa-font mr-1.5"></i> 网站文案
       </button>
     </div>
 
@@ -541,11 +552,27 @@
         </div>
       </div>
     </div>
+    <div id="tab-sitetext" class="tab-content hidden">
+      <div class="mb-4">
+        <h3 class="font-bold text-gray-800 text-lg mb-2">网站文案（多语言）</h3>
+        <p class="text-sm text-gray-500">此处编辑首页所有文字内容（导航、Hero、关于、产品、资质、展会、新闻、联系、页脚等），支持中/英/俄/德四语。保存并推送到 git 仓库后，前台按所选语言显示。</p>
+      </div>
+      <div class="mb-4">
+        <input type="text" id="sitetext-filter" placeholder="筛选字段名（如 hero、product、nav、contact）" oninput="filterSiteText(this.value)" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-green-700" />
+      </div>
+      <div id="sitetext-editor" class="space-y-3"></div>
+      <div class="mt-6 flex items-center gap-3">
+        <button onclick="saveSiteText()" class="btn-primary flex items-center gap-2">
+          <i class="fas fa-save"></i> 保存网站文案
+        </button>
+        <span class="text-xs text-gray-400">保存并推送到 git 仓库后，前台即生效。</span>
+      </div>
+    </div>
 </div><!-- end adminPage -->
 
 <script>
 // ===== 全局状态 =====
-let CONFIG = { owner: '', repo: '', token: '', dataPath: 'data.json' };
+let CONFIG = { owner: '', repo: '', token: '', dataPath: 'data.json', branch: '' };
 let currentData = null;
 let currentSHA = '';
 
@@ -616,8 +643,9 @@ function doLogin() {
   const repo = document.getElementById('githubRepo').value.trim();
   const token = document.getElementById('githubToken').value.trim();
   const dataPath = document.getElementById('dataPath').value.trim() || 'data.json';
+  const branch = document.getElementById('githubBranch').value.trim();
   if (!owner || !repo || !token) { showToast('请填写所有必填项', 'error'); return; }
-  CONFIG = { owner, repo, token, dataPath };
+  CONFIG = { owner, repo, token, dataPath, branch };
   localStorage.setItem('aultrastea_cfg', JSON.stringify(CONFIG));
   showToast('正在连接 GitHub...', 'loading', 0);
   fetchDataJson();
@@ -633,7 +661,8 @@ function doLogout() {
 // ===== 从 GitHub 读取 data.json =====
 async function fetchDataJson() {
   try {
-    const url = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.dataPath}`;
+    const refParam = CONFIG.branch ? `?ref=${encodeURIComponent(CONFIG.branch)}` : '';
+    const url = `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.dataPath}${refParam}`;
     const res = await fetch(url, {
       headers: { 'Authorization': `token ${CONFIG.token}`, 'Accept': 'application/vnd.github.v3+json' }
     });
@@ -700,6 +729,7 @@ function populateForm() {
 
   // 产品4图
   pmRender();
+  renderSiteTextEditor(currentData.langPack || {});
 }
 
 // ===== 图片预览 =====
@@ -1428,6 +1458,65 @@ async function saveNewsDetail() {
   await pushDataJson('新闻详情已保存并推送到 GitHub ✅');
 }
 
+// ===== 网站文案编辑器（langPack，首页全部文字） =====
+const SITE_TEXT_LANGS = ['en','zh','ru','de'];
+function renderSiteTextEditor(lp) {
+  const container = document.getElementById('sitetext-editor');
+  if (!container) return;
+  const src = lp || (currentData && currentData.langPack) || {};
+  const baseLang = src.en || {};
+  const keys = Object.keys(baseLang);
+  const langLabel = { en:'🇬🇧 EN', zh:'🇨🇳 中文', ru:'🇷🇺 RU', de:'🇩🇪 DE' };
+  const html = keys.map(k => {
+    const cells = SITE_TEXT_LANGS.map(l => {
+      const val = (src[l] && src[l][k] != null) ? src[l][k] : '';
+      return '<div><div class="field-label text-xs">' + (langLabel[l]||l) + '</div><textarea data-st="' + k + '" data-lang="' + l + '" rows="2" class="text-sm">' + escapeHtml(val) + '</textarea></div>';
+    }).join('');
+    return '<div class="section-card"><div class="font-semibold text-gray-700 text-sm mb-2"><code>' + escapeHtml(k) + '</code></div><div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">' + cells + '</div></div>';
+  }).join('');
+  container.innerHTML = html;
+}
+
+function filterSiteText(q) {
+  q = (q||'').trim().toLowerCase();
+  const cards = document.querySelectorAll('#sitetext-editor .section-card');
+  cards.forEach(card => {
+    const code = card.querySelector('code');
+    const key = code ? code.textContent.toLowerCase() : '';
+    card.style.display = (!q || key.indexOf(q) !== -1) ? '' : 'none';
+  });
+}
+
+function collectSiteText() {
+  const inputs = document.querySelectorAll('#sitetext-editor [data-st]');
+  const lp = { en:{}, zh:{}, ru:{}, de:{} };
+  inputs.forEach(el => {
+    const k = el.dataset.st, l = el.dataset.lang;
+    lp[l][k] = el.value;
+  });
+  return lp;
+}
+
+async function saveSiteText() {
+  currentData.langPack = collectSiteText();
+  await pushDataJson('网站文案已保存并推送到 GitHub ✅');
+}
+
+// ===== 下载 data.json（git 部署用） =====
+function downloadDataJson() {
+  if (!currentData) { showToast('请先连接并加载数据', 'error'); return; }
+  const blob = new Blob([JSON.stringify(currentData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'data.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('已导出 data.json，请推送到 git 仓库', 'success');
+}
+
 // ===== 推送 data.json 到 GitHub =====
 async function pushDataJson(successMsg) {
   showToast('正在推送到 GitHub...', 'loading', 0);
@@ -1439,6 +1528,7 @@ async function pushDataJson(successMsg) {
       content: content,
       sha: currentSHA
     };
+    if (CONFIG.branch) body.branch = CONFIG.branch;
     const res = await fetch(url, {
       method: 'PUT',
       headers: { 'Authorization': `token ${CONFIG.token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
