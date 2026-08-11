@@ -38,7 +38,10 @@
     .zoom-info .zi-off { background:#d1d5db; }
     .zoom-info .zi-shape-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:6px; font-size:12px; background:#0F4C3A; color:white; font-weight:600; }
     .zoom-info .zi-origin { font-size:13px; color:#374151; background:#fff; padding:8px 10px; border-radius:8px; border:1px solid #e5e7eb; }
-    .zoom-result { position:fixed; right:24px; top:50%; transform:translateY(-50%); width:400px; height:420px; background-color:#f9fafb; background-repeat:no-repeat; display:none; z-index:130; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.30); border:1px solid rgba(0,0,0,.08); }
+    .lb-dialog { align-items:stretch; }
+    .lb-image-area { min-width:0; justify-content:center; }
+    .lb-zoom-pane { flex:0 0 380px; display:flex; align-items:center; justify-content:center; }
+    .zoom-result { position:relative; width:360px; height:400px; background-color:#f9fafb; background-repeat:no-repeat; background-position:center; display:none; pointer-events:none; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.30); border:1px solid rgba(0,0,0,.08); }
   </style>
   <link rel="icon" href="data:,">
 </head>
@@ -178,10 +181,18 @@
       list.innerHTML = (pack.features||[]).map(f=>'<div class="flex items-center gap-3"><i class="fas fa-check-circle text-secondary"></i><span>'+f+'</span></div>').join("");
     }
 
+    function getProductImages(p){
+      const imgs = (p && p.images) || {};
+      if (imgs.dry || imgs.liquor) return { dry: imgs.dry || '', liquor: imgs.liquor || '' };
+      let dry='', liquor='';
+      ["conventional","eu","organic"].forEach(function(s){ const im=imgs[s]; if(im){ if(!dry && im.dry) dry=im.dry; if(!liquor && im.liquor) liquor=im.liquor; } });
+      return { dry: dry, liquor: liquor };
+    }
     function availableStandards(prod){
       const stds=["conventional","eu","organic"];
       if(prod.standards){ return stds.filter(s=> prod.standards[s]); }
-      return stds.filter(s=> prod.images && prod.images[s] && prod.images[s].dry);
+      const pi = getProductImages(prod);
+      return (pi.dry || pi.liquor) ? stds.slice() : [];
     }
     function getStd(prod, key){
       if(productStd[key]) return productStd[key];
@@ -205,7 +216,7 @@
         sub.products.forEach((p, pj)=>{
           const key = CAT+"-"+si+"-"+pj;
           const std = getStd(p, key);
-          const imgs = (p.images && p.images[std]) || {dry:"",liquor:""};
+          const imgs = getProductImages(p);
           const hasLiq = p.has_liquor !== false;
           const av = availableStandards(p);
           let stdBtns="";
@@ -251,27 +262,24 @@
       const p = sub.products[pj];
       window.__zoomProduct = p;
       const lang = currentLang; const pack = UI[lang] || UI.en;
-      // 收集该产品所有可用图片（跨标准：国标/欧标/有机，含干茶/茶汤）
+      // 收集该产品图片（干茶/茶汤）；标准仅作前端展示，不参与图片
+      const pim = getProductImages(p);
       const views = [];
-      ["conventional","eu","organic"].forEach(function(s){
-        const im = (p.images && p.images[s]) || null;
-        const sLabel = pack["std_"+s] || s;
-        if(im && im.dry) views.push({label: sLabel+" · "+pack.dry_leaf, src: im.dry});
-        if(p.has_liquor !== false && im && im.liquor) views.push({label: sLabel+" · "+pack.liquor, src: im.liquor});
-      });
+      if(pim.dry) views.push({label: pack.dry_leaf, src: pim.dry});
+      if(p.has_liquor !== false && pim.liquor) views.push({label: pack.liquor, src: pim.liquor});
       const hasImg = views.length>0;
       const mainSrc = hasImg ? views[0].src : "";
       let html = '<div class="absolute top-4 right-4 z-[120]"><button onclick="closeLightbox()" class="w-10 h-10 rounded-full bg-white/90 text-gray-700 flex items-center justify-center text-lg shadow"><i class="fas fa-times"></i></button></div>';
       html += '<div class="text-center mb-4"><h3 class="text-xl font-bold text-primary">'+escapeHtml(t(p.name,lang))+'</h3><p class="text-dark/50 text-sm">'+escapeHtml(t(sub.name,lang))+'</p></div>';
-      html += '<div class="flex flex-col md:flex-row items-start justify-center gap-6 w-full max-w-5xl">';
+      html += '<div class="lb-dialog flex flex-col md:flex-row items-stretch justify-center gap-6 w-full max-w-6xl">';
       // 左侧：固定信息栏（名称/标准/形状/产地），不随鼠标移动
       html += '<div class="lb-info-col zoom-info" id="lb-info-col"></div>';
-      // 右侧：图片区
-      html += '<div class="flex flex-col items-center gap-3 flex-1">';
+      // 中间：图片区
+      html += '<div class="lb-image-area flex flex-col items-center justify-center gap-3 flex-1">';
       if(hasImg){
-        html += '<div class="w-full flex justify-center"><img id="lb-main" src="'+mainSrc+'" alt="'+escapeHtml(t(p.name,lang))+'" class="max-h-[64vh] w-auto object-contain rounded-lg bg-gray-100 cursor-zoom-in shadow-lg"></div>';
+        html += '<div class="w-full flex justify-center"><img id="lb-main" src="'+mainSrc+'" alt="'+escapeHtml(t(p.name,lang))+'" class="max-h-[62vh] w-auto object-contain rounded-lg bg-gray-100 cursor-zoom-in shadow-lg"></div>';
       } else {
-        html += '<div class="w-full flex justify-center"><div id="lb-main" class="max-h-[64vh] min-h-[20rem] w-[28rem] max-w-full flex flex-col items-center justify-center text-center text-dark/40 rounded-lg bg-gray-100"><i class="fas fa-image text-4xl mb-3 opacity-50"></i><span>'+(lang==="zh"?"图片待上传":"Image pending")+'</span></div></div>';
+        html += '<div class="w-full flex justify-center"><div id="lb-main" class="max-h-[62vh] min-h-[20rem] w-[28rem] max-w-full flex flex-col items-center justify-center text-center text-dark/40 rounded-lg bg-gray-100"><i class="fas fa-image text-4xl mb-3 opacity-50"></i><span>'+(lang==="zh"?"图片待上传":"Image pending")+'</span></div></div>';
       }
       if(views.length>1){
         html += '<div class="flex gap-3 flex-wrap justify-center">';
@@ -280,7 +288,10 @@
         });
         html += '</div>';
       }
-      html += '</div></div>';
+      html += '</div>';
+      // 右侧：放大框（固定显示，不随鼠标，不遮挡）
+      html += '<div class="lb-zoom-pane"><div class="zoom-result" id="lb-zoom-result"></div></div>';
+      html += '</div>';
       const lb = document.getElementById("lightbox");
       lb.innerHTML = html; lb.classList.remove("hidden"); document.body.style.overflow="hidden";
       renderZoomInfo(p, t(sub.name, lang));
@@ -313,10 +324,9 @@
     const ZOOM = 2.4;
     let _zoomLens = null, _zoomResult = null;
     function ensureZoomEls(){
-      if(_zoomResult) return;
-      _zoomLens = document.createElement('div'); _zoomLens.className='zoom-lens';
-      _zoomResult = document.createElement('div'); _zoomResult.className='zoom-result';
-      document.body.appendChild(_zoomLens); document.body.appendChild(_zoomResult);
+      if(!_zoomResult){ _zoomResult = document.getElementById('lb-zoom-result'); }
+      if(!_zoomResult){ _zoomResult = document.createElement('div'); _zoomResult.className='zoom-result'; _zoomResult.id='lb-zoom-result'; document.body.appendChild(_zoomResult); }
+      if(!_zoomLens){ _zoomLens = document.createElement('div'); _zoomLens.className='zoom-lens'; document.body.appendChild(_zoomLens); }
     }
 
     function renderZoomInfo(prod, subName){

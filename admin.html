@@ -903,6 +903,13 @@ const PM_STD_LABEL = { conventional:"国标", eu:"欧标", organic:"有机" };
 const PM_SHAPES = ["strip","crumb","granule"];
 const PM_SHAPE_LABEL = { strip:"条状", crumb:"碎状", granule:"颗粒状" };
 const PM_SHAPE_ICON = { strip:"fas fa-grip-lines", crumb:"fas fa-th-large", granule:"fas fa-gem" };
+function getProductImages(p){
+  const imgs = (p && p.images) || {};
+  if (imgs.dry || imgs.liquor) return { dry: imgs.dry || '', liquor: imgs.liquor || '' };
+  let dry='', liquor='';
+  ["conventional","eu","organic"].forEach(function(s){ const im=imgs[s]; if(im){ if(!dry && im.dry) dry=im.dry; if(!liquor && im.liquor) liquor=im.liquor; } });
+  return { dry: dry, liquor: liquor };
+}
 
 function pmRender() {
   const cat = document.getElementById('pm_cat').value;
@@ -918,8 +925,10 @@ function pmRender() {
     sub.products.forEach((p, pj) => {
       // 初始化字段
       if (!p.standards) {
+        const _pi = getProductImages(p);
+        const _any = !!(_pi.dry || _pi.liquor);
         p.standards = {};
-        PM_STDS.forEach(s => { p.standards[s] = !!(p.images && p.images[s] && p.images[s].dry); });
+        PM_STDS.forEach(s => { p.standards[s] = _any; });
       }
       if (!p.shape) p.shape = 'strip';
       if (!p.origin) p.origin = '';
@@ -951,24 +960,21 @@ function pmRender() {
       // --- 产地 ---
       html += '<div class="pm-field-row"><label>产地</label><input type="text" data-pm="origin" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(p.origin || '') + '" placeholder="输入产地名称" class="max-w-xs" /></div>';
 
-      // --- 图片上传区（按激活的标准展开） ---
-      PM_STDS.forEach(s => {
-        const imgObj = (p.images && p.images[s]) || { dry: '', liquor: '' };
-        const blockHidden = p.standards[s] ? '' : 'display:none';
-        html += '<div data-pm-stdblock="' + si + '-' + pj + '-' + s + '" style="' + blockHidden + '" class="mt-3 pl-3 border-l-2 border-green-200 bg-green-50/50 rounded-r-lg p-3">';
-        html += '<div class="text-xs font-semibold text-green-800 mb-2">【' + PM_STD_LABEL[s] + '】图片上传</div>';
-        html += '<div class="grid sm:grid-cols-2 gap-3">';
-        // 干茶图
-        html += '<div class="pm-img-input-group"><div class="field-label text-xs">干茶图 Dry Leaf</div>';
-        html += '<input type="url" data-pm="dry" data-std="' + s + '" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(imgObj.dry || '') + '" placeholder="https://..." />';
-        html += '<img class="pm-img-preview-lg hidden" data-pm-prev="' + si + '-' + pj + '-' + s + '-dry" onerror="this.classList.add(\'hidden\')" /></div>';
-        // 茶汤图
-        const liqHidden = hasLiq ? '' : 'display:none';
-        html += '<div class="pm-img-input-group" style="' + liqHidden + '" data-pm-liqwrap="' + si + '-' + pj + '-' + s + '"><div class="field-label text-xs">茶汤图 Tea Liquor</div>';
-        html += '<input type="url" data-pm="liquor" data-std="' + s + '" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(imgObj.liquor || '') + '" placeholder="https://..." />';
-        html += '<img class="pm-img-preview-lg hidden" data-pm-prev="' + si + '-' + pj + '-' + s + '-liquor" onerror="this.classList.add(\'hidden\')" /></div>';
-        html += '</div></div>';
-      });
+      // --- 图片上传区（每款产品仅两个输入框：干茶图 / 茶汤图）---
+      const pim = getProductImages(p);
+      html += '<div class="mt-3 pl-3 border-l-2 border-green-200 bg-green-50/50 rounded-r-lg p-3">';
+      html += '<div class="text-xs font-semibold text-green-800 mb-2">产品图片上传（认证标准仅用于前端展示，不参与上传）</div>';
+      html += '<div class="grid sm:grid-cols-2 gap-3">';
+      // 干茶图
+      html += '<div class="pm-img-input-group"><div class="field-label text-xs">干茶图 Dry Leaf</div>';
+      html += '<input type="url" data-pm="dry" data-std="all" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(pim.dry || '') + '" placeholder="https://..." />';
+      html += '<img class="pm-img-preview-lg hidden" data-pm-prev="' + si + '-' + pj + '-all-dry" onerror="this.classList.add(\'hidden\')" /></div>';
+      // 茶汤图
+      const liqHidden = hasLiq ? '' : 'display:none';
+      html += '<div class="pm-img-input-group" style="' + liqHidden + '" data-pm-liqwrap="' + si + '-' + pj + '-all"><div class="field-label text-xs">茶汤图 Tea Liquor</div>';
+      html += '<input type="url" data-pm="liquor" data-std="all" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(pim.liquor || '') + '" placeholder="https://..." />';
+      html += '<img class="pm-img-preview-lg hidden" data-pm-prev="' + si + '-' + pj + '-all-liquor" onerror="this.classList.add(\'hidden\')" /></div>';
+      html += '</div></div>';
 
       html += '</div>'; // end product card
     });
@@ -1002,14 +1008,11 @@ function pmToggleStdBtn(btn) {
   const p = currentData.products[cat].subcategories[si].products[pj];
   if (!p.standards) p.standards = {};
   p.standards[s] = !p.standards[s];
-  // 切换按钮样式
+  // 切换按钮样式（认证标准仅用于前端展示，不参与图片上传）
   const btns = btn.parentElement.querySelectorAll('.pm-std-btn');
   btns.forEach(b => {
     if (b.dataset.pmStdbtn === s) b.classList.toggle('active', p.standards[s]);
   });
-  // 切换图片区块显示
-  const block = document.querySelector('[data-pm-stdblock="' + si + '-' + pj + '-' + s + '"]');
-  if (block) block.style.display = p.standards[s] ? '' : 'none';
 }
 
 // 形状按钮切换
@@ -1042,12 +1045,12 @@ function pmPreview(inp) {
 
 // 图片URL绑定到数据
 function pmLiveBind(inp) {
-  const si = +inp.dataset.si, pj = +inp.dataset.pj, std = inp.dataset.std, field = inp.dataset.pm;
+  const si = +inp.dataset.si, pj = +inp.dataset.pj, field = inp.dataset.pm;
   const cat = document.getElementById('pm_cat').value;
   const p = currentData.products[cat].subcategories[si].products[pj];
   if (!p.images) p.images = {};
-  if (!p.images[std]) p.images[std] = { dry: '', liquor: '' };
-  p.images[std][field] = inp.value.trim();
+  // 每款产品统一一对图片：p.images.dry / p.images.liquor（标准仅展示用）
+  p.images[field] = inp.value.trim();
 }
 
 async function saveProductManager() {
