@@ -27,8 +27,7 @@
     .zoom-wrap { cursor: zoom-in; }
     .product-img { transition: transform .12s ease-out; }
     .zoom-lens { position:fixed; border:2px solid rgba(15,76,58,.65); background:rgba(212,175,55,.20); pointer-events:none; display:none; z-index:110; border-radius:6px; }
-    .zoom-panel { position:fixed; display:none; z-index:130; background:#fff; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.30); border:1px solid rgba(0,0,0,.08); overflow:hidden; flex-direction:row; }
-    .zoom-info { width:260px; padding:20px 18px; background:#ffffff; border-right:1px solid #e5e7eb; align-self:stretch; overflow-y:auto; flex-shrink:0; box-shadow:inset 0 0 0 1px rgba(15,76,58,.04); }
+    .zoom-info { width:260px; padding:20px 18px; background:#ffffff; border-radius:16px; box-shadow:0 8px 30px rgba(15,76,58,.10); border:1px solid rgba(15,76,58,.08); flex-shrink:0; align-self:stretch; }
     .zoom-info h5 { font-size:14px; color:#0f4c3a; font-weight:700; margin:0 0 4px 0; }
     .zoom-info .zi-subtitle { font-size:12px; color:#9ca3af; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid #e5e7eb; }
     .zoom-info .zi-section { margin-bottom:14px; }
@@ -39,8 +38,9 @@
     .zoom-info .zi-off { background:#d1d5db; }
     .zoom-info .zi-shape-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:6px; font-size:12px; background:#0F4C3A; color:white; font-weight:600; }
     .zoom-info .zi-origin { font-size:13px; color:#374151; background:#fff; padding:8px 10px; border-radius:8px; border:1px solid #e5e7eb; }
-    .zoom-result { width:400px; height:420px; background-color:#f9fafb; background-repeat:no-repeat; background-position:center; background-size:cover; border-radius:0 16px 16px 0; }
+    .zoom-result { position:fixed; right:24px; top:50%; transform:translateY(-50%); width:400px; height:420px; background-color:#f9fafb; background-repeat:no-repeat; display:none; z-index:130; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.30); border:1px solid rgba(0,0,0,.08); }
   </style>
+  <link rel="icon" href="data:,">
 </head>
 <body>
   <header class="fixed w-full top-0 z-50 transition-all duration-500 py-3 bg-light/95 backdrop-blur-md shadow-sm">
@@ -221,9 +221,9 @@
           html += '<div class="bg-white rounded-2xl overflow-hidden shadow-md fade-in flex flex-col">';
           const _hasImg = !!(drySrc && drySrc.trim()!=="");
           const _imgInner = _hasImg
-            ? '<img data-pkey="'+key+'" src="'+drySrc+'" alt="'+escapeHtml(t(p.name,lang))+'" class="product-img w-full h-full object-cover cursor-zoom-in">'
+            ? '<img src="'+drySrc+'" alt="'+escapeHtml(t(p.name,lang))+'" class="product-img w-full h-full object-cover cursor-zoom-in">'
             : '<div class="w-full h-full flex flex-col items-center justify-center text-center text-dark/40 text-xs p-2 leading-relaxed"><span>'+escapeHtml(t(p.name,lang))+'</span><span class="opacity-60 mt-1">图片待上传</span></div>';
-          html += '<div class="p-2"><div class="zoom-wrap relative overflow-hidden rounded-lg bg-gray-100 product-detail-img" style="height:10rem">'+_imgInner+'</div></div>';
+          html += '<div class="p-2"><div class="zoom-wrap relative overflow-hidden rounded-lg bg-gray-100 product-detail-img" data-pkey="'+key+'" style="height:10rem">'+_imgInner+'</div></div>';
           html += '<div class="p-4 pt-2 flex-1 flex flex-col">';
           html += '<h4 class="text-base font-bold text-primary mb-1">'+escapeHtml(t(p.name,lang))+'</h4>';
           if(!hasLiq) html += '<span class="text-xs text-dark/40 mb-1">'+pack.no_liquor+'</span>';
@@ -234,10 +234,10 @@
         html += '</div></div>';
       });
       cont.innerHTML = html;
-      cont.querySelectorAll(".product-img").forEach(img=>{
-        img.addEventListener("click", ()=> openLightbox(img.getAttribute("data-pkey")));
-        img.addEventListener("error", ()=>{ img.style.background="#e5e7eb"; });
-        attachLightboxZoom(img);
+      cont.querySelectorAll(".product-detail-img").forEach(box=>{
+        box.addEventListener("click", ()=> openLightbox(box.getAttribute("data-pkey")));
+        const im = box.querySelector("img");
+        if(im){ im.addEventListener("error", ()=>{ im.style.background="#e5e7eb"; }); }
       });
       cont.querySelectorAll("[data-stdbtn]").forEach(btn=>{
         btn.addEventListener("click", ()=>{ const parts=btn.getAttribute("data-stdbtn").split("|"); productStd[parts[0]]=parts[1]; renderProducts(currentLang); });
@@ -250,56 +250,77 @@
       const sub = catData.subcategories[si];
       const p = sub.products[pj];
       window.__zoomProduct = p;
-      const std = getStd(p, key);
-      const imgs = (p.images && p.images[std]) || {dry:"",liquor:""};
-      const hasLiq = p.has_liquor !== false;
       const lang = currentLang; const pack = UI[lang] || UI.en;
-      const views = [{label: pack.dry_leaf, src: imgs.dry}];
-      if(hasLiq && imgs.liquor) views.push({label: pack.liquor, src: imgs.liquor});
+      // 收集该产品所有可用图片（跨标准：国标/欧标/有机，含干茶/茶汤）
+      const views = [];
+      ["conventional","eu","organic"].forEach(function(s){
+        const im = (p.images && p.images[s]) || null;
+        const sLabel = pack["std_"+s] || s;
+        if(im && im.dry) views.push({label: sLabel+" · "+pack.dry_leaf, src: im.dry});
+        if(p.has_liquor !== false && im && im.liquor) views.push({label: sLabel+" · "+pack.liquor, src: im.liquor});
+      });
+      const hasImg = views.length>0;
+      const mainSrc = hasImg ? views[0].src : "";
       let html = '<div class="absolute top-4 right-4 z-[120]"><button onclick="closeLightbox()" class="w-10 h-10 rounded-full bg-white/90 text-gray-700 flex items-center justify-center text-lg shadow"><i class="fas fa-times"></i></button></div>';
       html += '<div class="text-center mb-4"><h3 class="text-xl font-bold text-primary">'+escapeHtml(t(p.name,lang))+'</h3><p class="text-dark/50 text-sm">'+escapeHtml(t(sub.name,lang))+'</p></div>';
-      html += '<div class="flex flex-col items-center gap-3 w-full max-w-4xl">';
-      html += '<div class="w-full flex justify-center"><img id="lb-main" src="'+views[0].src+'" alt="'+escapeHtml(t(p.name,lang))+'" class="max-h-[64vh] w-auto object-contain rounded-lg bg-gray-100 cursor-zoom-in shadow-lg"></div>';
+      html += '<div class="flex flex-col md:flex-row items-start justify-center gap-6 w-full max-w-5xl">';
+      // 左侧：固定信息栏（名称/标准/形状/产地），不随鼠标移动
+      html += '<div class="lb-info-col zoom-info" id="lb-info-col"></div>';
+      // 右侧：图片区
+      html += '<div class="flex flex-col items-center gap-3 flex-1">';
+      if(hasImg){
+        html += '<div class="w-full flex justify-center"><img id="lb-main" src="'+mainSrc+'" alt="'+escapeHtml(t(p.name,lang))+'" class="max-h-[64vh] w-auto object-contain rounded-lg bg-gray-100 cursor-zoom-in shadow-lg"></div>';
+      } else {
+        html += '<div class="w-full flex justify-center"><div id="lb-main" class="max-h-[64vh] min-h-[20rem] w-[28rem] max-w-full flex flex-col items-center justify-center text-center text-dark/40 rounded-lg bg-gray-100"><i class="fas fa-image text-4xl mb-3 opacity-50"></i><span>'+(lang==="zh"?"图片待上传":"Image pending")+'</span></div></div>';
+      }
       if(views.length>1){
-        html += '<div class="flex gap-3">';
+        html += '<div class="flex gap-3 flex-wrap justify-center">';
         views.forEach((v,i)=>{
-          html += '<button type="button" class="lb-thumb rounded-lg overflow-hidden border-2 '+(i===0?'border-primary':'border-transparent')+'" data-lbsrc="'+v.src+'"><img src="'+v.src+'" class="h-16 w-16 object-cover"></button>';
+          html += '<button type="button" class="lb-thumb rounded-lg overflow-hidden border-2 '+(i===0?'border-primary':'border-transparent')+'" data-lbsrc="'+v.src+'" title="'+escapeHtml(v.label)+'"><img src="'+v.src+'" class="h-16 w-16 object-cover"></button>';
         });
         html += '</div>';
       }
-      html += '</div>';
+      html += '</div></div>';
       const lb = document.getElementById("lightbox");
       lb.innerHTML = html; lb.classList.remove("hidden"); document.body.style.overflow="hidden";
+      renderZoomInfo(p, t(sub.name, lang));
       const main = document.getElementById("lb-main");
-      if(main){ main.addEventListener("error", ()=>{ main.style.background="#e5e7eb"; }); attachLightboxZoom(main); }
+      if(main && hasImg){
+        main.addEventListener("error", ()=>{ main.style.background="#e5e7eb"; });
+        attachLightboxZoom(main);
+      }
       lb.querySelectorAll(".lb-thumb").forEach(btn=>{
         btn.addEventListener("click", ()=>{
           if(!main) return;
-          main.src = btn.getAttribute("data-lbsrc");
+          const ns = btn.getAttribute("data-lbsrc");
+          const nm = document.createElement("img");
+          nm.id="lb-main"; nm.src=ns; nm.alt=escapeHtml(t(p.name,lang));
+          nm.className="max-h-[64vh] w-auto object-contain rounded-lg bg-gray-100 cursor-zoom-in shadow-lg";
+          main.replaceWith(nm);
+          nm.addEventListener("error", ()=>{ nm.style.background="#e5e7eb"; });
+          attachLightboxZoom(nm);
           lb.querySelectorAll(".lb-thumb").forEach(b=>{ b.classList.remove("border-primary"); b.classList.add("border-transparent"); });
           btn.classList.add("border-primary"); btn.classList.remove("border-transparent");
-          if(_zoomResult) _zoomResult.style.display="none";
           if(_zoomLens) _zoomLens.style.display="none";
-          if(_zoomPanel) _zoomPanel.style.display="none";
+          if(_zoomResult) _zoomResult.style.display="none";
         });
       });
     }
-    function closeLightbox(){ const lb=document.getElementById("lightbox"); lb.classList.add("hidden"); lb.innerHTML=""; document.body.style.overflow=""; if(_zoomLens)_zoomLens.style.display='none'; if(_zoomResult)_zoomResult.style.display='none'; if(_zoomPanel)_zoomPanel.style.display='none'; }
+
+    function closeLightbox(){ const lb=document.getElementById("lightbox"); lb.classList.add("hidden"); lb.innerHTML=""; document.body.style.overflow=""; if(_zoomLens)_zoomLens.style.display='none'; if(_zoomResult)_zoomResult.style.display='none'; }
 
     /* ===== 悬停放大镜（仿 loopteas 产品图放大展示细节） ===== */
     const ZOOM = 2.4;
-    let _zoomLens = null, _zoomResult = null, _zoomPanel = null;
+    let _zoomLens = null, _zoomResult = null;
     function ensureZoomEls(){
-      if(_zoomPanel) return;
+      if(_zoomResult) return;
       _zoomLens = document.createElement('div'); _zoomLens.className='zoom-lens';
-      _zoomPanel = document.createElement('div'); _zoomPanel.className='zoom-panel';
-      const infoCol = document.createElement('div'); infoCol.className='zoom-info'; infoCol.id='zoom-info-col';
       _zoomResult = document.createElement('div'); _zoomResult.className='zoom-result';
-      _zoomPanel.appendChild(infoCol); _zoomPanel.appendChild(_zoomResult);
-      document.body.appendChild(_zoomLens); document.body.appendChild(_zoomPanel);
+      document.body.appendChild(_zoomLens); document.body.appendChild(_zoomResult);
     }
+
     function renderZoomInfo(prod, subName){
-      const col = document.getElementById('zoom-info-col');
+      const col = document.getElementById('lb-info-col') || document.getElementById('zoom-info-col');
       if(!col || !prod) return;
       const lang = currentLang || 'en';
       const pack = UI[lang] || UI.en;
@@ -307,10 +328,8 @@
       const av = availableStandards(prod);
       const shape = prod.shape || 'strip';
       const origin = prod.origin || '';
-      // 产品名
       let html = '<h5>' + escapeHtml(t(prod.name, lang)) + '</h5>';
       html += '<div class="zi-subtitle">' + escapeHtml(subName || '') + '</div>';
-      // 认证标准
       html += '<div class="zi-section"><div class="zi-label">' + (zh ? '认证标准' : 'Certification') + '</div>';
       var stdList=[["conventional",zh?"国标":"Conventional"],["eu",zh?"欧标":"EU"],["organic",zh?"有机":"Organic"]];
       stdList.forEach(function(st){
@@ -318,17 +337,16 @@
         html += '<div class="zi-row"><span class="zi-dot '+(on?'zi-on':'zi-off')+'"></span>'+st[1]+'</div>';
       });
       html += '</div>';
-      // 形状
       var shapeLabels = zh ? {"strip":"条状","crumb":"碎状","granule":"颗粒状"} : {"strip":"Strip","crumb":"Crumb","granule":"Granular"};
       html += '<div class="zi-section"><div class="zi-label">' + (zh ? '形状' : 'Shape') + '</div>';
       html += '<div class="zi-shape-badge">' + (shapeLabels[shape] || shape) + '</div>';
       html += '</div>';
-      // 产地
       html += '<div class="zi-section"><div class="zi-label">' + (zh ? '产地' : 'Origin') + '</div>';
       html += '<div class="zi-origin">' + (origin ? escapeHtml(origin) : (zh ? '—' : '—')) + '</div>';
       html += '</div>';
       col.innerHTML = html;
     }
+
     function getContentRect(img){
       const r = img.getBoundingClientRect();
       const nw = img.naturalWidth, nh = img.naturalHeight;
@@ -340,17 +358,13 @@
     function attachLightboxZoom(img){
       img.addEventListener('mouseenter', function(){
         if(!img.getAttribute('src')) return;
-        var _pk = img.getAttribute('data-pkey')||'';
-        var _pkp = _pk.split('-');
-        if(_pkp.length>=3){ var _ps = catData.subcategories[+_pkp[1]]; if(_ps) window.__zoomProduct = _ps.products[+_pkp[2]]; }
         ensureZoomEls();
         _zoomLens.style.display='block';
-        _zoomPanel.style.display='flex';
-        var _zpKey = _pk; var _zpSub = _zpKey ? catData.subcategories[_zpKey.split('-')[1]] : null; renderZoomInfo(window.__zoomProduct, _zpSub ? t(_zpSub.name, currentLang) : '');
+        _zoomResult.style.display='block';
         _zoomResult.style.backgroundImage='url("' + img.getAttribute('src') + '")';
       });
       img.addEventListener('mousemove', function(e){
-        if(_zoomPanel.style.display!=='flex') return;
+        if(_zoomResult.style.display!=='block') return;
         const cr = getContentRect(img);
         const lensW = cr.width/ZOOM, lensH = cr.height/ZOOM;
         _zoomLens.style.width=lensW+'px';
@@ -360,23 +374,15 @@
         let ly=Math.max(0,Math.min(y-lensH/2, cr.height-lensH));
         _zoomLens.style.left=(cr.left+lx)+'px';
         _zoomLens.style.top=(cr.top+ly)+'px';
-        const resW=_zoomResult.offsetWidth, resH=_zoomResult.offsetHeight;
         _zoomResult.style.backgroundSize=(cr.width*ZOOM)+'px '+(cr.height*ZOOM)+'px';
         _zoomResult.style.backgroundPosition='-'+(lx*ZOOM)+'px -'+(ly*ZOOM)+'px';
-        const panelW = _zoomPanel.offsetWidth || (resW+200);
-        const gap=16;
-        let px = cr.right+gap;
-        if(px+panelW > window.innerWidth-8) px = cr.left-gap-panelW;
-        if(px < 8) px = 8;
-        let py = Math.max(8, Math.min(e.clientY-_zoomPanel.offsetHeight/2, window.innerHeight-_zoomPanel.offsetHeight-8));
-        _zoomPanel.style.left=px+'px';
-        _zoomPanel.style.top=py+'px';
       });
       img.addEventListener('mouseleave', function(){
         if(_zoomLens){_zoomLens.style.display='none';}
-        if(_zoomPanel){_zoomPanel.style.display='none';}
+        if(_zoomResult){_zoomResult.style.display='none';}
       });
     }
+
 
 
     function switchLang(lang){
