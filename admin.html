@@ -272,27 +272,17 @@
     <div id="tab-product-detail" class="tab-content hidden">
       <div class="section-card">
         <h3 class="font-bold text-gray-800 mb-2 text-lg">产品中心管理（分类 → 子品类 → 产品）</h3>
-        <p class="text-gray-500 text-sm mb-4">为每个品类下的每款产品设置图片。每款产品可切换 <b>国标 / 欧盟(EU) / 有机(Organic)</b> 标准，分别上传 <b>干茶图</b> 与 <b>茶汤图</b>（无茶汤产品如抹茶、普洱饼请取消"有茶汤"）。</p>
-        <div class="mb-4 grid sm:grid-cols-2 gap-4">
-          <div>
-            <div class="field-label">选择品类</div>
-            <select id="pm_cat" onchange="pmRender()" class="form-select max-w-xs">
-              <option value="green">绿茶 Green Tea</option>
-              <option value="black">红茶 Black Tea</option>
-              <option value="dark">黑茶 Dark Tea</option>
-              <option value="white">白茶 White Tea</option>
-              <option value="flower">花茶 Flower Tea</option>
-              <option value="oolong">乌龙茶 Oolong Tea</option>
-            </select>
-          </div>
-          <div>
-            <div class="field-label">当前编辑标准（上传该标准下的图片）</div>
-            <select id="pm_std" onchange="pmRender()" class="form-select max-w-xs">
-              <option value="conventional">国标 Conventional</option>
-              <option value="eu">欧盟 EU</option>
-              <option value="organic">有机 Organic</option>
-            </select>
-          </div>
+        <p class="text-gray-500 text-sm mb-4">为每个品类下的每款产品设置图片。每款产品可勾选 <b>国标 / 欧标 / 有机</b> 标准（复选框，像"有茶汤"一样放在右侧），勾选后即为该产品上传对应标准的 <b>干茶图</b> 与 <b>茶汤图</b>（无茶汤产品如抹茶、普洱饼请取消"有茶汤"）。粘贴图片链接后下方即时显示预览。</p>
+        <div class="mb-4">
+          <div class="field-label">选择品类</div>
+          <select id="pm_cat" onchange="pmRender()" class="form-select max-w-xs">
+            <option value="green">绿茶 Green Tea</option>
+            <option value="black">红茶 Black Tea</option>
+            <option value="dark">黑茶 Dark Tea</option>
+            <option value="white">白茶 White Tea</option>
+            <option value="flower">花茶 Flower Tea</option>
+            <option value="oolong">乌龙茶 Oolong Tea</option>
+          </select>
         </div>
         <div id="pm-editor" class="space-y-6"></div>
         <div class="flex items-center gap-4 mt-6">
@@ -896,9 +886,11 @@ function t(obj, lang) {
   return obj[lang] || obj.en || obj.zh || '';
 }
 
+const PM_STDS = ["conventional","eu","organic"];
+const PM_STD_LABEL = { conventional:"国标", eu:"欧标", organic:"有机" };
+
 function pmRender() {
   const cat = document.getElementById('pm_cat').value;
-  const std = document.getElementById('pm_std').value;
   const catData = currentData && currentData.products && currentData.products[cat];
   const editor = document.getElementById('pm-editor');
   if (!editor) return;
@@ -909,31 +901,68 @@ function pmRender() {
     html += '<h4 class="font-bold text-gray-800 mb-1">' + escapeHtml(t(sub.name, 'zh')) + ' <span class="text-gray-400 font-normal text-sm">' + escapeHtml(t(sub.name, 'en')) + '</span></h4>';
     html += '<div class="space-y-3 mt-3">';
     sub.products.forEach((p, pj) => {
+      if (!p.standards) {
+        p.standards = {};
+        PM_STDS.forEach(s => { p.standards[s] = !!(p.images && p.images[s] && p.images[s].dry); });
+      }
       const hasLiq = p.has_liquor !== false;
-      const imgObj = (p.images && p.images[std]) || { dry: '', liquor: '' };
       html += '<div class="border border-gray-200 rounded-lg p-3">';
-      html += '<div class="flex items-center justify-between mb-2">';
-      html += '<div class="font-medium text-gray-700 text-sm">' + escapeHtml(t(p.name, 'zh')) + ' <span class="text-gray-400 text-xs">' + escapeHtml(t(p.name, 'en')) + '</span></div>';
+      html += '<div class="flex flex-wrap items-center gap-3 mb-2">';
+      html += '<div class="font-medium text-gray-700 text-sm flex-1 min-w-[140px]">' + escapeHtml(t(p.name, 'zh')) + ' <span class="text-gray-400 text-xs">' + escapeHtml(t(p.name, 'en')) + '</span></div>';
       html += '<label class="flex items-center gap-1 text-xs text-gray-500 cursor-pointer"><input type="checkbox" data-pm="hasliq" data-si="' + si + '" data-pj="' + pj + '" ' + (hasLiq ? 'checked' : '') + '/> 有茶汤</label>';
+      PM_STDS.forEach(s => {
+        const chk = p.standards[s] ? 'checked' : '';
+        html += '<label class="flex items-center gap-1 text-xs text-gray-500 cursor-pointer"><input type="checkbox" data-pm="std" data-std="' + s + '" data-si="' + si + '" data-pj="' + pj + '" ' + chk + '/> ' + PM_STD_LABEL[s] + '</label>';
+      });
       html += '</div>';
-      html += '<div class="grid sm:grid-cols-2 gap-3">';
-      html += '<div><div class="field-label text-xs">干茶图 Dry Leaf</div><input type="url" data-pm="dry" data-si="' + si + '" data-pj="' + pj + '" data-std="' + std + '" value="' + escapeHtml(imgObj.dry || '') + '" placeholder="https://..." /></div>';
-      html += '<div data-pm-liqwrap="' + si + '-' + pj + '" style="' + (hasLiq ? '' : 'display:none') + '"><div class="field-label text-xs">茶汤图 Tea Liquor</div><input type="url" data-pm="liquor" data-si="' + si + '" data-pj="' + pj + '" data-std="' + std + '" value="' + escapeHtml(imgObj.liquor || '') + '" placeholder="https://..." /></div>';
-      html += '</div></div>';
+      PM_STDS.forEach(s => {
+        const imgObj = (p.images && p.images[s]) || { dry: '', liquor: '' };
+        const blockHidden = p.standards[s] ? '' : 'display:none';
+        html += '<div data-pm-stdblock="' + si + '-' + pj + '-' + s + '" style="' + blockHidden + '" class="mt-2 pl-3 border-l-2 border-gray-100">';
+        html += '<div class="text-xs text-gray-400 mb-1">【' + PM_STD_LABEL[s] + '】干茶图 / 茶汤图</div>';
+        html += '<div class="grid sm:grid-cols-2 gap-3">';
+        html += '<div><div class="field-label text-xs">干茶图 Dry Leaf</div><input type="url" data-pm="dry" data-std="' + s + '" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(imgObj.dry || '') + '" placeholder="https://..." /><img class="img-preview hidden mt-1" data-pm-prev="' + si + '-' + pj + '-' + s + '-dry" onerror="this.classList.add(\'hidden\')" /></div>';
+        const liqHidden = hasLiq ? '' : 'display:none';
+        html += '<div data-pm-liqwrap="' + si + '-' + pj + '-' + s + '" style="' + liqHidden + '"><div class="field-label text-xs">茶汤图 Tea Liquor</div><input type="url" data-pm="liquor" data-std="' + s + '" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(imgObj.liquor || '') + '" placeholder="https://..." /><img class="img-preview hidden mt-1" data-pm-prev="' + si + '-' + pj + '-' + s + '-liquor" onerror="this.classList.add(\'hidden\')" /></div>';
+        html += '</div></div>';
+      });
+      html += '</div>';
     });
     html += '</div></div>';
   });
   editor.innerHTML = html;
   editor.querySelectorAll('[data-pm="hasliq"]').forEach(cb => cb.addEventListener('change', () => pmToggleLiquor(cb)));
-  editor.querySelectorAll('input[data-pm="dry"], input[data-pm="liquor"]').forEach(inp => inp.addEventListener('input', () => pmLiveBind(inp)));
+  editor.querySelectorAll('[data-pm="std"]').forEach(cb => cb.addEventListener('change', () => pmToggleStd(cb)));
+  editor.querySelectorAll('input[data-pm="dry"], input[data-pm="liquor"]').forEach(inp => {
+    inp.addEventListener('input', () => pmLiveBind(inp));
+    inp.addEventListener('input', () => pmPreview(inp));
+  });
 }
 
 function pmToggleLiquor(cb) {
   const si = +cb.dataset.si, pj = +cb.dataset.pj;
-  const p = currentData.products[document.getElementById('pm_cat').value].subcategories[si].products[pj];
+  const cat = document.getElementById('pm_cat').value;
+  const p = currentData.products[cat].subcategories[si].products[pj];
   p.has_liquor = cb.checked;
-  const wrap = document.querySelector('[data-pm-liqwrap="' + si + '-' + pj + '"]');
-  if (wrap) wrap.style.display = cb.checked ? '' : 'none';
+  document.querySelectorAll('[data-pm-liqwrap^="' + si + '-' + pj + '-"]').forEach(w => { w.style.display = cb.checked ? '' : 'none'; });
+}
+
+function pmToggleStd(cb) {
+  const si = +cb.dataset.si, pj = +cb.dataset.pj, s = cb.dataset.std;
+  const cat = document.getElementById('pm_cat').value;
+  const p = currentData.products[cat].subcategories[si].products[pj];
+  if (!p.standards) p.standards = {};
+  p.standards[s] = cb.checked;
+  const block = document.querySelector('[data-pm-stdblock="' + si + '-' + pj + '-' + s + '"]');
+  if (block) block.style.display = cb.checked ? '' : 'none';
+}
+
+function pmPreview(inp) {
+  const prev = document.querySelector('[data-pm-prev="' + inp.dataset.si + '-' + inp.dataset.pj + '-' + inp.dataset.std + '-' + inp.dataset.pm + '"]');
+  if (!prev) return;
+  const v = inp.value.trim();
+  if (v) { prev.src = v; prev.classList.remove('hidden'); }
+  else { prev.classList.add('hidden'); }
 }
 
 function pmLiveBind(inp) {
