@@ -26,15 +26,20 @@
     #lightbox { backdrop-filter: blur(4px); }
     .zoom-wrap { cursor: zoom-in; }
     .product-img { transition: transform .12s ease-out; }
-    .zoom-lens { position:fixed; border:2px solid rgba(15,76,58,.65); background:rgba(212,175,55,.20); pointer-events:none; display:none; z-index:110; }
-    .zoom-panel { position:fixed; display:none; z-index:130; background:#fff; border-radius:16px; box-shadow:0 18px 50px rgba(0,0,0,.30); border:1px solid rgba(0,0,0,.08); overflow:hidden; }
-    .zoom-std { width:200px; padding:18px 16px; background:#f7faf9; border-right:1px solid #eee; align-self:stretch; }
-    .zoom-std h5 { font-size:13px; color:#0f4c3a; font-weight:700; margin-bottom:10px; }
-    .zoom-std .std-row { display:flex; align-items:center; gap:8px; font-size:13px; margin-bottom:8px; color:#374151; }
-    .zoom-std .std-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
-    .zoom-std .std-on { background:#15803d; }
-    .zoom-std .std-off { background:#d1d5db; }
-    .zoom-result { width:360px; height:360px; background-color:#fff; background-repeat:no-repeat; }
+    .zoom-lens { position:fixed; border:2px solid rgba(15,76,58,.65); background:rgba(212,175,55,.20); pointer-events:none; display:none; z-index:110; border-radius:6px; }
+    .zoom-panel { position:fixed; display:none; z-index:130; background:#fff; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.30); border:1px solid rgba(0,0,0,.08); overflow:hidden; flex-direction:row; }
+    .zoom-info { width:240px; padding:20px 18px; background:#f7faf9; border-right:1px solid #e5e7eb; align-self:stretch; overflow-y:auto; flex-shrink:0; }
+    .zoom-info h5 { font-size:14px; color:#0f4c3a; font-weight:700; margin:0 0 4px 0; }
+    .zoom-info .zi-subtitle { font-size:12px; color:#9ca3af; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid #e5e7eb; }
+    .zoom-info .zi-section { margin-bottom:14px; }
+    .zoom-info .zi-label { font-size:11px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+    .zoom-info .zi-row { display:flex; align-items:center; gap:8px; font-size:13px; margin-bottom:6px; color:#374151; }
+    .zoom-info .zi-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+    .zoom-info .zi-on { background:#15803d; }
+    .zoom-info .zi-off { background:#d1d5db; }
+    .zoom-info .zi-shape-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:6px; font-size:12px; background:#0F4C3A; color:white; font-weight:600; }
+    .zoom-info .zi-origin { font-size:13px; color:#374151; background:#fff; padding:8px 10px; border-radius:8px; border:1px solid #e5e7eb; }
+    .zoom-result { width:400px; height:420px; background-color:#f9fafb; background-repeat:no-repeat; background-position:center; background-size:cover; border-radius:0 16px 16px 0; }
   </style>
 </head>
 <body>
@@ -287,23 +292,40 @@
       if(_zoomPanel) return;
       _zoomLens = document.createElement('div'); _zoomLens.className='zoom-lens';
       _zoomPanel = document.createElement('div'); _zoomPanel.className='zoom-panel';
-      const stdCol = document.createElement('div'); stdCol.className='zoom-std'; stdCol.id='zoom-std-col';
+      const infoCol = document.createElement('div'); infoCol.className='zoom-info'; infoCol.id='zoom-info-col';
       _zoomResult = document.createElement('div'); _zoomResult.className='zoom-result';
-      _zoomPanel.appendChild(stdCol); _zoomPanel.appendChild(_zoomResult);
+      _zoomPanel.appendChild(infoCol); _zoomPanel.appendChild(_zoomResult);
       document.body.appendChild(_zoomLens); document.body.appendChild(_zoomPanel);
     }
-    function renderZoomStdCol(prod){
-      const col = document.getElementById('zoom-std-col');
+    function renderZoomInfo(prod, subName){
+      const col = document.getElementById('zoom-info-col');
       if(!col || !prod) return;
-      const lang = currentLang;
+      const lang = currentLang || 'en';
       const pack = UI[lang] || UI.en;
+      const zh = lang === 'zh';
       const av = availableStandards(prod);
-      const stds=[["conventional","std_conventional"],["eu","std_eu"],["organic","std_organic"]];
-      let html = '<h5>' + ((lang==='zh') ? '适用标准' : 'Standards') + '</h5>';
-      stds.forEach(function(st){
-        const on = av.indexOf(st[0])>=0;
-        html += '<div class="std-row"><span class="std-dot '+(on?'std-on':'std-off')+'"></span>'+(pack[st[1]]||st[1])+'</div>';
+      const shape = prod.shape || 'strip';
+      const origin = prod.origin || '';
+      // 产品名
+      let html = '<h5>' + escapeHtml(t(prod.name, lang)) + '</h5>';
+      html += '<div class="zi-subtitle">' + escapeHtml(subName || '') + '</div>';
+      // 认证标准
+      html += '<div class="zi-section"><div class="zi-label">' + (zh ? '认证标准' : 'Certification') + '</div>';
+      var stdList=[["conventional",zh?"国标":"Conventional"],["eu",zh?"欧标":"EU"],["organic",zh?"有机":"Organic"]];
+      stdList.forEach(function(st){
+        var on = av.indexOf(st[0])>=0;
+        html += '<div class="zi-row"><span class="zi-dot '+(on?'zi-on':'zi-off')+'"></span>'+st[1]+'</div>';
       });
+      html += '</div>';
+      // 形状
+      var shapeLabels = zh ? {"strip":"条状","crumb":"碎状","granule":"颗粒状"} : {"strip":"Strip","crumb":"Crumb","granule":"Granular"};
+      html += '<div class="zi-section"><div class="zi-label">' + (zh ? '形状' : 'Shape') + '</div>';
+      html += '<div class="zi-shape-badge">' + (shapeLabels[shape] || shape) + '</div>';
+      html += '</div>';
+      // 产地
+      html += '<div class="zi-section"><div class="zi-label">' + (zh ? '产地' : 'Origin') + '</div>';
+      html += '<div class="zi-origin">' + (origin ? escapeHtml(origin) : (zh ? '—' : '—')) + '</div>';
+      html += '</div>';
       col.innerHTML = html;
     }
     function getContentRect(img){
@@ -320,7 +342,7 @@
         ensureZoomEls();
         _zoomLens.style.display='block';
         _zoomPanel.style.display='flex';
-        renderZoomStdCol(window.__zoomProduct);
+        var _zpSub = catData.subcategories[key.split('-')[1]]; renderZoomInfo(window.__zoomProduct, t(_zpSub.name, currentLang));
         _zoomResult.style.backgroundImage='url("' + img.getAttribute('src') + '")';
       });
       img.addEventListener('mousemove', function(e){

@@ -34,6 +34,18 @@
     .news-summary-item { border-left: 4px solid #3b82f6; }
     .news-detail-item { border-left: 4px solid #16a34a; }
     .news-editor-section { background: #f9fafb; border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+    /* 产品编辑器 UI（参考截图3模式，绿色主题） */
+    .pm-std-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 2px solid #d1d5db; background: white; color: #6b7280; }
+    .pm-std-btn:hover { border-color: #0F4C3A; }
+    .pm-std-btn.active { background: #0F4C3A; color: white; border-color: #0F4C3A; }
+    .pm-shape-btn { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 16px; border-radius: 8px; font-size: 12px; cursor: pointer; transition: all 0.2s; border: 2px solid #d1d5db; background: white; color: #6b7280; min-width: 72px; }
+    .pm-shape-btn:hover { border-color: #0F4C3A; }
+    .pm-shape-btn.active { background: #0F4C3A; color: white; border-color: #0F4C3A; }
+    .pm-shape-btn i { font-size: 20px; }
+    .pm-field-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+    .pm-field-row label { font-size: 13px; font-weight: 600; color: #374151; min-width: 56px; }
+    .pm-img-input-group { position: relative; }
+    .pm-img-preview-lg { max-height: 100px; width: 100%; object-fit: cover; border-radius: 6px; margin-top: 6px; border: 1px solid #e5e7eb; }
   </style>
 </head>
 <body>
@@ -272,7 +284,7 @@
     <div id="tab-product-detail" class="tab-content hidden">
       <div class="section-card">
         <h3 class="font-bold text-gray-800 mb-2 text-lg">产品中心管理（分类 → 子品类 → 产品）</h3>
-        <p class="text-gray-500 text-sm mb-4">为每个品类下的每款产品设置图片。每款产品可勾选 <b>国标 / 欧标 / 有机</b> 标准（复选框，像"有茶汤"一样放在右侧），勾选后即为该产品上传对应标准的 <b>干茶图</b> 与 <b>茶汤图</b>（无茶汤产品如抹茶、普洱饼请取消"有茶汤"）。粘贴图片链接后下方即时显示预览。</p>
+        <p class="text-gray-500 text-sm mb-4">为每个品类下的每款产品设置图片与属性。每款产品包含：<b>认证标准</b>（国标/欧标/有机，按钮切换）、<b>形状选择</b>（条状/碎状/颗粒状）、<b>产地</b>、<b>有茶汤</b>开关。勾选标准后显示对应干茶图/茶汤图上传框，粘贴链接即时预览。</p>
         <div class="mb-4">
           <div class="field-label">选择品类</div>
           <select id="pm_cat" onchange="pmRender()" class="form-select max-w-xs">
@@ -879,8 +891,7 @@ async function saveAboutVideo() {
   await pushDataJson('关于我们视频已保存并推送到 GitHub ✅');
 }
 
-// ===== 产品4图编辑器 =====
-// ===== 产品中心管理（新版：分类→子品类→产品，含国标/EU/有机标准） =====
+// ===== 产品中心管理（截图3模式：认证标准按钮 + 形状选择 + 产地 + 图片预览） =====
 function t(obj, lang) {
   if (!obj) return '';
   return obj[lang] || obj.en || obj.zh || '';
@@ -888,6 +899,9 @@ function t(obj, lang) {
 
 const PM_STDS = ["conventional","eu","organic"];
 const PM_STD_LABEL = { conventional:"国标", eu:"欧标", organic:"有机" };
+const PM_SHAPES = ["strip","crumb","granule"];
+const PM_SHAPE_LABEL = { strip:"条状", crumb:"碎状", granule:"颗粒状" };
+const PM_SHAPE_ICON = { strip:"fas fa-grip-lines", crumb:"fas fa-th-large", granule:"fas fa-gem" };
 
 function pmRender() {
   const cat = document.getElementById('pm_cat').value;
@@ -898,44 +912,77 @@ function pmRender() {
   let html = '';
   catData.subcategories.forEach((sub, si) => {
     html += '<div class="section-card border-l-4 border-green-700">';
-    html += '<h4 class="font-bold text-gray-800 mb-1">' + escapeHtml(t(sub.name, 'zh')) + ' <span class="text-gray-400 font-normal text-sm">' + escapeHtml(t(sub.name, 'en')) + '</span></h4>';
-    html += '<div class="space-y-3 mt-3">';
+    html += '<h4 class="font-bold text-gray-800 mb-3">' + escapeHtml(t(sub.name, 'zh')) + ' <span class="text-gray-400 font-normal text-sm">' + escapeHtml(t(sub.name, 'en')) + '</span></h4>';
+    html += '<div class="space-y-4">';
     sub.products.forEach((p, pj) => {
+      // 初始化字段
       if (!p.standards) {
         p.standards = {};
         PM_STDS.forEach(s => { p.standards[s] = !!(p.images && p.images[s] && p.images[s].dry); });
       }
+      if (!p.shape) p.shape = 'strip';
+      if (!p.origin) p.origin = '';
       const hasLiq = p.has_liquor !== false;
-      html += '<div class="border border-gray-200 rounded-lg p-3">';
-      html += '<div class="flex flex-wrap items-center gap-3 mb-2">';
-      html += '<div class="font-medium text-gray-700 text-sm flex-1 min-w-[140px]">' + escapeHtml(t(p.name, 'zh')) + ' <span class="text-gray-400 text-xs">' + escapeHtml(t(p.name, 'en')) + '</span></div>';
-      html += '<label class="flex items-center gap-1 text-xs text-gray-500 cursor-pointer"><input type="checkbox" data-pm="hasliq" data-si="' + si + '" data-pj="' + pj + '" ' + (hasLiq ? 'checked' : '') + '/> 有茶汤</label>';
-      PM_STDS.forEach(s => {
-        const chk = p.standards[s] ? 'checked' : '';
-        html += '<label class="flex items-center gap-1 text-xs text-gray-500 cursor-pointer"><input type="checkbox" data-pm="std" data-std="' + s + '" data-si="' + si + '" data-pj="' + pj + '" ' + chk + '/> ' + PM_STD_LABEL[s] + '</label>';
-      });
+
+      html += '<div class="border border-gray-200 rounded-xl p-4 bg-white shadow-sm">';
+      // --- 产品名行 ---
+      html += '<div class="flex items-center justify-between mb-3 pb-2 border-b border-gray-100">';
+      html += '<div class="font-bold text-gray-800">' + escapeHtml(t(p.name, 'zh')) + ' <span class="font-normal text-gray-400 text-sm">' + escapeHtml(t(p.name, 'en')) + '</span></div>';
+      html += '<label class="flex items-center gap-1 text-xs text-gray-500 cursor-pointer bg-gray-50 px-2 py-1 rounded"><input type="checkbox" data-pm="hasliq" data-si="' + si + '" data-pj="' + pj + '" ' + (hasLiq ? 'checked' : '') + '/> 有茶汤</label>';
       html += '</div>';
+
+      // --- 认证标准（按钮组） ---
+      html += '<div class="pm-field-row"><label>认证标准</label><div class="flex gap-2 flex-wrap">';
+      PM_STDS.forEach(s => {
+        const active = p.standards[s] ? 'active' : '';
+        html += '<button type="button" class="pm-std-btn ' + active + '" data-pm-stdbtn="' + s + '" data-si="' + si + '" data-pj="' + pj + '">' + PM_STD_LABEL[s] + '</button>';
+      });
+      html += '</div></div>';
+
+      // --- 形状选择（图标按钮组） ---
+      html += '<div class="pm-field-row"><label>形状选择</label><div class="flex gap-2 flex-wrap">';
+      PM_SHAPES.forEach(sh => {
+        const active = (p.shape === sh) ? 'active' : '';
+        html += '<button type="button" class="pm-shape-btn ' + active + '" data-pm-shapebtn="' + sh + '" data-si="' + si + '" data-pj="' + pj + '"><i class="' + PM_SHAPE_ICON[sh] + '"></i>' + PM_SHAPE_LABEL[sh] + '</button>';
+      });
+      html += '</div></div>';
+
+      // --- 产地 ---
+      html += '<div class="pm-field-row"><label>产地</label><input type="text" data-pm="origin" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(p.origin || '') + '" placeholder="输入产地名称" class="max-w-xs" /></div>';
+
+      // --- 图片上传区（按激活的标准展开） ---
       PM_STDS.forEach(s => {
         const imgObj = (p.images && p.images[s]) || { dry: '', liquor: '' };
         const blockHidden = p.standards[s] ? '' : 'display:none';
-        html += '<div data-pm-stdblock="' + si + '-' + pj + '-' + s + '" style="' + blockHidden + '" class="mt-2 pl-3 border-l-2 border-gray-100">';
-        html += '<div class="text-xs text-gray-400 mb-1">【' + PM_STD_LABEL[s] + '】干茶图 / 茶汤图</div>';
+        html += '<div data-pm-stdblock="' + si + '-' + pj + '-' + s + '" style="' + blockHidden + '" class="mt-3 pl-3 border-l-2 border-green-200 bg-green-50/50 rounded-r-lg p-3">';
+        html += '<div class="text-xs font-semibold text-green-800 mb-2">【' + PM_STD_LABEL[s] + '】图片上传</div>';
         html += '<div class="grid sm:grid-cols-2 gap-3">';
-        html += '<div><div class="field-label text-xs">干茶图 Dry Leaf</div><input type="url" data-pm="dry" data-std="' + s + '" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(imgObj.dry || '') + '" placeholder="https://..." /><img class="img-preview hidden mt-1" data-pm-prev="' + si + '-' + pj + '-' + s + '-dry" onerror="this.classList.add(\'hidden\')" /></div>';
+        // 干茶图
+        html += '<div class="pm-img-input-group"><div class="field-label text-xs">干茶图 Dry Leaf</div>';
+        html += '<input type="url" data-pm="dry" data-std="' + s + '" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(imgObj.dry || '') + '" placeholder="https://..." />';
+        html += '<img class="pm-img-preview-lg hidden" data-pm-prev="' + si + '-' + pj + '-' + s + '-dry" onerror="this.classList.add(\'hidden\')" /></div>';
+        // 茶汤图
         const liqHidden = hasLiq ? '' : 'display:none';
-        html += '<div data-pm-liqwrap="' + si + '-' + pj + '-' + s + '" style="' + liqHidden + '"><div class="field-label text-xs">茶汤图 Tea Liquor</div><input type="url" data-pm="liquor" data-std="' + s + '" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(imgObj.liquor || '') + '" placeholder="https://..." /><img class="img-preview hidden mt-1" data-pm-prev="' + si + '-' + pj + '-' + s + '-liquor" onerror="this.classList.add(\'hidden\')" /></div>';
+        html += '<div class="pm-img-input-group" style="' + liqHidden + '" data-pm-liqwrap="' + si + '-' + pj + '-' + s + '"><div class="field-label text-xs">茶汤图 Tea Liquor</div>';
+        html += '<input type="url" data-pm="liquor" data-std="' + s + '" data-si="' + si + '" data-pj="' + pj + '" value="' + escapeHtml(imgObj.liquor || '') + '" placeholder="https://..." />';
+        html += '<img class="pm-img-preview-lg hidden" data-pm-prev="' + si + '-' + pj + '-' + s + '-liquor" onerror="this.classList.add(\'hidden\')" /></div>';
         html += '</div></div>';
       });
-      html += '</div>';
+
+      html += '</div>'; // end product card
     });
-    html += '</div></div>';
+    html += '</div></div>'; // end space-y + section-card
   });
   editor.innerHTML = html;
+  // 绑定事件
   editor.querySelectorAll('[data-pm="hasliq"]').forEach(cb => cb.addEventListener('change', () => pmToggleLiquor(cb)));
-  editor.querySelectorAll('[data-pm="std"]').forEach(cb => cb.addEventListener('change', () => pmToggleStd(cb)));
+  editor.querySelectorAll('[data-pm-stdbtn]').forEach(btn => btn.addEventListener('click', () => pmToggleStdBtn(btn)));
+  editor.querySelectorAll('[data-pm-shapebtn]').forEach(btn => btn.addEventListener('click', () => pmToggleShapeBtn(btn)));
+  editor.querySelectorAll('[data-pm="origin"]').forEach(inp => inp.addEventListener('input', () => pmBindOrigin(inp)));
   editor.querySelectorAll('input[data-pm="dry"], input[data-pm="liquor"]').forEach(inp => {
     inp.addEventListener('input', () => pmLiveBind(inp));
     inp.addEventListener('input', () => pmPreview(inp));
+    if (inp.value.trim()) pmPreview(inp);
   });
 }
 
@@ -947,16 +994,43 @@ function pmToggleLiquor(cb) {
   document.querySelectorAll('[data-pm-liqwrap^="' + si + '-' + pj + '-"]').forEach(w => { w.style.display = cb.checked ? '' : 'none'; });
 }
 
-function pmToggleStd(cb) {
-  const si = +cb.dataset.si, pj = +cb.dataset.pj, s = cb.dataset.std;
+// 标准按钮切换
+function pmToggleStdBtn(btn) {
+  const si = +btn.dataset.si, pj = +btn.dataset.pj, s = btn.dataset.stdbtn;
   const cat = document.getElementById('pm_cat').value;
   const p = currentData.products[cat].subcategories[si].products[pj];
   if (!p.standards) p.standards = {};
-  p.standards[s] = cb.checked;
+  p.standards[s] = !p.standards[s];
+  // 切换按钮样式
+  const btns = btn.parentElement.querySelectorAll('.pm-std-btn');
+  btns.forEach(b => {
+    if (b.dataset.stdbtn === s) b.classList.toggle('active', p.standards[s]);
+  });
+  // 切换图片区块显示
   const block = document.querySelector('[data-pm-stdblock="' + si + '-' + pj + '-' + s + '"]');
-  if (block) block.style.display = cb.checked ? '' : 'none';
+  if (block) block.style.display = p.standards[s] ? '' : 'none';
 }
 
+// 形状按钮切换
+function pmToggleShapeBtn(btn) {
+  const si = +btn.dataset.si, pj = +btn.dataset.pj, shape = btn.dataset.shapebtn;
+  const cat = document.getElementById('pm_cat').value;
+  const p = currentData.products[cat].subcategories[si].products[pj];
+  p.shape = shape;
+  // 切换按钮样式
+  btn.parentElement.querySelectorAll('.pm-shape-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.shapebtn === shape);
+  });
+}
+
+// 产地绑定
+function pmBindOrigin(inp) {
+  const si = +inp.dataset.si, pj = +inp.dataset.pj;
+  const cat = document.getElementById('pm_cat').value;
+  currentData.products[cat].subcategories[si].products[pj].origin = inp.value.trim();
+}
+
+// 图片预览
 function pmPreview(inp) {
   const prev = document.querySelector('[data-pm-prev="' + inp.dataset.si + '-' + inp.dataset.pj + '-' + inp.dataset.std + '-' + inp.dataset.pm + '"]');
   if (!prev) return;
@@ -965,6 +1039,7 @@ function pmPreview(inp) {
   else { prev.classList.add('hidden'); }
 }
 
+// 图片URL绑定到数据
 function pmLiveBind(inp) {
   const si = +inp.dataset.si, pj = +inp.dataset.pj, std = inp.dataset.std, field = inp.dataset.pm;
   const cat = document.getElementById('pm_cat').value;
