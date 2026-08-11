@@ -9,7 +9,7 @@
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f4f8; }
     .tab-btn.active { background: #0F4C3A; color: white; }
-    .img-preview { max-height: 80px; object-fit: cover; border-radius: 6px; margin-top: 6px; }
+    .img-preview { max-height: 120px; object-fit: cover; border-radius: 6px; margin-top: 6px; }
     .section-card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 8px rgba(0,0,0,0.07); }
     input[type=text], input[type=url], textarea, select.form-select {
       width: 100%; border: 1px solid #d1d5db; border-radius: 8px; padding: 8px 12px;
@@ -45,7 +45,7 @@
     .pm-field-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
     .pm-field-row label { font-size: 13px; font-weight: 600; color: #374151; min-width: 56px; }
     .pm-img-input-group { position: relative; }
-    .pm-img-preview-lg { max-height: 100px; width: 100%; object-fit: cover; border-radius: 6px; margin-top: 6px; border: 1px solid #e5e7eb; }
+    .pm-img-preview-lg { max-height: 180px; width: 100%; object-fit: cover; border-radius: 6px; margin-top: 6px; border: 1px solid #e5e7eb; }
   </style>
 </head>
 <body>
@@ -996,7 +996,7 @@ function pmToggleLiquor(cb) {
 
 // 标准按钮切换
 function pmToggleStdBtn(btn) {
-  const si = +btn.dataset.si, pj = +btn.dataset.pj, s = btn.dataset.stdbtn;
+  const si = +btn.dataset.si, pj = +btn.dataset.pj, s = btn.dataset.pmStdbtn;
   const cat = document.getElementById('pm_cat').value;
   const p = currentData.products[cat].subcategories[si].products[pj];
   if (!p.standards) p.standards = {};
@@ -1004,7 +1004,7 @@ function pmToggleStdBtn(btn) {
   // 切换按钮样式
   const btns = btn.parentElement.querySelectorAll('.pm-std-btn');
   btns.forEach(b => {
-    if (b.dataset.stdbtn === s) b.classList.toggle('active', p.standards[s]);
+    if (b.dataset.pmStdbtn === s) b.classList.toggle('active', p.standards[s]);
   });
   // 切换图片区块显示
   const block = document.querySelector('[data-pm-stdblock="' + si + '-' + pj + '-' + s + '"]');
@@ -1013,13 +1013,13 @@ function pmToggleStdBtn(btn) {
 
 // 形状按钮切换
 function pmToggleShapeBtn(btn) {
-  const si = +btn.dataset.si, pj = +btn.dataset.pj, shape = btn.dataset.shapebtn;
+  const si = +btn.dataset.si, pj = +btn.dataset.pj, shape = btn.dataset.pmShapebtn;
   const cat = document.getElementById('pm_cat').value;
   const p = currentData.products[cat].subcategories[si].products[pj];
   p.shape = shape;
   // 切换按钮样式
   btn.parentElement.querySelectorAll('.pm-shape-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.shapebtn === shape);
+    b.classList.toggle('active', b.dataset.pmShapebtn === shape);
   });
 }
 
