@@ -202,9 +202,7 @@
     "address_1_en": "Chaguochang, Xinbao Village, Jichang Town, Xixiu District,",
     "address_2": "鸡场乡鑫堡村茶果场",
     "address_2_en": "Anshun City, Guizhou Province",
-    "email": "admin@aultrastea.com",
-    "phone_2_ru": "86-731-84652476",
-    "phone_2_de": "86-731-84652476"
+    "email": "admin@aultrastea.com"
   },
   "about_video": {
     "embed_code": "",
@@ -226,34 +224,31 @@
   ],
   "exhibitions": [
     {
-      "id": "exh_gulfood_2026",
+      "name": "Gulfood 2026:",
+      "name_zh": "2026年海湾食品展（Gulfood 2026）",
+      "name_en": "Gulfood 2026",
       "date": "Jan 26-30, 2026",
-      "name": "Gulfood 2026: World's Biggest Food Show Even Bigger in 2026\n\nGulfood 2026 is one of the largest and most influential comprehensive exhibitions in the global food and beverage industry. It will be grandly held at the Dubai World Trade Centre (DWTC) and the Dubai Exhibition Centre (DEC) from January 26th to 30th, 2026. As the first annual procurement event, it serves not only as a core platform for industry trend releases and innovation showcases but also as a key hub for global food trade.",
       "location": "Dubai, UAE (DWTC & DEC)",
       "booth": "TBA",
-      "status": "confirmed",
-      "name_zh": "2026年海湾食品展（Gulfood 2026）：全球最大食品展将于2026年进一步扩大规模\n\nGulfood 2026是全球食品饮料行业规模最大、最具影响力的综合性展览之一。该展会将于2026年1月26日至30日在迪拜世界贸易中心和迪拜展览中心隆重举行。作为年度首个采购盛会，它不仅是行业趋势发布和创新展示的核心平台，也是全球食品贸易的关键枢纽。",
-      "name_en": "Gulfood 2026: World's Biggest Food Show Even Bigger in 2026\n\nGulfood 2026 is one of the largest and most influential comprehensive exhibitions in the global food and beverage industry. It will be grandly held at the Dubai World Trade Centre (DWTC) and the Dubai Exhibition Centre (DEC) from January 26th to 30th, 2026. As the first annual procurement event, it serves not only as a core platform for industry trend releases and innovation showcases but also as a key hub for global food trade."
+      "status": "confirmed"
     },
     {
-      "id": "exh_prodexpo_2026",
+      "name": "Prodexpo 2026",
+      "name_zh": "2026年俄罗斯国际食品及饮料展览会（Prodexpo 2026）",
+      "name_en": "Prodexpo 2026",
       "date": "Feb 2026",
-      "name": "Prodexpo 2026: 33rd International Exhibition for Food, Beverages and Food Raw Materials\n\nProdexpo is Russia's largest food trade show for industry professionals. It is distinguished by an abundance of trending new products, extensive business networking, and contracts worth of hundred billions of rubles. Every year there are about 2,000 exhibitors from more than 35 countries. About 70,000 buyers from more than 100 countries find suppliers and sign deals at Prodexpo. The show's products are ranging from everyday food and beverages to gourmet, halal, organic food, sports and functional nutrition, healthy food, and exotic products.",
       "location": "Moscow, Russia",
       "booth": "TBA",
-      "status": "confirmed",
-      "name_zh": "2026年俄罗斯国际食品及饮料展览会（Prodexpo 2026）：第33届国际食品、饮料及食品原料展览会\n\nProdexpo是俄罗斯最大的面向行业专业人士的食品贸易展览会。其特点是新品潮流云集、商务洽谈广泛、合同金额达数千亿卢布。每年有来自超过35个国家的约2000家参展商。来自100多个国家的约70000名买家在Prodexpo寻找供应商并签订协议。展品范围涵盖日常食品饮料，以及美食、清真、有机食品、运动和功能性营养品、健康食品及异域特色产品。",
-      "name_en": "Prodexpo 2026: 33rd International Exhibition for Food, Beverages and Food Raw Materials\n\nProdexpo is Russia's largest food trade show for industry professionals. It is distinguished by an abundance of trending new products, extensive business networking, and contracts worth of hundred billions of rubles. Every year there are about 2,000 exhibitors from more than 35 countries. About 70,000 buyers from more than 100 countries find suppliers and sign deals at Prodexpo. The show's products are ranging from everyday food and beverages to gourmet, halal, organic food, sports and functional nutrition, healthy food, and exotic products."
+      "status": "confirmed"
     },
     {
-      "id": "exh_biofach_2026",
+      "name": "BIOFACH 2026",
+      "name_zh": "2026年德国国际有机食品展（BIOFACH 2026）",
+      "name_en": "BIOFACH 2026",
       "date": "Feb 2026",
-      "name": "BIOFACH 2026: World's Leading Trade Fair for Organic Food\n\nThe World's Leading Trade Fair for Organic Food is an important business event, an emotional event for the sector, and both a get-together and an opportunity for positioning. The leading exhibitions in the BIOFACH World connect organic marketplaces with international demand in 8 key economic regions of the world, and promote the development of regional markets at the same time. They are the meeting places for supply and demand, raw materials and convenience products, manufacturers and buyers, as well as politics and media.",
       "location": "Nuremberg, Germany",
       "booth": "TBA",
-      "status": "confirmed",
-      "name_zh": "2026年德国国际有机食品展（BIOFACH 2026）：世界领先的有机食品贸易展览会\n\n这个世界领先的有机食品贸易展览会，既是一个重要的商业盛会，也是行业的一次情感聚会，同时还是业内交流与定位的机会。BIOFACH世界系列中的领先展会，将全球8大关键经济区域的有机市场与国际需求连接起来，同时促进区域市场的发展。它们是供需双方、原料与便捷产品、制造商与买家，以及政界与媒体的交汇平台。",
-      "name_en": "BIOFACH 2026: World's Leading Trade Fair for Organic Food\n\nThe World's Leading Trade Fair for Organic Food is an important business event, an emotional event for the sector, and both a get-together and an opportunity for positioning. The leading exhibitions in the BIOFACH World connect organic marketplaces with international demand in 8 key economic regions of the world, and promote the development of regional markets at the same time. They are the meeting places for supply and demand, raw materials and convenience products, manufacturers and buyers, as well as politics and media."
+      "status": "confirmed"
     }
   ],
   "brochure_url": "https://ik.imagekit.io/taclov2ip/aultrastea-product-brochure.pdf",
@@ -349,8 +344,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/1-3505-A05/1-3505-A05-1-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/1-3505-A05/1-3505-A05-1-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -372,8 +376,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/3-3505AA/3-3505AA-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/3-3505AA/3-3505AA-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -396,7 +409,14 @@
                   "dry": "",
                   "liquor": ""
                 }
-              }
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -418,8 +438,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/4-3505A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-3505-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/4-3505A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-3505-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -441,8 +470,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/5-3505B/4-3505A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/5-3505B/4-3505A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -465,7 +503,14 @@
                   "dry": "",
                   "liquor": ""
                 }
-              }
+              },
+              "standards": {
+                "conventional": false,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -487,8 +532,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/7-9373/6-9373-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/7-9373/6-9373-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -510,8 +564,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/8-9374/7-9374-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/8-9374/7-9374-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -533,8 +596,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/9-9375/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E4%BD%8E%E6%A1%A3%E7%8F%A0%E8%8C%B6-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/9-9375/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E4%BD%8E%E6%A1%A3%E7%8F%A0%E8%8C%B6-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -556,8 +628,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/10-9501/8-9501-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/10-9501/8-9501-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -579,8 +660,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/11-9502/9-9502-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/1%E7%8F%A0%E8%8C%B6Gunpowder/11-9502/9-9502-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -612,8 +702,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/1-41022AAA/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-41022-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/1-41022AAA/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-41022-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -635,8 +734,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/2-41022AA/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-41022-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/2-41022AA/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-41022-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -658,8 +766,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/3-41022A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-41022-3_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/3-41022A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-41022-3_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -681,8 +798,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/4-9371AA/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-9371-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/4-9371AA/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-9371-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -704,8 +830,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/5-9371A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-9371-4_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/5-9371A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-9371-4_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -727,8 +862,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/6-9370/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-9371-9_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/6-9370/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-9371-9_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -750,8 +894,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/7-9369/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-9369-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/7-9369/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-9369-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -773,8 +926,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/8-9368/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-9369-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/8-9368/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-9369-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -796,8 +958,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/9-9367/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E4%BD%8E%E6%A1%A3%E7%9C%89%E8%8C%B6-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/9-9367/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E4%BD%8E%E6%A1%A3%E7%9C%89%E8%8C%B6-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -819,8 +990,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/10-9366/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E4%BD%8E%E6%A1%A3%E7%9C%89%E8%8C%B6-9_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/10-9366/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E4%BD%8E%E6%A1%A3%E7%9C%89%E8%8C%B6-9_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -842,8 +1022,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/11-3010/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E4%BD%8E%E6%A1%A3%E7%9C%89%E8%8C%B6-10_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/11-3010/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E4%BD%8E%E6%A1%A3%E7%9C%89%E8%8C%B6-10_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -865,8 +1054,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/12-3008/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E4%BD%8E%E6%A1%A3%E7%9C%89%E8%8C%B6-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/2%E7%9C%89%E8%8C%B6Chummee/12-3008/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E4%BD%8E%E6%A1%A3%E7%9C%89%E8%8C%B6-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -898,8 +1096,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/3%E7%A7%80%E7%9C%89XIU-MEI/1-XIU-MEI-A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%A7%80%E7%9C%89-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/3%E7%A7%80%E7%9C%89XIU-MEI/1-XIU-MEI-A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%A7%80%E7%9C%89-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -921,8 +1128,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/3%E7%A7%80%E7%9C%89XIU-MEI/2-XIU-MEI/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%A7%80%E7%9C%89-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/3%E7%A7%80%E7%9C%89XIU-MEI/2-XIU-MEI/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%A7%80%E7%9C%89-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "crumb",
+              "origin": ""
             }
           ]
         },
@@ -954,8 +1170,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/4%E7%BB%BF%E8%9E%BAGreen-Snail/1-Green-Snail-3A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%BB%BF%E8%9E%BA-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/4%E7%BB%BF%E8%9E%BAGreen-Snail/1-Green-Snail-3A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%BB%BF%E8%9E%BA-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -977,8 +1202,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/4%E7%BB%BF%E8%9E%BAGreen-Snail/2-Green-Snail-2A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%BB%BF%E8%9E%BA-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/4%E7%BB%BF%E8%9E%BAGreen-Snail/2-Green-Snail-2A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%BB%BF%E8%9E%BA-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -1000,8 +1234,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea/4%E7%BB%BF%E8%9E%BAGreen-Snail/3-Green-Snail-A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%BB%BF%E8%9E%BA-3_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea/4%E7%BB%BF%E8%9E%BAGreen-Snail/3-Green-Snail-A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%BB%BF%E8%9E%BA-3_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             }
           ]
         },
@@ -1033,8 +1276,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/5%E7%BB%BF%E7%A2%8EGreen-Tea-Fannings/1Green-Tea-Fannings-3A/10-Green-Tea-Fannings-3A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/5%E7%BB%BF%E7%A2%8EGreen-Tea-Fannings/1Green-Tea-Fannings-3A/10-Green-Tea-Fannings-3A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -1056,8 +1308,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/5%E7%BB%BF%E7%A2%8EGreen-Tea-Fannings/2-Green-Tea-Fannings-2A/11-Green-Tea-Fannings-2A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/5%E7%BB%BF%E7%A2%8EGreen-Tea-Fannings/2-Green-Tea-Fannings-2A/11-Green-Tea-Fannings-2A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -1079,8 +1340,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/5%E7%BB%BF%E7%A2%8EGreen-Tea-Fannings/3-Green-Tea-Fannings-2A/12-Green-Tea-Fannings-2A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/5%E7%BB%BF%E7%A2%8EGreen-Tea-Fannings/3-Green-Tea-Fannings-2A/12-Green-Tea-Fannings-2A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -1102,8 +1372,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/5%E7%BB%BF%E7%A2%8EGreen-Tea-Fannings/4-Green-Tea-Fannings/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%BB%BF%E7%A2%8E-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/5%E7%BB%BF%E7%A2%8EGreen-Tea-Fannings/4-Green-Tea-Fannings/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E7%BB%BF%E7%A2%8E-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -1125,8 +1404,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/5%E7%BB%BF%E7%A2%8EGreen-Tea-Fannings/5-Green-Tea-Fannings/13-Green-Tea-Fannings-2-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/5%E7%BB%BF%E7%A2%8EGreen-Tea-Fannings/5-Green-Tea-Fannings/13-Green-Tea-Fannings-2-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             }
           ]
         },
@@ -1158,8 +1446,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/6%E9%A6%99%E8%8C%B6WULU/1-WULU-AAA/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E9%A6%99%E8%8C%B6-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/6%E9%A6%99%E8%8C%B6WULU/1-WULU-AAA/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E9%A6%99%E8%8C%B6-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1181,8 +1478,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/6%E9%A6%99%E8%8C%B6WULU/2-WULU-AA/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E9%A6%99%E8%8C%B6-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/6%E9%A6%99%E8%8C%B6WULU/2-WULU-AA/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E9%A6%99%E8%8C%B6-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1204,8 +1510,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/6%E9%A6%99%E8%8C%B6WULU/3-WULU/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E9%A6%99%E8%8C%B6-3_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/6%E9%A6%99%E8%8C%B6WULU/3-WULU/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E9%A6%99%E8%8C%B6-3_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -1237,8 +1552,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/1Sencha-3A/14-Sencha-3A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/1Sencha-3A/14-Sencha-3A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1260,8 +1584,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/2-Sencha-3A/15-Sencha-3A-1-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/2-Sencha-3A/15-Sencha-3A-1-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1283,8 +1616,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/3-Sencha-2A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%92%B8%E9%9D%92-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/3-Sencha-2A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%92%B8%E9%9D%92-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1306,8 +1648,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/4-Sencha-2A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%92%B8%E9%9D%92-4_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/4-Sencha-2A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%92%B8%E9%9D%92-4_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1329,8 +1680,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/5-Sencha-A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%92%B8%E9%9D%92-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/5-Sencha-A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%92%B8%E9%9D%92-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1352,8 +1712,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/6-Sencha/15-Sencha-3A-2-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/7%E8%92%B8%E9%9D%92Sencha/6-Sencha/15-Sencha-3A-2-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -1385,8 +1754,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/1-Maofeng-No.1/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/1-Maofeng-No.1/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1408,8 +1786,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/2-Xiangxi-Maojian-A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-3_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/2-Xiangxi-Maojian-A/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-3_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1431,8 +1818,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/3-Xiangxi-Maojian/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/3-Xiangxi-Maojian/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1454,8 +1850,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/4-Luosi-Maojian/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-4_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/4-Luosi-Maojian/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1477,8 +1882,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/5-Maojian/16-Maojian-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/5-Maojian/16-Maojian-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1500,8 +1914,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/6-Anji-White-Tea/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-7_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/6-Anji-White-Tea/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-7_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1523,8 +1946,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/7-Golden-Tea/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-6_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/7-Golden-Tea/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6-6_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1546,8 +1978,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/8-Longjing-AA/17-Longjing-AA-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/8-Longjing-AA/17-Longjing-AA-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1569,8 +2010,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/9-Longjing-A/18-Longjing-A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/9-Longjing-A/18-Longjing-A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1592,8 +2042,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/10-Longjing/19-Longjing-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/8%E5%90%8D%E4%BC%98%E7%BB%BF%E8%8C%B6Premium-Famous-Green-Teas/10-Longjing/19-Longjing-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -1625,8 +2084,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/1-Xiao-Maojian-No.1/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%8C%B6%E5%9D%AF-%E5%A4%A7%E5%8F%B6%E7%A7%8D-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/1-Xiao-Maojian-No.1/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%8C%B6%E5%9D%AF-%E5%A4%A7%E5%8F%B6%E7%A7%8D-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1648,8 +2116,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/2-Stir-fried-Green-Tea-Super-Premium/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%8C%B6%E5%9D%AF-%E5%A4%A7%E5%8F%B6%E7%A7%8D-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/2-Stir-fried-Green-Tea-Super-Premium/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%8C%B6%E5%9D%AF-%E5%A4%A7%E5%8F%B6%E7%A7%8D-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1671,8 +2148,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/3-Stir-fried-Green-Tea-A/20-Stir-fried-Green-Tea-A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/3-Stir-fried-Green-Tea-A/20-Stir-fried-Green-Tea-A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1694,8 +2180,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/4-Yunnan-Baked-Xiao-Maojian/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%8C%B6%E5%9D%AF-%E5%A4%A7%E5%8F%B6%E7%A7%8D-4_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/4-Yunnan-Baked-Xiao-Maojian/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%8C%B6%E5%9D%AF-%E5%A4%A7%E5%8F%B6%E7%A7%8D-4_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": "云南"
             },
             {
               "name": {
@@ -1717,8 +2212,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/5-Yunnan-Straight-Leaf-Green-Tea/21-Yunnan-Straight-Leaf-Green-Tea-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/5-Yunnan-Straight-Leaf-Green-Tea/21-Yunnan-Straight-Leaf-Green-Tea-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": "云南"
             },
             {
               "name": {
@@ -1740,8 +2244,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/6-Yunnan-Straight-Leaf-Green-Tea-Grade-1/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%8C%B6%E5%9D%AF-%E5%A4%A7%E5%8F%B6%E7%A7%8D-7_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/6-Yunnan-Straight-Leaf-Green-Tea-Grade-1/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%8C%B6%E5%9D%AF-%E5%A4%A7%E5%8F%B6%E7%A7%8D-7_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": "云南"
             },
             {
               "name": {
@@ -1763,8 +2276,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/7-8810/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%8C%B6%E5%9D%AF-%E5%A4%A7%E5%8F%B6%E7%A7%8D-6_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Green%20tea%202/9%E5%85%B6%E4%BB%96others/7-8810/%E5%A4%96%E8%B4%B8-%E7%BB%BF%E8%8C%B6-%E8%8C%B6%E5%9D%AF-%E5%A4%A7%E5%8F%B6%E7%A7%8D-6_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -1787,7 +2309,14 @@
                   "dry": "",
                   "liquor": ""
                 }
-              }
+              },
+              "standards": {
+                "conventional": false,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -1819,8 +2348,16 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/10%E6%8A%B9%E8%8C%B6Matcha/39-Matcha-5A-1.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -1842,8 +2379,16 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/10%E6%8A%B9%E8%8C%B6Matcha/40-Matcha-4A-1.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -1865,8 +2410,16 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/10%E6%8A%B9%E8%8C%B6Matcha/41-Matcha-3A-1.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -1888,8 +2441,16 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Green%20tea%202/10%E6%8A%B9%E8%8C%B6Matcha/42-Matcha-A-1.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             }
           ]
         }
@@ -1925,8 +2486,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/1-Black-Tea-Fannings-2A/22-Black-Tea-Fannings-2A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/1-Black-Tea-Fannings-2A/22-Black-Tea-Fannings-2A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -1948,8 +2518,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/2-Black-Tea-Fannings-A/23-Black-Tea-Fannings-A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/2-Black-Tea-Fannings-A/23-Black-Tea-Fannings-A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -1971,8 +2550,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/3-Black-Tea-Fannings-A/24-Black-Tea-Fannings-A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/3-Black-Tea-Fannings-A/24-Black-Tea-Fannings-A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -1994,8 +2582,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/4-Black-Tea-Fannings/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E7%A2%8E1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/4-Black-Tea-Fannings/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E7%A2%8E1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -2017,8 +2614,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/5-Black-Tea-Fannings/25-Black-Tea-Fannings-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/5-Black-Tea-Fannings/25-Black-Tea-Fannings-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -2040,8 +2646,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/6-Black-Tea-CTC/26-Black-Tea-CTC-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/6-Black-Tea-CTC/26-Black-Tea-CTC-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -2063,8 +2678,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/7-Black-Tea-CTC/27-Black-Tea-CTC-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/1%E7%BA%A2%E7%A2%8EBlack-Tea-Fannings/7-Black-Tea-CTC/27-Black-Tea-CTC-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             }
           ]
         },
@@ -2096,8 +2720,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/1-Premium-Dian-Hong-Black-Tea/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E6%9D%A11_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/1-Premium-Dian-Hong-Black-Tea/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E6%9D%A11_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": "云南"
             },
             {
               "name": {
@@ -2120,7 +2753,14 @@
                   "dry": "",
                   "liquor": ""
                 }
-              }
+              },
+              "standards": {
+                "conventional": false,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2142,8 +2782,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/3-Black-Tea-Grade-5/29-Black-Tea-Grade-5-1-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/3-Black-Tea-Grade-5/29-Black-Tea-Grade-5-1-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2165,8 +2814,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/4-Black-Tea-Grade-4/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E6%9D%A13_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/4-Black-Tea-Grade-4/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E6%9D%A13_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2188,8 +2846,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/5-Black-Tea-Grade-3/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E6%9D%A14_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/5-Black-Tea-Grade-3/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E6%9D%A14_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2211,8 +2878,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/6-Black-Tea-Grade-2/29-Black-Tea-Grade-5-2-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/6-Black-Tea-Grade-2/29-Black-Tea-Grade-5-2-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2234,8 +2910,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/7-Black-Tea-Grade-1/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E6%9D%A15_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/7-Black-Tea-Grade-1/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E6%9D%A15_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2257,8 +2942,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/8-Black-Tea-Grade-1/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E6%9D%A12_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/2%E7%BA%A2%E6%9D%A1%E8%8C%B6Black-Tea/8-Black-Tea-Grade-1/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E7%BA%A2%E6%9D%A12_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -2290,8 +2984,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/3%E5%90%8D%E4%BC%98%E7%BA%A2%E8%8C%B6Premium-Famous-Black-Teas/1-Red-Maofeng/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%90%8D%E4%BC%98%E8%8C%B61_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/3%E5%90%8D%E4%BC%98%E7%BA%A2%E8%8C%B6Premium-Famous-Black-Teas/1-Red-Maofeng/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%90%8D%E4%BC%98%E8%8C%B61_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2313,8 +3016,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/3%E5%90%8D%E4%BC%98%E7%BA%A2%E8%8C%B6Premium-Famous-Black-Teas/2-Golden-Needle-Black-Tea/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%90%8D%E4%BC%98%E8%8C%B62_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/3%E5%90%8D%E4%BC%98%E7%BA%A2%E8%8C%B6Premium-Famous-Black-Teas/2-Golden-Needle-Black-Tea/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%90%8D%E4%BC%98%E8%8C%B62_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2336,8 +3048,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/3%E5%90%8D%E4%BC%98%E7%BA%A2%E8%8C%B6Premium-Famous-Black-Teas/3-Floral-Souchong/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%90%8D%E4%BC%98%E8%8C%B63_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/3%E5%90%8D%E4%BC%98%E7%BA%A2%E8%8C%B6Premium-Famous-Black-Teas/3-Floral-Souchong/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%90%8D%E4%BC%98%E8%8C%B63_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2359,8 +3080,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Black%20tea/3%E5%90%8D%E4%BC%98%E7%BA%A2%E8%8C%B6Premium-Famous-Black-Teas/4-Golden-Peony-No.1/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%90%8D%E4%BC%98%E8%8C%B64_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Black%20tea/3%E5%90%8D%E4%BC%98%E7%BA%A2%E8%8C%B6Premium-Famous-Black-Teas/4-Golden-Peony-No.1/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%90%8D%E4%BC%98%E8%8C%B64_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         }
@@ -2396,8 +3126,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Dark%20tea/1-%E7%86%9F%E7%A2%8E%E7%9B%AE%E8%8C%B6(%E6%99%AE%E6%B4%B1%E7%A2%8E)%EF%BC%9APu%E2%80%99er-Tea-Fannings/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E9%BB%91%E8%8C%B6-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Dark%20tea/1-%E7%86%9F%E7%A2%8E%E7%9B%AE%E8%8C%B6(%E6%99%AE%E6%B4%B1%E7%A2%8E)%EF%BC%9APu%E2%80%99er-Tea-Fannings/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E9%BB%91%E8%8C%B6-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             }
           ]
         },
@@ -2429,8 +3168,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Dark%20tea/2-%E7%86%9F%E6%99%AE-Fermented-Pu%E2%80%99er/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E9%BB%91%E8%8C%B6-3_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Dark%20tea/2-%E7%86%9F%E6%99%AE-Fermented-Pu%E2%80%99er/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E9%BB%91%E8%8C%B6-3_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -2462,8 +3210,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Dark%20tea/3-%E8%8C%B6%E5%8C%96%E7%9F%B3Tea-Fossil/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E9%BB%91%E8%8C%B6-4_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Dark%20tea/3-%E8%8C%B6%E5%8C%96%E7%9F%B3Tea-Fossil/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E9%BB%91%E8%8C%B6-4_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             }
           ]
         },
@@ -2495,8 +3252,16 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Dark%20tea/4-%E6%99%AE%E6%B4%B1%E9%A5%BC%EF%BC%9APu%E2%80%99er-Tea-Cakes/%E6%99%AE%E6%B4%B1%E9%A5%BC-1.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -2518,8 +3283,16 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Dark%20tea/4-%E6%99%AE%E6%B4%B1%E9%A5%BC%EF%BC%9APu%E2%80%99er-Tea-Cakes/%E6%99%AE%E6%B4%B1%E9%A5%BC-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -2541,8 +3314,16 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Dark%20tea/4-%E6%99%AE%E6%B4%B1%E9%A5%BC%EF%BC%9APu%E2%80%99er-Tea-Cakes/%E6%99%AE%E6%B4%B1%E9%A5%BC-3.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             }
           ]
         }
@@ -2578,8 +3359,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/White%20tea/1-%E7%99%BD%E6%AF%AB%E9%93%B6%E9%92%88Silver-Needle/1-Silver-Needle-AA/30-Silver-Needle-AA-1.jpg",
+                "liquor": "https://video.aultras-tea.com/White%20tea/1-%E7%99%BD%E6%AF%AB%E9%93%B6%E9%92%88Silver-Needle/1-Silver-Needle-AA/30-Silver-Needle-AA-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2601,8 +3391,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/White%20tea/1-%E7%99%BD%E6%AF%AB%E9%93%B6%E9%92%88Silver-Needle/2-Silver-Needle-A/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E7%99%BD%E6%AF%AB%E9%93%B6%E9%92%88-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/White%20tea/1-%E7%99%BD%E6%AF%AB%E9%93%B6%E9%92%88Silver-Needle/2-Silver-Needle-A/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E7%99%BD%E6%AF%AB%E9%93%B6%E9%92%88-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2624,8 +3423,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/White%20tea/1-%E7%99%BD%E6%AF%AB%E9%93%B6%E9%92%88Silver-Needle/3-Silver-Needle/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E7%99%BD%E6%AF%AB%E9%93%B6%E9%92%88-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/White%20tea/1-%E7%99%BD%E6%AF%AB%E9%93%B6%E9%92%88Silver-Needle/3-Silver-Needle/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E7%99%BD%E6%AF%AB%E9%93%B6%E9%92%88-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -2657,8 +3465,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/White%20tea/2-%E7%99%BD%E7%89%A1%E4%B8%B9White-Peony/1-White-Peony-AA/31-White-Peony-AA-1.jpg",
+                "liquor": "https://video.aultras-tea.com/White%20tea/2-%E7%99%BD%E7%89%A1%E4%B8%B9White-Peony/1-White-Peony-AA/31-White-Peony-AA-2.jpg"
+              },
+              "standards": {
+                "conventional": false,
+                "eu": false,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2680,8 +3497,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/White%20tea/2-%E7%99%BD%E7%89%A1%E4%B8%B9White-Peony/2-White-Peony-A/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E7%99%BD%E7%89%A1%E4%B8%B9-5_1.jpg",
+                "liquor": "https://video.aultras-tea.com/White%20tea/2-%E7%99%BD%E7%89%A1%E4%B8%B9White-Peony/2-White-Peony-A/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E7%99%BD%E7%89%A1%E4%B8%B9-5_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2703,8 +3529,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/White%20tea/2-%E7%99%BD%E7%89%A1%E4%B8%B9White-Peony/3-White-Peony/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E7%99%BD%E7%89%A1%E4%B8%B9-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/White%20tea/2-%E7%99%BD%E7%89%A1%E4%B8%B9White-Peony/3-White-Peony/%E5%A4%96%E8%B4%B8-%E5%9B%BD%E6%A0%87-%E7%99%BD%E7%89%A1%E4%B8%B9-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -2736,8 +3571,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/White%20tea/3-%E7%99%BD%E9%BE%99%E7%8F%A0White-Dragon-Pearl/White-Dragon-Pearl/32-White-Dragon-Pearl-2.jpg",
+                "liquor": "https://video.aultras-tea.com/White%20tea/3-%E7%99%BD%E9%BE%99%E7%8F%A0White-Dragon-Pearl/White-Dragon-Pearl/32-White-Dragon-Pearl-3.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -2769,8 +3613,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/White%20tea/4-%E7%99%BD%E8%8C%B6%E7%A2%8EWhite-tea-Fannings/1-White-tea-Fannings-A/33-White-tea-Fannings-A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/White%20tea/4-%E7%99%BD%E8%8C%B6%E7%A2%8EWhite-tea-Fannings/1-White-tea-Fannings-A/33-White-tea-Fannings-A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -2792,8 +3645,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/White%20tea/4-%E7%99%BD%E8%8C%B6%E7%A2%8EWhite-tea-Fannings/2-White-tea-Fannings/34-White-tea-Fannings-1.jpg",
+                "liquor": "https://video.aultras-tea.com/White%20tea/4-%E7%99%BD%E8%8C%B6%E7%A2%8EWhite-tea-Fannings/2-White-tea-Fannings/34-White-tea-Fannings-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             }
           ]
         }
@@ -2829,8 +3691,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Flower%20tea/1-Large-leaf-Scented-Tea/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E8%8A%B1%E8%8C%B61_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Flower%20tea/1-Large-leaf-Scented-Tea/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%A4%A7%E5%8F%B6%E8%8A%B1%E8%8C%B61_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -2862,8 +3733,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Flower%20tea/2-Jasmine-Tea-No.1/35-Jasmine-Tea-No.1-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Flower%20tea/2-Jasmine-Tea-No.1/35-Jasmine-Tea-No.1-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -2885,8 +3765,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Flower%20tea/3-Jasmine-Tea-No.3/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%B0%8F%E5%8F%B6%E8%8A%B1%E8%8C%B61_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Flower%20tea/3-Jasmine-Tea-No.3/%E5%A4%96%E8%B4%B8-%E7%BA%A2%E8%8C%B6-%E5%B0%8F%E5%8F%B6%E8%8A%B1%E8%8C%B61_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -2918,8 +3807,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Flower%20tea/4-Jasmine-Dragon-Pearl/36-Jasmine-Dragon-Pearl-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Flower%20tea/4-Jasmine-Dragon-Pearl/36-Jasmine-Dragon-Pearl-2.jpg"
+              },
+              "standards": {
+                "conventional": false,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             }
           ]
         },
@@ -2951,8 +3849,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Flower%20tea/5-Daqian-Rihong-Lychee/%E5%A4%96%E8%B4%B8-%E5%B7%A5%E8%89%BA%E8%8C%B6-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Flower%20tea/5-Daqian-Rihong-Lychee/%E5%A4%96%E8%B4%B8-%E5%B7%A5%E8%89%BA%E8%8C%B6-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -2974,8 +3881,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Flower%20tea/6-Golden-Altar/%E5%A4%96%E8%B4%B8-%E5%B7%A5%E8%89%BA%E8%8C%B6-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Flower%20tea/6-Golden-Altar/%E5%A4%96%E8%B4%B8-%E5%B7%A5%E8%89%BA%E8%8C%B6-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -2997,8 +3913,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Flower%20tea/7-Dragon-Pearl/%E5%A4%96%E8%B4%B8-%E5%B7%A5%E8%89%BA%E8%8C%B6-3_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Flower%20tea/7-Dragon-Pearl/%E5%A4%96%E8%B4%B8-%E5%B7%A5%E8%89%BA%E8%8C%B6-3_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -3020,8 +3945,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Flower%20tea/8-Lily-Fairy-(Jasmine-/%E5%A4%96%E8%B4%B8-%E5%B7%A5%E8%89%BA%E8%8C%B6-4_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Flower%20tea/8-Lily-Fairy-(Jasmine-/%E5%A4%96%E8%B4%B8-%E5%B7%A5%E8%89%BA%E8%8C%B6-4_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             }
           ]
         }
@@ -3057,8 +3991,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/1-%E9%97%B5%E5%8C%97%E4%B9%8C%E9%BE%99Minbei-Oolong/1-Floral-Da-Hong-Pao-A/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8C%97%E4%B9%8C%E9%BE%99-3_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/1-%E9%97%B5%E5%8C%97%E4%B9%8C%E9%BE%99Minbei-Oolong/1-Floral-Da-Hong-Pao-A/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8C%97%E4%B9%8C%E9%BE%99-3_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -3080,8 +4023,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/1-%E9%97%B5%E5%8C%97%E4%B9%8C%E9%BE%99Minbei-Oolong/2-Floral-Da-Hong-Pao/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8C%97%E4%B9%8C%E9%BE%99-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/1-%E9%97%B5%E5%8C%97%E4%B9%8C%E9%BE%99Minbei-Oolong/2-Floral-Da-Hong-Pao/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8C%97%E4%B9%8C%E9%BE%99-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -3103,8 +4055,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/1-%E9%97%B5%E5%8C%97%E4%B9%8C%E9%BE%99Minbei-Oolong/3-Da-Hong-Pao-No.2/37-Da-Hong-Pao-No.2-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/1-%E9%97%B5%E5%8C%97%E4%B9%8C%E9%BE%99Minbei-Oolong/3-Da-Hong-Pao-No.2/37-Da-Hong-Pao-No.2-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             },
             {
               "name": {
@@ -3126,8 +4087,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/1-%E9%97%B5%E5%8C%97%E4%B9%8C%E9%BE%99Minbei-Oolong/4-Da-Hong-Pao-No.1/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8C%97%E4%B9%8C%E9%BE%99-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/1-%E9%97%B5%E5%8C%97%E4%B9%8C%E9%BE%99Minbei-Oolong/4-Da-Hong-Pao-No.1/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8C%97%E4%B9%8C%E9%BE%99-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "strip",
+              "origin": ""
             }
           ]
         },
@@ -3159,8 +4129,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/1-Dongding-Oolong/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/1-Dongding-Oolong/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -3182,8 +4161,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/2-Floral-Tieguanyin-A/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-8_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/2-Floral-Tieguanyin-A/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-8_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -3205,8 +4193,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/3-Floral-Tieguanyin/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-2_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/3-Floral-Tieguanyin/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-2_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -3228,8 +4225,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/4-Green-Oolong-AA/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-5_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/4-Green-Oolong-AA/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-5_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -3251,8 +4257,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/5-Green-Oolong/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-6_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/5-Green-Oolong/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-6_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             },
             {
               "name": {
@@ -3274,8 +4289,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/6-Rich-Aroma-Oolong/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-14_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/2-%E9%97%B5%E5%8D%97%E4%B9%8C%E9%BE%99Minnan-Oolong/6-Rich-Aroma-Oolong/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E9%97%BD%E5%8D%97%E4%B9%8C%E9%BE%99-14_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             }
           ]
         },
@@ -3307,8 +4331,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/3-%E5%A5%B6%E9%A6%99%E4%B9%8C%E9%BE%99/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E5%A5%B6%E9%A6%99%E4%B9%8C%E9%BE%99-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/3-%E5%A5%B6%E9%A6%99%E4%B9%8C%E9%BE%99/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E5%A5%B6%E9%A6%99%E4%B9%8C%E9%BE%99-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "granule",
+              "origin": ""
             }
           ]
         },
@@ -3340,8 +4373,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/4-%E4%BA%BA%E5%8F%82%E4%B9%8C%E9%BE%99/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E4%BA%BA%E5%8F%82%E4%B9%8C%E9%BE%99-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/4-%E4%BA%BA%E5%8F%82%E4%B9%8C%E9%BE%99/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E4%BA%BA%E5%8F%82%E4%B9%8C%E9%BE%99-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": false,
+                "organic": false
+              },
+              "shape": "granule",
+              "origin": ""
             }
           ]
         },
@@ -3373,8 +4415,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/5-%E4%B9%8C%E9%BE%99%E7%A2%8E/1-Oolong-tea-Fannings-A/38-Oolong-tea-Fannings-A-1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/5-%E4%B9%8C%E9%BE%99%E7%A2%8E/1-Oolong-tea-Fannings-A/38-Oolong-tea-Fannings-A-2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             },
             {
               "name": {
@@ -3396,8 +4447,17 @@
                 "organic": {
                   "dry": "",
                   "liquor": ""
-                }
-              }
+                },
+                "dry": "https://video.aultras-tea.com/Oolong%20tea/5-%E4%B9%8C%E9%BE%99%E7%A2%8E/2-Oolong-tea-Fannings/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E4%B9%8C%E9%BE%99%E7%A2%8E-1_1.jpg",
+                "liquor": "https://video.aultras-tea.com/Oolong%20tea/5-%E4%B9%8C%E9%BE%99%E7%A2%8E/2-Oolong-tea-Fannings/%E5%A4%96%E8%B4%B8-%E4%B9%8C%E9%BE%99%E8%8C%B6-%E4%B9%8C%E9%BE%99%E7%A2%8E-1_2.jpg"
+              },
+              "standards": {
+                "conventional": true,
+                "eu": true,
+                "organic": true
+              },
+              "shape": "crumb",
+              "origin": ""
             }
           ]
         }
