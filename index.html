@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title data-lang="meta_title">AultrasTea | Premium Tea Supplier From China | Organic Tea Wholesale</title>
   <meta name="description" content="AultrasTea, professional Chinese tea manufacturer & exporter, supply organic green tea, black tea, white tea, oolong tea, puerh tea. Global wholesale, welcome to cooperate." data-lang="meta_desc">
   <meta name="keywords" content="AultrasTea, Chinese tea, organic tea, green tea, black tea, white tea, oolong tea, tea wholesale, tea exporter">
@@ -75,7 +78,21 @@
       border: 1px solid #f0f0f0; background: #fafafa; aspect-ratio: 4/3;
       display: flex; align-items: center; justify-content: center;
     }
-    .cert-card img { width: 100%; height: 100%; object-fit: contain; }
+    .cert-card img { width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; transition: transform 0.25s ease; }
+    .cert-card img:hover { transform: scale(1.04); }
+    .cert-card.has-img { cursor: zoom-in; }
+
+    /* 证书图片放大灯箱 */
+    #cert-lightbox { position: fixed; inset: 0; z-index: 9500; background: rgba(0,0,0,0.88); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; padding: 24px; }
+    #cert-lightbox.show { opacity: 1; visibility: visible; }
+    #cert-lightbox img { max-width: 92vw; max-height: 86vh; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    #cert-lightbox-close { position: absolute; top: 18px; right: 24px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.15); border: none; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+    #cert-lightbox-close:hover { background: rgba(255,255,255,0.32); }
+    #cert-lb-prev, #cert-lb-next { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.12); border: none; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 9501; }
+    #cert-lb-prev { left: 16px; }
+    #cert-lb-next { right: 16px; }
+    #cert-lb-prev:hover, #cert-lb-next:hover { background: rgba(255,255,255,0.3); }
+    #cert-lb-counter { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 500; }
     .cert-nav-btn {
       position: absolute; top: 50%; transform: translateY(-50%);
       width: 36px; height: 36px; border-radius: 50%;
@@ -542,7 +559,7 @@
     <div class="container mx-auto px-4 md:px-6">
       <div class="grid md:grid-cols-4 gap-8 mb-8">
         <div>
-          <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><img src="https://video.aultras-tea.com/%E6%B9%98%E4%B8%B0%E7%80%91%E5%B8%83%E5%95%86%E6%A0%87-04.png" alt="AultrasTea" class="navbar-logo" style="height:40px;width:auto;max-width:220px;object-fit:contain;"></h3>
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-leaf"></i> <span data-lang="navbar_brand">AultrasTea</span></h3>
           <p class="text-white/70 mb-4" data-lang="footer_desc">Professional Chinese tea manufacturer and exporter, supply premium organic tea to the world.</p>
         </div>
         <div>
@@ -612,6 +629,15 @@
         <span data-lang="exh_contact">Make an Appointment</span> →
       </a>
     </div>
+  </div>
+
+  <!-- 证书图片放大灯箱 -->
+  <div id="cert-lightbox" onclick="if(event.target===this)closeCertLightbox()">
+    <button id="cert-lightbox-close" onclick="closeCertLightbox()"><i class="fas fa-times"></i></button>
+    <button id="cert-lb-prev" onclick="certLbSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+    <img src="" alt="Certificate preview">
+    <button id="cert-lb-next" onclick="certLbSlide(1)"><i class="fas fa-chevron-right"></i></button>
+    <span id="cert-lb-counter"></span>
   </div>
 
   <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center opacity-0 invisible transition-all z-40 hover:bg-secondary shadow-lg">
@@ -743,17 +769,19 @@
       const start = certPage * cols;
       const pageItems = certUrls.slice(start, start + cols);
 
-      pageEl.innerHTML = pageItems.map((url, i) => `
-        <div class="cert-card">
+      pageEl.innerHTML = pageItems.map((url, i) => {
+        const realIndex = start + i;
+        return `
+        <div class="cert-card ${url ? 'has-img' : ''}" ${url ? `onclick="openCertLightbox(${realIndex})"` : ''}>
           ${url
-            ? `<img src="${url}" alt="Certificate ${start + i + 1}" loading="lazy">`
+            ? `<img src="${url}" alt="Certificate ${realIndex + 1}" loading="lazy">`
             : `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;color:#d1d5db">
                  <i class="fas fa-certificate" style="font-size:1.5rem"></i>
-                 <span style="font-size:11px;color:#bbb">Cert ${start + i + 1}</span>
+                 <span style="font-size:11px;color:#bbb">Cert ${realIndex + 1}</span>
                </div>`
           }
-        </div>`
-      ).join('');
+        </div>`;
+      }).join('');
 
       // 指示点
       if (certTotalPages > 1) {
@@ -784,6 +812,33 @@
     function resetCertTimer() {
       if (certAutoTimer) clearInterval(certAutoTimer);
       certAutoTimer = setInterval(() => certSlide(1), 4000);
+    }
+
+    // ===== 证书图片放大灯箱 =====
+    let _certLbIndex = 0;
+    function openCertLightbox(idx) {
+      _certLbIndex = idx;
+      const lb = document.getElementById('cert-lightbox');
+      if (!lb) return;
+      updateCertLightbox();
+      lb.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    function updateCertLightbox() {
+      const img = document.querySelector('#cert-lightbox img');
+      const counter = document.getElementById('cert-lb-counter');
+      if (img && certUrls[_certLbIndex]) img.src = certUrls[_certLbIndex];
+      if (counter) counter.textContent = (_certLbIndex + 1) + ' / ' + certUrls.length;
+    }
+    function certLbSlide(dir) {
+      if (!certUrls.length) return;
+      _certLbIndex = (_certLbIndex + dir + certUrls.length) % certUrls.length;
+      updateCertLightbox();
+    }
+    function closeCertLightbox() {
+      const lb = document.getElementById('cert-lightbox');
+      if (lb) lb.classList.remove('show');
+      document.body.style.overflow = '';
     }
 
     function renderCertificates(urls) {
@@ -970,48 +1025,12 @@
       if (popup) popup.classList.remove('show');
     }
 
-    // ===== 防御性UTF-8多重编码自动修复 =====
-    // 当后台管理系统因旧Bug导致data.json中文字段被双重/多重编码时，
-    // 前端读取后自动循环解码，确保页面正常显示中文
-    // 原理：每次 atob→JSON.parse 如果缺少 decodeURIComponent(escape(...)) 链，
-    // 中文就会被多编码一层，所以需要循环解码直到字符串不再变化
-    function fixDoubleEncoded(obj) {
-      if (typeof obj === 'string') {
-        let current = obj;
-        // 最多循环10次解码，防止无限循环
-        for (let i = 0; i < 10; i++) {
-          try {
-            const fixed = decodeURIComponent(escape(current));
-            // 如果解码结果与原值相同，说明已经是最简形式，停止
-            if (fixed === current) break;
-            current = fixed;
-          } catch(e) {
-            // decodeURIComponent 失败说明不是双重编码，停止
-            break;
-          }
-        }
-        return current;
-      }
-      if (Array.isArray(obj)) {
-        return obj.map(item => fixDoubleEncoded(item));
-      }
-      if (obj && typeof obj === 'object') {
-        const fixed = {};
-        for (const key in obj) {
-          fixed[key] = fixDoubleEncoded(obj[key]);
-        }
-        return fixed;
-      }
-      return obj;
-    }
-
     // ===== 从 data.json 动态加载内容 =====
     async function loadSiteData() {
       try {
-        const res = await fetch('./data.json?t=' + Date.now());
+        const res = await fetch('./data.json?v=' + Date.now() + '&r=' + Math.random().toString(36).slice(2,8), { cache: 'no-store' });
         let data = await res.json();
         // 自动修复双重编码字段
-        data = fixDoubleEncoded(data);
         // 使用 data.json 中的 langPack（后台可编辑文案），缺省回退到内置静态文案
         if (data.langPack) langPack = data.langPack;
 
@@ -1123,6 +1142,15 @@
         `;
       }
     }
+
+    // ===== 证书灯箱键盘支持 =====
+    document.addEventListener('keydown', e => {
+      const lb = document.getElementById('cert-lightbox');
+      if (!lb || !lb.classList.contains('show')) return;
+      if (e.key === 'Escape') closeCertLightbox();
+      else if (e.key === 'ArrowLeft') certLbSlide(-1);
+      else if (e.key === 'ArrowRight') certLbSlide(1);
+    });
 
     // ===== 语言切换 =====
     const langSelect = document.getElementById('langSelect');

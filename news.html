@@ -201,7 +201,7 @@
     <div class="container mx-auto px-4 md:px-6">
       <div class="grid md:grid-cols-4 gap-8 mb-8">
         <div>
-          <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><img src="https://video.aultras-tea.com/%E6%B9%98%E4%B8%B0%E7%80%91%E5%B8%83%E5%95%86%E6%A0%87-04.png" alt="AultrasTea" class="navbar-logo" style="height:40px;width:auto;max-width:220px;object-fit:contain;"></h3>
+          <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-leaf"></i> <span data-lang="navbar_brand">AultrasTea</span></h3>
           <p class="text-white/70 mb-4" data-lang="footer_desc">Professional Chinese tea manufacturer and exporter, supply premium organic tea to the world.</p>
         </div>
         <div>
@@ -621,12 +621,9 @@
     // ===== 从 data.json 加载数据 =====
     async function loadNewsData() {
       const loading = document.getElementById('loading');
-      // 防御性UTF-8多重编码自动修复（循环解码）
-      function fixDoubleEncoded(obj){if(typeof obj==='string'){let c=obj;for(let i=0;i<10;i++){try{const f=decodeURIComponent(escape(c));if(f===c)break;c=f}catch(e){break}}return c}if(Array.isArray(obj))return obj.map(i=>fixDoubleEncoded(i));if(obj&&typeof obj==='object'){const r={};for(const k in obj)r[k]=fixDoubleEncoded(obj[k]);return r}return obj}
-      try {
-        const res = await fetch('./data.json?t=' + Date.now());
+          try {
+        const res = await fetch('./data.json?v=' + Date.now() + '&r=' + Math.random().toString(36).slice(2,8), { cache: 'no-store' });
         let data = await res.json();
-        data = fixDoubleEncoded(data);
 
         // 优先读取 news_detail（详细版），如果不存在则读取旧版 news
         allNews = data.news_detail || data.news || [];

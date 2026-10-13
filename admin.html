@@ -579,30 +579,6 @@ let CONFIG = { owner: '', repo: '', token: '', dataPath: 'data.json', branch: ''
 let currentData = null;
 let currentSHA = '';
 
-// ===== 防御性UTF-8多重编码自动修复（循环解码） =====
-// GitHub上的data.json可能因旧版Bug被多重双重编码污染，
-// 此函数在后台读取数据后自动循环解码，确保表单显示和保存的都是正确中文
-function fixDoubleEncoded(obj) {
-  if (typeof obj === 'string') {
-    let current = obj;
-    for (let i = 0; i < 10; i++) {
-      try {
-        const fixed = decodeURIComponent(escape(current));
-        if (fixed === current) break;
-        current = fixed;
-      } catch(e) { break; }
-    }
-    return current;
-  }
-  if (Array.isArray(obj)) return obj.map(item => fixDoubleEncoded(item));
-  if (obj && typeof obj === 'object') {
-    const fixed = {};
-    for (const key in obj) fixed[key] = fixDoubleEncoded(obj[key]);
-    return fixed;
-  }
-  return obj;
-}
-
 // 产品4图的key映射
 const PRODUCT_CATS = {
   green: ['Chunmee','Gunpowder','Dragon Well','Sencha','Mao Feng','Green Tea Fannings','Mao Jian','Green Brick Tea'],
@@ -674,7 +650,6 @@ async function fetchDataJson() {
     currentSHA = json.sha;
     currentData = JSON.parse(decodeURIComponent(escape(atob(json.content.replace(/\n/g, '')))));
     // 自动修复多重编码的中文字段，确保表单显示正确中文
-    currentData = fixDoubleEncoded(currentData);
     showToast('连接成功！', 'success');
     document.getElementById('loginPage').classList.add('hidden');
     document.getElementById('adminPage').classList.remove('hidden');
