@@ -1010,8 +1010,8 @@
 
     // ===== 展会弹窗显示 =====
     let _exhPopupShown = false;
+    let _exhPopupTimer = null;   // 保留定时器句柄，便于内容更新后重新弹出
     function showExhPopup(exhs) {
-      if (_exhPopupShown) return;
       if (!exhs || exhs.length === 0) return;
       // 永远展示后台最新添加的展会（后台 addExhibition 追加到数组末尾）
       const target = exhs[exhs.length - 1] || exhs[0];
@@ -1029,12 +1029,21 @@
       if (locationEl) locationEl.textContent = target.location || '';
       if (boothEl) boothEl.textContent = target.booth || 'TBA';
       if (badgeEl) {
-        badgeEl.textContent = target.status === 'confirmed' ? 'Confirmed' : 'Upcoming';
-        badgeEl.className = 'exh-popup-badge ' + (target.status === 'confirmed' ? 'confirmed' : 'upcoming') + ' ml-2 flex-shrink-0';
+        // 用 String().toLowerCase() 判断：任何大小写的 confirmed 都算已确认，其余为即将开始
+        const st = String(target.status || '').toLowerCase();
+        const isConfirmed = (st === 'confirmed');
+        badgeEl.textContent = isConfirmed ? 'Confirmed' : 'Upcoming';
+        badgeEl.className = 'exh-popup-badge ' + (isConfirmed ? 'confirmed' : 'upcoming') + ' ml-2 flex-shrink-0';
       }
+      // 弹窗标题（如后台 langPack 提供 popup_title 则使用之）
+      const titleEl = document.getElementById('popup-section-title');
+      if (titleEl) titleEl.textContent = (langPack[currentLang] && langPack[currentLang].popup_title) || 'Latest Exhibition';
+      console.log('[展会弹窗] 已填充数据:', target);
 
-      // 延迟 1.5 秒后弹出
-      setTimeout(() => {
+      // 已经显示过就直接返回；否则延迟 1.5 秒弹出
+      if (_exhPopupShown) return;
+      if (_exhPopupTimer) clearTimeout(_exhPopupTimer);
+      _exhPopupTimer = setTimeout(() => {
         popup.classList.add('show');
         _exhPopupShown = true;
       }, 1500);
@@ -1096,13 +1105,23 @@
         }
 
         // 展会
+        console.log('[data.json] 展会列表', (data.exhibitions||[]).length, '条; 弹窗设置 exh_popup =', data.exh_popup || '（未设置）');
         if(data.exhibitions && data.exhibitions.length) {
           _exhibitionsAll = data.exhibitions;
           renderExhibitions(data.exhibitions);
-          // 弹窗优先读取后台“前端弹窗展会设置”(exh_popup)；未设置则自动取列表最新一条
-          const _popupExh = (data.exh_popup && (data.exh_popup.name || data.exh_popup.date || data.exh_popup.location))
-            ? [data.exh_popup] : data.exhibitions;
+        }
+        // 弹窗优先读取后台“前端弹窗展会设置”(exh_popup)；未设置则自动取列表最新一条
+        // 注意：此逻辑独立于展会列表，即使列表为空，只要 exh_popup 有内容，弹窗依然生效
+        const _popupExh = (data.exh_popup && (data.exh_popup.name || data.exh_popup.date || data.exh_popup.location))
+          ? [data.exh_popup] : (data.exhibitions || []);
+        if (_popupExh.length) {
           showExhPopup(_popupExh);
+        } else {
+          // 数据异常兜底：15 秒后仍无弹窗则显示默认 Gulfood 2026，避免永久空白
+          setTimeout(function() {
+            if (_exhPopupShown) return;
+            showExhPopup([{ name: 'Gulfood 2026', date: 'Jan 26-30, 2026', location: 'Dubai, UAE (DWTC & DEC)', booth: 'TBA', status: 'confirmed' }]);
+          }, 15000);
         }
 
 

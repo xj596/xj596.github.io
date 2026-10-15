@@ -1153,6 +1153,9 @@ function collectExhibitions() {
 
 async function saveExhibitions() {
   currentData.exhibitions = collectExhibitions();
+  // 同时保存弹窗设置，避免用户点“保存展会信息”时丢失弹窗修改
+  const epName = document.getElementById('ep_name');
+  if (epName) currentData.exh_popup = collectExhPopup();
   await pushDataJson('展会信息已保存并推送到 GitHub ✅');
 }
 
@@ -1699,11 +1702,41 @@ async function pushDataJson(successMsg) {
       headers: { 'Authorization': `token ${CONFIG.token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
-    if (!res.ok) { const err = await res.json(); throw new Error(err.message || `HTTP ${res.status}`); }
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      // 409 冲突：远端 data.json 已被更新（其他标签页/会话提交），自动取最新 sha 重试
+      if (res.status === 409) {
+        const refreshed = await fetch(url + (CONFIG.branch ? `?ref=${encodeURIComponent(CONFIG.branch)}` : ''), {
+          headers: { 'Authorization': `token ${CONFIG.token}`, 'Accept': 'application/vnd.github.v3+json' }
+        }).then(r => r.json()).catch(() => null);
+        if (refreshed && refreshed.sha) {
+          currentSHA = refreshed.sha;
+          body.sha = refreshed.sha;
+          const res2 = await fetch(url, {
+            method: 'PUT',
+            headers: { 'Authorization': `token ${CONFIG.token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+          });
+          if (!res2.ok) {
+            const err2 = await res2.json().catch(() => ({}));
+            const m2 = new Error(err2.message || `HTTP ${res2.status}`);
+            document.body.setAttribute('data-last-push-error', m2.message);
+            throw m2;
+          }
+          currentSHA = (await res2.json()).content.sha;
+          showToast(successMsg, 'success');
+          return;
+        }
+      }
+      document.body.setAttribute('data-last-push-error', err.message || `HTTP ${res.status}`);
+      throw new Error(err.message || `HTTP ${res.status}`);
+    }
     const result = await res.json();
     currentSHA = result.content.sha;
+    document.body.setAttribute('data-last-push-error', '');
     showToast(successMsg, 'success');
   } catch(e) {
+    document.body.setAttribute('data-last-push-error', e.message);
     showToast('推送失败：' + e.message, 'error');
   }
 }
