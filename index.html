@@ -1013,8 +1013,8 @@
     function showExhPopup(exhs) {
       if (_exhPopupShown) return;
       if (!exhs || exhs.length === 0) return;
-      // 优先展示 confirmed 状态的展会，否则取第一条
-      const target = exhs.find(e => e.status === 'confirmed') || exhs[0];
+      // 永远展示后台最新添加的展会（后台 addExhibition 追加到数组末尾）
+      const target = exhs[exhs.length - 1] || exhs[0];
       const popup = document.getElementById('exh-popup');
       if (!popup) return;
 

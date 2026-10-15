@@ -533,7 +533,8 @@
       if (!item) return;
 
       const title = item['title_' + currentLang] || item.title_en || '';
-      const content = item['content_' + currentLang] || item.content_en || '';
+      const content = item['content_' + currentLang] || item.content_en
+        || item['summary_' + currentLang] || item.summary_en || '';
       const imgUrl = (item.image || '').trim();
       const img2Url = (item.image2 || '').trim();
       const img3Url = (item.image3 || '').trim();
@@ -628,7 +629,17 @@
         let data = await res.json();
 
         // 优先读取 news_detail（详细版），如果不存在则读取旧版 news
-        allNews = data.news_detail || data.news || [];
+        allNews = (data.news_detail || data.news || []).slice();
+        // 合并“首页新闻”(news_summary)：后台首页新闻编辑器保存的条目也必须显示且可点开
+        if (data.news_summary && data.news_summary.length) {
+          const seen = new Set(allNews.map(n => String(n.id)));
+          data.news_summary.forEach(sm => {
+            if (sm && sm.id !== undefined && !seen.has(String(sm.id))) {
+              allNews.push(sm);
+              seen.add(String(sm.id));
+            }
+          });
+        }
 
         // 按日期降序
         allNews.sort((a, b) => new Date(b.date) - new Date(a.date));
