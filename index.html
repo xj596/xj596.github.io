@@ -1099,7 +1099,10 @@
         if(data.exhibitions && data.exhibitions.length) {
           _exhibitionsAll = data.exhibitions;
           renderExhibitions(data.exhibitions);
-          showExhPopup(data.exhibitions);
+          // 弹窗优先读取后台“前端弹窗展会设置”(exh_popup)；未设置则自动取列表最新一条
+          const _popupExh = (data.exh_popup && (data.exh_popup.name || data.exh_popup.date || data.exh_popup.location))
+            ? [data.exh_popup] : data.exhibitions;
+          showExhPopup(_popupExh);
         }
 
 

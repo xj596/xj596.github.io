@@ -407,6 +407,46 @@
         </button>
         <span class="text-xs text-gray-400">支持添加/删除/编辑任意展会，超出3个自动轮播</span>
       </div>
+
+      <!-- ===== 前端弹窗展会设置（对应主页 Latest Exhibition 弹窗）===== -->
+      <div class="section-card p-5 mb-10">
+        <div class="flex items-center gap-2 mb-1">
+          <i class="fas fa-window-restore text-green-700"></i>
+          <h4 class="font-bold text-gray-800">前端弹窗展会设置（Latest Exhibition）</h4>
+        </div>
+        <p class="text-xs text-gray-500 mb-4">单独控制主页右下角弹窗的内容，与上方展会列表互不影响。将“展会名称”清空保存，弹窗即自动恢复为显示列表中最新添加的展会。</p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="sm:col-span-2">
+            <div class="field-label text-xs">展会名称（弹窗主标题）</div>
+            <input type="text" id="ep_name" placeholder="例如: Gulfood 2026" />
+          </div>
+          <div>
+            <div class="field-label text-xs">日期</div>
+            <input type="text" id="ep_date" placeholder="例如: Jan 26-30, 2026" />
+          </div>
+          <div>
+            <div class="field-label text-xs">状态标签</div>
+            <select id="ep_status" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-green-700">
+              <option value="confirmed">Confirmed（已确认）</option>
+              <option value="upcoming">Upcoming（即将开始）</option>
+            </select>
+          </div>
+          <div>
+            <div class="field-label text-xs">地点</div>
+            <input type="text" id="ep_location" placeholder="例如: Dubai, UAE (DWTC &amp; DEC)" />
+          </div>
+          <div>
+            <div class="field-label text-xs">展位号</div>
+            <input type="text" id="ep_booth" placeholder="例如: F92 或 TBA" />
+          </div>
+        </div>
+        <div class="flex items-center gap-4 mt-5">
+          <button onclick="saveExhPopup()" class="btn-primary flex items-center gap-2">
+            <i class="fas fa-save"></i> 保存弹窗展会设置
+          </button>
+          <button onclick="resetExhPopupFromList()" class="text-xs text-gray-500 underline hover:text-green-700">恢复为“最新展会”（自动跟随列表）</button>
+        </div>
+      </div>
     </div>
 
 
@@ -691,6 +731,7 @@ function populateForm() {
 
   // 展会
   renderExhibitionsEditor(currentData.exhibitions || []);
+  renderExhPopupEditor();
 
   // 社媒
   renderSocialEditor(currentData.social_links || []);
@@ -1113,6 +1154,47 @@ function collectExhibitions() {
 async function saveExhibitions() {
   currentData.exhibitions = collectExhibitions();
   await pushDataJson('展会信息已保存并推送到 GitHub ✅');
+}
+
+// ===== 前端弹窗展会设置（主页 Latest Exhibition 弹窗）=====
+function renderExhPopupEditor() {
+  const hasCustom = currentData.exh_popup && (currentData.exh_popup.name || currentData.exh_popup.date || currentData.exh_popup.location);
+  const exhs = currentData.exhibitions || [];
+  // 已有自定义弹窗设置则显示它；否则预填列表中最新一条（保存前不写入数据）
+  const src = hasCustom ? currentData.exh_popup : (exhs.length ? exhs[exhs.length - 1] : {});
+  const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v || ''; };
+  setVal('ep_name', src.name);
+  setVal('ep_date', src.date);
+  setVal('ep_location', src.location);
+  setVal('ep_booth', src.booth);
+  setVal('ep_status', src.status === 'upcoming' ? 'upcoming' : 'confirmed');
+}
+
+function collectExhPopup() {
+  const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+  return {
+    name: g('ep_name'),
+    date: g('ep_date'),
+    location: g('ep_location'),
+    booth: g('ep_booth'),
+    status: g('ep_status') || 'confirmed'
+  };
+}
+
+async function saveExhPopup() {
+  currentData.exh_popup = collectExhPopup();
+  await pushDataJson('前端弹窗展会设置已保存并推送到 GitHub ✅');
+}
+
+function resetExhPopupFromList() {
+  const exhs = currentData.exhibitions || [];
+  const src = exhs.length ? exhs[exhs.length - 1] : {};
+  const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v || ''; };
+  setVal('ep_name', src.name);
+  setVal('ep_date', src.date);
+  setVal('ep_location', src.location);
+  setVal('ep_booth', src.booth);
+  setVal('ep_status', src.status === 'upcoming' ? 'upcoming' : 'confirmed');
 }
 
 // ===== 社媒链接编辑器 =====
