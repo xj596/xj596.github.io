@@ -347,7 +347,9 @@
     // ===== 解析URL参数，获取初始新闻ID =====
     function getNewsIdFromUrl() {
       const params = new URLSearchParams(window.location.search);
-      return parseInt(params.get('id')) || null;
+      // id 可能是字符串（如 news_spv_2024）也可能是数字，统一返回原始字符串
+      const raw = params.get('id');
+      return (raw !== null && raw !== '') ? raw : null;
     }
 
     // ===== 渲染左侧导航栏（年份-月份-日期树形结构）=====
@@ -411,7 +413,7 @@
             const title = item['title_' + currentLang] || item.title_en || '';
             const isActive = expandedId === item.id;
             html += `
-              <div class="day-item ${isActive ? 'active' : ''}" onclick="event.stopPropagation(); selectNews(${item.id})">
+              <div class="day-item ${isActive ? 'active' : ''}" onclick="event.stopPropagation(); selectNews(${JSON.stringify(item.id)})">
                 <div class="text-xs truncate">${day} - ${title.substring(0, 30)}${title.length > 30 ? '...' : ''}</div>
               </div>
             `;
@@ -480,7 +482,7 @@
         const isActive = expandedId === item.id;
 
         return `
-          <div class="news-list-item ${isActive ? 'active' : ''}" onclick="selectNews(${item.id})">
+          <div class="news-list-item ${isActive ? 'active' : ''}" onclick="selectNews(${JSON.stringify(item.id)})">
             <div class="bg-white rounded-xl shadow-sm p-5 hover:shadow-md transition-shadow">
               <div class="flex gap-4">
                 ${imgUrl ? `<img src="${imgUrl}" alt="${title}" class="w-24 h-24 object-cover rounded-lg flex-shrink-0">` : ''}
@@ -507,7 +509,7 @@
 
     // ===== 选择新闻，显示详情 =====
     function selectNews(id) {
-      if (expandedId === id) {
+      if (expandedId !== null && String(expandedId) === String(id)) {
         expandedId = null;
         document.getElementById('news-detail').classList.add('hidden');
         renderNewsList();
@@ -527,7 +529,7 @@
     // ===== 渲染新闻详情 =====
     function renderNewsDetail(id) {
       const detail = document.getElementById('news-detail');
-      const item = allNews.find(n => n.id === id);
+      const item = allNews.find(n => String(n.id) === String(id));
       if (!item) return;
 
       const title = item['title_' + currentLang] || item.title_en || '';
@@ -645,7 +647,7 @@
 
         // 检查URL是否有id参数
         const urlId = getNewsIdFromUrl();
-        if (urlId) {
+        if (urlId !== null) {
           // 延迟一下确保渲染完成
           setTimeout(() => selectNews(urlId), 100);
         }

@@ -68,11 +68,11 @@
     /* 认证徽标图标容器 */
     .cert-icon-wrap { min-height: 110px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
 
-    /* 资质证书轮播（6列网格 + 自动轮播） */
+    /* 资质证书轮播（4列大图网格 + 悬停暂停自动轮播） */
     .cert-container { position: relative; }
-    .cert-page { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
-    @media (max-width: 1023px) { .cert-page { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 639px)  { .cert-page { grid-template-columns: repeat(2, 1fr); } }
+    .cert-page { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    @media (max-width: 1023px) { .cert-page { grid-template-columns: repeat(3, 1fr); gap: 12px; } }
+    @media (max-width: 639px)  { .cert-page { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
     .cert-card {
       border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       border: 1px solid #f0f0f0; background: #fafafa; aspect-ratio: 4/3;
@@ -95,14 +95,16 @@
     #cert-lb-counter { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 500; }
     .cert-nav-btn {
       position: absolute; top: 50%; transform: translateY(-50%);
-      width: 36px; height: 36px; border-radius: 50%;
-      background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      color: #0F4C3A; font-size: 14px; z-index: 2; transition: background 0.2s, color 0.2s;
+      width: 46px; height: 46px; border-radius: 50%;
+      background: white; box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+      border: 1px solid rgba(15,76,58,0.18); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: #0F4C3A; font-size: 17px; z-index: 5; transition: background 0.2s, color 0.2s, transform 0.2s;
+      opacity: 0.97;
     }
-    .cert-nav-btn:hover { background: #0F4C3A; color: white; }
-    .cert-nav-btn.prev { left: -18px; }
-    .cert-nav-btn.next { right: -18px; }
+    .cert-nav-btn:hover { background: #0F4C3A; color: white; transform: translateY(-50%) scale(1.08); }
+    .cert-nav-btn.prev { left: 10px; }
+    .cert-nav-btn.next { right: 10px; }
     .cert-dot-row { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
     .cert-dot { width: 7px; height: 7px; border-radius: 50%; background: #d1d5db; transition: all 0.3s; cursor: pointer; }
     .cert-dot.active { background: #0F4C3A; transform: scale(1.3); }
@@ -390,7 +392,7 @@
         <div class="text-center py-6 px-4 border border-primary/10 rounded-lg hover:border-primary/30 transition-all w-64" data-cert-icon="cert_haccp"><div class="cert-icon-wrap"><img src="https://video.aultras-tea.com/HACCP.jpg" alt="HACCP" style="width:100%;max-width:120px;height:auto;object-fit:contain;margin:0 auto 8px;"></div><p class="font-medium" data-lang="cert_haccp">HACCP</p></div>
       </div>
 
-      <!-- 证书图片轮播（6列网格，支持20+张，与上方 HACCP 徽标并存） -->
+      <!-- 证书图片轮播（4列大图网格，支持20+张，与上方 HACCP 徽标并存） -->
       <div class="fade-in delay-100 mb-12">
         <div class="cert-container relative">
           <button id="cert-prev" onclick="certSlide(-1)" class="cert-nav-btn prev hidden">
@@ -754,7 +756,7 @@
     let certTotalPages = 0;
     let certUrls = [];
     let certAutoTimer = null;
-    const CERT_COLS = () => window.innerWidth >= 1024 ? 6 : window.innerWidth >= 640 ? 3 : 2;
+    const CERT_COLS = () => window.innerWidth >= 1024 ? 4 : window.innerWidth >= 640 ? 3 : 2;
 
     function getCertCols() {
       return CERT_COLS();
@@ -811,7 +813,8 @@
 
     function resetCertTimer() {
       if (certAutoTimer) clearInterval(certAutoTimer);
-      certAutoTimer = setInterval(() => certSlide(1), 4000);
+      if (certTotalPages <= 1) return; // 只有一页时不自动轮播
+      certAutoTimer = setInterval(() => certSlide(1), 5000);
     }
 
     // ===== 证书图片放大灯箱 =====
@@ -849,10 +852,27 @@
       certPage = 0;
       renderCertPage();
       resetCertTimer();
+      // 悬停暂停自动轮播，移开恢复（便于手动翻页查看）
+      const box = document.querySelector('.cert-container');
+      if (box && !box.dataset.hoverBound) {
+        box.dataset.hoverBound = '1';
+        box.addEventListener('mouseenter', () => { if (certAutoTimer) clearInterval(certAutoTimer); });
+        box.addEventListener('mouseleave', () => { if (certUrls.length) resetCertTimer(); });
+      }
     }
 
+    let _certResizeTimer = null;
     window.addEventListener('resize', () => {
       updateExhSlider();
+      // 窗口尺寸变化后重算证书分页（列数变化）
+      if (_certResizeTimer) clearTimeout(_certResizeTimer);
+      _certResizeTimer = setTimeout(() => {
+        if (!certUrls.length) return;
+        const cols = CERT_COLS();
+        certTotalPages = Math.max(1, Math.ceil(certUrls.length / cols));
+        certPage = Math.min(certPage, certTotalPages - 1);
+        renderCertPage();
+      }, 150);
     });
 
     // ===== 新闻动态（轮播渲染 - 类似展会板块） =====
