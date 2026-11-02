@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="https://video.aultras-tea.com/%E6%B9%98%E4%B8%B0logo%E5%B9%BF%E5%91%8A%E8%AF%AD-06.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about Xiangfeng Tea Group - a leading B2B Chinese tea exporter with 53,000 mu plantations, exporting to 60+ countries since 1999.">
+    <title data-i18n="about.title">About Us - Xiangfeng Tea Group</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ==================== TOP BAR ==================== -->
+    <div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="mailto:admin@xf-tea.com" title="Email"><i class="fas fa-envelope"></i> admin@xf-tea.com</a>
+      <a href="tel:+8673184652476" title="Phone"><i class="fas fa-phone-alt"></i> +86 731 8465 2476</a>
+      <a href="mailto:admin@aultrastea.com" title="Email (Guizhou Office)"><i class="fas fa-envelope"></i> admin@aultrastea.com</a>
+      <a href="https://wa.me/8613975899978" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i> +86 139 7589 9978</a>
+    </div>
+    <div class="topbar-right">
+      <a href="https://www.linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.facebook.com" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="tel:+8673184652476" target="_blank" rel="noopener" title="Phone"><i class="fas fa-phone"></i></a>
+      <span id="lang-selector"></span>
+    </div>
+  </div>
+</div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" class="header-logo-img">
+            </a>
+            <nav class="nav" id="navMenu">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link" data-i18n="common.home">Home</a>
+                </div>
+                <div class="nav-item">
+                    <a href="certs.html" class="nav-link" data-i18n="common.certsHonors">Certificates</a>
+                </div>
+                <div class="nav-item">
+                    <a href="about.html" class="nav-link active" data-i18n="common.about">About Us</a>
+                </div>
+                <div class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <span data-i18n="common.products">Products Center</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="products.html?cat=products.catGreen"><span data-i18n="products.catGreen">Green Tea</span></a>
+                        <a href="products.html?cat=products.catBlack"><span data-i18n="products.catBlack">Black Tea</span></a>
+                        <a href="products.html?cat=products.catOolong"><span data-i18n="products.catOolong">Oolong Tea</span></a>
+                        <a href="products.html?cat=products.catWhite"><span data-i18n="products.catWhite">White Tea</span></a>
+                        <a href="products.html?cat=products.catPuer"><span data-i18n="products.catPuer">Pu-erh Tea</span></a>
+                        <a href="products.html?cat=products.catOEM"><span data-i18n="common.oem">OEM/ODM</span></a>
+          <a href="products.html?cat=products.catFlower"><span data-i18n="products.catFlower">Flower Tea</span></a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="news.html" class="nav-link" data-i18n="common.latestUpdates">News</a>
+                </div>
+                <div class="nav-item">
+                    <a href="contact.html" class="nav-link" data-i18n="common.contact">Contact Us</a>
+                </div>
+                <button class="nav-inquiry-btn" onclick="openInquiry()">
+                    <i class="fas fa-paper-plane"></i>
+                    <span data-i18n="common.inquiry">Inquiry</span>
+                </button>
+            </nav>
+            <div class="mobile-menu-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="page-banner">
+        <div class="container">
+            <h1 data-i18n="about.title">About Xiangfeng Tea Group</h1>
+            <p data-i18n="about.productionDesc">From plantation to packaging, every step is carefully controlled</p>
+            <div class="breadcrumb">
+                <a href="index.html" data-i18n="common.home">Home</a>
+                <span>/</span>
+                <span data-i18n="common.about">About Us</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== COMPANY OVERVIEW ==================== -->
+    <section class="section" style="background: white;">
+        <div class="container">
+            <div class="section-title" style="text-align: center; max-width: 900px; margin: 0 auto 1.5rem;">
+                <p style="font-size: 1.05rem; line-height: 1.9; color: var(--text-light);" data-i18n="about.companyIntro">
+                    Founded in 1998 and headquartered in Changsha, Xiangfeng Tea Group is a national key leading enterprise in agricultural industrialization. As a comprehensive industrial group with a full industry chain, full product categories, and full-domain marketing in the tea industry, our products span green tea, black tea, white tea, dark tea, flower and fruit tea, and other major categories. We sell across more than 20 provinces and major third-party e-commerce platforms in China, and export to over 60 countries and regions worldwide. Recognized as a Chinese Export Brand and a National High-Quality Development Base for Agricultural International Trade, we hold ISO series, HACCP, EU Organic, US-Canada Organic, Japan Organic, German Naturland, Rainforest Alliance, Fair Trade, FSSC 22000, and other international authoritative certifications — a promise of quality, traceability, and reliable global supply.
+                </p>
+            </div>
+            <div class="about-intro-video" style="max-width: 900px; margin: 2.5rem auto 0; text-align: center;">
+                <video controls playsinline preload="metadata" style="width: 100%; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.12); background: #000;" src="https://video.aultras-tea.com/%E9%9B%86%E5%9B%A2%E5%AE%A3%E4%BC%A0%E7%89%87%E8%A3%81%E5%89%AA2.mov">
+                    您的浏览器不支持视频播放，请<a href="https://video.aultras-tea.com/%E9%9B%86%E5%9B%A2%E5%AE%A3%E4%BC%A0%E7%89%87%E8%A3%81%E5%89%AA2.mov" target="_blank" rel="noopener">点击此处查看宣传片</a>。
+                </video>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- ==================== DEVELOPMENT HISTORY TIMELINE (动态从 data.json 渲染) ==================== -->
+    <section class="section" id="historyTimelineSection" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="about.historyTitle">Development History</h2>
+                <p data-i18n="about.historyDesc">Milestones from a small tea factory to a national leading enterprise</p>
+            </div>
+            <div class="history-timeline" id="historyTimeline">
+                <div style="text-align:center; color:var(--text-light);">Loading timeline...</div>
+            </div>
+        </div>
+    </section>
+
+        <!-- ==================== CORPORATE CULTURE ==================== -->
+    <section class="section about-culture" style="background: white;">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="about.cultureTitle">Corporate Culture</h2>
+                <p data-i18n="about.cultureDesc">The values, mission and vision behind every cup of Xiangfeng tea</p>
+            </div>
+            <div class="culture-grid">
+                <div class="culture-card">
+                    <div class="culture-icon"><i class="fas fa-bullseye"></i></div>
+                    <h4 data-i18n="about.cultureMissionTitle">Mission</h4>
+                    <p data-i18n="about.cultureMissionDesc">Empower rural revitalization; serve the people.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon"><i class="fas fa-eye"></i></div>
+                    <h4 data-i18n="about.cultureVisionTitle">Vision</h4>
+                    <p data-i18n="about.cultureVisionDesc">Win respect through strength; build a 108-year brand driven by industry + capital.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon"><i class="fas fa-star"></i></div>
+                    <h4 data-i18n="about.cultureValuesTitle">Core Values</h4>
+                    <p data-i18n="about.cultureValuesDesc">Passion, dedication, progress, loyalty.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h4 data-i18n="about.culturePhilosophyTitle">Philosophy</h4>
+                    <p data-i18n="about.culturePhilosophyDesc">Innovation drives growth; quality builds the brand.</p>
+                </div>
+                <div class="culture-card">
+                    <div class="culture-icon"><i class="fas fa-hands-helping"></i></div>
+                    <h4 data-i18n="about.cultureServiceTitle">Service</h4>
+                    <p data-i18n="about.cultureServiceDesc">The customer's requirements are our highest command; the customer's small matters are our big priorities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- ==================== SECTION 1: PRODUCTION & PROCESSING ==================== -->
+    <section class="about-production-flow" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="about.productionTitle">Production &amp; Processing</h2>
+                <p data-i18n="about.productionDesc">From plantation to packaging, every step is carefully controlled</p>
+            </div>
+            <div class="production-timeline">
+                <div class="production-step">
+                    <div class="production-step-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h4 data-i18n="about.step1Harvest">Harvesting</h4>
+                    <p data-i18n="about.step1Desc">53,000 mu of organic tea plantation across 6 provinces. Hand-picked by 20,000+ skilled workers during peak season, ensuring only the finest buds and leaves are selected.</p>
+                </div>
+                <div class="production-step">
+                    <div class="production-step-icon">
+                        <i class="fas fa-magnifying-glass"></i>
+                    </div>
+                    <h4 data-i18n="about.step2Sort">Sorting &amp; Grading</h4>
+                    <p data-i18n="about.step2Desc">Rigorous multi-stage selection process using both AI-powered optical sorters and experienced tea masters. Graded by leaf size, shape, color, and aroma profile.</p>
+                </div>
+                <div class="production-step">
+                    <div class="production-step-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h4 data-i18n="about.step3Process">Processing &amp; Fermentation</h4>
+                    <p data-i18n="about.step3Desc">State-of-the-art facilities with automated temperature and humidity control. Traditional craftsmanship combined with modern processing technology across 32 dedicated production lines.</p>
+                </div>
+                <div class="production-step">
+                    <div class="production-step-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h4 data-i18n="about.step4Pack">Packaging &amp; QC</h4>
+                    <p data-i18n="about.step4Desc">Multi-layer quality inspection at every stage. Metal detection, microbiological testing, and sensory evaluation before final packaging in food-grade, export-compliant materials.</p>
+                </div>
+                <div class="production-step">
+                    <div class="production-step-icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <h4 data-i18n="about.step5Ship">Global Shipping</h4>
+                    <p data-i18n="about.step5Desc">Efficient logistics network reaching 60+ countries via sea freight, air cargo, and China-Europe Railway Express. Full customs documentation and certificate of origin provided.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="section" style="background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%); padding: 4rem 0; color: white; text-align: center;">
+        <div class="container">
+            <h2 style="color: white; font-size: 2rem; margin-bottom: 1rem;" data-i18n="about.ctaTitle">Ready to Start Your Tea Journey?</h2>
+            <p style="color: rgba(255,255,255,0.85); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; line-height: 1.8;" data-i18n="about.ctaDesc">Get in touch with our export team for product catalogs, samples, and competitive pricing. We respond within 24 hours.</p>
+            <a href="contact.html" class="btn btn-accent" style="background: white; color: var(--primary); font-size: 1.05rem; padding: 14px 36px; border-radius: 50px;">
+                <i class="fas fa-envelope"></i> <span data-i18n="about.ctaBtn">Contact Us Now</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <a href="index.html"><img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" class="footer-logo-img"></a>
+                    </div>
+                    <p data-i18n="footer.aboutDesc">A leading Chinese tea export enterprise, delivering premium teas worldwide since 1998.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title" data-i18n="footer.quickLinks">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html" data-i18n="common.about">About Us</a></li>
+                        <li><a href="products.html" data-i18n="common.products">Products</a></li>
+                        <li><a href="news.html" data-i18n="common.latestUpdates">News</a></li>
+                        <li><a href="certs.html" data-i18n="common.certsHonors">Certificates &amp; Honors</a></li>
+                        <li><a href="contact.html" data-i18n="common.contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title" data-i18n="footer.productsTitle">Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="products.html?cat=green"><span data-i18n="products.catGreen">Green Tea</span></a></li>
+                        <li><a href="products.html?cat=black"><span data-i18n="products.catBlack">Black Tea</span></a></li>
+                        <li><a href="products.html?cat=oolong"><span data-i18n="products.catOolong">Oolong Tea</span></a></li>
+                        <li><a href="products.html?cat=white"><span data-i18n="products.catWhite">White Tea</span></a></li>
+                        <li><a href="products.html?cat=puer"><span data-i18n="products.catPuer">Pu-erh Tea</span></a></li>
+                        <li><a href="products.html?cat=products.catOEM"><span data-i18n="common.oem">OEM / ODM</span></a></li>
+                        <li><a href="products.html?cat=matcha"><span data-i18n="common.matcha">Matcha</span></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title" data-i18n="footer.contactTitle">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 4/F, Building 1, Xiangfeng Tea Innovation Industry Park, No.12 Dongshi'er Road, Changsha County, Changsha, Hunan, China</li>
+                        <li><i class="fas fa-phone"></i> +86 731 8465 2476</li>
+                        <li><i class="fas fa-envelope"></i> admin@xf-tea.com</li>
+                        <li><i class="fas fa-envelope"></i> admin@aultrastea.com</li>
+                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/8613975899978" target="_blank" rel="noopener">+86 139 7589 9978</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Xiangfeng Tea Group. <span data-i18n="footer.rights">All rights reserved.</span></span>
+                <div>
+                    <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+                    <span style="margin: 0 8px;">|</span>
+                    <a href="#" data-i18n="footer.terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== INQUIRY POPUP ==================== -->
+    <div class="inquiry-overlay" id="inquiryOverlay" onclick="closeInquiryOverlay(event)">
+        <div class="inquiry-popup" id="inquiryPopup">
+            <div class="inquiry-header">
+                <h3 data-i18n="popup.title">Product Inquiry</h3>
+                <div class="inquiry-close" onclick="closeInquiry()">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="inquiry-body">
+                <form class="inquiry-form" id="inquiryForm" onsubmit="submitInquiry(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                <span data-i18n="popup.name">Your Name</span>
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" name="name" required data-i18n-placeholder="popup.name" placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span data-i18n="popup.company">Company / Brand</span>
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" name="company" required data-i18n-placeholder="popup.company" placeholder="Company / Brand">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                <span data-i18n="popup.email">Email</span>
+                                <span class="required">*</span>
+                            </label>
+                            <input type="email" name="email" required data-i18n-placeholder="popup.email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span data-i18n="popup.phone">Phone</span>
+                            </label>
+                            <input type="text" name="phone" data-i18n-placeholder="popup.phone" placeholder="Phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="popup.quantity">Estimated Quantity</label>
+                        <input type="text" name="quantity" data-i18n-placeholder="popup.quantity" placeholder="Estimated Quantity">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <span data-i18n="popup.message">Message</span>
+                            <span class="required">*</span>
+                        </label>
+                        <textarea name="message" rows="4" required data-i18n-placeholder="popup.messagePlaceholder" placeholder="Tell us about your requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="inquiry-submit popup-submit">
+                        <span class="loading-spinner"></span>
+                        <span class="btn-text" data-i18n="popup.submitBtn">Submit Inquiry</span>
+                    </button>
+                </form>
+            </div>
+            <div class="inquiry-success-animation" id="inquirySuccess">
+                <div class="success-checkmark">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h3 data-i18n="popup.successTitle">Inquiry Submitted!</h3>
+                <p data-i18n="popup.successDesc">Our export team will contact you within 24 hours.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== BACK TO TOP ==================== -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="js/i18n.js"></script>
+    <script src="js/product-data.js"></script>
+    <script>
+    /* ---------- i18n helper ---------- */
+    function __(key) {
+      if (typeof XF_i18n !== 'undefined' && XF_i18n.t) {
+        return XF_i18n.t(key);
+      }
+      return key;
+    }
+
+    /* ---------- CSRF Token Generator ---------- */
+    function generateToken() {
+      var timestamp = Date.now();
+      var random = Math.random().toString(36).substring(2, 15);
+      return timestamp + '_' + random;
+    }
+
+    /* ---------- HTML Escape Helper (XSS prevention) ---------- */
+    function escapeHtml(str) {
+      if (!str) return '';
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
+
+    /* ---------- Mobile Menu Toggle ---------- */
+    function toggleMobileMenu() {
+      var nav = document.getElementById('navMenu');
+      var toggle = document.getElementById('mobileToggle');
+      if (nav) nav.classList.toggle('active');
+      if (toggle) toggle.classList.toggle('active');
+    }
+
+    /* ---------- Inquiry Popup ---------- */
+    function openInquiry(productId) {
+  try { var _f = document.getElementById('contactFormCard'); if (_f) { _f.scrollIntoView({behavior:'smooth', block:'start'}); return; } window.location.href = 'contact.html#contactFormCard'; return; } catch(e) {}
+
+  // Direct jump to the customer's email client (pre-filled inquiry).
+  var email = INQUIRY_EMAIL;
+  try {
+    if (typeof XF_DATA !== 'undefined' && XF_DATA && XF_DATA.inquiry && XF_DATA.inquiry.email) email = XF_DATA.inquiry.email;
+    else if (typeof DATA !== 'undefined' && DATA && DATA.inquiry && DATA.inquiry.email) email = DATA.inquiry.email;
+  } catch(e) {}
+  var pname = '';
+  try {
+    if (productId && typeof XF_Products !== 'undefined') {
+      var p = XF_Products.getProductById(productId);
+      if (p) pname = XF_Products.getName(p);
+    }
+  } catch(e) {}
+  try {
+    if (!pname && typeof currentProduct !== 'undefined' && currentProduct && typeof XF_Products !== 'undefined') {
+      pname = XF_Products.getName(currentProduct);
+    }
+  } catch(e) {}
+  var subject = 'Tea Inquiry' + (pname ? ' - ' + pname : '');
+  var body = 'Dear Xiangfeng Tea Export Team,\n\nI would like to inquire about ' + (pname ? pname : 'your tea products') + '.\n\n';
+  body += 'My details:\nName: \nCompany: \nEmail: \nPhone: \n\nMessage:\n\nLooking forward to your reply.\n';
+  var mailtoUrl = 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  window.location.href = mailtoUrl;
+}
+
+
+    function closeInquiry() {
+      var overlay = document.getElementById('inquiryOverlay');
+      if (overlay) {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function closeInquiryOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeInquiry();
+      }
+    }
+
+    /* ====== Email Configuration ====== */
+    var INQUIRY_EMAIL = 'admin@xf-tea.com';
+    var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/' + INQUIRY_EMAIL;
+    var FORMSUBMIT_AJAX_HEADERS = { 'Accept': 'application/json' };
+
+    function isStaticHosting() {
+      return window.location.hostname.includes('github.io') ||
+             !window.location.protocol.startsWith('http') ||
+             window.location.protocol === 'file:';
+    }
+
+    function submitInquiry(e) {
+      e.preventDefault();
+      var form = e.target;
+
+      var name = form.querySelector('[name="name"]').value || '';
+      var company = form.querySelector('[name="company"]').value || '';
+      var email = form.querySelector('[name="email"]').value || '';
+      var phone = form.querySelector('[name="phone"]').value || '';
+      var product = form.querySelector('[name="product_interest"]').value || '';
+      var quantity = form.querySelector('[name="quantity"]').value || '';
+      var message = form.querySelector('[name="message"]').value || '';
+
+      if (!name || !email || !message) {
+        alert(__('popup.fillRequired') || 'Please fill in all required fields.');
+        return;
+      }
+
+      var submitBtn = form.querySelector('.popup-submit');
+      if (submitBtn) {
+        submitBtn.classList.add('form-submitting');
+        var btnText = submitBtn.querySelector('.btn-text');
+        if (btnText) btnText.textContent = __('popup.submitting') || 'Submitting...';
+      }
+
+      var formData = new FormData(form);
+      formData.append('_subject', 'Tea Inquiry from ' + name + (company ? ' (' + company + ')' : ''));
+      formData.append('_template', 'table');
+      formData.append('_captcha', 'false');
+
+      fetch(FORMSUBMIT_ENDPOINT, {
+        method: 'POST',
+        headers: FORMSUBMIT_AJAX_HEADERS,
+        body: formData
+      })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (submitBtn) submitBtn.classList.remove('form-submitting');
+          if (data.success === 'true' || data.success === true) {
+            showInquirySuccess();
+          } else {
+            fallbackToMailto(name, company, email, phone, product, quantity, message);
+          }
+        })
+        .catch(function() {
+          if (submitBtn) submitBtn.classList.remove('form-submitting');
+          fallbackToMailto(name, company, email, phone, product, quantity, message);
+        });
+    }
+
+    function fallbackToMailto(name, company, email, phone, product, quantity, message) {
+      var subject = 'Tea Inquiry from ' + name + (company ? ' (' + company + ')' : '');
+      var body = 'Dear Xiangfeng Tea Export Team,\n\n';
+      body += 'I would like to inquire about your tea products. Here are my details:\n\n';
+      body += 'Name: ' + name + '\n';
+      if (company) body += 'Company: ' + company + '\n';
+      body += 'Email: ' + email + '\n';
+      if (phone) body += 'Phone: ' + phone + '\n';
+      if (product) body += 'Product Interest: ' + product + '\n';
+      if (quantity) body += 'Estimated Quantity: ' + quantity + '\n';
+      body += '\nMessage:\n' + message + '\n\n';
+      body += 'Looking forward to your reply.\n\nBest regards,\n' + name;
+
+      var mailtoUrl = 'mailto:' + INQUIRY_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      window.location.href = mailtoUrl;
+      showInquirySuccess();
+    }
+
+    function showInquirySuccess() {
+      var form = document.getElementById('inquiryForm');
+      var successDiv = document.getElementById('inquirySuccess');
+      if (form) form.style.display = 'none';
+      if (successDiv) {
+        successDiv.classList.add('active');
+      }
+    }
+
+    /* ---------- Back to Top ---------- */
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function initBackToTop() {
+      var btn = document.getElementById('backToTop');
+      if (!btn) return;
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 400) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+      });
+
+      var header = document.getElementById('header');
+      var topbar = document.querySelector('.topbar');
+      window.addEventListener('scroll', function() {
+        if (header) {
+          header.classList.toggle('scrolled', window.scrollY > 50);
+        }
+        if (topbar) {
+          topbar.classList.toggle('scrolled', window.scrollY > 10);
+        }
+      });
+    }
+
+    /* ---------- Initialize on DOM Ready ---------- */
+    document.addEventListener('DOMContentLoaded', function() {
+      initBackToTop();
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+      var nav = document.getElementById('navMenu');
+      var toggle = document.getElementById('mobileToggle');
+      if (nav && nav.classList.contains('active') && toggle) {
+        if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+          nav.classList.remove('active');
+          toggle.classList.remove('active');
+        }
+      }
+    });
+
+    // Close inquiry on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeInquiry();
+      }
+    });
+
+    /* ---------- Development History Timeline (from data.json) ---------- */
+    function getTimelineField(obj, field) {
+      var lang = (typeof XF_i18n !== 'undefined' && XF_i18n.getLang) ? XF_i18n.getLang() : 'en';
+      if (obj && typeof obj[field] === 'object' && obj[field] !== null) {
+        var v = obj[field][lang];
+        if (v) return v;
+        return obj[field].en || obj[field].zh || '';
+      }
+      if (obj && typeof obj[field] === 'string') return obj[field];
+      return '';
+    }
+    function escAttr(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+    function renderHistoryTimeline(items){
+      var box = document.getElementById('historyTimeline');
+      if (!box) return;
+      if (!items || !items.length) {
+        box.innerHTML = '<div style="text-align:center;color:var(--text-light);">'+__('about.historyEmpty')+'</div>';
+        return;
+      }
+      var html = '';
+      items.forEach(function(it){
+        var y = escAttr(it.year || '');
+        var desc = escAttr(getTimelineField(it,'desc'));
+        html += '<div class="history-timeline-item">'
+              + '<div class="history-year">' + y + '</div>'
+              + '<div class="history-dot"></div>'
+              + '<div class="history-card">'
+              + '<p>' + desc + '</p>'
+              + '</div></div>';
+      });
+      box.innerHTML = html;
+    }
+    function loadHistoryTimeline(){
+      var box = document.getElementById('historyTimeline');
+      if (!box) return;
+      fetch('data.json').then(function(r){
+        if (!r.ok) throw new Error('data.json fetch failed');
+        return r.json();
+      }).then(function(d){
+        renderHistoryTimeline(d.timeline || []);
+      }).catch(function(err){
+        box.innerHTML = '<div style="text-align:center;color:#c00;">'+__('about.historyEmpty')+'</div>';
+      });
+    }
+    loadHistoryTimeline();
+    document.addEventListener('xf_lang_change', function(){ loadHistoryTimeline(); });
+    </script>
+</body>
+</html>

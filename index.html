@@ -3,1300 +3,1019 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="site-version" content="15.8-20261015-1730">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <title data-lang="meta_title">AultrasTea | Premium Tea Supplier From China | Organic Tea Wholesale</title>
-  <meta name="description" content="AultrasTea, professional Chinese tea manufacturer & exporter, supply organic green tea, black tea, white tea, oolong tea, puerh tea. Global wholesale, welcome to cooperate." data-lang="meta_desc">
-  <meta name="keywords" content="AultrasTea, Chinese tea, organic tea, green tea, black tea, white tea, oolong tea, tea wholesale, tea exporter">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#0F4C3A',
-            secondary: '#D4AF37',
-            light: '#F8F5F0',
-            dark: '#1A1A1A',
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            serif: ['"Noto Serif SC"', 'serif'],
-          },
-        },
-      }
-    }
-  </script>
-  <style type="text/tailwindcss">
-    @layer utilities {
-      .content-auto { content-visibility: auto; }
-      .text-shadow { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-      .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-      .fade-in.visible { opacity: 1; transform: translateY(0); }
-    }
-  </style>
-  <style>
-    html { scroll-behavior: smooth; }
-    section[id] { scroll-margin-top: 96px; }
-    body { overflow-x: hidden; background-color: #F8F5F0; color: #1A1A1A; font-family: "Inter", sans-serif; }
-    .nav-link { position: relative; }
-    .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #D4AF37; transition: width 0.3s ease; }
-    .nav-link:hover::after { width: 100%; }
-    .product-card { transition: all 0.3s ease; }
-    .product-card:hover { transform: translateY(-8px); box-shadow: 0 10px 30px rgba(15,76,58,0.15); }
-
-    /* 展会轮播 */
-    .exh-track-wrap { overflow: hidden; }
-    .exh-track { display: flex; transition: transform 0.5s ease; }
-    .exh-slide { min-width: calc(33.333% - 14px); margin-right: 21px; flex-shrink: 0; }
-    @media (max-width: 768px) {
-      .exh-slide { min-width: calc(100% - 0px); margin-right: 21px; }
-    }
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .exh-slide { min-width: calc(50% - 11px); }
-    }
-    .exh-dot { width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 0.3s; cursor: pointer; }
-    .exh-dot.active { background: #0F4C3A; }
-
-    /* 关于我们视频 */
-    .about-video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 1rem; overflow: hidden; background: #0F4C3A; box-shadow: 0 25px 50px rgba(15,76,58,0.25); }
-    .about-video-wrap iframe, .about-video-wrap video { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
-
-    /* 认证徽标图标容器 */
-    .cert-icon-wrap { min-height: 110px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
-
-    /* 资质证书轮播（4列大图网格 + 悬停暂停自动轮播） */
-    .cert-container { position: relative; }
-    .cert-page { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    @media (max-width: 1023px) { .cert-page { grid-template-columns: repeat(3, 1fr); gap: 12px; } }
-    @media (max-width: 639px)  { .cert-page { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
-    .cert-card {
-      border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      border: 1px solid #f0f0f0; background: #fafafa; aspect-ratio: 4/3;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .cert-card img { width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; transition: transform 0.25s ease; }
-    .cert-card img:hover { transform: scale(1.04); }
-    .cert-card.has-img { cursor: zoom-in; }
-
-    /* 证书图片放大灯箱 */
-    #cert-lightbox { position: fixed; inset: 0; z-index: 9500; background: rgba(0,0,0,0.88); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; padding: 24px; }
-    #cert-lightbox.show { opacity: 1; visibility: visible; }
-    #cert-lightbox img { max-width: 92vw; max-height: 86vh; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
-    #cert-lightbox-close { position: absolute; top: 18px; right: 24px; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.15); border: none; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
-    #cert-lightbox-close:hover { background: rgba(255,255,255,0.32); }
-    #cert-lb-prev, #cert-lb-next { position: absolute; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.12); border: none; color: white; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s; z-index: 9501; }
-    #cert-lb-prev { left: 16px; }
-    #cert-lb-next { right: 16px; }
-    #cert-lb-prev:hover, #cert-lb-next:hover { background: rgba(255,255,255,0.3); }
-    #cert-lb-counter { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.85); font-size: 14px; font-weight: 500; }
-    .cert-nav-btn {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 46px; height: 46px; border-radius: 50%;
-      background: white; box-shadow: 0 4px 14px rgba(0,0,0,0.22);
-      border: 1px solid rgba(15,76,58,0.18); cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: #0F4C3A; font-size: 17px; z-index: 5; transition: background 0.2s, color 0.2s, transform 0.2s;
-      opacity: 0.97;
-    }
-    .cert-nav-btn:hover { background: #0F4C3A; color: white; transform: translateY(-50%) scale(1.08); }
-    .cert-nav-btn.prev { left: 10px; }
-    .cert-nav-btn.next { right: 10px; }
-    .cert-dot-row { display: flex; justify-content: center; gap: 6px; margin-top: 12px; }
-    .cert-dot { width: 7px; height: 7px; border-radius: 50%; background: #d1d5db; transition: all 0.3s; cursor: pointer; }
-    .cert-dot.active { background: #0F4C3A; transform: scale(1.3); }
-
-    /* 首页展会弹窗 */
-    #exh-popup {
-      position: fixed; bottom: 24px; left: 24px; z-index: 9000;
-      width: clamp(280px, 25vw, 360px);
-      background: white; border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(15,76,58,0.18), 0 2px 8px rgba(0,0,0,0.1);
-      overflow: hidden; transform: translateY(120%); opacity: 0;
-      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-      border: 1px solid rgba(15,76,58,0.12);
-    }
-    #exh-popup.show { transform: translateY(0); opacity: 1; }
-    .exh-popup-header {
-      background: linear-gradient(135deg, #0F4C3A 0%, #1a6b54 100%);
-      padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
-    }
-    .exh-popup-body { padding: 16px; }
-    .exh-popup-badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
-    .exh-popup-badge.confirmed { background: #dcfce7; color: #15803d; }
-    .exh-popup-badge.upcoming  { background: #fef9c3; color: #a16207; }
-    .exh-popup-close {
-      width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,0.2);
-      border: none; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center;
-      font-size: 12px; transition: background 0.2s; flex-shrink: 0;
-    }
-    .exh-popup-close:hover { background: rgba(255,255,255,0.35); }
-
-    /* 新闻板块（轮播） */
-    .news-track-wrap { overflow: hidden; }
-    .news-track { display: flex; transition: transform 0.5s ease; }
-    .news-slide { min-width: calc(33.333% - 18px); margin-right: 27px; flex-shrink: 0; }
-    @media (max-width: 768px) {
-      .news-slide { min-width: calc(100% - 0px); margin-right: 21px; }
-    }
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .news-slide { min-width: calc(50% - 11px); }
-    }
-    .news-dot { width: 8px; height: 8px; border-radius: 50%; background: #d1d5db; transition: background 0.3s; cursor: pointer; }
-    .news-dot.active { background: #0F4C3A; }
-    /* 新闻卡片样式 */
-    .news-card { transition: all 0.3s ease; border: 1px solid rgba(15,76,58,0.08); }
-    .news-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(15,76,58,0.12); border-color: rgba(15,76,58,0.2); }
-    .news-card .news-img-wrap { height: 180px; overflow: hidden; background: linear-gradient(135deg, #0F4C3A11, #D4AF3722); }
-    .news-card .news-img-wrap img { width:100%; height:100%; object-fit:cover; transition: transform 0.4s ease; }
-    .news-card:hover .news-img-wrap img { transform: scale(1.05); }
-    .news-pagination { display:flex; align-items:center; justify-content:center; gap:6px; margin-top:32px; flex-wrap:wrap; }
-    .news-pg-btn { min-width:36px; height:36px; border-radius:8px; border:1px solid rgba(15,76,58,0.25); background:white; color:#0F4C3A; font-weight:600; font-size:14px; cursor:pointer; transition:all 0.2s; display:flex; align-items:center; justify-content:center; padding:0 10px; }
-    .news-pg-btn:hover { background:#0F4C3A; color:white; border-color:#0F4C3A; }
-    .news-pg-btn.active { background:#0F4C3A; color:white; border-color:#0F4C3A; }
-    .news-pg-btn:disabled { opacity:0.35; cursor:not-allowed; }
-    .news-date-tag { display:inline-block; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:600; background:rgba(15,76,58,0.08); color:#0F4C3A; }
-  </style>
-  <link rel="icon" href="data:,">
+  <meta name="description" content="Xiangfeng Tea Group — Premium Chinese Tea Exporter. B2B wholesale, OEM/ODM, direct from origin. Shipping to 60+ countries.">
+  <meta name="keywords" content="Chinese tea export, green tea, black tea, oolong tea, white tea, pu-erh, matcha, OEM tea, B2B tea supplier">
+  <title>Xiangfeng Tea Group — Premium Chinese Tea Exporter</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://video.aultras-tea.com/%E6%B9%98%E4%B8%B0logo%E5%B9%BF%E5%91%8A%E8%AF%AD-06.png">
 </head>
 <body>
-  <!-- 导航栏 -->
-  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-500 py-3 bg-light/95 backdrop-blur-md shadow-sm">
-    <div class="container mx-auto px-4 md:px-6">
-      <nav class="flex items-center justify-between">
-        <a href="#home" class="text-2xl font-bold text-primary flex items-center gap-2">
-          <img src="https://video.aultras-tea.com/%E6%B9%98%E4%B8%B0%E7%80%91%E5%B8%83%E5%95%86%E6%A0%87-04.png" alt="AultrasTea" class="navbar-logo" style="height:40px;width:auto;max-width:220px;object-fit:contain;">
+
+<!-- ============================================
+     1. TOP UTILITY BAR
+     ============================================ -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="mailto:admin@xf-tea.com" title="Email"><i class="fas fa-envelope"></i> admin@xf-tea.com</a>
+      <a href="tel:+8673184652476" title="Phone"><i class="fas fa-phone-alt"></i> +86 731 8465 2476</a>
+      <a href="mailto:admin@aultrastea.com" title="Email (Guizhou Office)"><i class="fas fa-envelope"></i> admin@aultrastea.com</a>
+      <a href="https://wa.me/8613975899978" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i> +86 139 7589 9978</a>
+    </div>
+    <div class="topbar-right">
+      <a href="https://www.linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.facebook.com" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="tel:+8673184652476" target="_blank" rel="noopener" title="Phone"><i class="fas fa-phone"></i></a>
+      <span id="lang-selector"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     2. MAIN HEADER (MODIFIED NAVIGATION)
+     ============================================ -->
+<header class="header" id="header">
+  <div class="container">
+    <a href="index.html" class="logo">
+      <img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" class="header-logo-img">
+    </a>
+    <nav class="nav" id="navMenu">
+      <div class="nav-item">
+        <a href="index.html" class="nav-link active" data-i18n="common.home">Home</a>
+      </div>
+      <div class="nav-item">
+        <a href="certs.html" class="nav-link" data-i18n="common.certsHonors">Certificates</a>
+      </div>
+      <div class="nav-item">
+        <a href="about.html" class="nav-link" data-i18n="common.about">About Us</a>
+      </div>
+      <div class="nav-item">
+        <a href="products.html" class="nav-link">
+          <span data-i18n="common.products">Products Center</span>
+          <i class="fas fa-chevron-down"></i>
         </a>
-        <ul class="hidden md:flex items-center gap-8">
-          <li><a href="#home" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_home">Home</a></li>
-          <li><a href="#about" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_about">About Us</a></li>
-          <li><a href="#products" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_products">Products</a></li>
-          <li><a href="#certificates" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_certificates">Certificates</a></li>
-          <li><a href="#exhibitions" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_exhibitions">Exhibitions</a></li>
-          <li><a href="news.html" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_news">News</a></li>
-          <li><a href="#contact" class="nav-link text-dark hover:text-primary transition-colors font-medium" data-lang="nav_contact">Contact Us</a></li>
-        </ul>
-        <div class="flex items-center gap-4">
-          <select id="langSelect" class="px-3 py-1.5 rounded-lg border border-primary/30 text-primary bg-white font-medium outline-none">
-            <option value="en">English</option>
-            <option value="zh">中文</option>
-            <option value="ru">Русский</option>
-            <option value="de">Deutsch</option>
-          </select>
-          <button id="menuToggle" class="md:hidden text-2xl text-primary">
-            <i class="fas fa-bars"></i>
-          </button>
+        <div class="nav-dropdown">
+          <a href="products.html?cat=products.catGreen"><span data-i18n="products.catGreen">Green Tea</span></a>
+          <a href="products.html?cat=products.catBlack"><span data-i18n="products.catBlack">Black Tea</span></a>
+          <a href="products.html?cat=products.catOolong"><span data-i18n="products.catOolong">Oolong Tea</span></a>
+          <a href="products.html?cat=products.catWhite"><span data-i18n="products.catWhite">White Tea</span></a>
+          <a href="products.html?cat=products.catPuer"><span data-i18n="products.catPuer">Pu-erh Tea</span></a>
+          <a href="products.html?cat=products.catOEM"><span data-i18n="common.oem">OEM/ODM</span></a>
+          <a href="products.html?cat=products.catFlower"><span data-i18n="products.catFlower">Flower Tea</span></a>
         </div>
-      </nav>
-      <div id="mobileMenu" class="md:hidden hidden bg-white mt-4 rounded-xl border border-primary/10 p-6 absolute left-4 right-4 shadow-lg">
-        <ul class="flex flex-col gap-5">
-          <li><a href="#home" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_home">Home</a></li>
-          <li><a href="#about" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_about">About Us</a></li>
-          <li><a href="#products" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_products">Products</a></li>
-          <li><a href="#certificates" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_certificates">Certificates</a></li>
-          <li><a href="#exhibitions" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_exhibitions">Exhibitions</a></li>
-          <li><a href="news.html" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_news">News</a></li>
-          <li><a href="#contact" class="block py-2 text-dark hover:text-primary transition-colors font-medium" data-lang="nav_contact">Contact Us</a></li>
-        </ul>
       </div>
+      <div class="nav-item">
+        <a href="news.html" class="nav-link" data-i18n="common.latestUpdates">News</a>
+      </div>
+      <div class="nav-item">
+        <a href="contact.html" class="nav-link" data-i18n="common.contact">Contact Us</a>
+      </div>
+      <button class="nav-inquiry-btn" onclick="openInquiry()">
+        <i class="fas fa-paper-plane"></i>
+        <span data-i18n="common.inquiry">Inquiry</span>
+      </button>
+    </nav>
+    <div class="mobile-menu-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- Hero -->
-  <section id="home" class="min-h-screen flex items-center pt-20 pb-16 relative overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img id="img_hero_bg" src="" alt="Tea Garden" class="w-full h-full object-cover opacity-20">
-    </div>
-    <div class="container mx-auto px-4 md:px-6 relative z-10">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="fade-in text-center md:text-left">
-          <p class="text-secondary font-medium tracking-widest mb-4" data-lang="hero_subtitle">GUIZHOU AULTRAS TEA CO.,LTD</p>
-          <h1 class="text-[clamp(2.5rem,8vw,4.5rem)] font-bold leading-tight mb-6 text-primary text-shadow">
-            <span data-lang="hero_title1">Premium Tea</span><br>
-            <span data-lang="hero_title2">from China to the World</span>
-          </h1>
-          <p class="text-dark/70 text-lg mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed" data-lang="hero_desc">
-            With 20+ years of tea industry experience, we supply high-quality EU organic green tea, black tea, white tea, oolong tea, and other tea products worldwide.
-          </p>
-          <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-            <a href="#products" class="px-8 py-3 bg-primary text-white rounded-full font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
-              <span data-lang="hero_btn1">View Products</span>
-            </a>
-            <a href="#contact" class="px-8 py-3 border-2 border-primary text-primary rounded-full font-medium hover:bg-primary/5 transition-all">
-              <span data-lang="hero_btn2">Contact Us</span>
-            </a>
-          </div>
-          <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div class="flex items-center gap-3">
-              <i class="fas fa-envelope text-primary text-xl"></i>
-              <span class="text-dark/80">admin@aultrastea.com</span>
-            </div>
-            <div class="flex items-center gap-3">
-              <i class="fas fa-phone text-primary text-xl"></i>
-              <span id="hero_phone" class="text-dark/80">收集中</span>
-            </div>
-          </div>
-        </div>
-        <div class="fade-in delay-200 relative">
-          <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-            <img id="img_hero_main" src="" alt="Premium Tea Products" class="w-full h-full object-cover">
+<!-- ============================================
+     3. HERO SLIDER (3 slides)
+     ============================================ -->
+<section class="hero" id="hero">
+  <!-- Hero floating tagline (首页背景悬浮文字) -->
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:0;text-align:center;pointer-events:none;width:100%;opacity:0.08;">
+    <h2 style="color:white;font-size:3.5rem;font-weight:700;letter-spacing:2px;margin:0;" data-i18n="hero.title">XF TEA FOR EVERY CORNER OF THE WORLD</h2>
+  </div>
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slide active" style="background: linear-gradient(135deg, #1a3a2e, #2d5a3d);">
+      <img src="https://video.aultras-tea.com/%E5%A4%96%E8%B4%B8%E7%BD%91%E7%AB%99%E9%A6%96%E5%9B%BE1.jpg"
+           onerror="this.style.display='none'"
+           alt="Tea Plantation">
+      <div class="container">
+        <div class="hero-content">
+          <span style="display:inline-block;padding:6px 16px;background:rgba(48,180,168,0.3);border-radius:50px;font-size:0.85rem;margin-bottom:1.5rem;" data-i18n="hero.slide1Badge">Explore Our Products</span>
+          <h1 data-i18n="hero.slide1Title">Premium Chinese Tea, Going Global</h1>
+          <p data-i18n="hero.slide1Subtitle">Supplying world-class green tea, black tea, oolong tea, white tea, and pu-erh tea to 60+ countries worldwide</p>
+          <div class="hero-buttons">
+            <a href="products.html" class="btn btn-accent" data-i18n="hero.ctaProducts">Explore Products</a>
+            <button class="btn btn-outline" style="color:white;border-color:white;" onclick="openInquiry()" data-i18n="hero.ctaInquiry">Request Quote</button>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- 产品中心（6大品类） -->
-  <section id="products" class="py-20 bg-light">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-16 fade-in">
-        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-primary" data-lang="products_title">Our Products</h2>
-        <p class="text-dark/70 max-w-2xl mx-auto mb-4" data-lang="products_desc">We provide a wide range of tea products, offering custom packaging and OEM services. Welcome to inquire about wholesale and bulk orders.</p>
-        <div class="w-24 h-1 bg-secondary mx-auto"></div>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-
-        <!-- 绿茶 -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md fade-in">
-          <div class="relative h-52 overflow-hidden">
-            <img id="img_product_green" src="" alt="Green Tea" class="w-full h-full object-cover transition-all duration-500">
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-bold mb-1 text-primary" data-lang="product_green">Green Tea</h3>
-            <p class="text-dark/60 text-xs mb-1 uppercase tracking-wide">绿茶</p>
-            <p class="text-dark/70 text-sm mb-4" data-lang="product_green_desc">Chunmee, Gunpowder, Dragon Well, Sencha, Mao Feng etc.</p>
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <a href="#contact" class="text-secondary font-medium flex items-center gap-1 text-sm hover:gap-2 transition-all"><span data-lang="product_inquiry">Inquiry Now</span><i class="fas fa-arrow-right text-xs"></i></a>
-              <a href="product-green.html" class="inline-flex items-center gap-1 text-primary text-xs font-medium hover:text-secondary transition-colors px-3 py-1 rounded-full border border-primary/30 hover:border-primary hover:bg-primary/5"><span data-lang="view_detail">View Details</span><i class="fas fa-chevron-right text-xs"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 红茶 -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md fade-in delay-100">
-          <div class="relative h-52 overflow-hidden">
-            <img id="img_product_black" src="" alt="Black Tea" class="w-full h-full object-cover transition-all duration-500">
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-bold mb-1 text-primary" data-lang="product_black">Black Tea</h3>
-            <p class="text-dark/60 text-xs mb-1 uppercase tracking-wide">红茶</p>
-            <p class="text-dark/70 text-sm mb-4" data-lang="product_black_desc">CTC Black Tea, Golden Snail, Black Fannings, Mao Feng Black Tea etc.</p>
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <a href="#contact" class="text-secondary font-medium flex items-center gap-1 text-sm hover:gap-2 transition-all"><span data-lang="product_inquiry">Inquiry Now</span><i class="fas fa-arrow-right text-xs"></i></a>
-              <a href="product-black.html" class="inline-flex items-center gap-1 text-primary text-xs font-medium hover:text-secondary transition-colors px-3 py-1 rounded-full border border-primary/30 hover:border-primary hover:bg-primary/5"><span data-lang="view_detail">View Details</span><i class="fas fa-chevron-right text-xs"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 乌龙茶 -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md fade-in delay-200">
-          <div class="relative h-52 overflow-hidden">
-            <img id="img_product_oolong" src="" alt="Oolong Tea" class="w-full h-full object-cover transition-all duration-500">
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-bold mb-1 text-primary" data-lang="product_oolong">Oolong Tea</h3>
-            <p class="text-dark/60 text-xs mb-1 uppercase tracking-wide">乌龙茶</p>
-            <p class="text-dark/70 text-sm mb-4" data-lang="product_oolong_desc">Da Hong Pao, Tie Guan Yin, Milk Oolong, Ginseng Oolong etc.</p>
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <a href="#contact" class="text-secondary font-medium flex items-center gap-1 text-sm hover:gap-2 transition-all"><span data-lang="product_inquiry">Inquiry Now</span><i class="fas fa-arrow-right text-xs"></i></a>
-              <a href="product-oolong.html" class="inline-flex items-center gap-1 text-primary text-xs font-medium hover:text-secondary transition-colors px-3 py-1 rounded-full border border-primary/30 hover:border-primary hover:bg-primary/5"><span data-lang="view_detail">View Details</span><i class="fas fa-chevron-right text-xs"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 白茶 -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md fade-in">
-          <div class="relative h-52 overflow-hidden">
-            <img id="img_product_white" src="" alt="White Tea" class="w-full h-full object-cover transition-all duration-500">
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-bold mb-1 text-primary" data-lang="product_white">White Tea</h3>
-            <p class="text-dark/60 text-xs mb-1 uppercase tracking-wide">白茶</p>
-            <p class="text-dark/70 text-sm mb-4" data-lang="product_white_desc">White Peony, Silver Needle, Yunnan White Peony etc.</p>
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <a href="#contact" class="text-secondary font-medium flex items-center gap-1 text-sm hover:gap-2 transition-all"><span data-lang="product_inquiry">Inquiry Now</span><i class="fas fa-arrow-right text-xs"></i></a>
-              <a href="product-white.html" class="inline-flex items-center gap-1 text-primary text-xs font-medium hover:text-secondary transition-colors px-3 py-1 rounded-full border border-primary/30 hover:border-primary hover:bg-primary/5"><span data-lang="view_detail">View Details</span><i class="fas fa-chevron-right text-xs"></i></a>
-            </div>
-          </div>
-        </div>
-        <!-- 黑茶 -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md fade-in delay-200">
-          <div class="relative h-52 overflow-hidden">
-            <img id="img_product_dark" src="" alt="Dark Tea" class="w-full h-full object-cover transition-all duration-500">
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-bold mb-1 text-primary" data-lang="product_dark">Dark Tea</h3>
-            <p class="text-dark/60 text-xs mb-1 uppercase tracking-wide">黑茶</p>
-            <p class="text-dark/70 text-sm mb-4" data-lang="product_dark_desc">Pu-erh, Liu Bao, Fu Brick, An Hua Dark Tea etc.</p>
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <a href="#contact" class="text-secondary font-medium flex items-center gap-1 text-sm hover:gap-2 transition-all"><span data-lang="product_inquiry">Inquiry Now</span><i class="fas fa-arrow-right text-xs"></i></a>
-              <a href="product-dark.html" class="inline-flex items-center gap-1 text-primary text-xs font-medium hover:text-secondary transition-colors px-3 py-1 rounded-full border border-primary/30 hover:border-primary hover:bg-primary/5"><span data-lang="view_detail">View Details</span><i class="fas fa-chevron-right text-xs"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 工艺茶 -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md fade-in">
-          <div class="relative h-52 overflow-hidden">
-            <img id="img_product_flower" src="" alt="Flower Tea" class="w-full h-full object-cover transition-all duration-500">
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-bold mb-1 text-primary" data-lang="product_flower">Flower Tea</h3>
-            <p class="text-dark/60 text-xs mb-1 uppercase tracking-wide">工艺茶</p>
-            <p class="text-dark/70 text-sm mb-4" data-lang="product_flower_desc">Jasmine Pearls, Blooming Tea, Jasmine Silver Needle, Rose Tea etc.</p>
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <a href="#contact" class="text-secondary font-medium flex items-center gap-1 text-sm hover:gap-2 transition-all"><span data-lang="product_inquiry">Inquiry Now</span><i class="fas fa-arrow-right text-xs"></i></a>
-              <a href="product-flower.html" class="inline-flex items-center gap-1 text-primary text-xs font-medium hover:text-secondary transition-colors px-3 py-1 rounded-full border border-primary/30 hover:border-primary hover:bg-primary/5"><span data-lang="view_detail">View Details</span><i class="fas fa-chevron-right text-xs"></i></a>
-            </div>
-          </div>
-        </div>
-
-
-        <!-- 产品手册 -->
-        <div class="product-card bg-white rounded-xl overflow-hidden shadow-md fade-in delay-100">
-          <div class="relative h-52 overflow-hidden bg-gradient-to-br from-primary/5 to-secondary/10 flex items-center justify-center">
-            <div class="text-center">
-              <i class="fas fa-file-pdf text-6xl text-primary/40 mb-2"></i>
-              <p class="text-primary/50 text-sm font-medium">Product Catalog</p>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-bold mb-1 text-primary" data-lang="product_brochure">Product Catalog</h3>
-                        <p class="text-dark/70 text-sm mb-4" data-lang="product_brochure_desc">Full catalog of AultrasTea products — specifications, packaging, and MOQ details.</p>
-            <div class="flex items-center justify-between flex-wrap gap-2">
-              <a href="#contact" class="text-secondary font-medium flex items-center gap-1 text-sm hover:gap-2 transition-all"><span data-lang="product_inquiry">Inquiry Now</span><i class="fas fa-arrow-right text-xs"></i></a>
-              <a id="brochure-download-btn" href="#" target="_blank" rel="noopener" onclick="openBrochure(event)" class="inline-flex items-center gap-1 bg-primary text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-primary/90 transition-colors"><i class="fas fa-download text-xs mr-1"></i><span data-lang="btn_download_pdf">Download PDF</span></a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- 资质证书 -->
-  <section id="certificates" class="py-20 bg-white">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-16 fade-in">
-        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-primary" data-lang="cert_title">Certificates</h2>
-        <p class="text-dark/70 max-w-2xl mx-auto mb-4" data-lang="cert_desc">International Certificates, Standardized Production</p>
-        <div class="w-24 h-1 bg-secondary mx-auto"></div>
-      </div>
-
-      <!-- 认证徽标行：data-cert-icon 属性供 JS 替换图片使用 -->
-      <div class="flex justify-center fade-in mb-12">
-        <div class="text-center py-6 px-4 border border-primary/10 rounded-lg hover:border-primary/30 transition-all w-64" data-cert-icon="cert_haccp"><div class="cert-icon-wrap"><img src="https://video.aultras-tea.com/HACCP.jpg" alt="HACCP" style="width:100%;max-width:120px;height:auto;object-fit:contain;margin:0 auto 8px;"></div><p class="font-medium" data-lang="cert_haccp">HACCP</p></div>
-      </div>
-
-      <!-- 证书图片轮播（4列大图网格，支持20+张，与上方 HACCP 徽标并存） -->
-      <div class="fade-in delay-100 mb-12">
-        <div class="cert-container relative">
-          <button id="cert-prev" onclick="certSlide(-1)" class="cert-nav-btn prev hidden">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <div id="cert-page" class="cert-page"></div>
-          <button id="cert-next" onclick="certSlide(1)" class="cert-nav-btn next hidden">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-        </div>
-        <div id="cert-dots" class="cert-dot-row hidden"></div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 展会动态（轮播） -->
-  <section id="exhibitions" class="py-20 bg-light">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-16 fade-in">
-        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-primary" data-lang="exh_title">Exhibitions</h2>
-        <p class="text-dark/70 max-w-2xl mx-auto mb-4" data-lang="exh_desc">We sincerely invite you to visit our booth at the exhibitions.</p>
-        <div class="w-24 h-1 bg-secondary mx-auto"></div>
-      </div>
-
-      <!-- 轮播容器 -->
-      <div class="relative">
-        <div class="exh-track-wrap">
-          <div id="exh-track" class="exh-track"></div>
-        </div>
-
-        <!-- 导航箭头 -->
-        <button id="exh-prev" onclick="exhSlide(-1)" class="hidden absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all z-10">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button id="exh-next" onclick="exhSlide(1)" class="hidden absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all z-10">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-
-      <!-- 指示点 -->
-      <div id="exh-dots" class="flex justify-center gap-2 mt-8 hidden"></div>
-    </div>
-  </section>
-
-  <!-- 新闻动态（轮播+6卡片） -->
-  <section id="news" class="py-20 bg-white">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-12 fade-in">
-        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-primary" data-lang="news_title">News</h2>
-        <p class="text-dark/70 max-w-2xl mx-auto mb-4" data-lang="news_desc">Stay updated with the latest news and events from AultrasTea.</p>
-        <div class="w-24 h-1 bg-secondary mx-auto"></div>
-      </div>
-
-      <!-- 轮播容器（类似展会板块） -->
-      <div class="relative fade-in">
-        <div class="news-track-wrap">
-          <div id="news-track" class="news-track"></div>
-        </div>
-        <!-- 导航箭头 -->
-        <button id="news-prev" onclick="newsSlide(-1)" class="hidden absolute left-0 top-1/2 -translate-y-1/2 -translate-x-5 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all z-10">
-          <i class="fas fa-chevron-left"></i>
-        </button>
-        <button id="news-next" onclick="newsSlide(1)" class="hidden absolute right-0 top-1/2 -translate-y-1/2 translate-x-5 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all z-10">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-      </div>
-
-      <!-- 指示点 -->
-      <div id="news-dots" class="flex justify-center gap-2 mt-8 hidden"></div>
-
-      <!-- 查看更多按钮 -->
-      <div class="text-center mt-10 fade-in">
-        <a href="news.html" class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-white rounded-full font-medium hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
-          <span data-lang="news_view_all">View All News</span>
-          <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- 无新闻占位 -->
-      <div id="news-empty" class="hidden text-center py-16 text-dark/40">
-        <i class="fas fa-newspaper text-5xl mb-4"></i>
-        <p data-lang="news_empty">No news yet. Check back soon!</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 关于我们（视频版） -->
-  <section id="about" class="py-20 bg-white">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-16 fade-in">
-        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-primary" data-lang="about_title">About AultrasTea</h2>
-        <div class="w-24 h-1 bg-secondary mx-auto"></div>
-      </div>
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <!-- 左侧：视频展示 -->
-        <div class="fade-in relative order-2 md:order-1">
-          <div class="about-video-wrap" id="about_video_container">
-            <!-- 占位提示，视频由 data.json 注入 -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-white/60 text-sm gap-3">
-              <i class="fas fa-play-circle text-5xl text-white/30"></i>
-              <p>Brand Video</p>
-            </div>
-          </div>
-        </div>
-        <!-- 右侧：文字信息 -->
-        <div class="fade-in delay-200 order-1 md:order-2">
-          <p class="text-dark/70 mb-6 leading-relaxed" data-lang="about_p1">
-            We are Guizhou Aultras Tea Co., Ltd., located in Anshun, the home of the Huangguoshu Waterfall. The company is jointly funded by Xiangfeng Tea Industry Group (a national key leading enterprise) and Anshun Waterfall Tea Industry (a state-owned leading agricultural enterprise). We specialize in EU-standard organic tea plantation management, bulk tea roughing and refining, and the production of green tea, white tea, black tea, and more. We own EU organic tea gardens and operate both national standard and EU organic workshops to prevent cross-contamination.
-          </p>
-          <p class="text-dark/70 mb-6 leading-relaxed" data-lang="about_p2">
-            Our facilities include large-scale rough processing plants and efficient refining lines. We can customize products to meet the regulations of the EU, USA, Japan, Korea, and other countries. With strong support from our two shareholders in technology, supply chain, capital, and sales channels, we are a reliable source manufacturer integrating plantation, processing, and refining.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- 联系我们 -->
-  <section id="contact" class="py-20 bg-white">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-16 fade-in">
-        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold mb-4 text-primary" data-lang="contact_title">Contact Us</h2>
-        <p class="text-dark/70 max-w-2xl mx-auto mb-4" data-lang="contact_desc">If you have any inquiries about our products, please feel free to contact us. We will reply within 24 hours.</p>
-        <div class="w-24 h-1 bg-secondary mx-auto"></div>
-      </div>
-      <!-- 横向紧凑布局：参考多列footer样式 -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 max-w-4xl mx-auto fade-in">
-        <!-- 公司名称 -->
-        <div>
-          <p class="text-dark/50 text-sm mb-1" data-lang="contact_company">Company Name</p>
-          <p class="font-medium text-dark text-sm leading-relaxed" data-lang="contact_company_name">GUIZHOU AULTRAS TEA CO.,LTD.</p>
-        </div>
-        <!-- 邮箱 -->
-        <div>
-          <p class="text-dark/50 text-sm mb-1" data-lang="contact_email">Email</p>
-          <p class="font-medium text-dark text-sm leading-relaxed" id="contact_email_1">admin@aultrastea.com</p>
-          <p class="font-medium text-dark text-sm leading-relaxed" id="contact_email_2">tea@xf-tea.com</p>
-        </div>
-        <!-- 电话 / WhatsApp：标签与号码同行，号码左对齐 -->
-        <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] items-baseline gap-y-1 lg:gap-x-1.5">
-          <span class="text-dark/50 text-sm" data-lang="contact_phone">Phone:</span>
-          <p class="font-medium text-dark text-sm leading-relaxed" id="contact_phone_1">收集中</p>
-          <span class="text-dark/50 text-sm">WhatsApp:</span>
-          <p class="font-medium text-dark text-sm leading-relaxed" id="contact_phone_2">收集中</p>
-        </div>
-        <!-- 地址 -->
-        <div>
-          <p class="text-dark/50 text-sm mb-1" data-lang="contact_address">Address</p>
-          <p class="font-medium text-dark text-sm leading-relaxed" id="contact_address_1" data-lang="contact_address_1">贵州省安顺市西秀区</p>
-          <p class="font-medium text-dark text-sm leading-relaxed" id="contact_address_2" data-lang="contact_address_2">鸡场镇茶果场</p>
-        </div>
-        <!-- 社交媒体（跨两列） -->
-        <div class="col-span-2 md:col-span-4 flex items-center gap-3 pt-2 border-t border-gray-100">
-          <p class="text-dark/50 text-sm font-medium shrink-0" data-lang="contact_social">Follow Us</p>
-          <div id="social-links" class="flex gap-4">
-            <!-- 社媒图标由 data.json 动态渲染 -->
+    <div class="hero-slide" style="background: linear-gradient(135deg, #3a2a1a, #5a4530);">
+      <img src="https://video.aultras-tea.com/%E5%A4%96%E8%B4%B8%E7%BD%91%E7%AB%99%E9%A6%96%E5%9B%BE2.jpg?v=20261102"
+           onerror="this.style.display='none'"
+           alt="Tea Processing">
+      <div class="container">
+        <div class="hero-content">
+          <h1 data-i18n="hero.slide2Title">Sustainable Cultivation, Exceptional Quality</h1>
+          <p data-i18n="hero.slide2Subtitle">Certified by EU Organic, USDA Organic, Rainforest Alliance and other international standards. Every leaf meets the highest global standards</p>
+          <div class="hero-buttons">
+            <a href="products.html" class="btn btn-accent" data-i18n="hero.ctaProducts">Explore Products</a>
+            <button class="btn btn-outline" style="color:white;border-color:white;" onclick="openInquiry()" data-i18n="hero.ctaInquiry">Request Quote</button>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- 页脚 -->
-  <footer class="py-10 bg-primary text-white">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="grid md:grid-cols-4 gap-8 mb-8">
-        <div>
-          <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="fas fa-leaf"></i> <span data-lang="navbar_brand">AultrasTea</span></h3>
-          <p class="text-white/70 mb-4" data-lang="footer_desc">Professional Chinese tea manufacturer and exporter, supply premium organic tea to the world.</p>
+    <div class="hero-slide" style="background: linear-gradient(135deg, #1a2a3a, #2d3a5a);">
+      <img src="https://video.aultras-tea.com/%E5%A4%96%E8%B4%B8%E7%BD%91%E7%AB%99%E9%A6%96%E5%9B%BE3.jpg"
+           onerror="this.style.display='none'"
+           alt="Tea Ceremony">
+      <div class="container">
+        <div class="hero-content">
+          <h1 data-i18n="hero.slide3Title">Trusted by Global Importers</h1>
+          <p data-i18n="hero.slide3Subtitle">20+ years of export experience, offering tailored OEM/ODM solutions to meet diverse market demands</p>
+          <div class="hero-buttons">
+            <a href="products.html" class="btn btn-accent" data-i18n="hero.ctaProducts">Explore Products</a>
+            <button class="btn btn-outline" style="color:white;border-color:white;" onclick="openInquiry()" data-i18n="hero.ctaInquiry">Request Quote</button>
+          </div>
         </div>
-        <div>
-          <h4 class="text-lg font-bold mb-4" data-lang="footer_quick">Quick Links</h4>
-          <ul class="space-y-2">
-            <li><a href="#home" class="text-white/70 hover:text-white transition-colors" data-lang="nav_home">Home</a></li>
-            <li><a href="#about" class="text-white/70 hover:text-white transition-colors" data-lang="nav_about">About Us</a></li>
-            <li><a href="#products" class="text-white/70 hover:text-white transition-colors" data-lang="nav_products">Products</a></li>
-            <li><a href="#exhibitions" class="text-white/70 hover:text-white transition-colors" data-lang="nav_exhibitions">Exhibitions</a></li>
-            <li><a href="news.html" class="text-white/70 hover:text-white transition-colors" data-lang="nav_news">News</a></li>
-            <li><a href="#contact" class="text-white/70 hover:text-white transition-colors" data-lang="nav_contact">Contact Us</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-lg font-bold mb-4" data-lang="footer_product">Product Categories</h4>
-          <ul class="space-y-2">
-            <li><a href="product-green.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_green">Green Tea</a></li>
-            <li><a href="product-black.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_black">Black Tea</a></li>
-            <li><a href="product-oolong.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_oolong">Oolong Tea</a></li>
-            <li><a href="product-white.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_white">White Tea</a></li>            <li><a href="product-dark.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_dark">Dark Tea</a></li>
-            <li><a href="product-flower.html" class="text-white/70 hover:text-white transition-colors" data-lang="product_flower">Flower Tea</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="text-lg font-bold mb-4" data-lang="footer_contact">Contact</h4>
-          <ul class="space-y-2">
-            <li class="flex items-center gap-2 text-white/70"><i class="fas fa-envelope"></i> <span id="footer_email">admin@aultrastea.com</span></li>
-            <li class="flex items-center gap-2 text-white/70"><i class="fas fa-phone"></i> <span id="footer_phone">收集中</span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="border-t border-white/20 pt-6 flex flex-col md:flex-row justify-between items-center">
-        <p class="text-white/60 mb-4 md:mb-0">© <span id="year"></span> <span data-lang="footer_company">GUIZHOU AULTRAS TEA CO.,LTD.</span> <span data-lang="footer_copy">All Rights Reserved.</span></p>
-        <p class="text-white/60 text-sm" data-lang="footer_disclaimer">Disclaimer: This website is for product display and international trade communication only.</p>
       </div>
     </div>
-  </footer>
+  </div>
 
-
-  <!-- 展会弹窗（左下角） -->
-  <div id="exh-popup">
-    <div class="exh-popup-header">
-      <div class="flex items-center gap-2">
-        <i class="fas fa-calendar-check text-white/80 text-sm"></i>
-        <span class="text-white font-semibold text-sm" id="popup-section-title">Latest Exhibition</span>
-      </div>
-      <button class="exh-popup-close" onclick="closeExhPopup()"><i class="fas fa-times"></i></button>
+  <div class="hero-controls">
+    <div class="hero-arrow" onclick="heroPrev()">
+      <i class="fas fa-chevron-left"></i>
     </div>
-    <div class="exh-popup-body">
-      <div class="flex items-start justify-between mb-2">
-        <h4 class="font-bold text-primary text-base leading-tight" id="popup-exh-name">Exhibition Name</h4>
-        <span class="exh-popup-badge confirmed ml-2 flex-shrink-0" id="popup-exh-badge">Confirmed</span>
-      </div>
-      <p class="text-dark/60 text-sm mb-1 flex items-center gap-1.5">
-        <i class="fas fa-calendar-alt text-secondary text-xs"></i>
-        <span id="popup-exh-date">Date</span>
-      </p>
-      <p class="text-dark/60 text-sm mb-1 flex items-center gap-1.5">
-        <i class="fas fa-map-marker-alt text-secondary text-xs"></i>
-        <span id="popup-exh-location">Location</span>
-      </p>
-      <p class="text-dark/60 text-sm mb-4 flex items-center gap-1.5">
-        <i class="fas fa-door-open text-secondary text-xs"></i>
-        <span data-lang="exh_booth">Booth No.</span>&nbsp;<span id="popup-exh-booth">TBA</span>
-      </p>
-      <a href="#contact" onclick="closeExhPopup()" class="block w-full text-center bg-primary text-white rounded-lg py-2 text-sm font-semibold hover:bg-primary/90 transition-colors">
-        <span data-lang="exh_contact">Make an Appointment</span> →
+    <div class="hero-dots" id="heroDots">
+      <span class="hero-dot active" onclick="heroGoTo(0)"></span>
+      <span class="hero-dot" onclick="heroGoTo(1)"></span>
+      <span class="hero-dot" onclick="heroGoTo(2)"></span>
+    </div>
+    <div class="hero-arrow" onclick="heroNext()">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     4. FEATURED COLLECTIONS CAROUSEL (MODIFIED)
+     ============================================ -->
+<section class="section">
+  <div class="container section-container">
+    <div class="section-title section-header">
+      <h2 data-i18n="home.featuredTitle">Featured Collections</h2>
+      <p data-i18n="home.featuredSubtitle">Handpicked selections from our most popular export teas, ready for your market.</p>
+    </div>
+    <div class="featured-carousel-wrapper">
+      <button class="featured-carousel-arrow prev" onclick="featuredPrev()">‹</button>
+      <div class="featured-carousel-track" id="featuredCarousel"></div>
+      <button class="featured-carousel-arrow next" onclick="featuredNext()">›</button>
+    </div>
+    <div class="featured-carousel-dots" id="featuredDots"></div>
+  </div>
+</section>
+
+<!-- ============================================
+     5. TEA COLLECTION SECTIONS
+     ============================================ -->
+
+<!-- 5.1 Green Tea Section -->
+<section class="section" style="background: var(--bg-light);">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="products.catGreen">Green Tea</h2>
+      <p style="max-width:600px;margin:1.5rem auto 0;" data-i18n="home.greenTeaDesc">Hand-harvested from misty high-altitude gardens, green tea delivers bright, crisp freshness that defines top-tier Chinese green tea craft.</p>
+    </div>
+    <div class="products-grid" id="greenTeaGrid"></div>
+    <div class="text-center mt-4">
+      <a href="products.html?cat=products.catGreen" class="btn btn-outline">
+        <span data-i18n="common.viewAll">View All</span> Green Tea →
       </a>
     </div>
   </div>
+</section>
 
-  <!-- 证书图片放大灯箱 -->
-  <div id="cert-lightbox" onclick="if(event.target===this)closeCertLightbox()">
-    <button id="cert-lightbox-close" onclick="closeCertLightbox()"><i class="fas fa-times"></i></button>
-    <button id="cert-lb-prev" onclick="certLbSlide(-1)"><i class="fas fa-chevron-left"></i></button>
-    <img src="" alt="Certificate preview">
-    <button id="cert-lb-next" onclick="certLbSlide(1)"><i class="fas fa-chevron-right"></i></button>
-    <span id="cert-lb-counter"></span>
+<!-- 5.2 Black Tea Section -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="products.catBlack">Black Tea</h2>
+      <p style="max-width:600px;margin:1.5rem auto 0;" data-i18n="home.blackTeaDesc">Sun-cured and fully fermented to perfection, black tea boasts a luxuriously smooth honeyed profile.</p>
+    </div>
+    <div class="products-grid" id="blackTeaGrid"></div>
+    <div class="text-center mt-4">
+      <a href="products.html?cat=products.catBlack" class="btn btn-outline">
+        <span data-i18n="common.viewAll">View All</span> Black Tea →
+      </a>
+    </div>
   </div>
+</section>
 
-  <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center opacity-0 invisible transition-all z-40 hover:bg-secondary shadow-lg">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+<!-- 5.3 Oolong Tea Section -->
+<section class="section" style="background: var(--bg-light);">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="products.catOolong">Oolong Tea</h2>
+      <p style="max-width:600px;margin:1.5rem auto 0;" data-i18n="home.oolongTeaDesc">Semi-oxidized high-mountain oolong unfolds complex floral and toasty layers for a sophisticated sipping experience.</p>
+    </div>
+    <div class="products-grid" id="oolongTeaGrid"></div>
+    <div class="text-center mt-4">
+      <a href="products.html?cat=products.catOolong" class="btn btn-outline">
+        <span data-i18n="common.viewAll">View All</span> Oolong Tea →
+      </a>
+    </div>
+  </div>
+</section>
 
-  <!-- 语言包 -->
-  <script>
-    const SITE_VERSION = '15.11-20261027-0906';  // 前端版本标识（F12 控制台可见，诊断部署用）
-    console.log('%cAultrasTea 前端版本: ' + SITE_VERSION, 'color:#0F4C3A;font-weight:bold');
-    let langPack = {
-      en: { navbar_brand:"AultrasTea",meta_title:"AultrasTea | Premium Tea Supplier From China | Organic Tea Wholesale",meta_desc:"AultrasTea, professional Chinese tea manufacturer and exporter.",nav_home:"Home",nav_about:"About Us",nav_products:"Products",nav_certificates:"Certificates",nav_exhibitions:"Exhibitions",nav_news:"News",nav_contact:"Contact Us",hero_subtitle:"GUIZHOU AULTRAS TEA CO.,LTD",hero_title1:"Premium Tea",hero_title2:"from China to the World",hero_desc:"With 20+ years of tea industry experience, we supply high-quality EU organic green tea, black tea, white tea, oolong tea, and other tea products worldwide.",hero_btn1:"View Products",hero_btn2:"Contact Us",about_title:"About AultrasTea",about_p1:"We are Guizhou Aultras Tea Co., Ltd., located in Anshun, the home of the Huangguoshu Waterfall. The company is jointly funded by Xiangfeng Tea Industry Group (a national key leading enterprise) and Anshun Waterfall Tea Industry (a state-owned leading agricultural enterprise).\n\nWe specialize in EU-standard organic tea plantation management, bulk tea roughing and refining, and the production of green tea, white tea, black tea, and more. We own EU organic tea gardens and operate both national standard and EU organic workshops to prevent cross-contamination.",about_p2:"Our facilities include large-scale rough processing plants and efficient refining lines. We can customize products to meet the regulations of the EU, USA, Japan, Korea, and other countries.\n\nWith strong support from our two shareholders in technology, supply chain, capital, and sales channels, we are a reliable source manufacturer integrating plantation, processing, and refining.",about_year:"Years Experience",about_country:"Countries Exported",about_cert:"International Certificates",about_product:"Tea Products",products_title:"Our Products",products_desc:"We provide a wide range of tea products, offering custom packaging and OEM services. Welcome to inquire about wholesale and bulk orders.",product_green:"Green Tea",product_green_desc:"Green Tea: Unfermented; clear liquor and green leaves; fresh and brisk.",product_black:"Black Tea",product_black_desc:"Black Tea: Fully fermented; red liquor and leaves; sweet and mellow.",product_oolong:"Oolong Tea",product_oolong_desc:"Oolong Tea: Semi-fermented; green leaves with red edges; rich and fragrant.",product_white:"White Tea",product_white_desc:"White Tea: Slightly fermented; pale apricot liquor; light and sweet.",product_dark:"Dark Tea",product_dark_desc:"Pu'er Tea: Post-fermented; deep red liquor; aged and mellow.",product_flower:"Flower Tea",product_flower_desc:"Blooming Tea& Flower: Infused with floral scents (e.g., jasmine); aromatic and refreshing.",product_inquiry:"Inquiry Now",view_detail:"View Details",cert_title:"Certificates",cert_desc:"International Certificates, Standardized Production",cert_eu:"EU Organic",cert_us:"US Organic",cert_haccp:"HACCP",cert_iso:"ISO 9001",cert_fairtrade:"Fair Trade",exh_title:"Exhibitions",exh_desc:"We sincerely invite you to visit our booth at the exhibitions.",exh_booth:"Booth No.",exh_contact:"Make an Appointment",news_title:"News",news_desc:"Stay updated with the latest news and events from AultrasTea.",news_empty:"No news yet. Check back soon!",news_read_more:"Read More",news_view_all:"View All News",news_contact:"Contact Us",contact_title:"Contact Us",contact_desc:"If you have any inquiries about our products, please feel free to contact us. We will reply within 24 hours.",contact_info:"Contact Information",contact_company:"Company Name",contact_phone_placeholder:"To be collected",contact_company_name:"GUIZHOU AULTRAS TEA CO.,LTD.",contact_email:"Email",contact_phone:"Phone:",contact_address:"Address",contact_social:"Follow Us",footer_desc:"Professional Chinese tea manufacturer and exporter, supply premium organic tea to the world.",footer_quick:"Quick Links",footer_product:"Product Categories",footer_contact:"Contact",footer_disclaimer:"Disclaimer: This website is for product display and international trade communication only.",footer_company:"GUIZHOU AULTRAS TEA CO.,LTD.",footer_copy:"All Rights Reserved.",product_brochure:"Product Catalog",product_brochure_desc:"Full catalog of AultrasTea products — specifications, packaging, and MOQ details.",contact_address_1:"Chaguochang, Jichang Town, Xixiu District,",contact_address_2:"Anshun, Guizhou, China",btn_download_pdf:"Download PDF",social_youtube:"AultrasTea Official" },
-      zh: { navbar_brand:"湘丰瀑布AULTRAS",meta_title:"贵州湘丰瀑布茶业有限公司 | 中国优质茶叶供应商 | 有机茶叶批发",meta_desc:"贵州湘丰瀑布茶业有限公司，专业茶叶生产出口商。",nav_home:"首页",nav_about:"关于我们",nav_products:"产品中心",nav_certificates:"公司资质",nav_exhibitions:"展会动态",nav_news:"新闻动态",nav_contact:"联系我们",hero_subtitle:"贵州湘丰瀑布茶业有限公司",hero_title1:"优质好茶",hero_title2:"从中国走向世界",hero_desc:"拥有20余年行业经验的专业茶叶生产出口商，我们为全球70多个国家供应有机绿茶、红茶、白茶、乌龙茶等全品类茶叶产品。",hero_btn1:"查看产品",hero_btn2:"联系我们",about_title:"关于贵州湘丰瀑布茶业有限公司",about_p1:"贵州湘丰瀑布茶业有限公司位于黄果树瀑布所在地——贵州安顺，由农业产业化国家重点龙头企业湘丰茶业集团与国有农业龙头企业安顺瀑布茶业共同出资成立。\n\n公司主营欧盟有机茶园管理、大宗茶粗制与精制，以及绿茶、白茶、红茶等茶类的生产销售。我们拥有欧盟有机茶园基地，并设有国标茶车间及欧盟有机茶车间，有效防止交叉污染。",about_p2:"公司配备规模化粗制加工厂和高效精制生产线，可按照欧盟、美国、日本、韩国等不同国家的法规要求定制产品。\n\n依托两大股东在技术、供应链、资金、渠道等方面的强大支持，我们是集茶园管理、毛茶粗制、精制加工于一体的可靠源头厂家。",about_year:"年行业经验",about_country:"出口国家",about_cert:"国际认证",about_product:"茶叶产品",products_title:"我们的产品",products_desc:"我们提供全品类茶叶产品，支持定制包装和自有品牌，欢迎批发和大宗订单咨询。",product_green:"绿茶",product_green_desc:"绿茶：不发酵，清汤绿叶，口感鲜爽。",product_black:"红茶",product_black_desc:"红茶：全发酵，红汤红叶，滋味甜润醇厚。",product_oolong:"乌龙茶",product_oolong_desc:"乌龙茶：半发酵，绿叶红镶边，香气馥郁有层次。",product_white:"白茶",product_white_desc:"白茶：微发酵，满披白毫，汤色浅杏黄，清甜淡雅。",product_dark:"黑茶",product_dark_desc:"普洱茶：后发酵（生茶自然陈化，熟茶人工渥堆），汤色红浓，陈香醇厚。",product_flower:"工艺茶",product_flower_desc:"花茶：以茶叶为基底窨制花香（以茉莉花茶最典型），香气鲜灵，滋味爽口。",product_inquiry:"立即咨询",view_detail:"查看详情",cert_title:"公司资质",cert_desc:"产品通过多项国际认证，确保每一批茶叶的品质与安全。",cert_eu:"欧盟有机认证",cert_us:"美国有机认证",cert_haccp:"HACCP认证",cert_iso:"ISO 9001认证",cert_fairtrade:"公平贸易认证",exh_title:"展会动态",exh_desc:"我们诚挚邀请您莅临展会展位，与我们面对面交流合作。",exh_booth:"展位号",exh_contact:"预约见面",news_title:"新闻动态",news_desc:"了解贵州湘丰瀑布茶业的最新动态与行业资讯。",news_empty:"暂无新闻，请稍后再来！",news_read_more:"阅读更多",news_view_all:"查看全部新闻",news_contact:"联系我们",contact_title:"联系我们",contact_desc:"如果您对我们的产品有任何咨询，欢迎随时联系我们，我们将在24小时内给您回复。",contact_info:"联系方式",contact_company:"公司名称",contact_phone_placeholder:"收集中",contact_company_name:"贵州湘丰瀑布有限公司",contact_email:"邮箱",contact_phone:"电话：",contact_address:"地址",contact_social:"关注我们",footer_desc:"专业的中国茶叶生产出口商，为全球供应优质有机茶叶。",footer_quick:"快速导航",footer_product:"产品分类",footer_contact:"联系我们",footer_disclaimer:"免责声明：本网站仅用于产品展示与国际贸易沟通使用。",footer_company:"贵州湘丰瀑布茶业有限公司",footer_copy:"版权所有",product_brochure:"产品目录",product_brochure_desc:"贵州湘丰瀑布茶业全系列产品目录，包含规格、包装及最小起订量说明。",contact_address_1:"贵州省安顺市西秀区",contact_address_2:"鸡场镇茶果场",btn_download_pdf:"下载PDF",social_youtube:"湘丰瀑布茶业官方" },
-      ru: { navbar_brand:"AultrasTea",meta_title:"AultrasTea | Поставщик чая из Китая",meta_desc:"AultrasTea, профессиональный производитель и экспортер чая.",nav_home:"Главная",nav_about:"О нас",nav_products:"Продукция",nav_certificates:"Сертификаты",nav_exhibitions:"Выставки",nav_news:"Новости",nav_contact:"Контакты",hero_subtitle:"ГУЙЧЖОУ АУЛЬТРАС ЧАЙ КО.,ЛТД",hero_title1:"Премиальный чай",hero_title2:"Из Китая по всему миру",hero_desc:"Обладая более чем 20-летним опытом работы в чайной отрасли, мы поставляем по всему миру высококачественный органический чай: зеленый (соответствующий стандартам ЕС), черный, белый, улун и другие виды чайной продукции.",hero_btn1:"Посмотреть продукцию",hero_btn2:"Связаться с нами",about_title:"О компании AultrasTea",about_p1:"Компания Guizhou Aultras Tea Co., Ltd. расположена в городе Аньшунь, на родине знаменитого водопада Хуангошу. Предприятие создано совместно холдингом Xiangfeng Tea Industry Group (ведущее системообразующее предприятие КНР в сфере агропромышленной интеграции) и государственным агропромышленным лидером Anshun Waterfall Tea Industry.\n\nНаша компания специализируется на управлении органическими чайными плантациями по стандартам ЕС, производстве, первичной и глубокой переработке, а также оптовых продажах зеленого, белого, черного и других сортов чая. Мы владеем более чем 5 000 акрами органических чайных садов европейского стандарта. Наши производственные цеха полностью отвечают как национальным, так и международным нормам ЕС, что гарантирует полную защиту продукции от перекрестного загрязнения.",about_p2:"Предприятие оснащено крупными заводами первичной обработки и высокотехнологичными линиями глубокой переработки. Наша продукция полностью соответствует законодательным стандартам и фитосанитарным требованиям ЕС, США, Японии, Южной Кореи и других стран.\n\nБлагодаря сильной технической, финансовой, логистической и дистрибьюторской поддержке наших ключевых акционеров, мы являемся надежным производителем полного цикла — от выращивания чайного листа до выпуска готовой продукции.",about_year:"Лет опыта",about_country:"Стран экспорта",about_cert:"Международные сертификаты",about_product:"Виды чая",products_title:"Наша продукция",products_desc:"Мы предлагаем широкий ассортимент чая, услуги OEM-производства, а также разработку индивидуальной упаковки. Свяжитесь с нами, чтобы получить детальную информацию об оптовых поставках.",product_green:"Зеленый чай",product_green_desc:"Зелёный чай: Неферментированный; прозрачный настой, зелёные листья; свежий и бодрящий.",product_black:"Черный чай",product_black_desc:"Чёрный чай: Полностью ферментированный; красный настой и листья; сладкий и мягкий.",product_oolong:"Улун",product_oolong_desc:"Чай улун: Полуферментированный; зелёные листья с красными краями; насыщенный ароматный.",product_white:"Белый чай",product_white_desc:"Белый чай: Слабоферментированный; бледно-абрикосовый настой; лёгкий и нежный.",product_dark:"Темный чай",product_dark_desc:"Пуэр: Постферментированный; тёмно-красный настой; выдержанный и мягкий.",product_flower:"Цветочный чай",product_flower_desc:"Цветочный чай: Настоянный на цветах (например, жасмин); ароматный и освежающий.",product_inquiry:"Запросить цену",view_detail:"Подробнее",cert_title:"Сертификаты",cert_desc:"Международная сертификация | Стандартизированное производство",cert_eu:"Органический ЕС",cert_us:"Органический США",cert_haccp:"HACCP",cert_iso:"ISO 9001",cert_fairtrade:"Справедливая торговля",exh_title:"Выставки",exh_desc:"Приглашаем посетить наш стенд.",exh_booth:"Номер стенда",exh_contact:"Записаться на встречу",news_title:"Новости",news_desc:"Будьте в курсе последних новостей и событий AultrasTea.",news_empty:"Новостей пока нет. Заходите позже!",news_read_more:"Подробнее",news_view_all:"Все новости",news_contact:"Связаться с нами",contact_title:"Связаться с нами",contact_desc:"Если у вас возникли вопросы о нашей продукции, пожалуйста, свяжитесь с нами. Мы ответим вам в течение 24 часов.",contact_info:"Контактная информация",contact_company:"Название компании",contact_phone_placeholder:"Собирается",contact_company_name:"GUIZHOU AULTRAS TEA CO.,LTD.",contact_email:"Электронная почта",contact_phone:"Телефон:",contact_address:"Адрес",contact_address_1:"Chaguochang, Jichang Town, Xixiu District,",contact_address_2:"Anshun, Guizhou, China",contact_social:"Подписывайтесь на нас",footer_desc:"Профессиональный производитель и экспортер чая из Китая.",footer_quick:"Быстрые ссылки",footer_product:"Категории продукции",footer_contact:"Контакты",footer_disclaimer:"Этот сайт предназначен только для демонстрации продукции.",footer_company:"GUIZHOU AULTRAS TEA CO.,LTD.",footer_copy:"Все права защищены.",product_brochure:"Каталог продукции",product_brochure_desc:"Полный каталог продукции AultrasTea.",btn_download_pdf:"Скачать PDF",social_youtube:"AultrasTea Official" },
-      de: { navbar_brand:"AultrasTea",meta_title:"AultrasTea | Premium Tee aus China",meta_desc:"AultrasTea, professioneller Tee-Hersteller und Exporteur.",nav_home:"Startseite",nav_about:"Über Uns",nav_products:"Produkte",nav_certificates:"Zertifikate",nav_exhibitions:"Messen",nav_news:"Neuigkeiten",nav_contact:"Kontakt",hero_subtitle:"GUIZHOU AULTRAS TEA CO.,LTD",hero_title1:"Premium Tee",hero_title2:"Aus China in die Welt",hero_desc:"Mit über 20 Jahren Erfahrung in der Teeindustrie liefern wir hochwertigen EU-Bio-Grüntee, schwarzen Tee, weißen Tee, Oolong-Tee und andere Teeprodukte weltweit.",hero_btn1:"Produkte ansehen",hero_btn2:"Kontakt aufnehmen",about_title:"Über AultrasTea",about_p1:"Wir sind die Guizhou Aultras Tea Co., Ltd., die im Heimatort des Huangguoshu-Wasserfalls, Anshun, ansässig ist. Das Unternehmen wird gemeinsam von der Xiangfeng Tea Industry Group (einem nationalen Schwerpunktunternehmen der landwirtschaftlichen Führung) und der staatlichen landwirtschaftlichen Führungsunternehmung Anshun Waterfall Tea Industry gegründet.\n\nWir spezialisieren uns auf die EU-standardgerechte Bio-Teeplantagenverwaltung, die Grob- und Feinverarbeitung von Massentee sowie die Produktion von Grüntee, weißen Tee, schwarzem Tee und mehr. Wir besitzen EU-Bio-Teegärten und betreiben sowohl nationale Standard- als auch EU-Bio-Werkshallen, um Kreuzkontamination zu vermeiden.",about_p2:"Unsere Einrichtungen umfassen großangelegte Grobverarbeitungswerke und effiziente Feinveredelungslinien. Wir können Produkte entsprechend den Vorschriften der EU, der USA, Japans, Südkoreas und anderer Länder individualisieren.\n\nMit starker Unterstützung unserer beiden Aktionäre in Technologie, Lieferkette, Kapital und Vertriebskanälen sind wir ein verlässlicher Quellenhersteller, der Plantage, Verarbeitung und Veredelung integriert.",about_year:"Jahre Erfahrung",about_country:"Exportländer",about_cert:"Internationale Zertifikate",about_product:"Teesorten",products_title:"Unsere Produkte",products_desc:"Wir bieten eine breite Palette von Teeprodukten an, mit individueller Verpackung und OEM-Service. Kontaktieren Sie uns für Großhandel und Bulk-Bestellungen.",product_green:"Grüntee",product_green_desc:"Grüntee: Unvergärt; klare Brühe und grüne Blätter; frisch und erfrischend.",product_black:"Schwarzer Tee",product_black_desc:"Schwarzer Tee: Vollständig vergärt; rote Brühe und Blätter; süß und mild.",product_oolong:"Oolong Tee",product_oolong_desc:"Oolong-Tee: Halbvergärt; grüne Blätter mit roten Rändern; reich und aromatisch.",product_white:"Weißer Tee",product_white_desc:"Weißer Tee: Leicht vergärt; blass-aprikosbenfarbene Brühe; leicht und süß.",product_dark:"Dunkler Tee",product_dark_desc:"Pu-Erh-Tee: Nachvergärt; tiefrote Brühe; gereift und mild.",product_flower:"Blütentee",product_flower_desc:"Blütentee: Mit Blütenduft aromatisiert (z. B. Jasmin); aromatisch und erfrischend.",product_inquiry:"Jetzt anfragen",view_detail:"Mehr Details",cert_title:"Zertifikate",cert_desc:"Internationale Zertifikate, standardisierte Produktion",cert_eu:"EU-Bio",cert_us:"US-Bio",cert_haccp:"HACCP",cert_iso:"ISO 9001",cert_fairtrade:"Fairer Handel",exh_title:"Messen",exh_desc:"Besuchen Sie unseren Stand auf den Messen.",exh_booth:"Standnummer",exh_contact:"Termin vereinbaren",news_title:"Neuigkeiten",news_desc:"Bleiben Sie über die neuesten Nachrichten und Ereignisse von AultrasTea informiert.",news_empty:"Noch keine Nachrichten. Schauen Sie bald wieder vorbei!",news_read_more:"Mehr lesen",news_view_all:"Alle Neuigkeiten",news_contact:"Kontakt",contact_title:"Kontaktieren Sie Uns",contact_desc:"Wenn Sie Fragen zu unseren Produkten haben, kontaktieren Sie uns gerne. Wir antworten innerhalb von 24 Stunden.",contact_info:"Kontaktinformationen",contact_company:"Firmenname",contact_phone_placeholder:"Wird gesammelt",contact_company_name:"GUIZHOU AULTRAS TEA CO.,LTD.",contact_email:"E-Mail",contact_phone:"Telefon:",contact_address:"Adresse",contact_social:"Folgen Sie Uns",footer_desc:"Professioneller Tee-Hersteller und Exporteur aus China.",footer_quick:"Schnellzugriff",footer_product:"Produktkategorien",footer_contact:"Kontakt",footer_disclaimer:"Diese Website dient nur der Produktpräsentation.",footer_company:"GUIZHOU AULTRAS TEA CO.,LTD.",footer_copy:"Alle Rechte vorbehalten.",product_brochure:"Produktkatalog",product_brochure_desc:"Vollständiger Katalog der AultrasTea-Produkte.",btn_download_pdf:"PDF herunterladen",social_youtube:"AultrasTea Official",contact_address_1:"Chaguochang, Jichang Town, Xixiu District,",contact_address_2:"Anshun, Guizhou, China" }
-    };
+<!-- ============================================
+     6. WHY CHOOSE XIANGFENG (4 feature cards)
+     ============================================ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="home.featureTitle">Why Choose Xiangfeng?</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;" id="featureGrid">
+      <div class="cert-badge-card" style="text-align:center;">
+        <div class="cert-icon"><i class="fas fa-seedling"></i></div>
+        <h4 data-i18n="home.feature1Title">Direct-from-Origin</h4>
+        <p data-i18n="home.feature1Desc">We own plantations and partner with 2,000+ family farms across 6 provinces.</p>
+      </div>
+      <div class="cert-badge-card" style="text-align:center;">
+        <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+        <h4 data-i18n="home.feature2Title">Certified Quality</h4>
+        <p data-i18n="home.feature2Desc">EU & USDA Organic, ISO 22000, HACCP — full traceability.</p>
+      </div>
+      <div class="cert-badge-card" style="text-align:center;">
+        <div class="cert-icon"><i class="fas fa-globe"></i></div>
+        <h4 data-i18n="home.feature3Title">Flexible Supply</h4>
+        <p data-i18n="home.feature3Desc">Bulk wholesale, private label OEM, sample packs — MOQ as low as 50kg.</p>
+      </div>
+      <div class="cert-badge-card" style="text-align:center;">
+        <div class="cert-icon"><i class="fas fa-truck-fast"></i></div>
+        <h4 data-i18n="home.feature4Title">Global Logistics</h4>
+        <p data-i18n="home.feature4Desc">Shipping to 60+ countries via sea, air, and rail (China-Europe Express).</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // ===== 展会轮播 =====
-    let exhIndex = 0;
-    let exhTotal = 0;
-    let currentLang = 'en';
-    let _exhibitionsAll = [];
-    let _contactInfo = null;
-    function setContactText(id, val){ const el = document.getElementById(id); if (el && val != null && val !== '') el.textContent = val; }
-    function applyContactLang(lang){
-      if (!_contactInfo) return;
-      const ci = _contactInfo;
-      const ph = (langPack[lang] && langPack[lang].contact_phone_placeholder) ? langPack[lang].contact_phone_placeholder : 'To be collected';
-      // 取值顺序：当前语言 → （非中文时优先英文）→ 基础值 → 英文 → 中文
-      // 目的：俄/德页面没有单独翻译时显示英文地址，而不是回落到中文地址
-      const v = (k) => {
-        const localized = ci[k + '_' + lang];
-        if (localized != null && localized !== '') return localized;
-        if (lang !== 'zh' && ci[k + '_en'] != null && ci[k + '_en'] !== '') return ci[k + '_en'];
-        if (ci[k] != null && ci[k] !== '') return ci[k];
-        if (ci[k + '_en'] != null && ci[k + '_en'] !== '') return ci[k + '_en'];
-        return ci[k + '_zh'] != null ? ci[k + '_zh'] : '';
-      };
-      setContactText('contact_email_1', ci.email_1 || '');
-      setContactText('contact_email_2', ci.email_2 || '');
-      setContactText('contact_phone_1', v('phone_1') || ph);
-      setContactText('contact_phone_2', v('phone_2') || ph);
-      setContactText('contact_address_1', v('address_1') || '');
-      setContactText('contact_address_2', v('address_2') || '');
-      setContactText('footer_email', ci.email_1 || '');
-      setContactText('footer_phone', v('phone_1') || ph);
-      setContactText('hero_phone', v('phone_1') || ph);
-    }
-    const VISIBLE_COUNT = () => window.innerWidth >= 1024 ? 3 : window.innerWidth >= 769 ? 2 : 1;
+<!-- ============================================
+     7. ABOUT PREVIEW SECTION (Production Process)
+     ============================================ -->
+<section class="section" style="background: linear-gradient(135deg, var(--primary-bg) 0%, #fff 100%);">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="about.productionTitle">Production & Processing</h2>
+      <p data-i18n="about.productionDesc" style="max-width:700px;margin:1.5rem auto 0;">From plantation to packaging, every step is carefully controlled</p>
+    </div>
 
-    function renderExhibitions(exhs) {
-      const track = document.getElementById('exh-track');
-      const dots = document.getElementById('exh-dots');
-      exhTotal = exhs.length;
-      const curLang = currentLang || 'en';
-      track.innerHTML = exhs.map((exh, i) => {
-        const displayName = (curLang === 'zh' && exh.name_zh) ? exh.name_zh : exh.name;
-        return `
-        <div class="exh-slide">
-          <div class="bg-white rounded-xl overflow-hidden shadow-md h-full">
-            <div class="p-6">
-              <div class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">${exh.date}</div>
-              <h3 class="text-xl font-bold mb-3 text-dark">${displayName}</h3>
-              <p class="text-dark/70 mb-4"><i class="fas fa-map-marker-alt text-primary mr-2"></i>${exh.location}</p>
-              <p class="text-dark/70 mb-6"><i class="fas fa-door-open text-primary mr-2"></i><span data-lang="exh_booth">Booth No.</span> ${exh.booth}</p>
-              <a href="#contact" class="text-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all">
-                <span data-lang="exh_contact">Make an Appointment</span>
-                <i class="fas fa-arrow-right"></i>
-              </a>
-            </div>
+    <!-- Production Steps Preview -->
+    <div class="production-timeline">
+      <div class="production-step">
+        <div class="production-step-icon"><i class="fas fa-hand-paper"></i></div>
+        <h4 data-i18n="about.step1Harvest">Harvesting</h4>
+        <p data-i18n="home.step1Desc">Hand-picked at peak season</p>
+      </div>
+      <span class="production-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="production-step">
+        <div class="production-step-icon"><i class="fas fa-layer-group"></i></div>
+        <h4 data-i18n="about.step2Sort">Sorting & Grading</h4>
+        <p data-i18n="home.step2Desc">Quality classification</p>
+      </div>
+      <span class="production-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="production-step">
+        <div class="production-step-icon"><i class="fas fa-fire"></i></div>
+        <h4 data-i18n="about.step3Process">Processing & Fermentation</h4>
+        <p data-i18n="home.step3Desc">Traditional craftsmanship</p>
+      </div>
+      <span class="production-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="production-step">
+        <div class="production-step-icon"><i class="fas fa-box"></i></div>
+        <h4 data-i18n="about.step4Pack">Packaging & QC</h4>
+        <p data-i18n="home.step4Desc">Rigorous quality control</p>
+      </div>
+      <span class="production-arrow"><i class="fas fa-arrow-right"></i></span>
+      <div class="production-step">
+        <div class="production-step-icon"><i class="fas fa-ship"></i></div>
+        <h4 data-i18n="about.step5Ship">Global Shipping</h4>
+        <p data-i18n="home.step5Desc">To 60+ countries worldwide</p>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="global-stats" style="margin-top:3rem;">
+      <div class="global-stat-card">
+        <div class="stat-number">53,000</div>
+        <div class="stat-label" data-i18n="about.statPlantation">Mu Plantation Area</div>
+      </div>
+      <div class="global-stat-card">
+        <div class="stat-number">60+</div>
+        <div class="stat-label" data-i18n="common.countries">Countries</div>
+      </div>
+      <div class="global-stat-card">
+        <div class="stat-number">28+</div>
+        <div class="stat-label" data-i18n="common.years">Years</div>
+      </div>
+      <div class="global-stat-card">
+        <div class="stat-number">50,000</div>
+        <div class="stat-label" data-i18n="about.statTons">Tons Annual Capacity</div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="about.html" class="btn btn-primary">
+        <span data-i18n="common.learnMore">Learn More</span> →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     8. LATEST UPDATES (Single featured event card)
+     ============================================ -->
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <h2 data-i18n="home.latestTitle">News</h2>
+      <p data-i18n="home.latestSubtitle">Company updates, trade show highlights, and industry insights.</p>
+    </div>
+    <div class="event-card" id="featuredEventCard" style="max-width:100%;"></div>
+  </div>
+</section>
+
+<!-- ============================================
+     9. CONTACT CTA BANNER
+     ============================================ -->
+<section style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);padding:4rem 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-50%;right:-10%;width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.05);"></div>
+  <div style="position:absolute;bottom:-30%;left:-5%;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,0.05);"></div>
+  <div class="container" style="position:relative;">
+    <div style="max-width:700px;margin:0 auto;text-align:center;color:white;">
+      <h2 style="color:white;font-size:2rem;margin-bottom:1rem;" data-i18n="home.ctaTitle">Ready to Start Your Tea Journey?</h2>
+      <p style="color:rgba(255,255,255,0.9);font-size:1.1rem;margin-bottom:2rem;" data-i18n="home.ctaSubtitle">Get a personalized quote within 24 hours. No minimum for samples.</p>
+      <button class="btn btn-accent" style="font-size:1.1rem;padding:14px 40px;" onclick="openInquiry()">
+        <i class="fas fa-paper-plane"></i>
+        <span data-i18n="home.ctaBtn">Start Inquiry</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     10. FOOTER (4 columns)
+     ============================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Column 1: About -->
+      <div class="footer-brand">
+        <div class="logo">
+          <a href="index.html"><img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" class="footer-logo-img"></a>
+        </div>
+        <p data-i18n="footer.aboutDesc">A leading Chinese tea export enterprise, delivering premium teas worldwide since 1998.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://www.facebook.com" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://x.com" target="_blank" rel="noopener" title="X"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.youtube.com" target="_blank" rel="noopener" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="tel:+8673184652476" target="_blank" rel="noopener" title="Phone"><i class="fas fa-phone"></i></a>
+        </div>
+      </div>
+
+      <!-- Column 2: Products -->
+      <div>
+        <h4 class="footer-title" data-i18n="footer.productsTitle">Products</h4>
+        <ul class="footer-links">
+          <li><a href="products.html?cat=products.catGreen"><span data-i18n="products.catGreen">Green Tea</span></a></li>
+          <li><a href="products.html?cat=products.catBlack"><span data-i18n="products.catBlack">Black Tea</span></a></li>
+          <li><a href="products.html?cat=products.catOolong"><span data-i18n="products.catOolong">Oolong Tea</span></a></li>
+          <li><a href="products.html?cat=products.catWhite"><span data-i18n="products.catWhite">White Tea</span></a></li>
+          <li><a href="products.html?cat=products.catPuer"><span data-i18n="products.catPuer">Pu-erh Tea</span></a></li>
+          <li><a href="products.html?cat=products.catOEM"><span data-i18n="common.oem">OEM/ODM</span></a></li>
+          <a href="products.html?cat=products.catFlower"><span data-i18n="products.catFlower">Flower Tea</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Quick Links -->
+      <div>
+        <h4 class="footer-title" data-i18n="footer.quickLinks">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html"><span data-i18n="common.about">About Us</span></a></li>
+          <li><a href="news.html"><span data-i18n="common.latestUpdates">News</span></a></li>
+          <li><a href="certs.html"><span data-i18n="common.certsHonors">Certificates</span></a></li>
+          <li><a href="contact.html"><span data-i18n="common.contact">Contact</span></a></li>
+        </ul>
+      </div>
+
+      <!-- Column 4: Contact -->
+      <div>
+        <h4 class="footer-title" data-i18n="footer.contactTitle">Contact Us</h4>
+        <ul class="footer-contact">
+          <li><i class="fas fa-map-marker-alt"></i> <span>4/F, Building 1, Xiangfeng Tea Innovation Industry Park, No.12 Dongshi'er Road, Changsha County, Changsha, Hunan, China</span></li>
+                    <li><i class="fas fa-phone-alt"></i> <span>+86 731 8465 2476</span></li>
+                    <li><i class="fas fa-envelope"></i> <span>admin@xf-tea.com</span></li>
+                    <li><i class="fas fa-envelope"></i> <span>admin@aultrastea.com</span></li>
+          <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/8613975899978" target="_blank" rel="noopener">+86 139 7589 9978</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 1998–2026 Xiangfeng Tea Group. <span data-i18n="footer.rights">All rights reserved.</span></div>
+      <div>
+        <a href="#" data-i18n="footer.privacy">Privacy Policy</a> ·
+        <a href="#" data-i18n="footer.terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================
+     11. INQUIRY POPUP
+     ============================================ -->
+<div class="inquiry-overlay" id="inquiryOverlay" onclick="closeInquiryOverlay(event)">
+  <div class="inquiry-popup" id="inquiryPopup">
+    <div class="inquiry-header">
+      <h3 data-i18n="popup.title">Product Inquiry</h3>
+      <div class="inquiry-close" onclick="closeInquiry()">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+    <div class="inquiry-body">
+      <form class="inquiry-form" id="inquiryForm" onsubmit="submitInquiry(event)">
+        <div class="form-group">
+          <label><span data-i18n="popup.name">Your Name</span> <span class="required">*</span></label>
+          <input type="text" name="name" required>
+        </div>
+        <div class="form-group">
+          <label><span data-i18n="popup.company">Company / Brand</span></label>
+          <input type="text" name="company">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label><span data-i18n="popup.email">Email</span> <span class="required">*</span></label>
+            <input type="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label><span data-i18n="popup.phone">Phone</span></label>
+            <input type="tel" name="phone">
           </div>
         </div>
-      `}).join('');
+        <div class="form-group">
+          <label><span data-i18n="contact.productInterest">Product Interest</span> <span class="required">*</span></label>
+          <select name="product_interest" id="inquiryProductSelect" required>
+            <option value="">-- Select --</option>
+            <option value="green_tea" data-i18n="products.catGreen">Green Tea</option>
+            <option value="black_tea" data-i18n="products.catBlack">Black Tea</option>
+            <option value="oolong_tea" data-i18n="products.catOolong">Oolong Tea</option>
+            <option value="white_tea" data-i18n="products.catWhite">White Tea</option>
+            <option value="puer_tea" data-i18n="products.catPuer">Pu-erh Tea</option>
+            <option value="oem" data-i18n="common.oem">OEM/ODM</option>
+            <option value="matcha" data-i18n="common.matcha">Matcha</option>
+            <option value="flower_tea" data-i18n="products.catFlower">Flower Tea</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><span data-i18n="popup.quantity">Estimated Quantity</span></label>
+          <input type="text" name="quantity" placeholder="e.g. 500kg, 1 ton, 10 tons">
+        </div>
+        <div class="form-group">
+          <label><span data-i18n="popup.message">Message</span> <span class="required">*</span></label>
+          <textarea name="message" rows="4" required data-i18n-placeholder="popup.messagePlaceholder" placeholder="Tell us about your requirements..."></textarea>
+        </div>
+        <button type="submit" class="inquiry-submit popup-submit">
+          <span class="loading-spinner"></span>
+          <span class="btn-text" data-i18n="popup.submitBtn">Submit Inquiry</span>
+        </button>
+      </form>
+    </div>
 
-      // 生成指示点（超过3个才显示）
-      if (exhTotal > 3) {
-        const maxIndex = exhTotal - VISIBLE_COUNT();
-        dots.innerHTML = '';
-        dots.classList.remove('hidden');
-        for (let i = 0; i <= maxIndex; i++) {
-          const dot = document.createElement('div');
-          dot.className = 'exh-dot' + (i === 0 ? ' active' : '');
-          dot.onclick = () => { exhIndex = i; updateExhSlider(); };
-          dots.appendChild(dot);
-        }
-        document.getElementById('exh-prev').classList.remove('hidden');
-        document.getElementById('exh-next').classList.remove('hidden');
+    <!-- Success Animation Overlay -->
+    <div class="inquiry-success-animation" id="inquirySuccess">
+      <div class="success-checkmark">
+        <i class="fas fa-check"></i>
+      </div>
+      <h3 data-i18n="popup.successTitle">Inquiry Submitted!</h3>
+      <p data-i18n="popup.successDesc">Our export team will contact you within 24 hours.</p>
+      <button class="btn btn-primary mt-4" onclick="closeInquiry()" style="margin-top:2rem;">
+        <span data-i18n="common.close">Close</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     12. BACK TO TOP BUTTON
+     ============================================ -->
+<div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+  <i class="fas fa-arrow-up"></i>
+</div>
+
+<!-- ============================================
+     SCRIPTS
+     ============================================ -->
+<script src="js/i18n.js"></script>
+<script src="js/product-data.js"></script>
+<script>
+/* ============================================
+   XIANGFENG TEA — HOMEPAGE LOGIC
+   ============================================ */
+
+/* ---------- i18n helper ---------- */
+function __(key) {
+  if (typeof XF_i18n !== 'undefined' && XF_i18n.t) {
+    return XF_i18n.t(key);
+  }
+  return key;
+}
+
+/* ---------- CSRF Token Generator ---------- */
+function generateToken() {
+  var timestamp = Date.now();
+  var random = Math.random().toString(36).substring(2, 15);
+  return timestamp + '_' + random;
+}
+
+/* ---------- HTML Escape Helper (XSS prevention) ---------- */
+function escapeHtml(str) {
+  if (!str) return '';
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
+/* ---------- Product Card Renderer (NO PRICES, TWO BUTTONS) ---------- */
+function renderProductCard(p) {
+  var name = escapeHtml(XF_Products.getName(p));
+  var cat = escapeHtml(__(p.catKey));
+  var id = escapeHtml(p.id);
+  return '<div class="product-card" data-cat="' + p.catKey + '">'
+    + '<div class="product-card-image">'
+    +   '<span class="product-card-tag">' + cat + '</span>'
+    +   '<img src="' + (XF_Products.getPrimaryImage(p) || 'images/placeholder-dry.svg') + '" alt="' + name + '" style="width:100%;height:100%;object-fit:cover;" onerror="this.src=\'images/placeholder-dry.svg\'">'
+    +   '<div class="product-card-actions">'
+    +     '<a href="product-detail.html?id=' + id + '" class="btn-view"><span data-i18n="products.viewDetails">View Details</span></a>'
+    +     '<button class="btn-inquire" onclick="openInquiry(\'' + id + '\')"><span data-i18n="products.inquire">Inquire</span></button>'
+    +   '</div>'
+    + '</div>'
+    + '<div class="product-card-body">'
+    +   '<div class="product-card-category">' + cat + '</div>'
+    +   '<h3 class="product-card-title">' + name + '</h3>'
+    +   '<div class="product-card-footer">'
+    +     '<a href="product-detail.html?id=' + id + '" class="btn btn-details" data-i18n="products.viewDetails">View Details</a>'
+    +     '<button class="btn btn-inquire-now" onclick="openInquiry(\'' + id + '\')" data-i18n="products.inquire">Inquire</button>'
+    +   '</div>'
+    + '</div></div>';
+}
+
+/* ---------- Featured Carousel ---------- */
+var featuredProducts = [];
+var featuredCurrent = 0;
+var featuredPerView = 4;
+var featuredInterval = null;
+
+function getFeaturedPerView() {
+  if (window.innerWidth <= 480) return 1;
+  if (window.innerWidth <= 768) return 2;
+  if (window.innerWidth <= 1024) return 3;
+  return 4;
+}
+
+function renderFeaturedCarousel() {
+  featuredProducts = XF_Products.getFeaturedProducts();
+  featuredPerView = getFeaturedPerView();
+  var track = document.getElementById('featuredCarousel');
+  if (!track) return;
+
+  var html = featuredProducts.map(function(p) {
+    return '<div class="product-card-wrapper">' + renderProductCard(p) + '</div>';
+  }).join('');
+  track.innerHTML = html;
+
+  // Set card widths based on perView
+  var cards = track.querySelectorAll('.product-card-wrapper');
+  var gap = 24; // 1.5rem
+  var wrapperWidth = track.parentElement.offsetWidth - 100; // minus arrows
+  var cardWidth = (wrapperWidth - gap * (featuredPerView - 1)) / featuredPerView;
+  for (var i = 0; i < cards.length; i++) {
+    cards[i].style.flex = '0 0 ' + cardWidth + 'px';
+    cards[i].style.maxWidth = cardWidth + 'px';
+  }
+
+  renderFeaturedDots();
+  updateFeaturedPosition();
+}
+
+function renderFeaturedDots() {
+  var dotsContainer = document.getElementById('featuredDots');
+  if (!dotsContainer) return;
+  var totalSlides = Math.max(1, featuredProducts.length - featuredPerView + 1);
+  var html = '';
+  for (var i = 0; i < totalSlides; i++) {
+    html += '<span class="featured-carousel-dot' + (i === featuredCurrent ? ' active' : '') + '" onclick="featuredGoTo(' + i + ')"></span>';
+  }
+  dotsContainer.innerHTML = html;
+}
+
+function updateFeaturedPosition() {
+  var track = document.getElementById('featuredCarousel');
+  if (!track) return;
+  var firstCard = track.querySelector('.product-card-wrapper');
+  if (!firstCard) return;
+  var cardWidth = firstCard.offsetWidth;
+  var gap = 24;
+  var offset = featuredCurrent * (cardWidth + gap);
+  track.style.transform = 'translateX(-' + offset + 'px)';
+
+  // Update dots
+  var dots = document.querySelectorAll('#featuredDots .featured-carousel-dot');
+  for (var i = 0; i < dots.length; i++) {
+    dots[i].classList.toggle('active', i === featuredCurrent);
+  }
+}
+
+function featuredNext() {
+  var totalSlides = Math.max(1, featuredProducts.length - featuredPerView + 1);
+  featuredCurrent = (featuredCurrent + 1) % totalSlides;
+  updateFeaturedPosition();
+  resetFeaturedAutoRotate();
+}
+
+function featuredPrev() {
+  var totalSlides = Math.max(1, featuredProducts.length - featuredPerView + 1);
+  featuredCurrent = featuredCurrent <= 0 ? totalSlides - 1 : featuredCurrent - 1;
+  updateFeaturedPosition();
+  resetFeaturedAutoRotate();
+}
+
+function featuredGoTo(index) {
+  var totalSlides = Math.max(1, featuredProducts.length - featuredPerView + 1);
+  featuredCurrent = ((index % totalSlides) + totalSlides) % totalSlides;
+  updateFeaturedPosition();
+  resetFeaturedAutoRotate();
+}
+
+function startFeaturedAutoRotate() {
+  clearInterval(featuredInterval);
+  featuredInterval = setInterval(function() {
+    var totalSlides = Math.max(1, featuredProducts.length - featuredPerView + 1);
+    featuredCurrent = (featuredCurrent + 1) % totalSlides;
+    updateFeaturedPosition();
+  }, 4000);
+}
+
+function resetFeaturedAutoRotate() {
+  startFeaturedAutoRotate();
+}
+
+/* ---------- Tea Collection Sections ---------- */
+function renderTeaSections() {
+  var allProducts = XF_Products.products;
+
+  // Green Tea
+  var greenTeas = allProducts.filter(function(p) { return p.catKey === 'products.catGreen'; });
+  var greenGrid = document.getElementById('greenTeaGrid');
+  if (greenGrid) {
+    greenGrid.innerHTML = greenTeas.slice(0, 6).map(renderProductCard).join('');
+  }
+
+  // Black Tea
+  var blackTeas = allProducts.filter(function(p) { return p.catKey === 'products.catBlack'; });
+  var blackGrid = document.getElementById('blackTeaGrid');
+  if (blackGrid) {
+    blackGrid.innerHTML = blackTeas.slice(0, 5).map(renderProductCard).join('');
+  }
+
+  // Oolong Tea
+  var oolongTeas = allProducts.filter(function(p) { return p.catKey === 'products.catOolong'; });
+  var oolongGrid = document.getElementById('oolongTeaGrid');
+  if (oolongGrid) {
+    oolongGrid.innerHTML = oolongTeas.slice(0, 4).map(renderProductCard).join('');
+  }
+}
+
+/* ---------- Featured Event Card ---------- */
+function renderFeaturedEvent() {
+  var card = document.getElementById('featuredEventCard');
+  if (!card) return;
+
+  var title = escapeHtml(__('home.exhibitTitle'));
+  var desc = __('home.exhibitDesc');
+  var imgUrl = 'https://video.aultras-tea.com/%E5%B1%95%E4%BC%9A%E5%9B%BE%E7%89%871.jpg';
+
+  card.innerHTML = '<div class="event-card-image">'
+    +   '<img src="' + imgUrl + '" onerror="this.style.display=\'none\';this.parentElement.style.background=\'linear-gradient(135deg,var(--primary-bg),var(--accent-light))\'" alt="' + title + '">'
+    + '</div>'
+    + '<div class="event-card-body">'
+    +   '<h3 style="font-size:1.3rem;margin-bottom:1rem;color:var(--dark);">' + title + '</h3>'
+    +   '<p style="color:var(--text-light);line-height:1.8;margin-bottom:1rem;">' + desc + '</p>'
+    +   '<a href="news.html" class="read-more" style="color:var(--primary);font-weight:600;">'
+    +     '<span data-i18n="common.readMore">Read More</span>'
+    +     ' <i class="fas fa-arrow-right"></i>'
+    +   '</a>'
+    + '</div>';
+}
+
+/* ---------- Hero Slider ---------- */
+var heroCurrent = 0;
+var heroSlides = [];
+var heroDots = [];
+var heroInterval = null;
+
+function initHeroSlider() {
+  heroSlides = document.querySelectorAll('.hero-slide');
+  heroDots = document.querySelectorAll('#heroDots .hero-dot');
+  if (heroSlides.length === 0) return;
+
+  // Start auto-rotate
+  startHeroAutoRotate();
+}
+
+function heroGoTo(index) {
+  if (index < 0) index = heroSlides.length - 1;
+  if (index >= heroSlides.length) index = 0;
+
+  for (var i = 0; i < heroSlides.length; i++) {
+    heroSlides[i].classList.toggle('active', i === index);
+  }
+  for (var j = 0; j < heroDots.length; j++) {
+    heroDots[j].classList.toggle('active', j === index);
+  }
+  heroCurrent = index;
+}
+
+function heroNext() {
+  heroGoTo(heroCurrent + 1);
+}
+
+function heroPrev() {
+  heroGoTo(heroCurrent - 1);
+}
+
+function startHeroAutoRotate() {
+  clearInterval(heroInterval);
+  heroInterval = setInterval(function() {
+    heroGoTo(heroCurrent + 1);
+  }, 10000);
+}
+
+/* ---------- Mobile Menu Toggle ---------- */
+function toggleMobileMenu() {
+  var nav = document.getElementById('navMenu');
+  var toggle = document.getElementById('mobileToggle');
+  if (nav) nav.classList.toggle('active');
+  if (toggle) toggle.classList.toggle('active');
+}
+
+/* ---------- Inquiry Popup ---------- */
+function openInquiry(productId) {
+  try { var _f = document.getElementById('contactFormCard'); if (_f) { _f.scrollIntoView({behavior:'smooth', block:'start'}); return; } window.location.href = 'contact.html#contactFormCard'; return; } catch(e) {}
+
+  // Direct jump to the customer's email client (pre-filled inquiry).
+  var email = INQUIRY_EMAIL;
+  try {
+    if (typeof XF_DATA !== 'undefined' && XF_DATA && XF_DATA.inquiry && XF_DATA.inquiry.email) email = XF_DATA.inquiry.email;
+    else if (typeof DATA !== 'undefined' && DATA && DATA.inquiry && DATA.inquiry.email) email = DATA.inquiry.email;
+  } catch(e) {}
+  var pname = '';
+  try {
+    if (productId && typeof XF_Products !== 'undefined') {
+      var p = XF_Products.getProductById(productId);
+      if (p) pname = XF_Products.getName(p);
+    }
+  } catch(e) {}
+  try {
+    if (!pname && typeof currentProduct !== 'undefined' && currentProduct && typeof XF_Products !== 'undefined') {
+      pname = XF_Products.getName(currentProduct);
+    }
+  } catch(e) {}
+  var subject = 'Tea Inquiry' + (pname ? ' - ' + pname : '');
+  var body = 'Dear Xiangfeng Tea Export Team,\n\nI would like to inquire about ' + (pname ? pname : 'your tea products') + '.\n\n';
+  body += 'My details:\nName: \nCompany: \nEmail: \nPhone: \n\nMessage:\n\nLooking forward to your reply.\n';
+  var mailtoUrl = 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  window.location.href = mailtoUrl;
+}
+
+
+function closeInquiry() {
+  var overlay = document.getElementById('inquiryOverlay');
+  if (overlay) {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function closeInquiryOverlay(event) {
+  if (event.target === event.currentTarget) {
+    closeInquiry();
+  }
+}
+
+/* ====== Email Configuration ====== */
+var INQUIRY_EMAIL = 'admin@xf-tea.com';
+var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/' + INQUIRY_EMAIL;
+var FORMSUBMIT_AJAX_HEADERS = { 'Accept': 'application/json' };
+
+function isStaticHosting() {
+  return window.location.hostname.includes('github.io') ||
+         !window.location.protocol.startsWith('http') ||
+         window.location.protocol === 'file:';
+}
+
+function submitInquiry(e) {
+  e.preventDefault();
+  var form = e.target;
+
+  var name = form.querySelector('[name="name"]').value || '';
+  var company = form.querySelector('[name="company"]').value || '';
+  var email = form.querySelector('[name="email"]').value || '';
+  var phone = form.querySelector('[name="phone"]').value || '';
+  var product = form.querySelector('[name="product_interest"]').value || '';
+  var quantity = form.querySelector('[name="quantity"]').value || '';
+  var message = form.querySelector('[name="message"]').value || '';
+
+  if (!name || !email || !message) {
+    alert(__('popup.fillRequired') || 'Please fill in all required fields.');
+    return;
+  }
+
+  var submitBtn = form.querySelector('.popup-submit');
+  if (submitBtn) {
+    submitBtn.classList.add('form-submitting');
+    var btnText = submitBtn.querySelector('.btn-text');
+    if (btnText) btnText.textContent = __('popup.submitting') || 'Submitting...';
+  }
+
+  var formData = new FormData(form);
+  formData.append('_subject', 'Tea Inquiry from ' + name + (company ? ' (' + company + ')' : ''));
+  formData.append('_template', 'table');
+  formData.append('_captcha', 'false');
+
+  fetch(FORMSUBMIT_ENDPOINT, {
+    method: 'POST',
+    headers: FORMSUBMIT_AJAX_HEADERS,
+    body: formData
+  })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (submitBtn) submitBtn.classList.remove('form-submitting');
+      if (data.success === 'true' || data.success === true) {
+        showInquirySuccess();
       } else {
-        dots.classList.add('hidden');
-        document.getElementById('exh-prev').classList.add('hidden');
-        document.getElementById('exh-next').classList.add('hidden');
+        fallbackToMailto(name, company, email, phone, product, quantity, message);
       }
-      updateExhSlider();
-      // 重新绑定语言
-      document.querySelectorAll('[data-lang]').forEach(el => {
-        const key = el.getAttribute('data-lang');
-        const lang = currentLang || 'en';
-        if(langPack[lang] && langPack[lang][key]) el.textContent = langPack[lang][key];
-      });
-    }
-
-    function updateExhSlider() {
-      const track = document.getElementById('exh-track');
-      const slides = track.querySelectorAll('.exh-slide');
-      const visible = VISIBLE_COUNT();
-      const maxIndex = Math.max(0, exhTotal - visible);
-      exhIndex = Math.min(exhIndex, maxIndex);
-      const slideWidth = slides[0] ? slides[0].offsetWidth + 21 : 0;
-      track.style.transform = `translateX(-${exhIndex * slideWidth}px)`;
-      document.querySelectorAll('.exh-dot').forEach((d, i) => d.classList.toggle('active', i === exhIndex));
-    }
-
-    function exhSlide(dir) {
-      const visible = VISIBLE_COUNT();
-      const maxIndex = Math.max(0, exhTotal - visible);
-      exhIndex = Math.max(0, Math.min(exhIndex + dir, maxIndex));
-      updateExhSlider();
-    }
-
-    // ===== 证书图片轮播（6列网格 + 自动轮播） =====
-    let certPage = 0;
-    let certTotalPages = 0;
-    let certUrls = [];
-    let certAutoTimer = null;
-    const CERT_COLS = () => window.innerWidth >= 1024 ? 4 : window.innerWidth >= 640 ? 3 : 2;
-
-    function getCertCols() {
-      return CERT_COLS();
-    }
-
-    function renderCertPage() {
-      const pageEl = document.getElementById('cert-page');
-      const dotsEl = document.getElementById('cert-dots');
-      const prevBtn = document.getElementById('cert-prev');
-      const nextBtn = document.getElementById('cert-next');
-      const cols = CERT_COLS();
-      const start = certPage * cols;
-      const pageItems = certUrls.slice(start, start + cols);
-
-      pageEl.innerHTML = pageItems.map((url, i) => {
-        const realIndex = start + i;
-        return `
-        <div class="cert-card ${url ? 'has-img' : ''}" ${url ? `onclick="openCertLightbox(${realIndex})"` : ''}>
-          ${url
-            ? `<img src="${url}" alt="Certificate ${realIndex + 1}" loading="lazy">`
-            : `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;color:#d1d5db">
-                 <i class="fas fa-certificate" style="font-size:1.5rem"></i>
-                 <span style="font-size:11px;color:#bbb">Cert ${realIndex + 1}</span>
-               </div>`
-          }
-        </div>`;
-      }).join('');
-
-      // 指示点
-      if (certTotalPages > 1) {
-        dotsEl.innerHTML = '';
-        dotsEl.classList.remove('hidden');
-        dotsEl.classList.add('cert-dot-row');
-        for (let i = 0; i < certTotalPages; i++) {
-          const dot = document.createElement('div');
-          dot.className = 'cert-dot' + (i === certPage ? ' active' : '');
-          dot.onclick = () => { certPage = i; renderCertPage(); resetCertTimer(); };
-          dotsEl.appendChild(dot);
-        }
-        prevBtn.classList.remove('hidden');
-        nextBtn.classList.remove('hidden');
-      } else {
-        dotsEl.classList.add('hidden');
-        prevBtn.classList.add('hidden');
-        nextBtn.classList.add('hidden');
-      }
-    }
-
-    function certSlide(dir) {
-      certPage = ((certPage + dir) % certTotalPages + certTotalPages) % certTotalPages;
-      renderCertPage();
-      resetCertTimer();
-    }
-
-    function resetCertTimer() {
-      if (certAutoTimer) clearInterval(certAutoTimer);
-      if (certTotalPages <= 1) return; // 只有一页时不自动轮播
-      certAutoTimer = setInterval(() => certSlide(1), 5000);
-    }
-
-    // ===== 证书图片放大灯箱 =====
-    let _certLbIndex = 0;
-    function openCertLightbox(idx) {
-      _certLbIndex = idx;
-      const lb = document.getElementById('cert-lightbox');
-      if (!lb) return;
-      updateCertLightbox();
-      lb.classList.add('show');
-      document.body.style.overflow = 'hidden';
-    }
-    function updateCertLightbox() {
-      const img = document.querySelector('#cert-lightbox img');
-      const counter = document.getElementById('cert-lb-counter');
-      if (img && certUrls[_certLbIndex]) img.src = certUrls[_certLbIndex];
-      if (counter) counter.textContent = (_certLbIndex + 1) + ' / ' + certUrls.length;
-    }
-    function certLbSlide(dir) {
-      if (!certUrls.length) return;
-      _certLbIndex = (_certLbIndex + dir + certUrls.length) % certUrls.length;
-      updateCertLightbox();
-    }
-    function closeCertLightbox() {
-      const lb = document.getElementById('cert-lightbox');
-      if (lb) lb.classList.remove('show');
-      document.body.style.overflow = '';
-    }
-
-    function renderCertificates(urls) {
-      certUrls = urls;
-      if (!certUrls.length) return;
-      const cols = CERT_COLS();
-      certTotalPages = Math.max(1, Math.ceil(certUrls.length / cols));
-      certPage = 0;
-      renderCertPage();
-      resetCertTimer();
-      // 悬停暂停自动轮播，移开恢复（便于手动翻页查看）
-      const box = document.querySelector('.cert-container');
-      if (box && !box.dataset.hoverBound) {
-        box.dataset.hoverBound = '1';
-        box.addEventListener('mouseenter', () => { if (certAutoTimer) clearInterval(certAutoTimer); });
-        box.addEventListener('mouseleave', () => { if (certUrls.length) resetCertTimer(); });
-      }
-    }
-
-    let _certResizeTimer = null;
-    window.addEventListener('resize', () => {
-      updateExhSlider();
-      // 窗口尺寸变化后重算证书分页（列数变化）
-      if (_certResizeTimer) clearTimeout(_certResizeTimer);
-      _certResizeTimer = setTimeout(() => {
-        if (!certUrls.length) return;
-        const cols = CERT_COLS();
-        certTotalPages = Math.max(1, Math.ceil(certUrls.length / cols));
-        certPage = Math.min(certPage, certTotalPages - 1);
-        renderCertPage();
-      }, 150);
+    })
+    .catch(function() {
+      if (submitBtn) submitBtn.classList.remove('form-submitting');
+      fallbackToMailto(name, company, email, phone, product, quantity, message);
     });
+}
 
-    // ===== 新闻动态（轮播渲染 - 类似展会板块） =====
-    let newsIndex = 0;
-    let newsTotal = 0;
-    const NEWS_VISIBLE = () => window.innerWidth >= 1024 ? 3 : window.innerWidth >= 769 ? 2 : 1;
-    let _newsAll = [];
+function fallbackToMailto(name, company, email, phone, product, quantity, message) {
+  var subject = 'Tea Inquiry from ' + name + (company ? ' (' + company + ')' : '');
+  var body = 'Dear Xiangfeng Tea Export Team,\n\n';
+  body += 'I would like to inquire about your tea products. Here are my details:\n\n';
+  body += 'Name: ' + name + '\n';
+  if (company) body += 'Company: ' + company + '\n';
+  body += 'Email: ' + email + '\n';
+  if (phone) body += 'Phone: ' + phone + '\n';
+  if (product) body += 'Product Interest: ' + product + '\n';
+  if (quantity) body += 'Estimated Quantity: ' + quantity + '\n';
+  body += '\nMessage:\n' + message + '\n\n';
+  body += 'Looking forward to your reply.\n\nBest regards,\n' + name;
 
-    function renderNews(news) {
-      // 按日期降序（最新在最前）
-      _newsAll = [...news].sort((a, b) => {
-        const da = new Date(a.date || '2000-01-01');
-        const db = new Date(b.date || '2000-01-01');
-        return db - da;
-      }).slice(0, 3);
-      newsIndex = 0;
-      newsTotal = _newsAll.length;
+  var mailtoUrl = 'mailto:' + INQUIRY_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  window.location.href = mailtoUrl;
+  showInquirySuccess();
+}
 
-      const track = document.getElementById('news-track');
-      const dots = document.getElementById('news-dots');
-      const emptyEl = document.getElementById('news-empty');
-      const prevBtn = document.getElementById('news-prev');
-      const nextBtn = document.getElementById('news-next');
+function showInquirySuccess() {
+  var form = document.getElementById('inquiryForm');
+  var successDiv = document.getElementById('inquirySuccess');
+  if (form) form.style.display = 'none';
+  if (successDiv) {
+    successDiv.classList.add('active');
+  }
+}
 
-      if (!_newsAll.length) {
-        track.innerHTML = '';
-        emptyEl.classList.remove('hidden');
-        dots.classList.add('hidden');
-        prevBtn.classList.add('hidden');
-        nextBtn.classList.add('hidden');
-        return;
-      }
-      emptyEl.classList.add('hidden');
+/* ---------- Back to Top ---------- */
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-      // 渲染卡片
-      const lang = document.getElementById('langSelect').value || 'en';
-      track.innerHTML = _newsAll.map(item => {
-        const title = item['title_' + lang] || item.title_en || '';
-        const summary = item['summary_' + lang] || item.summary_en || '';
-        const dateStr = item.date || '';
-        const imgUrl = (item.image || '').trim();
-        const newsId = item.id || 0;
-        const viewAllLabel = (langPack[lang] && langPack[lang].news_view_all) || 'Read More';
-        const contactLabel = (langPack[lang] && langPack[lang].news_contact) || 'Contact Us';
-        return `
-          <div class="news-slide">
-            <div class="news-card bg-white rounded-xl overflow-hidden h-full flex flex-col">
-              <div class="news-img-wrap bg-gradient-to-br from-primary/5 to-secondary/10 flex items-center justify-center flex-shrink-0">
-                ${imgUrl
-                  ? `<img src="${imgUrl}" alt="${title}" loading="lazy">`
-                  : `<div class="flex flex-col items-center justify-center w-full h-full text-primary/20"><i class="fas fa-newspaper text-5xl mb-2"></i></div>`
-                }
-              </div>
-              <div class="p-5 flex flex-col flex-grow">
-                <span class="news-date-tag mb-3 inline-block">${dateStr}</span>
-                <h3 class="font-bold text-primary text-base mb-4 leading-snug line-clamp-2 flex-grow">${title}</h3>
-                <p class="text-dark/60 text-sm mb-3 line-clamp-2">${summary}</p>
-                <div class="flex items-center justify-between gap-2 mt-auto">
-                  <a href="#contact" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 text-primary text-xs font-medium rounded-full hover:bg-primary hover:text-white transition-all">
-                    <i class="fas fa-envelope text-xs"></i>
-                    <span>${contactLabel}</span>
-                  </a>
-                  <a href="news.html?id=${newsId}" class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-secondary text-white text-xs font-medium rounded-full hover:bg-secondary/90 transition-all">
-                    <span>${viewAllLabel}</span>
-                    <i class="fas fa-arrow-right text-xs"></i>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>`;
-      }).join('');
-
-      // 生成指示点（超过可见数量才显示轮播）
-      const visible = NEWS_VISIBLE();
-      if (newsTotal > visible) {
-        const maxIndex = newsTotal - visible;
-        dots.innerHTML = '';
-        dots.classList.remove('hidden');
-        for (let i = 0; i <= maxIndex; i++) {
-          const dot = document.createElement('div');
-          dot.className = 'news-dot' + (i === 0 ? ' active' : '');
-          dot.onclick = () => { newsIndex = i; updateNewsSlider(); };
-          dots.appendChild(dot);
-        }
-        prevBtn.classList.remove('hidden');
-        nextBtn.classList.remove('hidden');
-      } else {
-        dots.classList.add('hidden');
-        prevBtn.classList.add('hidden');
-        nextBtn.classList.add('hidden');
-      }
-      updateNewsSlider();
-
-      // 重新绑定语言
-      document.querySelectorAll('[data-lang]').forEach(el => {
-        const key = el.getAttribute('data-lang');
-        const curLang = currentLang || 'en';
-        if(langPack[curLang] && langPack[curLang][key]) el.textContent = langPack[curLang][key];
-      });
+function initBackToTop() {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
     }
+  });
 
-    function updateNewsSlider() {
-      const track = document.getElementById('news-track');
-      const slides = track.querySelectorAll('.news-slide');
-      const visible = NEWS_VISIBLE();
-      const maxIndex = Math.max(0, newsTotal - visible);
-      newsIndex = Math.min(newsIndex, maxIndex);
-      const slideWidth = slides[0] ? slides[0].offsetWidth + 27 : 0;
-      track.style.transform = `translateX(-${newsIndex * slideWidth}px)`;
-      document.querySelectorAll('.news-dot').forEach((d, i) => d.classList.toggle('active', i === newsIndex));
+  // Header + Topbar scroll shadow
+  var header = document.getElementById('header');
+  var topbar = document.querySelector('.topbar');
+  window.addEventListener('scroll', function() {
+    if (header) {
+      header.classList.toggle('scrolled', window.scrollY > 50);
     }
-
-    function newsSlide(dir) {
-      const visible = NEWS_VISIBLE();
-      const maxIndex = Math.max(0, newsTotal - visible);
-      newsIndex = Math.max(0, Math.min(newsIndex + dir, maxIndex));
-      updateNewsSlider();
+    if (topbar) {
+      topbar.classList.toggle('scrolled', window.scrollY > 10);
     }
+  });
+}
 
-    window.addEventListener('resize', () => {
-      updateNewsSlider();
-    });
+/* ---------- Language Change Re-render ---------- */
+function reRenderOnLangChange() {
+  // Re-render product cards with new language
+  renderFeaturedCarousel();
+  renderTeaSections();
+  renderFeaturedEvent();
 
-    // ===== PDF 打开（在新标签展示） =====
-    function openBrochure(e) {
-      const btn = document.getElementById('brochure-download-btn');
-      const url = btn ? btn.href : '';
-      if (!url || url === '#' || url === window.location.href + '#') {
-        e.preventDefault();
-        alert('Product catalog link is not configured yet. Please contact us for details.');
-        return;
-      }
-      // href 已设置为完整链接，target="_blank" 会自动新标签打开，此处不阻止
+  // Re-apply i18n to dynamically generated elements
+  if (typeof XF_i18n !== 'undefined' && XF_i18n.applyLang) {
+    XF_i18n.applyLang(XF_i18n.getLang());
+  }
+}
+
+// Patch i18n setLang to trigger re-render
+(function patchI18n() {
+  if (typeof XF_i18n === 'undefined') return;
+  var origSetLang = XF_i18n.setLang;
+  XF_i18n.setLang = function(lang) {
+    origSetLang(lang);
+    reRenderOnLangChange();
+  };
+})();
+
+/* ---------- Window Resize Handler ---------- */
+var resizeTimer = null;
+window.addEventListener('resize', function() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function() {
+    var newPerView = getFeaturedPerView();
+    if (newPerView !== featuredPerView) {
+      featuredPerView = newPerView;
+      featuredCurrent = 0;
+      renderFeaturedDots();
+      updateFeaturedPosition();
+      // Re-render to recalculate card widths
+      renderFeaturedCarousel();
     }
+  }, 250);
+});
 
-    // ===== 展会弹窗显示 =====
-    let _exhPopupShown = false;
-    let _exhPopupTimer = null;   // 保留定时器句柄，便于内容更新后重新弹出
-    function showExhPopup(exhs) {
-      if (!exhs || exhs.length === 0) return;
-      // 永远展示后台最新添加的展会（后台 addExhibition 追加到数组末尾）
-      const target = exhs[exhs.length - 1] || exhs[0];
-      const popup = document.getElementById('exh-popup');
-      if (!popup) return;
+/* ---------- Initialize on DOM Ready ---------- */
+document.addEventListener('DOMContentLoaded', function() {
+  // i18n already auto-inits via its own DOMContentLoaded listener
 
-      // 填充弹窗内容
-      const nameEl = document.getElementById('popup-exh-name');
-      const dateEl = document.getElementById('popup-exh-date');
-      const locationEl = document.getElementById('popup-exh-location');
-      const boothEl = document.getElementById('popup-exh-booth');
-      const badgeEl = document.getElementById('popup-exh-badge');
-      if (nameEl) nameEl.textContent = target.name || '';
-      if (dateEl) dateEl.textContent = target.date || '';
-      if (locationEl) locationEl.textContent = target.location || '';
-      if (boothEl) boothEl.textContent = target.booth || 'TBA';
-      if (badgeEl) {
-        // 用 String().toLowerCase() 判断：任何大小写的 confirmed 都算已确认，其余为即将开始
-        const st = String(target.status || '').toLowerCase();
-        const isConfirmed = (st === 'confirmed');
-        badgeEl.textContent = isConfirmed ? 'Confirmed' : 'Upcoming';
-        badgeEl.className = 'exh-popup-badge ' + (isConfirmed ? 'confirmed' : 'upcoming') + ' ml-2 flex-shrink-0';
-      }
-      // 弹窗标题（如后台 langPack 提供 popup_title 则使用之）
-      const titleEl = document.getElementById('popup-section-title');
-      if (titleEl) titleEl.textContent = (langPack[currentLang] && langPack[currentLang].popup_title) || 'Latest Exhibition';
-      console.log('[展会弹窗] 已填充数据:', target);
+  // Render dynamic content (slight delay to ensure i18n is ready)
+  setTimeout(function() {
+    renderFeaturedCarousel();
+    renderTeaSections();
+    renderFeaturedEvent();
+    initHeroSlider();
+    initBackToTop();
+    startFeaturedAutoRotate();
+  }, 100);
+});
 
-      // 已经显示过就直接返回；否则延迟 1.5 秒弹出
-      if (_exhPopupShown) return;
-      if (_exhPopupTimer) clearTimeout(_exhPopupTimer);
-      _exhPopupTimer = setTimeout(() => {
-        popup.classList.add('show');
-        _exhPopupShown = true;
-      }, 1500);
+// Re-render dynamic content when language changes
+document.addEventListener('xf_lang_change', function() {
+  setTimeout(function() {
+    renderFeaturedEvent();
+    renderFeaturedCarousel();
+    renderTeaSections();
+  }, 50);
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', function(e) {
+  var nav = document.getElementById('navMenu');
+  var toggle = document.getElementById('mobileToggle');
+  if (nav && nav.classList.contains('active') && toggle) {
+    if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+      nav.classList.remove('active');
+      toggle.classList.remove('active');
     }
+  }
+});
 
-    function closeExhPopup() {
-      const popup = document.getElementById('exh-popup');
-      if (popup) popup.classList.remove('show');
-    }
+// Close inquiry on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeInquiry();
+  }
+});
+</script>
 
-    // ===== 从 data.json 动态加载内容 =====
-    async function loadSiteData() {
-      try {
-        const res = await fetch('./data.json?v=' + Date.now() + '&r=' + Math.random().toString(36).slice(2,8), { cache: 'no-store' });
-        let data = await res.json();
-        // 自动修复双重编码字段
-        // 使用 data.json 中的 langPack（后台可编辑文案），缺省回退到内置静态文案
-        if (data.langPack) langPack = data.langPack;
-
-        // 图片
-        const imgs = data.images || {};
-        const setImg = (id, src) => { const el = document.getElementById(id); if(el && src) el.src = src; };
-        setImg('img_hero_bg', imgs.hero_bg);
-        setImg('img_hero_main', imgs.hero_main);
-        setImg('img_product_green', imgs.product_green);
-        setImg('img_product_black', imgs.product_black);
-        setImg('img_product_oolong', imgs.product_oolong);
-        setImg('img_product_white', imgs.product_white);
-        setImg('img_product_dark', imgs.product_dark);
-        setImg('img_product_flower', imgs.product_flower);
-
-        // 资质证书：仅展示 HACCP（由 data-cert-icon 渲染真实图片）
-
-        // 证书图片轮播（最多20张，key: cert_1 ~ cert_20）
-        const certUrls = [];
-        for (let i = 1; i <= 20; i++) {
-          if (imgs['cert_' + i]) certUrls.push(imgs['cert_' + i]);
-        }
-        if (certUrls.length > 0) renderCertificates(certUrls);
-
-        // 联系方式（多语言，随语言切换）
-        if (data.contact_info) {
-          _contactInfo = data.contact_info;
-          applyContactLang(langSelect.value || 'en');
-          const el = document.getElementById('contact_email_link');
-          if (el && _contactInfo.email_1) el.href = 'mailto:' + _contactInfo.email_1;
-        }
-
-        // 关于我们视频（支持 direct_url MP4 直链 和 embed_code iframe 两种）
-        const aboutVC = document.getElementById('about_video_container');
-        if (aboutVC && data.about_video) {
-          const durl = data.about_video.direct_url;
-          const embed = data.about_video.embed_code;
-          if (durl && durl.trim()) {
-            aboutVC.innerHTML = '<video src="' + durl + '" autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:none;"></video>';
-          } else if (embed && embed.trim()) {
-            aboutVC.innerHTML = embed;
-          }
-        }
-
-        // 展会
-        console.log('[data.json] 展会列表', (data.exhibitions||[]).length, '条; 弹窗设置 exh_popup =', data.exh_popup || '（未设置）');
-        if(data.exhibitions && data.exhibitions.length) {
-          _exhibitionsAll = data.exhibitions;
-          renderExhibitions(data.exhibitions);
-        }
-        // 弹窗优先读取后台“前端弹窗展会设置”(exh_popup)；未设置则自动取列表最新一条
-        // 注意：此逻辑独立于展会列表，即使列表为空，只要 exh_popup 有内容，弹窗依然生效
-        const _popupExh = (data.exh_popup && (data.exh_popup.name || data.exh_popup.date || data.exh_popup.location))
-          ? [data.exh_popup] : (data.exhibitions || []);
-        if (_popupExh.length) {
-          showExhPopup(_popupExh);
-        } else {
-          // 数据异常兜底：15 秒后仍无弹窗则显示默认 Gulfood 2026，避免永久空白
-          setTimeout(function() {
-            if (_exhPopupShown) return;
-            showExhPopup([{ name: 'Gulfood 2026', date: 'Jan 26-30, 2026', location: 'Dubai, UAE (DWTC & DEC)', booth: 'TBA', status: 'confirmed' }]);
-          }, 15000);
-        }
-
-
-        // 产品手册 PDF 链接（点击直接在新标签打开PDF）
-        if (data.brochure_url && data.brochure_url.trim()) {
-          const btn = document.getElementById('brochure-download-btn');
-          if (btn) btn.href = data.brochure_url.trim();
-        }
-
-        // 资质认证徽标图标（有图片则替换图标区域内容，无图片则保留默认图标）
-        if (data.cert_icons) {
-          const certIconKeys = ['cert_haccp'];
-          certIconKeys.forEach(key => {
-            const url = (data.cert_icons[key] || '').trim();
-            const card = document.querySelector('[data-cert-icon="' + key + '"]');
-            if (!card) return;
-            const wrap = card.querySelector('.cert-icon-wrap');
-            if (url && wrap) {
-              // 有图片链接 → 显示图片，隐藏默认图标
-              wrap.innerHTML = '<img src="' + url + '" alt="' + key + '" style="width:96px;height:96px;object-fit:contain;margin:0 auto 8px;">';
-            }
-            // 无图片则保留默认图标，不做任何操作
-          });
-        }
-
-        // 社媒链接
-        const socialWrap = document.getElementById('social-links');
-        if(socialWrap && data.social_links) {
-          const iconMap = { youtube:'fab fa-youtube', linkedin:'fab fa-linkedin', whatsapp:'fab fa-whatsapp', wechat:'fab fa-weixin', facebook:'fab fa-facebook', instagram:'fab fa-instagram', twitter:'fab fa-twitter' };
-          socialWrap.innerHTML = data.social_links.map(s => {
-            const icon = iconMap[s.platform] || 'fas fa-link';
-            return `<a href="${s.url}" target="_blank" rel="noopener" class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" title="${s.platform}"><i class="${icon}"></i></a>`;
-          }).join('');
-        }
-
-        // 新闻动态（读取 news_summary 精简版）
-        if (data.news_summary && data.news_summary.length) {
-          renderNews(data.news_summary);
-        } else if (data.news && data.news.length) {
-          // 兼容旧版数据
-          renderNews(data.news);
-        } else {
-          document.getElementById('news-empty').classList.remove('hidden');
-        }
-
-      } catch(e) {
-        console.warn('data.json 加载失败，使用默认内容', e);
-        // 默认展会（3条）
-        renderExhibitions([
-          { date: '1 - 3 April 2026', name: 'UzFood 2026', location: 'Uzexpocentre NEC, Tashkent, Uzbekistan', booth: 'F92' },
-          { date: 'Coming Soon', name: 'BIOFACH 2026', location: 'Nuremberg, Germany', booth: 'TBA' },
-          { date: 'Coming Soon', name: 'Gulfood 2026', location: 'Dubai, UAE', booth: 'TBA' }
-        ]);
-        // 默认社媒
-        document.getElementById('social-links').innerHTML = `
-          <a href="https://www.youtube.com/@XiangfengTea" target="_blank" rel="noopener" class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"><i class="fab fa-youtube"></i></a>
-          <a href="https://www.linkedin.com/company/%E6%B9%98%E4%B8%B0%E8%8C%B6%E4%B8%9A%E9%9B%86%E5%9B%A2%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8" target="_blank" rel="noopener" class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"><i class="fab fa-linkedin"></i></a>
-          <a href="https://wa.me/8613975899978" target="_blank" rel="noopener" class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"><i class="fab fa-whatsapp"></i></a>
-          <a href="#contact" class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"><i class="fab fa-weixin"></i></a>
-        `;
-      }
-    }
-
-    // ===== 证书灯箱键盘支持 =====
-    document.addEventListener('keydown', e => {
-      const lb = document.getElementById('cert-lightbox');
-      if (!lb || !lb.classList.contains('show')) return;
-      if (e.key === 'Escape') closeCertLightbox();
-      else if (e.key === 'ArrowLeft') certLbSlide(-1);
-      else if (e.key === 'ArrowRight') certLbSlide(1);
-    });
-
-    // ===== 语言切换 =====
-    const langSelect = document.getElementById('langSelect');
-    function _renderNewsPage(){ if (_newsAll && _newsAll.length) renderNews(_newsAll); }
-
-    function switchLang(lang) {
-      currentLang = lang;
-      document.querySelectorAll('[data-lang]').forEach(el => {
-        const key = el.getAttribute('data-lang');
-        if(langPack[lang] && langPack[lang][key]) el.textContent = langPack[lang][key];
-      });
-      applyContactLang(lang);
-      document.title = langPack[lang].meta_title;
-      document.querySelector("meta[name='description']").setAttribute('content', langPack[lang].meta_desc);
-      document.documentElement.lang = lang;
-      // 新闻同步切语言（重渲染当前页）
-      if (_newsAll.length > 0) _renderNewsPage();
-      // 展会同步切语言
-      if (_exhibitionsAll && _exhibitionsAll.length > 0) renderExhibitions(_exhibitionsAll);
-    }
-    langSelect.addEventListener('change', () => switchLang(langSelect.value));
-
-    // ===== 导航滚动 =====
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('py-2', window.scrollY > 50);
-      navbar.classList.toggle('shadow-md', window.scrollY > 50);
-    });
-
-    // ===== 移动端菜单 =====
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-      const icon = menuToggle.querySelector('i');
-      icon.classList.toggle('fa-bars');
-      icon.classList.toggle('fa-times');
-    });
-    document.querySelectorAll('#mobileMenu a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        menuToggle.querySelector('i').className = 'fas fa-bars';
-      });
-    });
-
-    // ===== 渐入动画 =====
-    const fadeElements = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('visible'));
-    }, { threshold: 0.1 });
-    fadeElements.forEach(el => observer.observe(el));
-
-    // ===== 回到顶部 =====
-    const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if(window.scrollY > 300) {
-        backToTop.classList.remove('opacity-0', 'invisible');
-        backToTop.classList.add('opacity-100', 'visible');
-      } else {
-        backToTop.classList.add('opacity-0', 'invisible');
-        backToTop.classList.remove('opacity-100', 'visible');
-      }
-    });
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // ===== 年份 =====
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // ===== 初始化 =====
-
-    // ===== 锚点平滑跳转（带固定导航栏偏移，修复跳转落点被遮挡） =====
-    const HEADER_OFFSET = 90;
-    document.addEventListener('click', function(e){
-      const a = e.target.closest('a[href^="#"]');
-      if(!a) return;
-      const href = a.getAttribute('href');
-      if(!href || href.length <= 1) return;
-      const target = document.getElementById(href.slice(1));
-      if(!target) return;
-      e.preventDefault();
-      const y = target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-      if(history.replaceState) history.replaceState(null, '', href);
-    });
-    window.addEventListener('load', function(){
-      if(location.hash && location.hash.length > 1){
-        const target = document.getElementById(location.hash.slice(1));
-        if(target){
-          const y = target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-        }
-      }
-    });
-
-    loadSiteData().then(() => { switchLang(langSelect.value || 'en'); });
-  </script>
 </body>
 </html>

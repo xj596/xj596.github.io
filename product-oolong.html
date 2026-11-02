@@ -1,428 +1,251 @@
 <!DOCTYPE html>
-<html lang="en" id="html-root">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="page-title">Oolong Tea | AultrasTea</title>
-  <meta name="description" id="page-desc" content="Premium Organic Tea From Guizhou & Hunan, China - AultrasTea.">
+  <title>Oolong Tea | Xiangfeng Tea — Premium Chinese Tea Exporter</title>
+  <link rel="icon" type="image/png" href="">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: { extend: { colors: { primary: '#0F4C3A', secondary: '#D4AF37', light: '#F8F5F0', dark: '#1A1A1A' },
-        fontFamily: { sans: ['Inter', 'sans-serif'] } } }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #0F4C3A;
+      --primary-light: #1A6B52;
+      --gold: #D4AF37;
+      --gold-light: #E8D5A3;
+      --bg-warm: #F8F5F0;
+      --bg-cream: #FDFBF7;
+      --text-dark: #2D2D2D;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { overflow-x: hidden; background-color: #F8F5F0; color: #1A1A1A; font-family: "Inter", sans-serif; }
-    .nav-link { position: relative; }
-    .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #D4AF37; transition: width 0.3s ease; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-dark);
+      background: var(--bg-cream);
+      line-height: 1.7;
+    }
+    .font-serif-heading {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-weight: 600;
+    }
+    .accent-line { width: 60px; height: 3px; background: var(--gold); margin: 0 auto; }
+    .nav-scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); }
+    .nav-link { position: relative; text-decoration: none; }
+    .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.3s ease; }
     .nav-link:hover::after { width: 100%; }
-    .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    .product-detail-img { background: #e5e7eb; min-height: 7rem; }
-    #lightbox { backdrop-filter: blur(4px); }
-    .zoom-wrap { cursor: zoom-in; }
-    .product-img { transition: transform .12s ease-out; }
-    .zoom-lens { position:fixed; border:2px solid rgba(15,76,58,.65); background:rgba(212,175,55,.20); pointer-events:none; display:none; z-index:110; border-radius:6px; }
-    .zoom-info { width:260px; padding:20px 18px; background:#ffffff; border-radius:16px; box-shadow:0 8px 30px rgba(15,76,58,.10); border:1px solid rgba(15,76,58,.08); flex-shrink:0; align-self:stretch; }
-    .zoom-info h5 { font-size:14px; color:#0f4c3a; font-weight:700; margin:0 0 4px 0; }
-    .zoom-info .zi-subtitle { font-size:12px; color:#9ca3af; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid #e5e7eb; }
-    .zoom-info .zi-section { margin-bottom:14px; }
-    .zoom-info .zi-label { font-size:11px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
-    .zoom-info .zi-row { display:flex; align-items:center; gap:8px; font-size:13px; margin-bottom:6px; color:#374151; }
-    .zoom-info .zi-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
-    .zoom-info .zi-on { background:#15803d; }
-    .zoom-info .zi-off { background:#d1d5db; }
-    .zoom-info .zi-shape-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:6px; font-size:12px; background:#0F4C3A; color:white; font-weight:600; }
-    .zoom-info .zi-origin { font-size:13px; color:#374151; background:#fff; padding:8px 10px; border-radius:8px; border:1px solid #e5e7eb; }
-    .lb-dialog { align-items:stretch; }
-    .lb-image-area { min-width:0; justify-content:center; }
-    .lb-zoom-pane { flex:0 0 380px; display:flex; align-items:center; justify-content:center; }
-    .zoom-result { position:relative; width:360px; height:400px; background-color:#f9fafb; background-repeat:no-repeat; background-position:center; display:none; pointer-events:none; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.30); border:1px solid rgba(0,0,0,.08); }
+    .product-card {
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+      background: white; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.12); }
+    .product-card .img-wrap { overflow: hidden; height: 240px; }
+    .product-card .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .product-card:hover .img-wrap img { transform: scale(1.06); }
+    .product-detail-card {
+      background: white; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .detail-img-wrap { height: 300px; overflow: hidden; }
+    .detail-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .detail-img-wrap:hover img { transform: scale(1.04); }
+    .tab-btn { padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; }
+    .tab-btn.active { background: var(--primary); color: white; }
+    .tab-btn:not(.active) { background: #f3f4f6; color: #6b7280; }
+    .tab-btn:not(.active):hover { background: #e5e7eb; }
+    @media (max-width: 768px) {
+      .detail-img-wrap { height: 200px; }
+    }
   </style>
-  <link rel="icon" href="data:,">
 </head>
 <body>
-  <header class="fixed w-full top-0 z-50 transition-all duration-500 py-3 bg-light/95 backdrop-blur-md shadow-sm">
-    <div class="container mx-auto px-4 md:px-6">
-      <nav class="flex items-center justify-between">
-        <a href="index.html" class="text-2xl font-bold text-primary flex items-center gap-2">
-          <img src="https://video.aultras-tea.com/%E6%B9%98%E4%B8%B0%E7%80%91%E5%B8%83%E5%95%86%E6%A0%87-04.png" alt="AultrasTea" class="navbar-logo" style="height:40px;width:auto;max-width:220px;object-fit:contain;">
-        </a>
-        <ul class="hidden md:flex items-center gap-8">
-          <li><a href="index.html#home" class="nav-link text-dark hover:text-primary font-medium" data-lang="nav_home">Home</a></li>
-          <li><a href="index.html#products" class="nav-link text-dark hover:text-primary font-medium" data-lang="nav_products">Products</a></li>
-          <li><a href="index.html#certificates" class="nav-link text-dark hover:text-primary font-medium" data-lang="nav_cert">Certificates</a></li>
-          <li><a href="index.html#contact" class="nav-link text-dark hover:text-primary font-medium" data-lang="nav_contact">Contact Us</a></li>
-        </ul>
-        <div class="flex items-center gap-3">
-          <select id="langSelect" class="px-3 py-1.5 rounded-lg border border-primary/30 text-primary bg-white font-medium outline-none text-sm" onchange="switchLang(this.value)">
-            <option value="en">English</option>
-            <option value="zh">中文</option>
-            <option value="ru">Русский</option>
-            <option value="de">Deutsch</option>
-          </select>
-          <a href="index.html#contact" class="px-5 py-2 bg-primary text-white rounded-full text-sm font-medium hover:bg-primary/90 transition-all hidden md:inline-flex items-center gap-1">
-            <i class="fas fa-envelope mr-1"></i><span data-lang="inquiry">Get Quote</span>
-          </a>
-        </div>
-      </nav>
-    </div>
-  </header>
-
-  <div class="pt-20">
-    <div class="bg-primary text-white py-16">
-      <div class="container mx-auto px-4 md:px-6">
-        <nav class="flex items-center gap-2 text-sm text-white/60 mb-6">
-          <a href="index.html" class="hover:text-white transition-colors" data-lang="nav_home">Home</a>
-          <i class="fas fa-chevron-right text-xs"></i>
-          <a href="index.html#products" class="hover:text-white transition-colors" data-lang="nav_products">Products</a>
-          <i class="fas fa-chevron-right text-xs"></i>
-          <span class="text-white" id="breadcrumb-cat">Oolong Tea</span>
-        </nav>
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-          <div class="fade-in">
-            <div class="inline-block px-3 py-1 bg-white/20 text-white rounded-full text-sm font-medium mb-4" data-lang="badge">Organic Certified</div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-3" id="cat-name-en">Oolong Tea</h1>
-            <p class="text-white/60 text-xl mb-6" id="cat-name-zh">乌龙茶</p>
-            <p class="text-white/80 text-lg leading-relaxed mb-6" id="cat-subtitle" data-lang="subtitle">Premium Organic Oolong Tea From Fujian & Guizhou, China</p>
-            <div class="space-y-3 mb-8" id="features-list"></div>
-            <div class="flex gap-4 flex-wrap">
-              <a href="index.html#contact" class="px-8 py-3 bg-secondary text-white rounded-full font-medium hover:bg-secondary/90 transition-all shadow-lg">
-                <i class="fas fa-envelope mr-2"></i><span data-lang="inquiry">Send Inquiry Now</span>
-              </a>
-              <a href="index.html#products" class="px-8 py-3 border-2 border-white/40 text-white rounded-full font-medium hover:border-white transition-all">
-                <i class="fas fa-arrow-left mr-2"></i><span data-lang="view_all">All Products</span>
-              </a>
-            </div>
-          </div>
-          <div class="fade-in">
-            <div class="rounded-2xl overflow-hidden shadow-2xl aspect-video bg-white/10">
-              <img id="cat_hero_img" src="" alt="Oolong Tea" class="w-full h-full object-cover">
-            </div>
-          </div>
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 nav-scrolled">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" class="header-logo-img">
+      </a>
+      <div class="hidden lg:flex items-center gap-6">
+        <a href="index.html#about" class="nav-link text-[var(--text-dark)]/80 text-sm font-medium uppercase tracking-wide">About</a>
+        <a href="index.html#products" class="nav-link text-[var(--primary)] text-sm font-medium uppercase tracking-wide">Products</a>
+        <a href="index.html#news" class="nav-link text-[var(--text-dark)]/80 text-sm font-medium uppercase tracking-wide">News</a>
+        <a href="index.html#contact" class="nav-link text-[var(--text-dark)]/80 text-sm font-medium uppercase tracking-wide">Contact</a>
+        <div class="flex items-center gap-1 ml-2">
+          <button onclick="switchLang('en')" class="px-2.5 py-1 rounded-full border border-gray-300 text-xs text-gray-500 hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] transition-all">EN</button>
+          <button onclick="switchLang('zh')" class="px-2.5 py-1 rounded-full border border-gray-300 text-xs text-gray-500 hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] transition-all">中文</button>
+          <button onclick="switchLang('ru')" class="px-2.5 py-1 rounded-full border border-gray-300 text-xs text-gray-500 hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] transition-all">RU</button>
+          <button onclick="switchLang('de')" class="px-2.5 py-1 rounded-full border border-gray-300 text-xs text-gray-500 hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] transition-all">DE</button>
         </div>
       </div>
+      <button id="mobile-toggle" class="lg:hidden text-[var(--primary)] text-2xl" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
-  </div>
+    <div id="mobile-menu" class="hidden lg:hidden flex-col bg-white/98 backdrop-blur-md px-6 py-6 gap-4 shadow-lg">
+      <a href="index.html#about" class="text-sm font-medium uppercase">About</a>
+      <a href="index.html#products" class="text-sm font-medium uppercase">Products</a>
+      <a href="index.html#news" class="text-sm font-medium uppercase">News</a>
+      <a href="index.html#contact" class="text-sm font-medium uppercase">Contact</a>
+    </div>
+  </nav>
 
-  <section class="py-16">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-12 fade-in">
-        <h2 class="text-3xl font-bold mb-4 text-primary" data-lang="product_range_title">Product Range</h2>
-        <p class="text-dark/60 max-w-2xl mx-auto" id="range-desc" data-lang="product_range_desc">Each product shows the dry leaf; click to enlarge and view the tea soup (liquor).</p>
-        <div class="w-24 h-1 bg-secondary mx-auto mt-4"></div>
-      </div>
-      <div id="products-container" class="space-y-12"></div>
+  <!-- HERO -->
+  <section class="pt-28 pb-16 text-center relative overflow-hidden" style="background: linear-gradient(135deg, #C4A35A 0%, #9B7E3D 100%);">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"60\" height=\"60\" viewBox=\"0 0 60 60\"><path d=\"M30 10 Q35 25 30 40 Q25 25 30 10Z\" fill=\"%23ffffff\" fill-opacity=\"0.15\"/></svg>'); background-size: 120px;"></div>
+    </div>
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      <a href="index.html#products" class="inline-flex items-center gap-2 text-white/70 text-sm mb-6 hover:text-white transition-colors">
+        <i class="fa-solid fa-arrow-left text-xs"></i> Back to All Products
+      </a>
+      <p class="text-white/60 text-sm uppercase tracking-[0.25em] mb-3">Premium Chinese Tea</p>
+      <h1 class="font-serif-heading text-4xl md:text-6xl lg:text-7xl text-white mb-4" id="cat-name"></h1>
+      <div class="accent-line mb-6"></div>
+      <p class="text-white/70 text-sm md:text-base max-w-2xl mx-auto leading-relaxed" id="cat-desc"></p>
     </div>
   </section>
 
-  <section class="py-16 bg-primary text-white">
-    <div class="container mx-auto px-4 md:px-6 text-center">
-      <h2 class="text-3xl font-bold mb-4" data-lang="cta_title">Ready to Order?</h2>
-      <p class="text-white/70 text-lg mb-8 max-w-xl mx-auto" id="cta-desc" data-lang="cta_desc">Contact us for samples, pricing, and custom packaging solutions.</p>
-      <div class="flex flex-wrap gap-4 justify-center">
-        <a href="index.html#contact" class="px-10 py-4 bg-secondary text-white rounded-full font-bold hover:bg-secondary/90 transition-all shadow-lg text-lg">
-          <i class="fas fa-envelope mr-2"></i><span data-lang="send_inquiry">Send Inquiry</span>
-        </a>
-        <a href="mailto:admin@aultrastea.com" class="px-10 py-4 border-2 border-white/40 text-white rounded-full font-bold hover:border-white transition-all text-lg">
-          <i class="fas fa-at mr-2"></i><span data-lang="email_us">Email Us</span>
+  <!-- PRODUCT GRID -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid"></div>
+      <div id="no-products" class="hidden text-center py-16 text-gray-400">
+        <i class="fa-solid fa-leaf text-4xl mb-3 opacity-30"></i>
+        <p data-i18n="home.emptyCategory">No products in this category yet. Contact us for custom sourcing.</p>
+      </div>
+      <div class="text-center mt-16">
+        <a href="index.html#contact" class="inline-block px-8 py-3 bg-[var(--primary)] text-white font-semibold rounded-full text-sm uppercase tracking-wider hover:bg-[var(--primary-light)] transition-all duration-300 shadow-md hover:shadow-lg">
+          Send Inquiry
         </a>
       </div>
     </div>
   </section>
 
-  <footer class="py-8 bg-dark text-white/60">
-    <div class="container mx-auto px-4 md:px-6 text-center">
-      <p>© <span id="year"></span> <span data-lang="footer_company">GUIZHOU AULTRAS TEA CO.,LTD.</span> <span data-lang="footer_copy">All Rights Reserved.</span></p>
+  <!-- FOOTER -->
+  <footer class="bg-[#0A2E24] text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" style="height:46px;width:auto;max-width:200px;object-fit:contain;filter:brightness(0) invert(1);margin:0 auto 0.5rem;display:block;">
+      <p class="text-gray-400 text-sm mb-4">From Mountain to World</p>
+      <div class="border-t border-white/10 pt-4 text-gray-500 text-xs">
+        <p>&copy; 2026 Xiangfeng Tea. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
-  <div id="lightbox" class="hidden fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4" onclick="if(event.target===this)closeLightbox()"></div>
+  <!-- FLOATING INQUIRY -->
+  <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-2">
+    <a id="float-wa" href="tel:+8673184652476" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" style="background:#30b4a8;" title="Phone">
+      <i class="fas fa-phone text-white text-xl"></i>
+    </a>
+    <a id="float-email" href="#" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" style="background:var(--primary);" title="Email">
+      <i class="fa-solid fa-envelope text-white text-lg"></i>
+    </a>
+  </div>
 
   <script>
-    const CAT = "oolong";
-    const CAT_TITLE = { en: "Oolong Tea | AultrasTea", zh: "乌龙茶 | 贵州湘丰瀑布茶业有限公司", ru: "Oolong Tea | AultrasTea", de: "Oolong Tea | AultrasTea" };
-        const CAT_SUB   = { en: "Premium Organic Oolong Tea From Fujian & Guizhou, China",    zh: "来自中国福建与贵州的优质有机乌龙茶",    ru: "Премиальный органический чай улун из Фуцзяни и Гуйчжоу, Китай",  de: "Premium Bio-Oolong-Tee aus Fujian & Guizhou, China" };
-                const CAT_NAME  = { en: "Oolong Tea", zh: "乌龙茶", ru: "Чай улун", de: "Oolong-Tee" };
-        const CAT_FERMENT = { en: "Oolong Tea: Semi-fermented; green leaves with red edges; rich and fragrant.", zh: "乌龙茶：半发酵，绿叶红镶边，香气馥郁有层次。", ru: "Чай улун: Полуферментированный; зелёные листья с красными краями; насыщенный ароматный.", de: "Oolong-Tee: Halbvergärt; grüne Blätter mit roten Rändern; reich und aromatisch." };
+    let DATA = null;
+    let currentLang = 'en';
+    const CATEGORY_ID = 'oolong';
 
-    const UI = {
-      en: { navbar_brand:"AultrasTea", nav_home:"Home", nav_products:"Products", nav_cert:"Certificates", nav_contact:"Contact Us", view_all:"All Products", inquiry:"Send Inquiry Now", badge:"Organic Certified", product_range_title:"Product Range", product_range_desc:"Each product shows the dry leaf; click to enlarge and view the tea soup (liquor).", dry_leaf:"Dry Leaf", liquor:"Tea Liquor", no_liquor:"No liquor soup", inquiry_btn:"Inquiry Now", cta_title:"Ready to Order?", cta_desc:"Contact us for samples, pricing, and custom packaging solutions.", send_inquiry:"Send Inquiry", email_us:"Email Us", footer_copy:"All Rights Reserved.", footer_company:"GUIZHOU AULTRAS TEA CO.,LTD.", std_conventional:"Conventional", std_eu:"EU", std_organic:"Organic", close:"Close", sub_label:"Subcategory", features:["Full range of grades & specifications","EU & US Organic Certified options","Custom Packaging & Private Label","Direct from origin tea gardens"] },
-      zh: { navbar_brand:"湘丰瀑布AULTRAS", nav_home:"首页", nav_products:"产品中心", nav_cert:"公司资质", nav_contact:"联系我们", view_all:"全部产品", inquiry:"立即咨询", badge:"有机认证", product_range_title:"产品系列", product_range_desc:"每款产品展示干茶；点击可放大查看茶汤。", dry_leaf:"干茶", liquor:"茶汤", no_liquor:"无茶汤", inquiry_btn:"立即咨询", cta_title:"准备下单？", cta_desc:"联系我们获取样品、报价及定制包装方案。", send_inquiry:"发送询盘", email_us:"邮件联系", footer_copy:"版权所有", footer_company:"贵州湘丰瀑布茶业有限公司", std_conventional:"国标", std_eu:"欧盟", std_organic:"有机", close:"关闭", sub_label:"子品类", features:["齐全的等级与规格","可提供欧盟及美国有机认证","支持定制包装与自有品牌","原产地茶园直供"] }
-    };
-    UI.ru = Object.assign({}, UI.en);
-    UI.de = Object.assign({}, UI.en);
-
-    let siteData = null, catData = null, currentLang = "en";
-    const productStd = {};
-
-    function t(obj, lang){ if(!obj) return ""; return obj[lang] || obj.en || obj.zh || ""; }
-    function escapeHtml(str){ if(!str) return ""; const d=document.createElement("div"); d.textContent=str; return d.innerHTML; }
-
-    function applyUI(lang){
-      const pack = UI[lang] || UI.en;
-      document.getElementById("page-title").textContent = CAT_TITLE[lang] || CAT_TITLE.en;
-      document.title = CAT_TITLE[lang] || CAT_TITLE.en;
-      document.querySelectorAll("[data-lang]").forEach(el=>{ const k=el.getAttribute("data-lang"); if(pack[k]!==undefined) el.textContent=pack[k]; });
-      document.getElementById("cat-name-en").textContent = t(CAT_NAME, lang);
-      document.getElementById("cat-name-zh").textContent = t(CAT_FERMENT, lang);
-      document.getElementById("breadcrumb-cat").textContent = t(CAT_NAME, lang);
-      document.getElementById("cat-subtitle").textContent = CAT_SUB[lang] || CAT_SUB.en;
-      renderFeatures(lang);
-    }
-
-    function renderFeatures(lang){
-      const pack = UI[lang] || UI.en;
-      const list = document.getElementById("features-list");
-      list.innerHTML = (pack.features||[]).map(f=>'<div class="flex items-center gap-3"><i class="fas fa-check-circle text-secondary"></i><span>'+f+'</span></div>').join("");
-    }
-
-    function getProductImages(p){
-      const imgs = (p && p.images) || {};
-      if (imgs.dry || imgs.liquor) return { dry: imgs.dry || '', liquor: imgs.liquor || '' };
-      let dry='', liquor='';
-      ["conventional","eu","organic"].forEach(function(s){ const im=imgs[s]; if(im){ if(!dry && im.dry) dry=im.dry; if(!liquor && im.liquor) liquor=im.liquor; } });
-      return { dry: dry, liquor: liquor };
-    }
-    function availableStandards(prod){
-      const stds=["conventional","eu","organic"];
-      if(prod.standards){ return stds.filter(s=> prod.standards[s]); }
-      const pi = getProductImages(prod);
-      return (pi.dry || pi.liquor) ? stds.slice() : [];
-    }
-    function getStd(prod, key){
-      if(productStd[key]) return productStd[key];
-      const av = availableStandards(prod);
-      return av.length ? av[0] : "conventional";
-    }
-
-    function renderProducts(lang){
-      const cont = document.getElementById("products-container");
-      if(!cont) return;
-      if(!catData){ cont.innerHTML='<div class="text-center text-dark/50 py-10">No product data.</div>'; return; }
-      const pack = UI[lang] || UI.en;
-      let html="";
-      catData.subcategories.forEach((sub, si)=>{
-        const subOther = (lang==="zh") ? t(sub.name,"en") : t(sub.name,"zh");
-        html += '<div class="subcat-block fade-in">';
-        html += '<div class="flex items-center gap-3 mb-6"><div class="w-1.5 h-8 bg-secondary rounded-full"></div>';
-        html += '<h3 class="text-2xl font-bold text-primary">'+escapeHtml(t(sub.name,lang))+'</h3>';
-        html += '<span class="text-dark/40 text-sm">'+escapeHtml(subOther)+'</span></div>';
-        html += '<div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">';
-        sub.products.forEach((p, pj)=>{
-          const key = CAT+"-"+si+"-"+pj;
-          const std = getStd(p, key);
-          const imgs = getProductImages(p);
-          const hasLiq = p.has_liquor !== false;
-          const av = availableStandards(p);
-          let stdBtns="";
-          if(av.length>1){
-            stdBtns = '<div class="flex gap-1 mt-2 flex-wrap">'+["conventional","eu","organic"].map(s=>{
-              const lbl = pack["std_"+s];
-              const dis = (av.indexOf(s)<0) ? "opacity-40 cursor-not-allowed" : "";
-              const act = (s===std) ? "bg-primary text-white" : "bg-gray-100 text-gray-600";
-              return '<button type="button" data-stdbtn="'+key+"|"+s+'" class="text-xs px-2 py-1 rounded '+act+" "+dis+'">'+lbl+'</button>';
-            }).join("")+'</div>';
-          }
-          const drySrc = imgs.dry || "";
-          html += '<div class="bg-white rounded-2xl overflow-hidden shadow-md fade-in flex flex-col">';
-          const _hasImg = !!(drySrc && drySrc.trim()!=="");
-          const _imgInner = _hasImg
-            ? '<img src="'+drySrc+'" alt="'+escapeHtml(t(p.name,lang))+'" class="product-img w-full h-full object-cover cursor-zoom-in">'
-            : '<div class="w-full h-full flex flex-col items-center justify-center text-center text-dark/40 text-xs p-2 leading-relaxed"><span>'+escapeHtml(t(p.name,lang))+'</span><span class="opacity-60 mt-1">图片待上传</span></div>';
-          html += '<div class="p-2"><div class="zoom-wrap relative overflow-hidden rounded-lg bg-gray-100 product-detail-img" data-pkey="'+key+'" style="height:10rem">'+_imgInner+'</div></div>';
-          html += '<div class="p-4 pt-2 flex-1 flex flex-col">';
-          html += '<h4 class="text-base font-bold text-primary mb-1">'+escapeHtml(t(p.name,lang))+'</h4>';
-          if(!hasLiq) html += '<span class="text-xs text-dark/40 mb-1">'+pack.no_liquor+'</span>';
-          html += stdBtns;
-          html += '<div class="mt-auto pt-3 border-t border-gray-100"><a href="index.html#contact" class="text-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all text-sm"><span>'+pack.inquiry_btn+'</span><i class="fas fa-arrow-right text-xs"></i></a></div>';
-          html += '</div></div>';
-        });
-        html += '</div></div>';
-      });
-      cont.innerHTML = html;
-      cont.querySelectorAll(".product-detail-img").forEach(box=>{
-        box.addEventListener("click", ()=> openLightbox(box.getAttribute("data-pkey")));
-        const im = box.querySelector("img");
-        if(im){ im.addEventListener("error", ()=>{ im.style.background="#e5e7eb"; }); }
-      });
-      cont.querySelectorAll("[data-stdbtn]").forEach(btn=>{
-        btn.addEventListener("click", ()=>{ const parts=btn.getAttribute("data-stdbtn").split("|"); productStd[parts[0]]=parts[1]; renderProducts(currentLang); });
-      });
-      cont.querySelectorAll(".fade-in").forEach(el=>observer.observe(el));
-    }
-
-    function openLightbox(key){
-      const parts = key.split("-"); const si=+parts[1], pj=+parts[2];
-      const sub = catData.subcategories[si];
-      const p = sub.products[pj];
-      window.__zoomProduct = p;
-      const lang = currentLang; const pack = UI[lang] || UI.en;
-      // 收集该产品图片（干茶/茶汤）；标准仅作前端展示，不参与图片
-      const pim = getProductImages(p);
-      const views = [];
-      if(pim.dry) views.push({label: pack.dry_leaf, src: pim.dry});
-      if(p.has_liquor !== false && pim.liquor) views.push({label: pack.liquor, src: pim.liquor});
-      const hasImg = views.length>0;
-      const mainSrc = hasImg ? views[0].src : "";
-      let html = '<div class="absolute top-4 right-4 z-[120]"><button onclick="closeLightbox()" class="w-10 h-10 rounded-full bg-white/90 text-gray-700 flex items-center justify-center text-lg shadow"><i class="fas fa-times"></i></button></div>';
-      html += '<div class="text-center mb-4"><h3 class="text-xl font-bold text-primary">'+escapeHtml(t(p.name,lang))+'</h3><p class="text-dark/50 text-sm">'+escapeHtml(t(sub.name,lang))+'</p></div>';
-      html += '<div class="lb-dialog flex flex-col md:flex-row items-stretch justify-center gap-6 w-full max-w-6xl">';
-      // 左侧：固定信息栏（名称/标准/形状/产地），不随鼠标移动
-      html += '<div class="lb-info-col zoom-info" id="lb-info-col"></div>';
-      // 中间：图片区
-      html += '<div class="lb-image-area flex flex-col items-center justify-center gap-3 flex-1">';
-      if(hasImg){
-        html += '<div class="w-full flex justify-center"><img id="lb-main" src="'+mainSrc+'" alt="'+escapeHtml(t(p.name,lang))+'" class="max-h-[62vh] w-auto object-contain rounded-lg bg-gray-100 cursor-zoom-in shadow-lg"></div>';
-      } else {
-        html += '<div class="w-full flex justify-center"><div id="lb-main" class="max-h-[62vh] min-h-[20rem] w-[28rem] max-w-full flex flex-col items-center justify-center text-center text-dark/40 rounded-lg bg-gray-100"><i class="fas fa-image text-4xl mb-3 opacity-50"></i><span>'+(lang==="zh"?"图片待上传":"Image pending")+'</span></div></div>';
+    async function loadData() {
+      try {
+        const resp = await fetch('data.json?t=' + Date.now());
+        DATA = await resp.json();
+        initPage();
+      } catch (err) {
+        console.error('Failed to load data:', err);
       }
-      if(views.length>1){
-        html += '<div class="flex gap-3 flex-wrap justify-center">';
-        views.forEach((v,i)=>{
-          html += '<button type="button" class="lb-thumb rounded-lg overflow-hidden border-2 '+(i===0?'border-primary':'border-transparent')+'" data-lbsrc="'+v.src+'" title="'+escapeHtml(v.label)+'"><img src="'+v.src+'" class="h-16 w-16 object-cover"></button>';
-        });
-        html += '</div>';
+    }
+
+    function initPage() {
+      if (!DATA) return;
+
+      document.getElementById('cat-name').textContent = currentLang === 'zh' ? getCategoryNameCN() : getCategoryName();
+      document.getElementById('cat-desc').textContent = currentLang === 'zh' ? getCategoryDescCN() : getCategoryDesc();
+      document.title = (currentLang === 'zh' ? getCategoryNameCN() : getCategoryName()) + ' | Xiangfeng Tea';
+
+      if (DATA.inquiry) {
+        document.getElementById('float-wa').href = 'tel:+8673184652476';
+        document.getElementById('float-email').href = 'mailto:' + DATA.inquiry.email;
       }
-      html += '</div>';
-      // 右侧：放大框（固定显示，不随鼠标，不遮挡）
-      html += '<div class="lb-zoom-pane"><div class="zoom-result" id="lb-zoom-result"></div></div>';
-      html += '</div>';
-      const lb = document.getElementById("lightbox");
-      lb.innerHTML = html; lb.classList.remove("hidden"); document.body.style.overflow="hidden";
-      renderZoomInfo(p, t(sub.name, lang));
-      const main = document.getElementById("lb-main");
-      if(main && hasImg){
-        main.addEventListener("error", ()=>{ main.style.background="#e5e7eb"; });
-        attachLightboxZoom(main);
+
+      const items = (DATA.products && DATA.products.items) ? DATA.products.items.filter(i => i.category === CATEGORY_ID) : [];
+      const grid = document.getElementById('products-grid');
+
+      if (items.length === 0) {
+        grid.innerHTML = '';
+        document.getElementById('no-products').classList.remove('hidden');
+        return;
       }
-      lb.querySelectorAll(".lb-thumb").forEach(btn=>{
-        btn.addEventListener("click", ()=>{
-          if(!main) return;
-          const ns = btn.getAttribute("data-lbsrc");
-          const nm = document.createElement("img");
-          nm.id="lb-main"; nm.src=ns; nm.alt=escapeHtml(t(p.name,lang));
-          nm.className="max-h-[64vh] w-auto object-contain rounded-lg bg-gray-100 cursor-zoom-in shadow-lg";
-          main.replaceWith(nm);
-          nm.addEventListener("error", ()=>{ nm.style.background="#e5e7eb"; });
-          attachLightboxZoom(nm);
-          lb.querySelectorAll(".lb-thumb").forEach(b=>{ b.classList.remove("border-primary"); b.classList.add("border-transparent"); });
-          btn.classList.add("border-primary"); btn.classList.remove("border-transparent");
-          if(_zoomLens) _zoomLens.style.display="none";
-          if(_zoomResult) _zoomResult.style.display="none";
-        });
-      });
+
+      document.getElementById('no-products').classList.add('hidden');
+      grid.innerHTML = items.map(item => {
+        const name = currentLang === 'zh' ? (item.nameCN || item.name) : currentLang === 'ru' ? (item.nameRU || item.name) : currentLang === 'de' ? (item.nameDE || item.name) : item.name;
+        const origin = currentLang === 'zh' ? (item.originCN || item.origin) : item.origin;
+        const grade = currentLang === 'zh' ? (item.gradeCN || item.grade) : item.grade;
+        return `
+          <div class="product-card group">
+            <div class="img-wrap bg-gray-50 relative">
+              <img src="${item.image}" alt="${name}" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100\\'><i class=\\'fa-solid fa-leaf text-5xl text-[var(--primary)]/20\\'></i></div>'">
+              ${grade ? `<div class="absolute top-3 right-3"><span class="px-2.5 py-1 rounded-full text-xs font-semibold text-white" style="background:var(--primary)">${grade}</span></div>` : ''}
+            </div>
+            <div class="p-6">
+              <h3 class="font-serif-heading text-xl mb-3">${name}</h3>
+              <div class="flex flex-wrap gap-4 text-xs text-gray-500 mb-4">
+                <span><i class="fa-solid fa-location-dot mr-1"></i>${origin}</span>
+                <span><i class="fa-solid fa-mountain mr-1"></i>${item.altitude || ''}</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                ${(item.certifications || []).map(c => `<span class="px-2 py-0.5 bg-green-50 text-[var(--primary)] text-xs rounded-full border border-green-100">${c}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
-    function closeLightbox(){ const lb=document.getElementById("lightbox"); lb.classList.add("hidden"); lb.innerHTML=""; document.body.style.overflow=""; if(_zoomLens)_zoomLens.style.display='none'; if(_zoomResult)_zoomResult.style.display='none'; }
-
-    /* ===== 悬停放大镜（仿 loopteas 产品图放大展示细节） ===== */
-    const ZOOM = 2.4;
-    let _zoomLens = null, _zoomResult = null;
-    function ensureZoomEls(){
-      // 每次都重新获取当前存活的放大框（灯箱内元素每次打开会重建，关闭即销毁）
-      _zoomResult = document.getElementById('lb-zoom-result');
-      if(!_zoomResult){ _zoomResult = document.createElement('div'); _zoomResult.className='zoom-result'; _zoomResult.id='lb-zoom-result'; document.body.appendChild(_zoomResult); }
-      if(!_zoomLens){ _zoomLens = document.createElement('div'); _zoomLens.className='zoom-lens'; document.body.appendChild(_zoomLens); }
+    function getCategoryName() {
+      const names = { green: 'Green Tea', black: 'Black Tea', oolong: 'Oolong Tea', white: 'White Tea', yellow: 'Yellow Tea', dark: 'Dark Tea', flower: 'Scented Tea' };
+      return names[CATEGORY_ID] || 'Tea';
+    }
+    function getCategoryNameCN() {
+      const names = { green: '绿茶', black: '红茶', oolong: '乌龙茶', white: '白茶', yellow: '黄茶', dark: '黑茶', flower: '工艺花茶' };
+      return names[CATEGORY_ID] || '茶叶';
+    }
+    function getCategoryDesc() {
+      const descs = {
+        green: 'Fresh and vibrant Chinese green teas sourced from premium high-altitude gardens.',
+        black: 'Rich and full-bodied black teas with smooth, malty character.',
+        oolong: 'Partially oxidized teas with complex floral and roasted notes.',
+        white: 'Minimally processed white teas with delicate, sweet flavors.',
+        yellow: 'Rare and exquisite yellow teas with mellow, refined character.',
+        dark: 'Aged and fermented dark teas with deep, earthy complexity.',
+        flower: 'Artfully scented and blooming teas with captivating aromas.'
+      };
+      return descs[CATEGORY_ID] || 'Premium Chinese teas for global markets.';
+    }
+    function getCategoryDescCN() {
+      const descs = {
+        green: '来自优质高海拔茶园的清新绿茶。',
+        black: '浓郁醇厚的红茶，口感顺滑。',
+        oolong: '半发酵茶，花果香浓郁，层次丰富。',
+        white: '轻发酵白茶，口感清甜淡雅。',
+        yellow: '稀有黄茶，醇和细腻。',
+        dark: '陈化发酵黑茶，滋味醇厚深沉。',
+        flower: '精致窨制花茶，香气怡人。'
+      };
+      return descs[CATEGORY_ID] || '面向全球市场的优质中国茶叶。';
     }
 
-    function renderZoomInfo(prod, subName){
-      const col = document.getElementById('lb-info-col') || document.getElementById('zoom-info-col');
-      if(!col || !prod) return;
-      const lang = currentLang || 'en';
-      const pack = UI[lang] || UI.en;
-      const zh = lang === 'zh';
-      const av = availableStandards(prod);
-      const shape = prod.shape || 'strip';
-      const origin = prod.origin || '';
-      let html = '<h5>' + escapeHtml(t(prod.name, lang)) + '</h5>';
-      html += '<div class="zi-subtitle">' + escapeHtml(subName || '') + '</div>';
-      html += '<div class="zi-section"><div class="zi-label">' + (zh ? '认证标准' : 'Certification') + '</div>';
-      var stdList=[["conventional",zh?"国标":"Conventional"],["eu",zh?"欧标":"EU"],["organic",zh?"有机":"Organic"]];
-      stdList.forEach(function(st){
-        var on = av.indexOf(st[0])>=0;
-        html += '<div class="zi-row"><span class="zi-dot '+(on?'zi-on':'zi-off')+'"></span>'+st[1]+'</div>';
-      });
-      html += '</div>';
-      var shapeLabels = zh ? {"strip":"条状","crumb":"碎状","granule":"颗粒状"} : {"strip":"Strip","crumb":"Crumb","granule":"Granular"};
-      html += '<div class="zi-section"><div class="zi-label">' + (zh ? '形状' : 'Shape') + '</div>';
-      html += '<div class="zi-shape-badge">' + (shapeLabels[shape] || shape) + '</div>';
-      html += '</div>';
-      html += '<div class="zi-section"><div class="zi-label">' + (zh ? '产地' : 'Origin') + '</div>';
-      html += '<div class="zi-origin">' + (origin ? escapeHtml(origin) : (zh ? '—' : '—')) + '</div>';
-      html += '</div>';
-      col.innerHTML = html;
-    }
-
-    function getContentRect(img){
-      const r = img.getBoundingClientRect();
-      const nw = img.naturalWidth, nh = img.naturalHeight;
-      if(!nw || !nh) return r;
-      const scale = Math.min(r.width/nw, r.height/nh);
-      const dw = nw*scale, dh = nh*scale;
-      return { left: r.left + (r.width-dw)/2, top: r.top + (r.height-dh)/2, width: dw, height: dh };
-    }
-    function attachLightboxZoom(img){
-      img.addEventListener('mouseenter', function(){
-        if(!img.getAttribute('src')) return;
-        ensureZoomEls();
-        _zoomLens.style.display='block';
-        _zoomResult.style.display='block';
-        _zoomResult.style.backgroundImage='url("' + img.getAttribute('src') + '")';
-      });
-      img.addEventListener('mousemove', function(e){
-        if(!_zoomResult||!_zoomLens||_zoomResult.style.display!=='block') return;
-        const cr = getContentRect(img);
-        const lensW = cr.width/ZOOM, lensH = cr.height/ZOOM;
-        _zoomLens.style.width=lensW+'px';
-        _zoomLens.style.height=lensH+'px';
-        let x=e.clientX-cr.left, y=e.clientY-cr.top;
-        let lx=Math.max(0,Math.min(x-lensW/2, cr.width-lensW));
-        let ly=Math.max(0,Math.min(y-lensH/2, cr.height-lensH));
-        _zoomLens.style.left=(cr.left+lx)+'px';
-        _zoomLens.style.top=(cr.top+ly)+'px';
-        _zoomResult.style.backgroundSize=(cr.width*ZOOM)+'px '+(cr.height*ZOOM)+'px';
-        _zoomResult.style.backgroundPosition='-'+(lx*ZOOM)+'px -'+(ly*ZOOM)+'px';
-      });
-      img.addEventListener('mouseleave', function(){
-        if(_zoomLens){_zoomLens.style.display='none';}
-        if(_zoomResult){_zoomResult.style.display='none';}
-      });
-    }
-
-
-
-    function switchLang(lang){
+    function switchLang(lang) {
       currentLang = lang;
-      applyUI(lang);
-      renderProducts(lang);
+      document.documentElement.lang = lang;
+      initPage();
     }
 
-    async function loadData(){
-      try{
-        const res = await fetch("./data.json?v=" + Date.now() + "&r=" + Math.random().toString(36).slice(2,8), { cache: "no-store" });
-        let data = await res.json();
-        siteData = data;
-        catData = (data.products && data.products[CAT]) || null;
-        const heroImg = document.getElementById("cat_hero_img");
-        if(heroImg && siteData.images && siteData.images["product_"+CAT]) heroImg.src = siteData.images["product_"+CAT];
-      }catch(e){ siteData=null; catData=null; console.warn("data.json load failed", e); }
-    }
-
-    const observer = new IntersectionObserver(entries=>{ entries.forEach(e=> e.isIntersecting && e.target.classList.add("visible")); }, { threshold: 0.1 });
-    document.querySelectorAll(".fade-in").forEach(el=>observer.observe(el));
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    const savedLang = localStorage.getItem("aultrastea_lang") || "en";
-    document.getElementById("html-root").lang = savedLang;
-    document.getElementById("langSelect").value = savedLang;
-    document.getElementById("langSelect").addEventListener("change", e=>{ localStorage.setItem("aultrastea_lang", e.target.value); switchLang(e.target.value); });
-
-    loadData().then(()=> switchLang(savedLang));
+    loadData();
   </script>
 </body>
 </html>

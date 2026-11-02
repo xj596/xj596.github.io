@@ -1,257 +1,251 @@
 <!DOCTYPE html>
-<html lang="en" id="html-root">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="page-title">Yellow Tea | AultrasTea</title>
-  <meta name="description" id="page-desc" content="Premium Organic Yellow Tea From Hunan & Sichuan, China - AultrasTea premium organic tea from China.">
+  <title>Yellow Tea | Xiangfeng Tea — Premium Chinese Tea Exporter</title>
+  <link rel="icon" type="image/png" href="">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#0F4C3A',
-            secondary: '#D4AF37',
-            light: '#F8F5F0',
-            dark: '#1A1A1A',
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-        },
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --primary: #0F4C3A;
+      --primary-light: #1A6B52;
+      --gold: #D4AF37;
+      --gold-light: #E8D5A3;
+      --bg-warm: #F8F5F0;
+      --bg-cream: #FDFBF7;
+      --text-dark: #2D2D2D;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { overflow-x: hidden; background-color: #F8F5F0; color: #1A1A1A; font-family: "Inter", sans-serif; }
-    .nav-link { position: relative; }
-    .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #D4AF37; transition: width 0.3s ease; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-dark);
+      background: var(--bg-cream);
+      line-height: 1.7;
+    }
+    .font-serif-heading {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-weight: 600;
+    }
+    .accent-line { width: 60px; height: 3px; background: var(--gold); margin: 0 auto; }
+    .nav-scrolled { background: rgba(255,255,255,0.97); backdrop-filter: blur(12px); }
+    .nav-link { position: relative; text-decoration: none; }
+    .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--gold); transition: width 0.3s ease; }
     .nav-link:hover::after { width: 100%; }
-    .fade-in { opacity: 0; transform: translateY(20px); transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    .product-detail-img { background: #e5e7eb; min-height: 7rem; }
+    .product-card {
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease;
+      background: white; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(0,0,0,0.12); }
+    .product-card .img-wrap { overflow: hidden; height: 240px; }
+    .product-card .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .product-card:hover .img-wrap img { transform: scale(1.06); }
+    .product-detail-card {
+      background: white; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .detail-img-wrap { height: 300px; overflow: hidden; }
+    .detail-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s; }
+    .detail-img-wrap:hover img { transform: scale(1.04); }
+    .tab-btn { padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; }
+    .tab-btn.active { background: var(--primary); color: white; }
+    .tab-btn:not(.active) { background: #f3f4f6; color: #6b7280; }
+    .tab-btn:not(.active):hover { background: #e5e7eb; }
+    @media (max-width: 768px) {
+      .detail-img-wrap { height: 200px; }
+    }
   </style>
-  <link rel="icon" href="data:,">
 </head>
 <body>
-  <!-- 导航栏 -->
-  <header class="fixed w-full top-0 z-50 transition-all duration-500 py-3 bg-light/95 backdrop-blur-md shadow-sm">
-    <div class="container mx-auto px-4 md:px-6">
-      <nav class="flex items-center justify-between">
-        <a href="index.html" class="text-2xl font-bold text-primary flex items-center gap-2">
-          <img src="https://video.aultras-tea.com/%E6%B9%98%E4%B8%B0%E7%80%91%E5%B8%83%E5%95%86%E6%A0%87-04.png" alt="AultrasTea" class="navbar-logo" style="height:40px;width:auto;max-width:220px;object-fit:contain;">
-        </a>
-        <ul class="hidden md:flex items-center gap-8">
-          <li><a href="index.html#home" class="nav-link text-dark hover:text-primary font-medium" data-lang="nav_home">Home</a></li>
-          <li><a href="index.html#products" class="nav-link text-dark hover:text-primary font-medium" data-lang="nav_products">Products</a></li>
-          <li><a href="index.html#certificates" class="nav-link text-dark hover:text-primary font-medium" data-lang="nav_cert">Certificates</a></li>
-          <li><a href="index.html#contact" class="nav-link text-dark hover:text-primary font-medium" data-lang="nav_contact">Contact Us</a></li>
-        </ul>
-        <div class="flex items-center gap-3">
-          <select id="langSelect" class="px-3 py-1.5 rounded-lg border border-primary/30 text-primary bg-white font-medium outline-none text-sm" onchange="switchLang(this.value)">
-            <option value="en">English</option>
-            <option value="zh">中文</option>
-            <option value="ru">Русский</option>
-            <option value="de">Deutsch</option>
-          </select>
-          <a href="index.html#contact" class="px-5 py-2 bg-primary text-white rounded-full text-sm font-medium hover:bg-primary/90 transition-all hidden md:inline-flex items-center gap-1">
-            <i class="fas fa-envelope mr-1"></i><span data-lang="inquiry">Get Quote</span>
-          </a>
-        </div>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero Banner -->
-  <div class="pt-20">
-    <div class="bg-primary text-white py-16">
-      <div class="container mx-auto px-4 md:px-6">
-        <nav class="flex items-center gap-2 text-sm text-white/60 mb-6">
-          <a href="index.html" class="hover:text-white transition-colors" data-lang="nav_home">Home</a>
-          <i class="fas fa-chevron-right text-xs"></i>
-          <a href="index.html#products" class="hover:text-white transition-colors" data-lang="nav_products">Products</a>
-          <i class="fas fa-chevron-right text-xs"></i>
-          <span class="text-white" id="breadcrumb-cat">Yellow Tea</span>
-        </nav>
-        <div class="grid md:grid-cols-2 gap-10 items-center">
-          <div class="fade-in">
-            <div class="inline-block px-3 py-1 bg-white/20 text-white rounded-full text-sm font-medium mb-4" data-lang="badge">Organic Certified</div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-3" id="cat-name-en">Yellow Tea</h1>
-            <p class="text-white/60 text-xl mb-6" id="cat-name-zh">黄茶</p>
-            <p class="text-white/80 text-lg leading-relaxed mb-6" id="cat-subtitle" data-lang="subtitle">Premium Organic Yellow Tea From Hunan & Sichuan, China</p>
-            <div class="space-y-3 mb-8" id="features-list"></div>
-            <div class="flex gap-4 flex-wrap">
-              <a href="index.html#contact" class="px-8 py-3 bg-secondary text-white rounded-full font-medium hover:bg-secondary/90 transition-all shadow-lg">
-                <i class="fas fa-envelope mr-2"></i><span data-lang="inquiry">Send Inquiry Now</span>
-              </a>
-              <a href="index.html#products" class="px-8 py-3 border-2 border-white/40 text-white rounded-full font-medium hover:border-white transition-all">
-                <i class="fas fa-arrow-left mr-2"></i><span data-lang="view_all">All Products</span>
-              </a>
-            </div>
-          </div>
-          <div class="fade-in">
-            <div class="rounded-2xl overflow-hidden shadow-2xl aspect-video bg-white/10">
-              <img id="cat_hero_img" src="" alt="Yellow Tea" class="w-full h-full object-cover">
-            </div>
-          </div>
+  <!-- NAVIGATION -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 py-4 nav-scrolled">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2">
+        <img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" class="header-logo-img">
+      </a>
+      <div class="hidden lg:flex items-center gap-6">
+        <a href="index.html#about" class="nav-link text-[var(--text-dark)]/80 text-sm font-medium uppercase tracking-wide">About</a>
+        <a href="index.html#products" class="nav-link text-[var(--primary)] text-sm font-medium uppercase tracking-wide">Products</a>
+        <a href="index.html#news" class="nav-link text-[var(--text-dark)]/80 text-sm font-medium uppercase tracking-wide">News</a>
+        <a href="index.html#contact" class="nav-link text-[var(--text-dark)]/80 text-sm font-medium uppercase tracking-wide">Contact</a>
+        <div class="flex items-center gap-1 ml-2">
+          <button onclick="switchLang('en')" class="px-2.5 py-1 rounded-full border border-gray-300 text-xs text-gray-500 hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] transition-all">EN</button>
+          <button onclick="switchLang('zh')" class="px-2.5 py-1 rounded-full border border-gray-300 text-xs text-gray-500 hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] transition-all">中文</button>
+          <button onclick="switchLang('ru')" class="px-2.5 py-1 rounded-full border border-gray-300 text-xs text-gray-500 hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] transition-all">RU</button>
+          <button onclick="switchLang('de')" class="px-2.5 py-1 rounded-full border border-gray-300 text-xs text-gray-500 hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] transition-all">DE</button>
         </div>
       </div>
+      <button id="mobile-toggle" class="lg:hidden text-[var(--primary)] text-2xl" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <i class="fa-solid fa-bars"></i>
+      </button>
     </div>
-  </div>
+    <div id="mobile-menu" class="hidden lg:hidden flex-col bg-white/98 backdrop-blur-md px-6 py-6 gap-4 shadow-lg">
+      <a href="index.html#about" class="text-sm font-medium uppercase">About</a>
+      <a href="index.html#products" class="text-sm font-medium uppercase">Products</a>
+      <a href="index.html#news" class="text-sm font-medium uppercase">News</a>
+      <a href="index.html#contact" class="text-sm font-medium uppercase">Contact</a>
+    </div>
+  </nav>
 
-  <!-- 产品展示区 -->
-  <section class="py-16">
-    <div class="container mx-auto px-4 md:px-6">
-      <div class="text-center mb-12 fade-in">
-        <h2 class="text-3xl font-bold mb-4 text-primary" data-lang="product_range_title">Product Range</h2>
-        <p class="text-dark/60 max-w-2xl mx-auto" id="range-desc" data-lang="product_range_desc">Each product is shown with Gift Box / Dry Leaf / Tea Liquor / Leaf Base — 4 images per item.</p>
-        <div class="w-24 h-1 bg-secondary mx-auto mt-4"></div>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="products-grid"></div>
+  <!-- HERO -->
+  <section class="pt-28 pb-16 text-center relative overflow-hidden" style="background: linear-gradient(135deg, #DAA520 0%, #B8860B 100%);">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"60\" height=\"60\" viewBox=\"0 0 60 60\"><path d=\"M30 10 Q35 25 30 40 Q25 25 30 10Z\" fill=\"%23ffffff\" fill-opacity=\"0.15\"/></svg>'); background-size: 120px;"></div>
+    </div>
+    <div class="max-w-4xl mx-auto px-6 relative z-10">
+      <a href="index.html#products" class="inline-flex items-center gap-2 text-white/70 text-sm mb-6 hover:text-white transition-colors">
+        <i class="fa-solid fa-arrow-left text-xs"></i> Back to All Products
+      </a>
+      <p class="text-white/60 text-sm uppercase tracking-[0.25em] mb-3">Premium Chinese Tea</p>
+      <h1 class="font-serif-heading text-4xl md:text-6xl lg:text-7xl text-white mb-4" id="cat-name"></h1>
+      <div class="accent-line mb-6"></div>
+      <p class="text-white/70 text-sm md:text-base max-w-2xl mx-auto leading-relaxed" id="cat-desc"></p>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-16 bg-primary text-white">
-    <div class="container mx-auto px-4 md:px-6 text-center">
-      <h2 class="text-3xl font-bold mb-4" data-lang="cta_title">Ready to Order?</h2>
-      <p class="text-white/70 text-lg mb-8 max-w-xl mx-auto" id="cta-desc" data-lang="cta_desc">Contact us for samples, pricing, and custom packaging solutions.</p>
-      <div class="flex flex-wrap gap-4 justify-center">
-        <a href="index.html#contact" class="px-10 py-4 bg-secondary text-white rounded-full font-bold hover:bg-secondary/90 transition-all shadow-lg text-lg">
-          <i class="fas fa-envelope mr-2"></i><span data-lang="send_inquiry">Send Inquiry</span>
-        </a>
-        <a href="mailto:admin@aultrastea.com" class="px-10 py-4 border-2 border-white/40 text-white rounded-full font-bold hover:border-white transition-all text-lg">
-          <i class="fas fa-at mr-2"></i><span data-lang="email_us">Email Us</span>
+  <!-- PRODUCT GRID -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid"></div>
+      <div id="no-products" class="hidden text-center py-16 text-gray-400">
+        <i class="fa-solid fa-leaf text-4xl mb-3 opacity-30"></i>
+        <p data-i18n="home.emptyCategory">No products in this category yet. Contact us for custom sourcing.</p>
+      </div>
+      <div class="text-center mt-16">
+        <a href="index.html#contact" class="inline-block px-8 py-3 bg-[var(--primary)] text-white font-semibold rounded-full text-sm uppercase tracking-wider hover:bg-[var(--primary-light)] transition-all duration-300 shadow-md hover:shadow-lg">
+          Send Inquiry
         </a>
       </div>
     </div>
   </section>
 
-  <!-- 页脚 -->
-  <footer class="py-8 bg-dark text-white/60">
-    <div class="container mx-auto px-4 md:px-6 text-center">
-      <p>© <span id="year"></span> <span data-lang="footer_company">GUIZHOU AULTRAS TEA CO.,LTD.</span> <span data-lang="footer_copy">All Rights Reserved.</span></p>
+  <!-- FOOTER -->
+  <footer class="bg-[#0A2E24] text-white py-12">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" style="height:46px;width:auto;max-width:200px;object-fit:contain;filter:brightness(0) invert(1);margin:0 auto 0.5rem;display:block;">
+      <p class="text-gray-400 text-sm mb-4">From Mountain to World</p>
+      <div class="border-t border-white/10 pt-4 text-gray-500 text-xs">
+        <p>&copy; 2026 Xiangfeng Tea. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
-  <script>
-    // ===== 语言包 =====
-    const langPack = {'en': {'title': 'Yellow Tea | AultrasTea', 'navbar_brand': 'AultrasTea', 'subtitle': 'Premium Organic Yellow Tea From Hunan & Sichuan, China', 'badge': 'Organic Certified', 'nav_home': 'Home', 'nav_products': 'Products', 'nav_cert': 'Certificates', 'nav_contact': 'Contact Us', 'view_all': 'All Products', 'inquiry': 'Send Inquiry Now', 'product_range_title': 'Product Range', 'product_range_desc': 'Each product is shown with Gift Box / Dry Leaf / Tea Liquor / Leaf Base — 4 images per item.', 'gift_box': 'Gift Box', 'dry_leaf': 'Dry Leaf', 'liquor': 'Liquor', 'leaf_base': 'Leaf Base', 'inquiry_btn': 'Inquiry Now', 'cta_title': 'Ready to Order?', 'cta_desc': 'Contact us for samples, pricing, and custom packaging solutions. We reply within 24 hours.', 'send_inquiry': 'Send Inquiry', 'email_us': 'Email Us', 'cat_en': 'Yellow Tea', 'cat_zh': '黄茶', 'footer_copy': 'All Rights Reserved.', 'footer_company': 'GUIZHOU AULTRAS TEA CO.,LTD.', 'products': [{'name': 'Jun Shan Yin Zhen', 'desc': "China's most famous yellow tea from Dongting Lake island."}, {'name': 'Meng Ding Huang Ya', 'desc': 'Premium bud yellow tea from Mount Meng with honey-like sweetness.'}, {'name': 'Huo Shan Huang Ya', 'desc': 'Anhui mountain yellow tea with floral and chestnut notes.'}, {'name': 'Beigang Maojian', 'desc': 'Hunan yellow tea with fine needles, sweet and refreshing liquor.'}, {'name': 'Weishan Maojian', 'desc': 'Smoked yellow tea from Weishan with unique campfire aroma.'}, {'name': 'Hai Ma Gong Ya', 'desc': 'Rare Guizhou yellow tea with clean mineral taste.'}, {'name': 'Yellow Small Tea', 'desc': 'One bud and one leaf yellow tea with sweet and grassy notes.'}, {'name': 'Yellow Tea Gift Box', 'desc': 'Curated selection of yellow tea varieties in premium gift packaging.'}]}, 'zh': {'title': '黄茶 | 贵州湘丰瀑布茶业有限公司', 'navbar_brand': '湘丰瀑布AULTRAS', 'subtitle': '来自中国湖南与四川的优质有机黄茶', 'badge': '有机认证', 'nav_home': '首页', 'nav_products': '产品中心', 'nav_cert': '公司资质', 'nav_contact': '联系我们', 'view_all': '全部产品', 'inquiry': '立即询价', 'product_range_title': '产品系列', 'product_range_desc': '每款产品展示礼盒/干茶/茶汤/叶底四张图，图片均可通过后台管理更新。', 'gift_box': '礼盒', 'dry_leaf': '干茶', 'liquor': '茶汤', 'leaf_base': '叶底', 'inquiry_btn': '立即咨询', 'cta_title': '准备下单？', 'cta_desc': '联系我们获取样品、报价和定制包装方案，我们24小时内回复。', 'send_inquiry': '发送询盘', 'email_us': '发邮件', 'cat_en': 'Yellow Tea', 'cat_zh': '黄茶', 'footer_copy': '版权所有', 'footer_company': '贵州湘丰瀑布茶业有限公司', 'products': [{'name': '君山银针', 'desc': '中国最著名黄茶，洞庭湖君山岛特产，芽头肥壮。'}, {'name': '蒙顶黄芽', 'desc': '四川蒙顶山名茶，蜜香甘甜，品质卓越。'}, {'name': '霍山黄芽', 'desc': '安徽高山黄茶，栗香花香，醇和不涩。'}, {'name': '北港毛尖', 'desc': '湖南黄茶，细针形，汤味清甜爽口。'}, {'name': '沩山毛尖', 'desc': '沩山独特烟熏黄茶，花香与烟香并存。'}, {'name': '海马宫茶', 'desc': '贵州高海拔稀有黄茶，矿物清新，口感干净。'}, {'name': '黄小茶', 'desc': '一芽一叶黄茶，清甜草香，适合日常饮用。'}, {'name': '黄茶礼盒', 'desc': '黄茶精选礼盒，高档包装，适合商务馈赠。'}]}, 'ru': {'title': 'Жёлтый чай | AultrasTea', 'navbar_brand': 'AultrasTea', 'subtitle': 'Органический жёлтый чай из Хунани и Сычуани, Китай', 'badge': 'Органический', 'nav_home': 'Главная', 'nav_products': 'Продукция', 'nav_cert': 'Сертификаты', 'nav_contact': 'Контакты', 'view_all': 'Все продукты', 'inquiry': 'Запросить цену', 'product_range_title': 'Ассортимент', 'product_range_desc': 'Каждый продукт представлен 4 фото: подарочная коробка, сухой чай, настой, лист.', 'gift_box': 'Подарок', 'dry_leaf': 'Сухой лист', 'liquor': 'Настой', 'leaf_base': 'Лист', 'inquiry_btn': 'Запрос цены', 'cta_title': 'Готовы заказать?', 'cta_desc': 'Свяжитесь с нами для образцов и цен. Ответим в течение 24 часов.', 'send_inquiry': 'Отправить запрос', 'email_us': 'Написать письмо', 'cat_en': 'Yellow Tea', 'cat_zh': '黄茶', 'footer_copy': 'Все права защищены.', 'footer_company': 'GUIZHOU AULTRAS TEA CO.,LTD.', 'products': [{'name': 'Цзюньшань Иньчжэнь', 'desc': 'Самый известный жёлтый чай Китая с острова на озере Дунтин.'}, {'name': 'Мэндин Хуан Я', 'desc': 'Почечный жёлтый чай с горы Мэн с медовой сладостью.'}, {'name': 'Хо Шань Хуан Я', 'desc': 'Горный жёлтый чай из Аньхоя с цветочными нотками.'}, {'name': 'Бэйган Маоцзянь', 'desc': 'Хунаньский жёлтый чай с тонкими иглами.'}, {'name': 'Вэйшань Маоцзянь', 'desc': 'Копчёный жёлтый чай с уникальным ароматом.'}, {'name': 'Хай Ма Гун Я', 'desc': 'Редкий гуйчжоуский жёлтый чай с чистым минеральным вкусом.'}, {'name': 'Малый жёлтый чай', 'desc': 'Один росток и один лист со сладко-травянистыми нотками.'}, {'name': 'Подарочный набор жёлтого чая', 'desc': 'Подборка жёлтых чаёв в премиальной подарочной упаковке.'}]}, 'de': {'title': 'Gelbtee | AultrasTea', 'navbar_brand': 'AultrasTea', 'subtitle': 'Premium Bio-Gelbtee aus Hunan und Sichuan, China', 'badge': 'Bio-zertifiziert', 'nav_home': 'Startseite', 'nav_products': 'Produkte', 'nav_cert': 'Zertifikate', 'nav_contact': 'Kontakt', 'view_all': 'Alle Produkte', 'inquiry': 'Jetzt Anfragen', 'product_range_title': 'Produktsortiment', 'product_range_desc': 'Jedes Produkt wird mit 4 Bildern gezeigt: Geschenkbox / Trockenes Blatt / Aufguss / Blattboden.', 'gift_box': 'Geschenkbox', 'dry_leaf': 'Trockenes Blatt', 'liquor': 'Aufguss', 'leaf_base': 'Blattboden', 'inquiry_btn': 'Jetzt Anfragen', 'cta_title': 'Bereit zu bestellen?', 'cta_desc': 'Kontaktieren Sie uns für Muster, Preise und individuelle Verpackung. Wir antworten innerhalb von 24 Stunden.', 'send_inquiry': 'Anfrage senden', 'email_us': 'E-Mail senden', 'cat_en': 'Yellow Tea', 'cat_zh': '黄茶', 'footer_copy': 'Alle Rechte vorbehalten.', 'footer_company': 'GUIZHOU AULTRAS TEA CO.,LTD.', 'products': [{'name': 'Jun Shan Yin Zhen', 'desc': 'Chinas berühmtester Gelbtee von der Insel im Dongting-See.'}, {'name': 'Meng Ding Huang Ya', 'desc': 'Knospen-Gelbtee vom Berg Meng mit Honigsüße.'}, {'name': 'Huo Shan Huang Ya', 'desc': 'Anhui Bergggelbtee mit floralen und Nussnoten.'}, {'name': 'Beigang Maojian', 'desc': 'Hunan Gelbtee mit feinen Nadeln und süßem Aufguss.'}, {'name': 'Weishan Maojian', 'desc': 'Geräucherter Gelbtee mit einzigartigem Lagerf-Aroma.'}, {'name': 'Hai Ma Gong Ya', 'desc': 'Seltener Guizhou-Gelbtee mit mineralischem Geschmack.'}, {'name': 'Kleiner Gelbtee', 'desc': 'Ein Knospen-Ein-Blatt-Gelbtee mit süßen und Grasaromen.'}, {'name': 'Gelbtee Geschenkbox', 'desc': 'Ausgewählte Gelbtee-Sorten in hochwertiger Geschenkverpackung.'}]}};
-    const catFeatures = {'en': ['Jun Shan Yin Zhen, Meng Ding Huang Ya, Huo Shan Huang Ya', "Unique 'Men Huang' (Smothering) Process", 'Mellow, Sweet with Slight Earthy Notes', 'Custom Packaging & Private Label Available'], 'zh': ['君山银针、蒙顶黄芽、霍山黄芽', '独特闷黄工艺', '醇和甘甜，带淡淡焦糖香', '支持定制包装和自有品牌'], 'ru': ['Цзюньшань Иньчжэнь, Мэндин Хуан Я, Хо Шань Хуан Я', 'Уникальный процесс «闷黄»', 'Мягкий, сладкий с землистыми нотками', 'Индивидуальная упаковка и частная марка'], 'de': ['Jun Shan Yin Zhen, Meng Ding Huang Ya, Huo Shan Huang Ya', "Einzigartiger 'Men Huang'-Prozess", 'Weich, süß mit leichten erdigen Noten', 'Individuelle Verpackung & Eigenmarke']};
+  <!-- FLOATING INQUIRY -->
+  <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-2">
+    <a id="float-wa" href="tel:+8673184652476" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" style="background:#30b4a8;" title="Phone">
+      <i class="fas fa-phone text-white text-xl"></i>
+    </a>
+    <a id="float-email" href="#" class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" style="background:var(--primary);" title="Email">
+      <i class="fa-solid fa-envelope text-white text-lg"></i>
+    </a>
+  </div>
 
+  <script>
+    let DATA = null;
     let currentLang = 'en';
+    const CATEGORY_ID = 'yellow';
+
+    async function loadData() {
+      try {
+        const resp = await fetch('data.json?t=' + Date.now());
+        DATA = await resp.json();
+        initPage();
+      } catch (err) {
+        console.error('Failed to load data:', err);
+      }
+    }
+
+    function initPage() {
+      if (!DATA) return;
+
+      document.getElementById('cat-name').textContent = currentLang === 'zh' ? getCategoryNameCN() : getCategoryName();
+      document.getElementById('cat-desc').textContent = currentLang === 'zh' ? getCategoryDescCN() : getCategoryDesc();
+      document.title = (currentLang === 'zh' ? getCategoryNameCN() : getCategoryName()) + ' | Xiangfeng Tea';
+
+      if (DATA.inquiry) {
+        document.getElementById('float-wa').href = 'tel:+8673184652476';
+        document.getElementById('float-email').href = 'mailto:' + DATA.inquiry.email;
+      }
+
+      const items = (DATA.products && DATA.products.items) ? DATA.products.items.filter(i => i.category === CATEGORY_ID) : [];
+      const grid = document.getElementById('products-grid');
+
+      if (items.length === 0) {
+        grid.innerHTML = '';
+        document.getElementById('no-products').classList.remove('hidden');
+        return;
+      }
+
+      document.getElementById('no-products').classList.add('hidden');
+      grid.innerHTML = items.map(item => {
+        const name = currentLang === 'zh' ? (item.nameCN || item.name) : currentLang === 'ru' ? (item.nameRU || item.name) : currentLang === 'de' ? (item.nameDE || item.name) : item.name;
+        const origin = currentLang === 'zh' ? (item.originCN || item.origin) : item.origin;
+        const grade = currentLang === 'zh' ? (item.gradeCN || item.grade) : item.grade;
+        return `
+          <div class="product-card group">
+            <div class="img-wrap bg-gray-50 relative">
+              <img src="${item.image}" alt="${name}" onerror="this.parentElement.innerHTML='<div class=\\'w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100\\'><i class=\\'fa-solid fa-leaf text-5xl text-[var(--primary)]/20\\'></i></div>'">
+              ${grade ? `<div class="absolute top-3 right-3"><span class="px-2.5 py-1 rounded-full text-xs font-semibold text-white" style="background:var(--primary)">${grade}</span></div>` : ''}
+            </div>
+            <div class="p-6">
+              <h3 class="font-serif-heading text-xl mb-3">${name}</h3>
+              <div class="flex flex-wrap gap-4 text-xs text-gray-500 mb-4">
+                <span><i class="fa-solid fa-location-dot mr-1"></i>${origin}</span>
+                <span><i class="fa-solid fa-mountain mr-1"></i>${item.altitude || ''}</span>
+              </div>
+              <div class="flex flex-wrap gap-1.5">
+                ${(item.certifications || []).map(c => `<span class="px-2 py-0.5 bg-green-50 text-[var(--primary)] text-xs rounded-full border border-green-100">${c}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function getCategoryName() {
+      const names = { green: 'Green Tea', black: 'Black Tea', oolong: 'Oolong Tea', white: 'White Tea', yellow: 'Yellow Tea', dark: 'Dark Tea', flower: 'Scented Tea' };
+      return names[CATEGORY_ID] || 'Tea';
+    }
+    function getCategoryNameCN() {
+      const names = { green: '绿茶', black: '红茶', oolong: '乌龙茶', white: '白茶', yellow: '黄茶', dark: '黑茶', flower: '工艺花茶' };
+      return names[CATEGORY_ID] || '茶叶';
+    }
+    function getCategoryDesc() {
+      const descs = {
+        green: 'Fresh and vibrant Chinese green teas sourced from premium high-altitude gardens.',
+        black: 'Rich and full-bodied black teas with smooth, malty character.',
+        oolong: 'Partially oxidized teas with complex floral and roasted notes.',
+        white: 'Minimally processed white teas with delicate, sweet flavors.',
+        yellow: 'Rare and exquisite yellow teas with mellow, refined character.',
+        dark: 'Aged and fermented dark teas with deep, earthy complexity.',
+        flower: 'Artfully scented and blooming teas with captivating aromas.'
+      };
+      return descs[CATEGORY_ID] || 'Premium Chinese teas for global markets.';
+    }
+    function getCategoryDescCN() {
+      const descs = {
+        green: '来自优质高海拔茶园的清新绿茶。',
+        black: '浓郁醇厚的红茶，口感顺滑。',
+        oolong: '半发酵茶，花果香浓郁，层次丰富。',
+        white: '轻发酵白茶，口感清甜淡雅。',
+        yellow: '稀有黄茶，醇和细腻。',
+        dark: '陈化发酵黑茶，滋味醇厚深沉。',
+        flower: '精致窨制花茶，香气怡人。'
+      };
+      return descs[CATEGORY_ID] || '面向全球市场的优质中国茶叶。';
+    }
 
     function switchLang(lang) {
       currentLang = lang;
-      const pack = langPack[lang];
-      if (!pack) return;
-
-      document.getElementById('html-root').lang = lang;
-      document.getElementById('page-title').textContent = pack.title;
-      document.title = pack.title;
-
-      // data-lang 元素
-      document.querySelectorAll('[data-lang]').forEach(el => {
-        const key = el.getAttribute('data-lang');
-        if (pack[key] !== undefined) el.textContent = pack[key];
-      });
-
-      // 品类名
-      document.getElementById('cat-name-en').textContent = pack.cat_en;
-      document.getElementById('cat-name-zh').textContent = pack.cat_zh;
-      document.getElementById('breadcrumb-cat').textContent = pack.cat_en;
-
-      // 特性列表
-      renderFeatures(lang);
-
-      // 产品网格
-      renderProducts(lang);
+      document.documentElement.lang = lang;
+      initPage();
     }
 
-    function renderFeatures(lang) {
-      const features = catFeatures[lang] || catFeatures['en'];
-      const list = document.getElementById('features-list');
-      list.innerHTML = features.map(f =>
-        `<div class="flex items-center gap-3"><i class="fas fa-check-circle text-secondary"></i><span>${f}</span></div>`
-      ).join('');
-    }
-
-    function renderProducts(lang) {
-      const pack = langPack[lang];
-      const imgs = window._siteImages || {};
-      const grid = document.getElementById('products-grid');
-      const catKey = 'yellow';
-      const labels = [pack.gift_box, pack.dry_leaf, pack.liquor, pack.leaf_base];
-      const suffixes = ['gift','dry','liquor','leaf'];
-
-      grid.innerHTML = pack.products.map((p, i) => {
-        const imgCards = suffixes.map((suf, si) => {
-          const key = `product_${catKey}_${i}_${suf}`;
-          const src = imgs[key] || '';
-          return `<div class="relative">
-            <img src="${src}" data-key="${key}" alt="${labels[si]}" class="w-full h-28 object-cover rounded-lg bg-gray-100 product-detail-img">
-            <span class="absolute bottom-1 left-1 bg-black/50 text-white text-xs px-1.5 py-0.5 rounded">${labels[si]}</span>
-          </div>`;
-        }).join('');
-
-        return `<div class="bg-white rounded-2xl overflow-hidden shadow-md fade-in">
-          <div class="p-4">
-            <h3 class="text-lg font-bold text-primary mb-3">${p.name}</h3>
-            <div class="grid grid-cols-2 gap-2 mb-3">${imgCards}</div>
-            <p class="text-dark/70 text-sm leading-relaxed">${p.desc}</p>
-          </div>
-          <div class="px-4 py-3 border-t border-gray-100">
-            <a href="index.html#contact" class="text-secondary font-medium flex items-center gap-2 hover:gap-3 transition-all text-sm">
-              <span>${pack.inquiry_btn}</span><i class="fas fa-arrow-right text-xs"></i>
-            </a>
-          </div>
-        </div>`;
-      }).join('');
-
-      // 重新绑定渐入
-      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    }
-
-    // ===== 从 data.json 加载图片 =====
-    async function loadProductImages() {
-      try {
-        const res = await fetch('./data.json?v=' + Date.now() + '&r=' + Math.random().toString(36).slice(2,8), { cache: 'no-store' });
-        let data = await res.json();
-        window._siteImages = data.images || {};
-        const heroImg = document.getElementById('cat_hero_img');
-        if (heroImg && window._siteImages['product_yellow']) {
-          heroImg.src = window._siteImages['product_yellow'];
-        }
-      } catch(e) {
-        window._siteImages = {};
-        console.warn('data.json 加载失败', e);
-      }
-      renderFeatures(currentLang);
-      renderProducts(currentLang);
-    }
-
-    // ===== 渐入动画 =====
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // ===== 初始化 =====
-    loadProductImages();
-
-    // 语言选择器自动还原
-    const savedLang = localStorage.getItem('aultrastea_lang') || 'en';
-    document.getElementById('langSelect').value = savedLang;
-    document.getElementById('langSelect').addEventListener('change', e => {
-      localStorage.setItem('aultrastea_lang', e.target.value);
-    });
-    switchLang(savedLang);
+    loadData();
   </script>
 </body>
 </html>

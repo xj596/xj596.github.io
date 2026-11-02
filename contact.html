@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="https://video.aultras-tea.com/%E6%B9%98%E4%B8%B0logo%E5%B9%BF%E5%91%8A%E8%AF%AD-06.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Xiangfeng Tea Group</title>
+<meta name="description" content="Contact Xiangfeng Tea Group for product inquiries, sample requests, and partnership opportunities. Premium Chinese tea exporter.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<style>
+/* Contact Page Specific Styles */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.contact-info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--bg-light);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.25rem;
+  transition: var(--transition);
+}
+
+.contact-info-card:hover {
+  background: var(--primary-bg);
+  transform: translateX(5px);
+}
+
+body.rtl .contact-info-card:hover {
+  transform: translateX(-5px);
+}
+
+.contact-info-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.contact-info-text h4 {
+  font-size: 1rem;
+  color: var(--dark);
+  margin-bottom: 0.25rem;
+}
+
+.contact-info-text p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.contact-form-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.contact-form-card h3 {
+  font-size: 1.5rem;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.contact-form-card .form-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+}
+
+.contact-form-card .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.contact-form-card label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+
+.contact-form-card label .required {
+  color: var(--error);
+}
+
+.contact-form-card input,
+.contact-form-card select,
+.contact-form-card textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  color: var(--text);
+  background: white;
+  transition: var(--transition);
+}
+
+.contact-form-card input:focus,
+.contact-form-card select:focus,
+.contact-form-card textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(48, 180, 168, 0.1);
+}
+
+.contact-form-card textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-form-card .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.contact-submit {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  margin-top: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+}
+
+.contact-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(48, 180, 168, 0.3);
+}
+
+.contact-submit.form-submitting {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.contact-submit .loading-spinner {
+  display: none;
+}
+
+.contact-submit.form-submitting .loading-spinner {
+  display: inline-block;
+}
+
+/* Success animation for contact form */
+.contact-success-animation {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.contact-success-animation .success-checkmark {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  animation: successPop 0.5s ease forwards;
+  box-shadow: 0 4px 20px rgba(76, 175, 80, 0.3);
+  color: white;
+  font-size: 2.5rem;
+}
+
+.contact-success-animation h3 {
+  font-size: 1.5rem;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.contact-success-animation p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.contact-error-msg {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: none;
+}
+
+.contact-error-msg.show {
+  display: block;
+}
+
+.quick-links-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.quick-link-tag {
+  display: inline-block;
+  padding: 8px 18px;
+  background: var(--bg-light);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: var(--text);
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.quick-link-tag:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .contact-form-card {
+    padding: 1.5rem;
+  }
+  .contact-form-card .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body data-page="contact">
+
+<!-- ========== TOP BAR ========== -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <a href="mailto:admin@xf-tea.com" title="Email"><i class="fas fa-envelope"></i> admin@xf-tea.com</a>
+      <a href="tel:+8673184652476" title="Phone"><i class="fas fa-phone-alt"></i> +86 731 8465 2476</a>
+      <a href="mailto:admin@aultrastea.com" title="Email (Guizhou Office)"><i class="fas fa-envelope"></i> admin@aultrastea.com</a>
+      <a href="https://wa.me/8613975899978" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i> +86 139 7589 9978</a>
+    </div>
+    <div class="topbar-right">
+      <a href="https://www.linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://www.facebook.com" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="tel:+8673184652476" target="_blank" rel="noopener" title="Phone"><i class="fas fa-phone"></i></a>
+      <span id="lang-selector"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ========== HEADER ========== -->
+<header class="header" id="header">
+  <div class="container">
+    <a href="index.html" class="logo">
+      <img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" class="header-logo-img">
+    </a>
+
+    <nav class="nav" id="navMenu">
+      <div class="nav-item">
+        <a href="index.html" class="nav-link" data-i18n="common.home">Home</a>
+      </div>
+      <div class="nav-item">
+        <a href="certs.html" class="nav-link" data-i18n="common.certsHonors">Certificates</a>
+      </div>
+      <div class="nav-item">
+        <a href="about.html" class="nav-link" data-i18n="common.about">About Us</a>
+      </div>
+      <div class="nav-item">
+        <a href="products.html" class="nav-link">
+          <span data-i18n="common.products">Products Center</span>
+          <i class="fas fa-chevron-down"></i>
+        </a>
+        <div class="nav-dropdown">
+          <a href="products.html?cat=products.catGreen"><span data-i18n="products.catGreen">Green Tea</span></a>
+          <a href="products.html?cat=products.catBlack"><span data-i18n="products.catBlack">Black Tea</span></a>
+          <a href="products.html?cat=products.catOolong"><span data-i18n="products.catOolong">Oolong Tea</span></a>
+          <a href="products.html?cat=products.catWhite"><span data-i18n="products.catWhite">White Tea</span></a>
+          <a href="products.html?cat=products.catPuer"><span data-i18n="products.catPuer">Pu-erh Tea</span></a>
+          <a href="products.html?cat=products.catOEM"><span data-i18n="common.oem">OEM/ODM</span></a>
+          <a href="products.html?cat=products.catFlower"><span data-i18n="products.catFlower">Flower Tea</span></a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="news.html" class="nav-link" data-i18n="common.latestUpdates">News</a>
+      </div>
+      <div class="nav-item">
+        <a href="contact.html" class="nav-link active" data-i18n="common.contact">Contact Us</a>
+      </div>
+      <button class="nav-inquiry-btn" onclick="openInquiry()">
+        <i class="fas fa-paper-plane"></i>
+        <span data-i18n="common.inquiry">Inquiry</span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ========== PAGE BANNER ========== -->
+<section class="page-banner">
+  <div class="container">
+    <h1 data-i18n="contact.title">Contact Us</h1>
+    <p data-i18n="contact.subtitle">Reach out for inquiries, samples, or partnership opportunities.</p>
+    <div class="breadcrumb">
+      <a href="index.html" data-i18n="common.home">Home</a>
+      <span>/</span>
+      <span data-i18n="common.contact">Contact</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT SECTION ========== -->
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- Left: Contact Info Cards -->
+      <div>
+        <div class="section-title" style="text-align:left;margin-bottom:2rem">
+          <h2 style="text-align:left" data-i18n="contact.infoTitle">Contact Information</h2>
+          <p style="text-align:left" data-i18n="contact.subtitle">Reach out for inquiries, samples, or partnership opportunities.</p>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="contact-info-text">
+            <h4 data-i18n="contact.address">Office Address</h4>
+            <p data-i18n="contact.addressValue">4/F, Building 1, Xiangfeng Tea Innovation Industry Park, No.12 Dongshi'er Road, Changsha County, Changsha, Hunan, China</p>
+          </div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fas fa-industry"></i></div>
+          <div class="contact-info-text">
+            <h4 data-i18n="contact.factoryAddress">Factory Address</h4>
+            <p data-i18n="contact.factoryAddressValue">1st Floor, Building 1001001, Xiangfeng Village 410158, Jinjing Town, Changsha County, Hunan Province, China</p>
+          </div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-info-text">
+            <h4 data-i18n="contact.emailLabel">Email</h4>
+            <p><a href="mailto:admin@xf-tea.com" style="color:var(--primary)">admin@xf-tea.com</a></p>
+          </div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
+          <div class="contact-info-text">
+            <h4>Email (Guizhou Office)</h4>
+            <p><a href="mailto:admin@aultrastea.com" style="color:var(--primary)">admin@aultrastea.com</a></p>
+          </div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fas fa-phone-alt"></i></div>
+          <div class="contact-info-text">
+            <h4 data-i18n="contact.phoneLabel">Phone</h4>
+            <p><a href="tel:+8673184652476" style="color:var(--primary)">+86 731 8465 2476</a></p>
+          </div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-info-icon"><i class="fab fa-whatsapp"></i></div>
+          <div class="contact-info-text">
+            <h4>WhatsApp</h4>
+            <p><a href="https://wa.me/8613975899978" target="_blank" rel="noopener" style="color:var(--primary)">+86 139 7589 9978</a></p>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div style="margin-top:2rem">
+          <h4 style="font-size:1rem;color:var(--dark);margin-bottom:0.75rem" data-i18n="footer.quickLinks">Quick Links</h4>
+          <div class="quick-links-list">
+            <a href="products.html" class="quick-link-tag" data-i18n="products.catGreen">Green Tea</a>
+            <a href="products.html" class="quick-link-tag" data-i18n="products.catBlack">Black Tea</a>
+            <a href="products.html" class="quick-link-tag" data-i18n="products.catOolong">Oolong Tea</a>
+            <a href="products.html" class="quick-link-tag" data-i18n="common.oem">OEM/ODM</a>
+            <a href="products.html" class="quick-link-tag" data-i18n="common.matcha">Matcha</a>
+            <a href="certs.html" class="quick-link-tag" data-i18n="common.certsHonors">Certificates</a>
+            <a href="about.html" class="quick-link-tag" data-i18n="common.about">About Us</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Contact Form -->
+      <div class="contact-form-card" id="contactFormCard">
+        <h3 data-i18n="contact.formTitle">Send Inquiry</h3>
+        <p class="form-subtitle" data-i18n="contact.subtitle">Reach out for inquiries, samples, or partnership opportunities.</p>
+
+        <form id="contactForm" onsubmit="handleContactSubmit(event)">
+
+          <div class="form-group">
+            <label data-i18n="contact.name">Your Name <span class="required">*</span></label>
+            <input type="text" name="name" required data-i18n-placeholder="contact.name" placeholder="Enter your name">
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label data-i18n="contact.email">Email <span class="required">*</span></label>
+              <input type="email" name="email" required placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+              <label data-i18n="contact.phone">Phone</label>
+              <input type="tel" name="phone" placeholder="Enter your phone">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label data-i18n="contact.company">Company Name</label>
+              <input type="text" name="company" placeholder="Your Company Ltd.">
+            </div>
+            <div class="form-group">
+              <label data-i18n="contact.productInterest">Product Interest</label>
+              <select name="product_interest">
+                <option value="">Select...</option>
+                <option value="Green Tea">Green Tea</option>
+                <option value="Black Tea">Black Tea</option>
+                <option value="Oolong Tea">Oolong Tea</option>
+                <option value="White Tea">White Tea</option>
+                <option value="Pu-erh Tea">Pu-erh Tea</option>
+                <option value="OEM/ODM">OEM/ODM</option>
+                <option value="Matcha">Matcha</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label data-i18n="contact.message">Message <span class="required">*</span></label>
+            <textarea name="message" required data-i18n-placeholder="popup.messagePlaceholder" placeholder="Tell us about your requirements..." rows="5"></textarea>
+          </div>
+
+          <button type="submit" class="contact-submit popup-submit">
+            <span class="loading-spinner"></span>
+            <span class="btn-text" data-i18n="contact.submitBtn">Submit Inquiry</span>
+          </button>
+
+          <div class="contact-error-msg" id="contactError"></div>
+        </form>
+
+        <!-- Success Animation (hidden by default) -->
+        <div class="contact-success-animation" id="contactSuccess" style="display:none">
+          <div class="success-checkmark">
+            <i class="fas fa-check"></i>
+          </div>
+          <h3 data-i18n="popup.successTitle">Inquiry Submitted!</h3>
+          <p data-i18n="popup.successDesc">Our export team will contact you within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <a href="index.html"><img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" class="footer-logo-img"></a>
+        </div>
+        <p data-i18n="footer.aboutDesc">A leading Chinese tea export enterprise, delivering premium teas worldwide since 1998.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="tel:+8673184652476" aria-label="Phone"><svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-title" data-i18n="footer.productsTitle">Products</h4>
+        <ul class="footer-links">
+          <li><a href="products.html" data-i18n="products.catGreen">Green Tea</a></li>
+          <li><a href="products.html" data-i18n="products.catBlack">Black Tea</a></li>
+          <li><a href="products.html" data-i18n="products.catOolong">Oolong Tea</a></li>
+          <li><a href="products.html" data-i18n="products.catWhite">White Tea</a></li>
+          <li><a href="products.html" data-i18n="products.catPuer">Pu-erh Tea</a></li>
+          <li><a href="products.html" data-i18n="common.oem">OEM/ODM</a></li>
+          <li><a href="products.html" data-i18n="common.matcha">Matcha</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title" data-i18n="footer.quickLinks">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html" data-i18n="common.home">Home</a></li>
+          <li><a href="about.html" data-i18n="common.about">About Us</a></li>
+          <li><a href="news.html" data-i18n="common.latestUpdates">News</a></li>
+          <li><a href="certs.html" data-i18n="common.certsHonors">Certificates</a></li>
+          <li><a href="contact.html" data-i18n="common.contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title" data-i18n="footer.contactTitle">Contact Us</h4>
+        <ul class="footer-contact">
+          <li><i class="fas fa-map-marker-alt"></i> 4/F, Building 1, Xiangfeng Tea Innovation Industry Park, No.12 Dongshi'er Road, Changsha County, Changsha, Hunan, China</li>
+          <li><i class="fas fa-phone"></i> +86 731 8465 2476</li>
+          <li><i class="fas fa-envelope"></i> admin@xf-tea.com</li>
+          <li><i class="fas fa-envelope"></i> admin@aultrastea.com</li>
+                    <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/8613975899978" target="_blank" rel="noopener">+86 139 7589 9978</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Xiangfeng Tea Group. <span data-i18n="footer.rights">All rights reserved.</span></span>
+      <div>
+        <a href="#" data-i18n="footer.privacy">Privacy Policy</a> &middot;
+        <a href="#" data-i18n="footer.terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ========== BACK TO TOP ========== -->
+<div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+  <i class="fas fa-arrow-up"></i>
+</div>
+
+<!-- ========== INQUIRY POPUP ========== -->
+<div class="inquiry-overlay" id="inquiryOverlay" onclick="closeInquiryOverlay(event)">
+  <div class="inquiry-popup" id="inquiryPopup">
+    <div class="inquiry-header">
+      <h3 data-i18n="popup.title">Product Inquiry</h3>
+      <div class="inquiry-close" onclick="closeInquiry()">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+    <div class="inquiry-body">
+      <form class="inquiry-form" id="inquiryForm" onsubmit="submitInquiry(event)">
+        <div class="form-group">
+          <label><span data-i18n="popup.name">Your Name</span> <span class="required">*</span></label>
+          <input type="text" name="name" required>
+        </div>
+        <div class="form-group">
+          <label><span data-i18n="popup.company">Company / Brand</span></label>
+          <input type="text" name="company">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label><span data-i18n="popup.email">Email</span> <span class="required">*</span></label>
+            <input type="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label><span data-i18n="popup.phone">Phone</span></label>
+            <input type="tel" name="phone">
+          </div>
+        </div>
+        <div class="form-group">
+          <label><span data-i18n="contact.productInterest">Product Interest</span> <span class="required">*</span></label>
+          <select name="product_interest" id="inquiryProductSelect" required>
+            <option value="">-- Select --</option>
+            <option value="green_tea" data-i18n="products.catGreen">Green Tea</option>
+            <option value="black_tea" data-i18n="products.catBlack">Black Tea</option>
+            <option value="oolong_tea" data-i18n="products.catOolong">Oolong Tea</option>
+            <option value="white_tea" data-i18n="products.catWhite">White Tea</option>
+            <option value="puer_tea" data-i18n="products.catPuer">Pu-erh Tea</option>
+            <option value="oem" data-i18n="common.oem">OEM/ODM</option>
+            <option value="matcha" data-i18n="common.matcha">Matcha</option>
+            <option value="flower_tea" data-i18n="products.catFlower">Flower Tea</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><span data-i18n="popup.quantity">Estimated Quantity</span></label>
+          <input type="text" name="quantity" placeholder="e.g. 500kg, 1 ton, 10 tons">
+        </div>
+        <div class="form-group">
+          <label><span data-i18n="popup.message">Message</span> <span class="required">*</span></label>
+          <textarea name="message" rows="4" required data-i18n-placeholder="popup.messagePlaceholder" placeholder="Tell us about your requirements..."></textarea>
+        </div>
+        <button type="submit" class="inquiry-submit popup-submit">
+          <span class="loading-spinner"></span>
+          <span class="btn-text" data-i18n="popup.submitBtn">Submit Inquiry</span>
+        </button>
+      </form>
+    </div>
+    <div class="inquiry-success-animation" id="inquirySuccess">
+      <div class="success-checkmark">
+        <i class="fas fa-check"></i>
+      </div>
+      <h3 data-i18n="popup.successTitle">Inquiry Submitted!</h3>
+      <p data-i18n="popup.successDesc">Our export team will contact you within 24 hours.</p>
+      <button class="btn btn-primary mt-4" onclick="closeInquiry()" style="margin-top:2rem;">
+        <span data-i18n="common.close">Close</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SCRIPTS ========== -->
+<script src="js/i18n.js"></script>
+<script src="js/product-data.js"></script>
+<script>
+/* ====== Shorthand for i18n ====== */
+function __(key) {
+  if (typeof XF_i18n !== 'undefined' && XF_i18n.t) return XF_i18n.t(key);
+  return key;
+}
+
+/* ====== CSRF Token Generator ====== */
+function generateToken() {
+  var timestamp = Date.now();
+  var random = Math.random().toString(36).substring(2, 15);
+  return timestamp + '_' + random;
+}
+
+/* ====== HTML Escape Helper ====== */
+function escapeHtml(str) {
+  if (!str) return '';
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
+/* ====== Mobile Menu Toggle ====== */
+function toggleMobileMenu() {
+  var nav = document.getElementById('navMenu');
+  var toggle = document.getElementById('mobileToggle');
+  if (nav) nav.classList.toggle('active');
+  if (toggle) toggle.classList.toggle('active');
+}
+
+/* ====== Inquiry Popup ====== */
+function openInquiry(productId) {
+  try { var _f = document.getElementById('contactFormCard'); if (_f) { _f.scrollIntoView({behavior:'smooth', block:'start'}); return; } window.location.href = 'contact.html#contactFormCard'; return; } catch(e) {}
+
+  // Direct jump to the customer's email client (pre-filled inquiry).
+  var email = INQUIRY_EMAIL;
+  try {
+    if (typeof XF_DATA !== 'undefined' && XF_DATA && XF_DATA.inquiry && XF_DATA.inquiry.email) email = XF_DATA.inquiry.email;
+    else if (typeof DATA !== 'undefined' && DATA && DATA.inquiry && DATA.inquiry.email) email = DATA.inquiry.email;
+  } catch(e) {}
+  var pname = '';
+  try {
+    if (productId && typeof XF_Products !== 'undefined') {
+      var p = XF_Products.getProductById(productId);
+      if (p) pname = XF_Products.getName(p);
+    }
+  } catch(e) {}
+  try {
+    if (!pname && typeof currentProduct !== 'undefined' && currentProduct && typeof XF_Products !== 'undefined') {
+      pname = XF_Products.getName(currentProduct);
+    }
+  } catch(e) {}
+  var subject = 'Tea Inquiry' + (pname ? ' - ' + pname : '');
+  var body = 'Dear Xiangfeng Tea Export Team,\n\nI would like to inquire about ' + (pname ? pname : 'your tea products') + '.\n\n';
+  body += 'My details:\nName: \nCompany: \nEmail: \nPhone: \n\nMessage:\n\nLooking forward to your reply.\n';
+  var mailtoUrl = 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  window.location.href = mailtoUrl;
+}
+
+
+function closeInquiry() {
+  var overlay = document.getElementById('inquiryOverlay');
+  if (overlay) {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function closeInquiryOverlay(event) {
+  if (event.target === event.currentTarget) {
+    closeInquiry();
+  }
+}
+
+/* ====== Email Configuration ====== */
+/* FormSubmit.co: Free form-to-email service, no signup needed.
+   First submission triggers a confirmation email to INQUIRY_EMAIL.
+   After confirmation, all submissions are delivered automatically.
+   Works on GitHub Pages and any static hosting. */
+var INQUIRY_EMAIL = 'admin@xf-tea.com';
+var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/' + INQUIRY_EMAIL;
+var FORMSUBMIT_AJAX_HEADERS = { 'Accept': 'application/json' };
+
+/* Detect if running on GitHub Pages (PHP not available) */
+function isStaticHosting() {
+  return window.location.hostname.includes('github.io') ||
+         !window.location.protocol.startsWith('http') ||
+         window.location.protocol === 'file:';
+}
+
+function submitInquiry(e) {
+  e.preventDefault();
+  var form = e.target;
+
+  // Collect form data
+  var name = form.querySelector('[name="name"]').value || '';
+  var company = form.querySelector('[name="company"]').value || '';
+  var email = form.querySelector('[name="email"]').value || '';
+  var phone = form.querySelector('[name="phone"]').value || '';
+  var product = form.querySelector('[name="product_interest"]').value || '';
+  var quantity = form.querySelector('[name="quantity"]').value || '';
+  var message = form.querySelector('[name="message"]').value || '';
+
+  // Basic validation
+  if (!name || !email || !message) {
+    alert(__('popup.fillRequired') || 'Please fill in all required fields.');
+    return;
+  }
+
+  // Build confirmation UI - show submitting state
+  var submitBtn = form.querySelector('.popup-submit');
+  if (submitBtn) {
+    submitBtn.classList.add('form-submitting');
+    var btnText = submitBtn.querySelector('.btn-text');
+    if (btnText) btnText.textContent = __('popup.submitting') || 'Submitting...';
+  }
+
+  // Use FormSubmit.co AJAX for all hosting environments
+  var formData = new FormData(form);
+  formData.append('_subject', 'Tea Inquiry from ' + name + (company ? ' (' + company + ')' : ''));
+  formData.append('_template', 'table');
+  formData.append('_captcha', 'false');
+
+  fetch(FORMSUBMIT_ENDPOINT, {
+    method: 'POST',
+    headers: FORMSUBMIT_AJAX_HEADERS,
+    body: formData
+  })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (submitBtn) submitBtn.classList.remove('form-submitting');
+      if (data.success === 'true' || data.success === true) {
+        showInquirySuccess();
+      } else {
+        // Fallback to mailto if FormSubmit fails
+        fallbackToMailto(name, company, email, phone, product, quantity, message);
+      }
+    })
+    .catch(function() {
+      if (submitBtn) submitBtn.classList.remove('form-submitting');
+      // Fallback to mailto if network error
+      fallbackToMailto(name, company, email, phone, product, quantity, message);
+    });
+}
+
+/* Mailto fallback - opens user's email client */
+function fallbackToMailto(name, company, email, phone, product, quantity, message) {
+  var subject = 'Tea Inquiry from ' + name + (company ? ' (' + company + ')' : '');
+  var body = 'Dear Xiangfeng Tea Export Team,\n\n';
+  body += 'I would like to inquire about your tea products. Here are my details:\n\n';
+  body += 'Name: ' + name + '\n';
+  if (company) body += 'Company: ' + company + '\n';
+  body += 'Email: ' + email + '\n';
+  if (phone) body += 'Phone: ' + phone + '\n';
+  if (product) body += 'Product Interest: ' + product + '\n';
+  if (quantity) body += 'Estimated Quantity: ' + quantity + '\n';
+  body += '\nMessage:\n' + message + '\n\n';
+  body += 'Looking forward to your reply.\n\nBest regards,\n' + name;
+
+  var mailtoUrl = 'mailto:' + INQUIRY_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  window.location.href = mailtoUrl;
+  showInquirySuccess();
+}
+
+function showInquirySuccess() {
+  var form = document.getElementById('inquiryForm');
+  var successDiv = document.getElementById('inquirySuccess');
+  if (form) form.style.display = 'none';
+  if (successDiv) successDiv.classList.add('active');
+}
+
+/* ====== Contact Form AJAX (page-specific) ====== */
+function handleContactSubmit(e) {
+  e.preventDefault();
+  var form = e.target;
+  var btn = form.querySelector('.popup-submit');
+  var errorDiv = document.getElementById('contactError');
+  if (errorDiv) errorDiv.classList.remove('show');
+
+  btn.classList.add('form-submitting');
+  btn.querySelector('.btn-text').textContent = __('popup.submitting') || 'Submitting...';
+
+  var formData = new FormData(form);
+  formData.append('_subject', 'Website Inquiry from ' + (formData.get('name') || 'Visitor'));
+  formData.append('_template', 'table');
+  formData.append('_captcha', 'false');
+
+  /* Use FormSubmit.co for static hosting (GitHub Pages) or PHP endpoint for servers */
+  var endpoint = isStaticHosting() ? FORMSUBMIT_ENDPOINT : 'inquiry-submit.php';
+  var fetchOptions = {
+    method: 'POST',
+    body: formData
+  };
+  if (isStaticHosting()) {
+    fetchOptions.headers = FORMSUBMIT_AJAX_HEADERS;
+  }
+
+  fetch(endpoint, fetchOptions)
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      btn.classList.remove('form-submitting');
+      if (data.success === true || data.success === 'true' || data.success) {
+        form.style.display = 'none';
+        var success = document.getElementById('contactSuccess');
+        if (success) success.style.display = 'block';
+      } else {
+        btn.querySelector('.btn-text').textContent = __('contact.submitBtn') || 'Submit Inquiry';
+        if (errorDiv) {
+          errorDiv.textContent = data.message || 'An error occurred. Please try again.';
+          errorDiv.classList.add('show');
+        } else {
+          alert(data.message || 'Error. Please try again.');
+        }
+      }
+    })
+    .catch(function() {
+      btn.classList.remove('form-submitting');
+      btn.querySelector('.btn-text').textContent = __('contact.submitBtn') || 'Submit Inquiry';
+      if (errorDiv) {
+        errorDiv.textContent = 'Network error. Please check your connection and try again.';
+        errorDiv.classList.add('show');
+      } else {
+        alert('Network error. Please try again.');
+      }
+    });
+}
+
+/* ====== Back to Top ====== */
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function initBackToTop() {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 400) {
+      btn.classList.add('visible');
+    } else {
+      btn.classList.remove('visible');
+    }
+  });
+
+      var header = document.getElementById('header');
+      var topbar = document.querySelector('.topbar');
+      window.addEventListener('scroll', function() {
+        if (header) {
+          header.classList.toggle('scrolled', window.scrollY > 50);
+        }
+        if (topbar) {
+          topbar.classList.toggle('scrolled', window.scrollY > 10);
+        }
+      });
+}
+
+/* ====== Init ====== */
+document.addEventListener('DOMContentLoaded', function() {
+  var token = generateToken();
+  var tokenInput = document.getElementById('csrfTokenContact');
+  if (tokenInput) tokenInput.value = token;
+  try { sessionStorage.setItem('xf_csrf_token', token); } catch(e) {}
+
+  initBackToTop();
+});
+
+/* Close mobile menu on outside click */
+document.addEventListener('click', function(e) {
+  var nav = document.getElementById('navMenu');
+  var toggle = document.getElementById('mobileToggle');
+  if (nav && nav.classList.contains('active') && toggle) {
+    if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+      nav.classList.remove('active');
+      toggle.classList.remove('active');
+    }
+  }
+});
+
+/* Close inquiry on Escape */
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeInquiry();
+});
+</script>
+</body>
+</html>

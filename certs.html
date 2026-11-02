@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="https://video.aultras-tea.com/%E6%B9%98%E4%B8%B0logo%E5%B9%BF%E5%91%8A%E8%AF%AD-06.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Xiangfeng Tea Group Certificates & Honors - EU Organic, USDA Organic, Rainforest Alliance, ISO 22000, HACCP, and World Tea Expo Gold Award.">
+    <title data-i18n="certs.title">Certificates & Honors - Xiangfeng Tea Group</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== Certs Page Specific Styles ===== */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .cert-badge-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-badge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .cert-badge-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .cert-badge-card:hover::before {
+            opacity: 1;
+        }
+
+        .cert-badge-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 1.25rem;
+            border-radius: 50%;
+            background: var(--primary-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .cert-badge-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .cert-badge-photo {
+            margin: 0.25rem auto 1rem;
+            padding: 0.6rem;
+            background: var(--primary-bg);
+            border: 1px dashed var(--primary, #2e7d32);
+            border-radius: 12px;
+            max-width: 220px;
+        }
+
+        .cert-badge-photo img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .cert-badge-card:hover .cert-badge-icon {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .cert-badge-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .cert-badge-card p {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .cert-badge-year {
+            display: inline-block;
+            padding: 4px 14px;
+            background: var(--primary-bg);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* ===== Honors Timeline ===== */
+        .honors-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .honors-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--accent) 100%);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .honor-item {
+            position: relative;
+            width: 50%;
+            padding: 1.5rem 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .honor-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+            padding-right: 3rem;
+        }
+
+        .honor-item:nth-child(even) {
+            left: 50%;
+            text-align: left;
+            padding-left: 3rem;
+        }
+
+        .honor-dot {
+            position: absolute;
+            top: 1.75rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px var(--accent);
+            z-index: 2;
+        }
+
+        .honor-item:nth-child(odd) .honor-dot {
+            right: -9px;
+        }
+
+        .honor-item:nth-child(even) .honor-dot {
+            left: -9px;
+        }
+
+        .honor-year {
+            display: inline-block;
+            padding: 4px 16px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .honor-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .honor-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ===== Quality Commitment ===== */
+        .quality-commitment {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .quality-commitment-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 4px 15px rgba(48, 180, 168, 0.3);
+        }
+
+        .quality-commitment h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .quality-commitment p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-light);
+        }
+
+        .quality-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .quality-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .quality-feature i {
+            color: var(--success);
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .certs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .honors-timeline::before {
+                left: 20px;
+            }
+
+            .honor-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding-left: 3rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .honor-item .honor-dot {
+                left: 11px !important;
+                right: auto !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quality-features {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* ===== Grouped Certificates Grid ===== */
+        #certsGrid { display: block; }
+        .cert-group-title { text-align:center; margin:2.5rem 0 1.5rem; color:var(--dark,#1a3a2e); font-size:1.4rem; }
+        .cert-group-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1.5rem; margin-bottom:1rem; }
+        .cert-badge-numbered { position:relative; text-align:center; }
+        .cert-order-badge { position:absolute; top:8px; left:8px; width:26px; height:26px; border-radius:50%; background:var(--primary,#30b4a8); color:#fff; font-size:0.85rem; display:flex; align-items:center; justify-content:center; }
+        .cert-sub { color:#888; font-size:0.9rem; margin-top:0.25rem; }
+    </style>
+</head>
+<body>
+    <!-- ==================== TOP BAR ==================== -->
+    <div class="topbar">
+        <div class="container">
+            <div class="topbar-left">
+                <a href="mailto:admin@xf-tea.com" title="Email"><i class="fas fa-envelope"></i> admin@xf-tea.com</a>
+                <a href="tel:+8673184652476" title="Phone"><i class="fas fa-phone-alt"></i> +86 731 8465 2476</a>
+                <a href="mailto:admin@aultrastea.com" title="Email (Guizhou Office)"><i class="fas fa-envelope"></i> admin@aultrastea.com</a>
+                <a href="https://wa.me/8613975899978" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i> +86 139 7589 9978</a>
+            </div>
+            <div class="topbar-right">
+                <a href="https://www.linkedin.com" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="tel:+8673184652476" target="_blank" rel="noopener" title="Phone"><i class="fas fa-phone"></i></a>
+                <span id="lang-selector"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" class="header-logo-img">
+            </a>
+            <nav class="nav" id="navMenu">
+                <div class="nav-item">
+                    <a href="index.html" class="nav-link" data-i18n="common.home">Home</a>
+                </div>
+                <div class="nav-item">
+                    <a href="certs.html" class="nav-link active" data-i18n="common.certsHonors">Certificates</a>
+                </div>
+                <div class="nav-item">
+                    <a href="about.html" class="nav-link" data-i18n="common.about">About Us</a>
+                </div>
+                <div class="nav-item">
+                    <a href="products.html" class="nav-link">
+                        <span data-i18n="common.products">Products Center</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="nav-dropdown">
+                        <a href="products.html?cat=products.catGreen"><span data-i18n="products.catGreen">Green Tea</span></a>
+                        <a href="products.html?cat=products.catBlack"><span data-i18n="products.catBlack">Black Tea</span></a>
+                        <a href="products.html?cat=products.catOolong"><span data-i18n="products.catOolong">Oolong Tea</span></a>
+                        <a href="products.html?cat=products.catWhite"><span data-i18n="products.catWhite">White Tea</span></a>
+                        <a href="products.html?cat=products.catPuer"><span data-i18n="products.catPuer">Pu-erh Tea</span></a>
+                        <a href="products.html?cat=products.catOEM"><span data-i18n="common.oem">OEM/ODM</span></a>
+          <a href="products.html?cat=products.catFlower"><span data-i18n="products.catFlower">Flower Tea</span></a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="news.html" class="nav-link" data-i18n="common.latestUpdates">News</a>
+                </div>
+                <div class="nav-item">
+                    <a href="contact.html" class="nav-link" data-i18n="common.contact">Contact Us</a>
+                </div>
+                <button class="nav-inquiry-btn" onclick="openInquiry()">
+                    <i class="fas fa-paper-plane"></i>
+                    <span data-i18n="common.inquiry">Inquiry</span>
+                </button>
+            </nav>
+            <div class="mobile-menu-toggle" id="mobileToggle" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== PAGE HERO ==================== -->
+    <section class="page-banner">
+        <div class="container">
+            <h1 data-i18n="certs.title">Certificates &amp; Honors</h1>
+            <p data-i18n="certs.subtitle">Our commitment to quality is validated by international authorities</p>
+            <div class="breadcrumb">
+                <a href="index.html" data-i18n="common.home">Home</a>
+                <span>/</span>
+                <span data-i18n="common.certsHonors">Certificates &amp; Honors</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CERTIFICATIONS GRID ==================== -->
+    <section class="section" style="background: white;">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="sectionTitle">International Certificates</h2>
+                <p data-i18n="sectionDesc">Every certificate represents our unwavering commitment to quality, safety, and sustainability</p>
+            </div>
+            <div class="certs-grid" id="certsGrid">
+                <!-- 由 data.json 的 certificates 数组动态渲染（后台可编辑，四语言） -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== QUALITY CONTROL & CERTIFICATIONS (从 about.html 移入) ==================== -->
+    <section class="about-quality-section" style="background: var(--bg-light);">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-i18n="about.qcTitle">Quality Control &amp; Certificates</h2>
+                <p data-i18n="about.qcDesc">Rigorous quality standards backed by international certifications</p>
+            </div>
+            <div class="qc-process">
+                <div class="qc-step">
+                    <i class="fas fa-flask"></i>
+                    <h4 data-i18n="about.qcLabTitle">Lab Testing</h4>
+                    <p data-i18n="about.qcLabDesc">Pesticide residue, heavy metals, and microbiological analysis for every batch</p>
+                </div>
+                <div class="qc-step">
+                    <i class="fas fa-clipboard-check"></i>
+                    <h4 data-i18n="about.qcAuditTitle">Process Audit</h4>
+                    <p data-i18n="about.qcAuditDesc">ISO 22000 &amp; HACCP compliant production with regular third-party audits</p>
+                </div>
+                <div class="qc-step">
+                    <i class="fas fa-eye"></i>
+                    <h4 data-i18n="about.qcSensoryTitle">Sensory Panel</h4>
+                    <p data-i18n="about.qcSensoryDesc">Expert tea tasters evaluate aroma, flavor, liquor color, and leaf appearance</p>
+                </div>
+                <div class="qc-step">
+                    <i class="fas fa-certificate"></i>
+                    <h4 data-i18n="about.qcTraceTitle">Traceability</h4>
+                    <p data-i18n="about.qcTraceDesc">Complete batch traceability from plantation to shipment via QR code system</p>
+                </div>
+                <div class="qc-step">
+                    <i class="fas fa-globe"></i>
+                    <h4 data-i18n="about.qcGlobalTitle">Global Standards</h4>
+                    <p data-i18n="about.qcGlobalDesc">Compliance with EU MRL, FDA, and destination country regulations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== QUALITY COMMITMENT SECTION ==================== -->
+    <section class="section" style="background: white;">
+        <div class="container">
+            <div class="quality-commitment">
+                <div class="quality-commitment-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3 data-i18n="qualityTitle">Our Quality Commitment</h3>
+                <p data-i18n-html="qualityDesc">Quality is not a destination — it is a continuous journey. At Xiangfeng Tea Group, we invest over <strong>5% of annual revenue</strong> in quality improvement initiatives, from upgrading processing equipment to training our 500+ quality control staff. Every certification and award we hold is a milestone, not an endpoint. We are committed to ongoing enhancement of our quality management systems, adopting the latest food safety technologies, and exceeding the evolving standards of global tea markets.</p>
+                <div class="quality-features">
+                    <div class="quality-feature">
+                        <i class="fas fa-check-circle"></i> <span data-i18n="qc500Staff">500+ QC Staff</span>
+                    </div>
+                    <div class="quality-feature">
+                        <i class="fas fa-check-circle"></i> <span data-i18n="qc100Batch">100% Batch Testing</span>
+                    </div>
+                    <div class="quality-feature">
+                        <i class="fas fa-check-circle"></i> <span data-i18n="qcFullTrace">Full Traceability</span>
+                    </div>
+                    <div class="quality-feature">
+                        <i class="fas fa-check-circle"></i> <span data-i18n="qcAnnualAudit">Annual Third-Party Audits</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="section" style="background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%); padding: 4rem 0; color: white; text-align: center;">
+        <div class="container">
+            <h2 style="color: white; font-size: 2rem; margin-bottom: 1rem;" data-i18n="ctaTitle">Want to Learn More About Our Quality Standards?</h2>
+            <p style="color: rgba(255,255,255,0.85); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; line-height: 1.8;" data-i18n="ctaDesc">Request our full certification documents, lab test reports, or schedule a virtual factory tour. Our quality team is ready to answer your questions.</p>
+            <a href="contact.html" class="btn btn-accent" style="background: white; color: var(--primary); font-size: 1.05rem; padding: 14px 36px; border-radius: 50px;">
+                <i class="fas fa-envelope"></i> <span data-i18n="ctaBtn">Contact Quality Team</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <a href="index.html"><img src="https://video.aultras-tea.com/%E6%A0%87%E5%87%86%E7%89%88-%E6%A8%AA%E5%BC%8F.png" alt="Xiangfeng Tea" class="footer-logo-img"></a>
+                    </div>
+                    <p data-i18n="footer.aboutDesc">A leading Chinese tea export enterprise, delivering premium teas worldwide since 1998.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title" data-i18n="footer.quickLinks">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html" data-i18n="common.about">About Us</a></li>
+                        <li><a href="products.html" data-i18n="common.products">Products</a></li>
+                        <li><a href="news.html" data-i18n="common.latestUpdates">News</a></li>
+                        <li><a href="certs.html" data-i18n="common.certsHonors">Certificates &amp; Honors</a></li>
+                        <li><a href="contact.html" data-i18n="common.contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title" data-i18n="footer.productsTitle">Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="products.html?cat=green"><span data-i18n="products.catGreen">Green Tea</span></a></li>
+                        <li><a href="products.html?cat=black"><span data-i18n="products.catBlack">Black Tea</span></a></li>
+                        <li><a href="products.html?cat=oolong"><span data-i18n="products.catOolong">Oolong Tea</span></a></li>
+                        <li><a href="products.html?cat=white"><span data-i18n="products.catWhite">White Tea</span></a></li>
+                        <li><a href="products.html?cat=puer"><span data-i18n="products.catPuer">Pu-erh Tea</span></a></li>
+                        <li><a href="products.html?cat=products.catOEM"><span data-i18n="common.oem">OEM / ODM</span></a></li>
+                        <li><a href="products.html?cat=matcha"><span data-i18n="common.matcha">Matcha</span></a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title" data-i18n="footer.contactTitle">Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> 4/F, Building 1, Xiangfeng Tea Innovation Industry Park, No.12 Dongshi'er Road, Changsha County, Changsha, Hunan, China</li>
+                        <li><i class="fas fa-phone"></i> +86 731 8465 2476</li>
+                        <li><i class="fas fa-envelope"></i> admin@xf-tea.com</li>
+                        <li><i class="fas fa-envelope"></i> admin@aultrastea.com</li>
+                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/8613975899978" target="_blank" rel="noopener">+86 139 7589 9978</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Xiangfeng Tea Group. <span data-i18n="footer.rights">All rights reserved.</span></span>
+                <div>
+                    <a href="#" data-i18n="footer.privacy">Privacy Policy</a>
+                    <span style="margin: 0 8px;">|</span>
+                    <a href="#" data-i18n="footer.terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== INQUIRY POPUP ==================== -->
+    <div class="inquiry-overlay" id="inquiryOverlay" onclick="closeInquiryOverlay(event)">
+        <div class="inquiry-popup" id="inquiryPopup">
+            <div class="inquiry-header">
+                <h3 data-i18n="popup.title">Product Inquiry</h3>
+                <div class="inquiry-close" onclick="closeInquiry()">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            <div class="inquiry-body">
+                <form class="inquiry-form" id="inquiryForm" onsubmit="submitInquiry(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                <span data-i18n="popup.name">Your Name</span>
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" name="name" required data-i18n-placeholder="popup.name" placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span data-i18n="popup.company">Company / Brand</span>
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" name="company" required data-i18n-placeholder="popup.company" placeholder="Company / Brand">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>
+                                <span data-i18n="popup.email">Email</span>
+                                <span class="required">*</span>
+                            </label>
+                            <input type="email" name="email" required data-i18n-placeholder="popup.email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span data-i18n="popup.phone">Phone</span>
+                            </label>
+                            <input type="text" name="phone" data-i18n-placeholder="popup.phone" placeholder="Phone">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label data-i18n="popup.quantity">Estimated Quantity</label>
+                        <input type="text" name="quantity" data-i18n-placeholder="popup.quantity" placeholder="Estimated Quantity">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <span data-i18n="popup.message">Message</span>
+                            <span class="required">*</span>
+                        </label>
+                        <textarea name="message" rows="4" required data-i18n-placeholder="popup.messagePlaceholder" placeholder="Tell us about your requirements..."></textarea>
+                    </div>
+                    <button type="submit" class="inquiry-submit popup-submit">
+                        <span class="loading-spinner"></span>
+                        <span class="btn-text" data-i18n="popup.submitBtn">Submit Inquiry</span>
+                    </button>
+                </form>
+            </div>
+            <div class="inquiry-success-animation" id="inquirySuccess">
+                <div class="success-checkmark">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h3 data-i18n="popup.successTitle">Inquiry Submitted!</h3>
+                <p data-i18n="popup.successDesc">Our export team will contact you within 24 hours.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== BACK TO TOP ==================== -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="js/i18n.js"></script>
+    <script src="js/product-data.js"></script>
+    <script>
+    /* ---------- i18n helper ---------- */
+    function __(key) {
+      if (typeof XF_i18n !== 'undefined' && XF_i18n.t) {
+        return XF_i18n.t(key);
+      }
+      return key;
+    }
+
+    /* ====== Certifications Grid (driven by data.json, four languages) ====== */
+    function __esc(s) {
+      return (s == null ? '' : String(s)).replace(/[&<>"']/g, function(m) {
+        return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[m];
+      });
+    }
+
+    function certField(obj) {
+      if (!obj) return '';
+      var l = (typeof XF_i18n !== 'undefined' && XF_i18n.getLang) ? XF_i18n.getLang() : 'en';
+      if (obj[l]) return obj[l];
+      if (l !== 'en' && obj.en) return obj.en;
+      return '';
+    }
+
+    /* Fallback content shown when data.json has no certificates (admin can override) */
+    var GROUP_TITLES = {
+      1: { en: 'Quality & Food Safety Standards', zh: '质量与食品安全标准' },
+      2: { en: 'Organic Certification', zh: '有机认证' },
+      3: { en: 'Sustainability & Social Responsibility', zh: '可持续发展与社会责任' }
+    };
+    var DEFAULT_CERTS = [
+      { id:1,  order:1,  group:1, icon:'', image:'', name:{en:'ISO',ru:'',de:'',zh:'ISO'},        sub:{en:'Quality / Food Safety Standard',zh:'质量/食安标准'} },
+      { id:2,  order:2,  group:1, icon:'', image:'', name:{en:'HACCP',ru:'',de:'',zh:'HACCP'},    sub:{en:'Hazard Analysis Foundation',zh:'危害分析基础'} },
+      { id:3,  order:3,  group:1, icon:'', image:'', name:{en:'FSSC 22000',ru:'',de:'',zh:'FSSC 22000'}, sub:{en:'ISO 22000 + GFSI',zh:'ISO 22000 + GFSI'} },
+      { id:4,  order:4,  group:2, icon:'', image:'', name:{en:'CN ORGANIC',ru:'',de:'',zh:'CN ORGANIC'}, sub:{en:'China Organic',zh:'中国有机'} },
+      { id:5,  order:5,  group:2, icon:'', image:'', name:{en:'EU ORGANIC',ru:'',de:'',zh:'EU ORGANIC'}, sub:{en:'EU Organic',zh:'欧盟有机'} },
+      { id:6,  order:6,  group:2, icon:'', image:'', name:{en:'NATURLAND',ru:'',de:'',zh:'NATURLAND'},   sub:{en:'German Private Standard',zh:'德国私有标准'} },
+      { id:7,  order:7,  group:2, icon:'', image:'', name:{en:'US ORGANIC',ru:'',de:'',zh:'US ORGANIC'}, sub:{en:'US NOP',zh:'美国 NOP'} },
+      { id:8,  order:8,  group:2, icon:'', image:'', name:{en:'JAPAN ORGANIC',ru:'',de:'',zh:'JAPAN ORGANIC'}, sub:{en:'Japan JAS',zh:'日本 JAS'} },
+      { id:9,  order:9,  group:3, icon:'', image:'', name:{en:'RAINFOREST ALLIANCE',ru:'',de:'',zh:'RAINFOREST ALLIANCE'}, sub:{en:'Rainforest Alliance',zh:'雨林联盟'} },
+      { id:10, order:10, group:3, icon:'', image:'', name:{en:'FAIRTRADE',ru:'',de:'',zh:'FAIRTRADE'},   sub:{en:'Fairtrade',zh:'公平贸易'} }
+    ];
+
+    var CERTS_DATA = [];
+
+    function renderCertGrid(list) {
+      var grid = document.getElementById('certsGrid');
+      if (!grid) return;
+      if (!list || !list.length) list = DEFAULT_CERTS;
+      var lang = (typeof XF_i18n !== 'undefined' && XF_i18n.getLang) ? XF_i18n.getLang() : 'en';
+      if (lang !== 'zh') lang = 'en';
+      list = list.slice().sort(function(a, b) { return (a.order || 0) - (b.order || 0); });
+      var groups = [1, 2, 3];
+      var html = '';
+      groups.forEach(function(g) {
+        var items = list.filter(function(c) { return (c.group || 1) === g; });
+        if (!items.length) return;
+        var gt = GROUP_TITLES[g] ? (GROUP_TITLES[g][lang] || GROUP_TITLES[g].en) : '';
+        html += '<h3 class="cert-group-title">' + __esc(gt) + '</h3>';
+        html += '<div class="cert-group-grid">';
+        items.forEach(function(c) {
+          var iconHtml = c.icon
+            ? '<img src="' + __esc(c.icon) + '" alt="' + __esc(certField(c.name)) + '">'
+            : '<i class="fas fa-award"></i>';
+          var sub = c.sub ? (c.sub.zh || c.sub.en || '') : '';
+          html += '<div class="cert-badge-card cert-badge-numbered">'
+            + '<span class="cert-order-badge">' + (c.order || '') + '</span>'
+            + '<div class="cert-badge-icon">' + iconHtml + '</div>'
+            + '<h4>' + __esc(certField(c.name)) + '</h4>'
+            + '<p class="cert-sub">' + __esc(sub) + '</p>'
+            + '</div>';
+        });
+        html += '</div>';
+      });
+      grid.innerHTML = html;
+    }
+
+    async function loadCerts() {
+      try {
+        var resp = await fetch('data.json?t=' + Date.now());
+        var data = await resp.json();
+        CERTS_DATA = (data && data.certificates) ? data.certificates : [];
+      } catch (e) {
+        CERTS_DATA = [];
+      }
+      renderCertGrid(CERTS_DATA);
+    }
+
+    document.addEventListener('xf_lang_change', function() { renderCertGrid(CERTS_DATA); });
+    loadCerts();
+
+    /* ---------- CSRF Token Generator ---------- */
+    function generateToken() {
+      var timestamp = Date.now();
+      var random = Math.random().toString(36).substring(2, 15);
+      return timestamp + '_' + random;
+    }
+
+    /* ---------- HTML Escape Helper ---------- */
+    function escapeHtml(str) {
+      if (!str) return '';
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
+
+    /* ---------- Mobile Menu Toggle ---------- */
+    function toggleMobileMenu() {
+      var nav = document.getElementById('navMenu');
+      var toggle = document.getElementById('mobileToggle');
+      if (nav) nav.classList.toggle('active');
+      if (toggle) toggle.classList.toggle('active');
+    }
+
+    /* ---------- Inquiry Popup ---------- */
+    function openInquiry(productId) {
+  try { var _f = document.getElementById('contactFormCard'); if (_f) { _f.scrollIntoView({behavior:'smooth', block:'start'}); return; } window.location.href = 'contact.html#contactFormCard'; return; } catch(e) {}
+
+  // Direct jump to the customer's email client (pre-filled inquiry).
+  var email = INQUIRY_EMAIL;
+  try {
+    if (typeof XF_DATA !== 'undefined' && XF_DATA && XF_DATA.inquiry && XF_DATA.inquiry.email) email = XF_DATA.inquiry.email;
+    else if (typeof DATA !== 'undefined' && DATA && DATA.inquiry && DATA.inquiry.email) email = DATA.inquiry.email;
+  } catch(e) {}
+  var pname = '';
+  try {
+    if (productId && typeof XF_Products !== 'undefined') {
+      var p = XF_Products.getProductById(productId);
+      if (p) pname = XF_Products.getName(p);
+    }
+  } catch(e) {}
+  try {
+    if (!pname && typeof currentProduct !== 'undefined' && currentProduct && typeof XF_Products !== 'undefined') {
+      pname = XF_Products.getName(currentProduct);
+    }
+  } catch(e) {}
+  var subject = 'Tea Inquiry' + (pname ? ' - ' + pname : '');
+  var body = 'Dear Xiangfeng Tea Export Team,\n\nI would like to inquire about ' + (pname ? pname : 'your tea products') + '.\n\n';
+  body += 'My details:\nName: \nCompany: \nEmail: \nPhone: \n\nMessage:\n\nLooking forward to your reply.\n';
+  var mailtoUrl = 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  window.location.href = mailtoUrl;
+}
+
+
+    function closeInquiry() {
+      var overlay = document.getElementById('inquiryOverlay');
+      if (overlay) {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function closeInquiryOverlay(event) {
+      if (event.target === event.currentTarget) {
+        closeInquiry();
+      }
+    }
+
+    /* ====== Email Configuration ====== */
+    var INQUIRY_EMAIL = 'admin@xf-tea.com';
+    var FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/' + INQUIRY_EMAIL;
+    var FORMSUBMIT_AJAX_HEADERS = { 'Accept': 'application/json' };
+
+    function isStaticHosting() {
+      return window.location.hostname.includes('github.io') ||
+             !window.location.protocol.startsWith('http') ||
+             window.location.protocol === 'file:';
+    }
+
+    function submitInquiry(e) {
+      e.preventDefault();
+      var form = e.target;
+
+      var name = form.querySelector('[name="name"]').value || '';
+      var company = form.querySelector('[name="company"]').value || '';
+      var email = form.querySelector('[name="email"]').value || '';
+      var phone = form.querySelector('[name="phone"]').value || '';
+      var product = form.querySelector('[name="product_interest"]').value || '';
+      var quantity = form.querySelector('[name="quantity"]').value || '';
+      var message = form.querySelector('[name="message"]').value || '';
+
+      if (!name || !email || !message) {
+        alert(__('popup.fillRequired') || 'Please fill in all required fields.');
+        return;
+      }
+
+      var submitBtn = form.querySelector('.popup-submit');
+      if (submitBtn) {
+        submitBtn.classList.add('form-submitting');
+        var btnText = submitBtn.querySelector('.btn-text');
+        if (btnText) btnText.textContent = __('popup.submitting') || 'Submitting...';
+      }
+
+      var formData = new FormData(form);
+      formData.append('_subject', 'Tea Inquiry from ' + name + (company ? ' (' + company + ')' : ''));
+      formData.append('_template', 'table');
+      formData.append('_captcha', 'false');
+
+      fetch(FORMSUBMIT_ENDPOINT, {
+        method: 'POST',
+        headers: FORMSUBMIT_AJAX_HEADERS,
+        body: formData
+      })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (submitBtn) submitBtn.classList.remove('form-submitting');
+          if (data.success === 'true' || data.success === true) {
+            showInquirySuccess();
+          } else {
+            fallbackToMailto(name, company, email, phone, product, quantity, message);
+          }
+        })
+        .catch(function() {
+          if (submitBtn) submitBtn.classList.remove('form-submitting');
+          fallbackToMailto(name, company, email, phone, product, quantity, message);
+        });
+    }
+
+    function fallbackToMailto(name, company, email, phone, product, quantity, message) {
+      var subject = 'Tea Inquiry from ' + name + (company ? ' (' + company + ')' : '');
+      var body = 'Dear Xiangfeng Tea Export Team,\n\n';
+      body += 'I would like to inquire about your tea products. Here are my details:\n\n';
+      body += 'Name: ' + name + '\n';
+      if (company) body += 'Company: ' + company + '\n';
+      body += 'Email: ' + email + '\n';
+      if (phone) body += 'Phone: ' + phone + '\n';
+      if (product) body += 'Product Interest: ' + product + '\n';
+      if (quantity) body += 'Estimated Quantity: ' + quantity + '\n';
+      body += '\nMessage:\n' + message + '\n\n';
+      body += 'Looking forward to your reply.\n\nBest regards,\n' + name;
+
+      var mailtoUrl = 'mailto:' + INQUIRY_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      window.location.href = mailtoUrl;
+      showInquirySuccess();
+    }
+
+    function showInquirySuccess() {
+      var form = document.getElementById('inquiryForm');
+      var successDiv = document.getElementById('inquirySuccess');
+      if (form) form.style.display = 'none';
+      if (successDiv) {
+        successDiv.classList.add('active');
+      }
+    }
+
+    /* ---------- Back to Top ---------- */
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function initBackToTop() {
+      var btn = document.getElementById('backToTop');
+      if (!btn) return;
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 400) {
+          btn.classList.add('visible');
+        } else {
+          btn.classList.remove('visible');
+        }
+      });
+
+      var header = document.getElementById('header');
+      var topbar = document.querySelector('.topbar');
+      window.addEventListener('scroll', function() {
+        if (header) {
+          header.classList.toggle('scrolled', window.scrollY > 50);
+        }
+        if (topbar) {
+          topbar.classList.toggle('scrolled', window.scrollY > 10);
+        }
+      });
+    }
+
+    /* ---------- Initialize on DOM Ready ---------- */
+    document.addEventListener('DOMContentLoaded', function() {
+      initBackToTop();
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+      var nav = document.getElementById('navMenu');
+      var toggle = document.getElementById('mobileToggle');
+      if (nav && nav.classList.contains('active') && toggle) {
+        if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+          nav.classList.remove('active');
+          toggle.classList.remove('active');
+        }
+      }
+    });
+
+    // Close inquiry on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeInquiry();
+      }
+    });
+    </script>
+</body>
+</html>
